@@ -1,0 +1,9 @@
+﻿*.sql
+*.sql.gz
+.env
+.env.*
+!.env.example
+/_uploads/
+/vendor/
+/node_modules/
+/public/wp-content/uploads/
