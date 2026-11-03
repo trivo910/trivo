@@ -38,4 +38,52 @@ Alpine.data('adminModal', () => ({
     close() { this.$refs.dialog.close(); },
 }));
 
+Alpine.data('mediaUpload', () => ({
+    busy: false, progress: 0, message: '', dragging: false,
+    drop(event) {
+        this.dragging = false;
+        if (event.dataTransfer.files.length !== 1) { this.message = 'Choose one image at a time.'; return; }
+        this.$refs.file.files = event.dataTransfer.files;
+    },
+    submit() {
+        if (this.busy || !this.$el.reportValidity()) return;
+        this.busy = true; this.message = ''; this.progress = 0;
+        const request = new XMLHttpRequest();
+        request.open('POST', this.$el.action);
+        request.setRequestHeader('Accept', 'application/json');
+        request.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').content);
+        request.timeout = 120000;
+        request.upload.onprogress = (event) => { if (event.lengthComputable) this.progress = Math.round(event.loaded / event.total * 100); };
+        request.onerror = request.ontimeout = () => { this.busy = false; this.message = 'Upload did not finish. Check your connection and try again.'; };
+        request.onload = () => {
+            this.busy = false;
+            let result;
+            try { result = JSON.parse(request.responseText); } catch { this.message = 'Your session may have expired. Reload this page and try again.'; return; }
+            if (request.status >= 200 && request.status < 300 && result.redirect) {
+                const target = new URL(result.redirect, location.origin);
+                if (target.origin === location.origin) location.assign(target.href);
+            } else this.message = result.errors ? Object.values(result.errors).flat().join(' ') : 'The upload was rejected. Check the file and try again.';
+        };
+        request.send(new FormData(this.$el));
+    },
+}));
+
+Alpine.data('mediaProcessing', () => ({
+    timer: null, attempts: 0,
+    init() {
+        if (!['queued', 'processing'].includes(this.$el.dataset.initialStatus)) return;
+        this.timer = setInterval(() => this.check(), 4000);
+    },
+    async check() {
+        if (++this.attempts > 30) { clearInterval(this.timer); return; }
+        try {
+            const response = await fetch(this.$el.dataset.statusUrl, { headers: { Accept: 'application/json' } });
+            if (!response.ok) { clearInterval(this.timer); return; }
+            const data = await response.json();
+            if (['ready', 'failed'].includes(data.status)) { clearInterval(this.timer); location.reload(); }
+        } catch { clearInterval(this.timer); }
+    },
+    destroy() { clearInterval(this.timer); },
+}));
+
 Alpine.start();

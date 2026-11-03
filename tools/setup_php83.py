@@ -26,7 +26,7 @@ with zipfile.ZipFile(download) as package:
 ini = target / 'php.ini'
 ini.write_text('extension_dir="' + str(target / 'ext').replace('\\', '/') + '"\n'
                'extension=curl\nextension=fileinfo\nextension=gd\nextension=intl\n'
-               'extension=mbstring\nextension=openssl\nextension=pdo_mysql\n'
+               'extension=mbstring\nextension=exif\nextension=openssl\nextension=pdo_mysql\n'
                'extension=pdo_sqlite\nextension=sqlite3\nextension=zip\n'
-               'memory_limit=512M\ndate.timezone=Asia/Kolkata\n', encoding='utf-8')
+               'memory_limit=512M\nupload_max_filesize=8M\npost_max_size=12M\ndate.timezone=Asia/Kolkata\n', encoding='utf-8')
 print('Portable PHP', release['version'], 'installed inside .audit/php83; system PHP unchanged.')

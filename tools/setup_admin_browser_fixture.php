@@ -30,6 +30,11 @@ Artisan::call('db:seed', ['--class' => RolePermissionSeeder::class, '--force' =>
 if (User::query()->where('email', '!=', 'browser-fixture@example.test')->exists()) {
     throw new RuntimeException('Unexpected data in browser fixture database.');
 }
+// Reset only this synthetic database so browser reruns do not keep prior test rules/mail.
+foreach (['redirects', 'not_found_logs', 'mail_logs', 'jobs', 'media'] as $table) {
+    DB::table($table)->delete();
+}
+DB::table('settings')->where('key', 'mail.smtp')->delete();
 $password = bin2hex(random_bytes(24));
 $secret = app(Google2FA::class)->generateSecretKey(32);
 $codes = array_map(fn () => strtoupper(bin2hex(random_bytes(8))), range(1, 5));
@@ -41,4 +46,10 @@ $user->forceFill(['name' => 'Preview Administrator', 'password' => $password, 'i
 $user->assignRole('Super Admin');
 file_put_contents($directory.'/credentials.json', json_encode(['email' => $user->email,
     'password' => $password, 'secret' => $secret, 'codes' => $codes, 'admin_path' => config('trivo.admin_path')], JSON_THROW_ON_ERROR));
+$image = imagecreatetruecolor(640, 360);
+imagefill($image, 0, 0, imagecolorallocate($image, 0, 106, 206));
+imagefilledrectangle($image, 40, 40, 180, 180, imagecolorallocate($image, 255, 190, 17));
+imagestring($image, 5, 40, 240, 'Synthetic media test fixture', imagecolorallocate($image, 255, 255, 255));
+imagepng($image, $directory.'/upload.png');
+imagedestroy($image);
 echo "Prepared isolated browser fixture; application database unchanged.\n";

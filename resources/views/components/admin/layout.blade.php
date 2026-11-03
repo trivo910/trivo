@@ -35,7 +35,7 @@
                 <div><p class="eyebrow">Trivo administration</p><h1>{{ $title }}</h1></div>
                 <form method="POST" action="{{ route('admin.preferences') }}" class="theme-form">
                     @csrf @method('PATCH')
-                    <input type="hidden" name="return_to" value="{{ in_array(request()->route()?->getName(), ['admin.dashboard', 'admin.styleguide', 'admin.activity'], true) ? request()->route()->getName() : 'admin.dashboard' }}">
+                    <input type="hidden" name="return_to" value="{{ in_array(request()->route()?->getName(), \App\Support\AdminAccess::THEME_ROUTES, true) ? request()->route()->getName() : 'admin.dashboard' }}">
                     <label for="theme">Theme</label>
                     <select name="theme" id="theme">
                         @foreach (['system' => 'System', 'light' => 'Light', 'dark' => 'Dark'] as $value => $label)

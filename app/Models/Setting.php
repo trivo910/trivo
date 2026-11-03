@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/** @property array<string, mixed>|null $value */
 class Setting extends Model
 {
     /** @var list<string> */

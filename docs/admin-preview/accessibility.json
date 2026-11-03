@@ -15,6 +15,26 @@
     "violations": []
   },
   {
+    "page": "mail-settings",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "redirects",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "redirect-form",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "not-found",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
     "page": "login",
     "viewport": "mobile-light",
     "violations": []
@@ -30,6 +50,26 @@
     "violations": []
   },
   {
+    "page": "mail-settings",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "redirects",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "redirect-form",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "not-found",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
     "page": "login",
     "viewport": "desktop-dark",
     "violations": []
@@ -41,6 +81,26 @@
   },
   {
     "page": "styleguide",
+    "viewport": "desktop-dark",
+    "violations": []
+  },
+  {
+    "page": "mail-settings",
+    "viewport": "desktop-dark",
+    "violations": []
+  },
+  {
+    "page": "redirects",
+    "viewport": "desktop-dark",
+    "violations": []
+  },
+  {
+    "page": "redirect-form",
+    "viewport": "desktop-dark",
+    "violations": []
+  },
+  {
+    "page": "not-found",
     "viewport": "desktop-dark",
     "violations": []
   }

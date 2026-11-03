@@ -1,4 +1,4 @@
-# Development status — 2026-11-02
+# Development status — 2026-11-03
 
 The Laravel foundation is implemented. The public migration and admin application are not finished, and nothing has been deployed or pushed.
 
@@ -14,17 +14,23 @@ The Laravel foundation is implemented. The public migration and admin applicatio
 - A separate read-only legacy connection and `php artisan trivo:legacy-report`.
 - Hidden-path admin sign-in with mandatory TOTP enrollment, replay protection, hashed one-use recovery codes, progressive lockout, idle/session-version checks and optional IP restrictions.
 - Shared admin components, permission-aware dashboard, protected activity log, persisted light/dark/system theme and a Super Admin styleguide denied in production.
+- SMTP settings with encrypted/hidden credentials, validated sender fields, queued/immediate test delivery, encrypted recipient logs and sanitized errors. Console boot excludes decrypted DB mail settings from configuration caches.
+- Bounded database queue worker scheduled every minute using a file-cache overlap lock; no Redis/Supervisor dependency.
+- Literal redirect CRUD/CSV import, graph loop prevention and chain flattening, live GET/HEAD redirect/410 handling, hit counters and privacy-conscious 404 logging/prefill.
+- Image library with guarded uploads, private staging, queued conversion, responsive WebP/AVIF, EXIF orientation/stripping, metadata/folders, usage protection and archive/restore. Published files and legacy uploads are retained; no video library or transcoding is implemented.
 
 ## Validation
 
-- Pest: 34 passing tests, 166 assertions.
+- Authentication/foundation, SMTP/redirect and image-library suite: 84 tests pass with 454 assertions.
 - Python audit parser/crawler: five passing synthetic tests.
 - Larastan level 6: no errors.
-- Pint applied; final style check recorded with the foundation handoff.
+- Pint applied; final style check passes.
 - Production asset build succeeds. Font URLs intentionally resolve from `public/fonts` at runtime.
 - Composer and npm audits: zero known vulnerability advisories.
+- Configuration, route, view and event cache commands succeed; generated caches were cleared after verification.
 - Core migrations succeed on an isolated SQLite development/test database. Production MySQL/MariaDB validation is still required.
-- Chrome browser checks pass for login/dashboard/styleguide across desktop light, desktop dark and true 390px mobile light viewports, with zero recorded axe A/AA violations. Navigation, dialog, reduced-transparency and sign-in flows are exercised against an isolated synthetic database.
+- Chrome browser checks pass for seven screens across desktop light, desktop dark and true 390px mobile light viewports (21 audits), with zero recorded axe A/AA violations. A real SMTP test was accepted by a loopback-only synthetic server; no external email was delivered.
+- Three image-library screens also pass nine browser accessibility audits. Their upload/conversion tests use only a synthetic fixture in separate storage; no legacy website images were processed.
 
 ## Runtime and current behavior
 
@@ -34,4 +40,4 @@ The homepage currently returns HTTP 503 until verified content and templates exi
 
 ## Next implementation
 
-Media/SMTP/redirect modules, then content modules, import services and public templates against the captured sources. User/access management actions, authentication alert emails and final security acceptance remain pending. The old live-site mobile references need recapture with explicit viewport emulation; see PHASE-0-AUDIT.md.
+Site/social/analytics settings, then content modules, import services and public templates against the captured sources. Real provider/cron checks, user/access management actions, authentication alert emails and final security acceptance remain pending. The old live-site mobile references need recapture with explicit viewport emulation; see PHASE-0-AUDIT.md. Module details are in IMAGE-LIBRARY.md and SMTP-AND-REDIRECTS.md.

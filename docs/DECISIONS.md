@@ -1,5 +1,21 @@
 ﻿# Development decisions
 
+## 2026-11-03 — SMTP and redirect management
+- Store SMTP values as one encrypted settings record. Never return the saved password to the browser, serialize it into queue payloads, or cache decrypted DB credentials. HTTP boot loads runtime mail settings; console boot skips them so config:cache stays clean. Queue processing refreshes configuration at execution time.
+- The queue toggle controls test delivery only. Public-form notifications remain required to use queued jobs when implemented. A bounded minute-based database worker with a file-cache overlap lock supports shared hosting without Supervisor or Redis.
+- A local-only SMTP sink verified the actual transport with synthetic addresses and credentials. It authenticates and stores a message but cannot relay. No external email was sent and no real provider credentials were added.
+- Redirect management supports literal 301/302/410 rules with same-site destinations. Protect system/admin entrypoints, reject loops, flatten chains, and apply CSV imports transactionally. Keep regex rows read-only until a reviewed regex implementation is needed.
+- Serve saved rules through a public GET/HEAD middleware, while leaving full host/HTTPS/slash canonicalization and content resolution in Phase 4. Do not claim overall URL parity from the redirect tests.
+- 404 records omit queries, referrers, raw IPs and admin paths; redact email-like path fragments and hash user agents. Redacted/sensitive paths are not offered as automatic redirect suggestions.
+- Browser QA used a separate synthetic SQLite database and tested seven screens in three layouts. The temporary PHP/SMTP servers were stopped after verification; the application database still has no default users or saved SMTP credentials.
+
+## 2026-11-03 — Image library and manual videos
+- User requested manual video handling: keep ordinary `<video>` tags for future embeds. Do not build video libraries, transcoding or automatic video processing.
+- New image uploads use private staging and queued Intervention Image/GD conversion to sanitized JPEG/PNG masters plus responsive WebP/AVIF. Require EXIF/fileinfo and GD support for both output formats; preserve orientation while stripping metadata.
+- Keep original legacy uploads read-only. Development verification uses generated synthetic images in isolated database/storage roots; no legacy images were converted or imported.
+- Deduplicate uploads by hash, require alt text, restrict metadata edits, and check content references before archiving. Archive is reversible and retains published files; legacy assets cannot be archived through this module.
+- Admin previews require authentication. Public picture rendering only selects generated variants; it never processes images during a request. Production storage/queue and legacy import checks remain pending.
+
 ## 2026-11-02 — Requirements and audit order
 - Follow MASTER-PROMPT.md and CLAUDE.md, beginning with Phase 0. Do not write application code before a substantive docs/URL-MAP.csv exists.
 - Use root CONTENT-MIGRATION.md for the migration workflow. The docs/CONTENT-MIGRATION.md copy describes an unavailable local reference project and is stale relative to the supplied SQL dumps and uploads folder.

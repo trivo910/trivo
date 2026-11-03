@@ -10,6 +10,10 @@
     "license": "proprietary",
     "require": {
         "php": "^8.3",
+        "ext-exif": "*",
+        "ext-fileinfo": "*",
+        "ext-gd": "*",
+        "intervention/image": "^3.0",
         "laravel/framework": "^12.0",
         "pragmarx/google2fa-laravel": "^3.0",
         "spatie/laravel-activitylog": "^4.12",

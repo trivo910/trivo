@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Support\AdminAccess;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -16,6 +17,6 @@ class ThemeRequest extends FormRequest
     public function rules(): array
     {
         return ['theme' => ['required', Rule::in(['system', 'light', 'dark'])],
-            'return_to' => ['required', Rule::in(['admin.dashboard', 'admin.styleguide', 'admin.activity'])]];
+            'return_to' => ['required', Rule::in(AdminAccess::THEME_ROUTES)]];
     }
 }

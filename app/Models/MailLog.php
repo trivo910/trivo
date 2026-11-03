@@ -12,13 +12,18 @@ class MailLog extends Model
         'status',
         'error_code',
         'sent_at',
+        'purpose', 'recipient', 'requested_by', 'error_message',
     ];
+
+    /** @var list<string> */
+    protected $hidden = ['recipient'];
 
     /** @return array<string, string> */
     protected function casts(): array
     {
         return [
             'sent_at' => 'datetime',
+            'recipient' => 'encrypted',
         ];
     }
 }

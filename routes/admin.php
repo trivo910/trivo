@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\MailSettingsController;
+use App\Http\Controllers\Admin\MediaController;
+use App\Http\Controllers\Admin\RedirectController;
 use App\Http\Middleware\AdminIpAllow;
 use App\Http\Middleware\EnsureAdminAuthenticated;
 use App\Http\Middleware\PendingAdminLogin;
@@ -27,6 +30,27 @@ Route::middleware(['web', AdminIpAllow::class])->prefix($path)->name('admin.')->
         Route::get('_styleguide', [DashboardController::class, 'styleguide'])->middleware('can:view-styleguide')->name('styleguide');
         Route::get('activity', [DashboardController::class, 'activity'])->middleware('can:activity.view')->name('activity');
         Route::patch('preferences', [DashboardController::class, 'preferences'])->name('preferences');
+        Route::get('media', [MediaController::class, 'index'])->name('media.index');
+        Route::get('media/create', [MediaController::class, 'create'])->name('media.create');
+        Route::post('media', [MediaController::class, 'store'])->middleware('throttle:admin-media-upload')->name('media.store');
+        Route::get('media/{media}', [MediaController::class, 'show'])->withTrashed()->name('media.show');
+        Route::get('media/{media}/preview', [MediaController::class, 'preview'])->withTrashed()->name('media.preview');
+        Route::get('media/{media}/status', [MediaController::class, 'status'])->name('media.status');
+        Route::put('media/{media}', [MediaController::class, 'update'])->name('media.update');
+        Route::delete('media/{media}', [MediaController::class, 'archive'])->name('media.archive');
+        Route::post('media/{media}/restore', [MediaController::class, 'restore'])->withTrashed()->name('media.restore');
+        Route::post('media/{media}/retry', [MediaController::class, 'retry'])->name('media.retry');
+        Route::get('settings/mail', [MailSettingsController::class, 'index'])->name('mail.index');
+        Route::put('settings/mail', [MailSettingsController::class, 'update'])->name('mail.update');
+        Route::post('settings/mail/test', [MailSettingsController::class, 'test'])->middleware('throttle:admin-mail-test')->name('mail.test');
+        Route::get('redirects', [RedirectController::class, 'index'])->name('redirects.index');
+        Route::get('redirects/create', [RedirectController::class, 'create'])->name('redirects.create');
+        Route::post('redirects', [RedirectController::class, 'store'])->name('redirects.store');
+        Route::post('redirects/import', [RedirectController::class, 'import'])->name('redirects.import');
+        Route::get('redirects/{redirect}/edit', [RedirectController::class, 'edit'])->name('redirects.edit');
+        Route::put('redirects/{redirect}', [RedirectController::class, 'update'])->name('redirects.update');
+        Route::delete('redirects/{redirect}', [RedirectController::class, 'destroy'])->name('redirects.destroy');
+        Route::get('not-found', [RedirectController::class, 'notFound'])->name('not-found');
         Route::get('recovery-codes', [AuthController::class, 'recoveryCodes'])->name('recovery-codes');
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     });

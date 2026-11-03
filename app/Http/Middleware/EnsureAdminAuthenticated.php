@@ -24,7 +24,9 @@ class EnsureAdminAuthenticated
 
             return redirect()->route('admin.login');
         }
-        $session->put('admin.last_activity', now()->timestamp);
+        if (! $request->routeIs('admin.media.status')) {
+            $session->put('admin.last_activity', now()->timestamp);
+        }
 
         return $next($request);
     }

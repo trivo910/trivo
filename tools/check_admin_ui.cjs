@@ -32,6 +32,8 @@ function otp(secret) {
             const context = await browser.newContext({ viewport: { width: mobile ? 390 : 1440, height: mobile ? 844 : 1000 },
                 colorScheme: dark ? 'dark' : 'light', isMobile: mobile, hasTouch: mobile, deviceScaleFactor: 1 });
             const page = await context.newPage();
+            page.setDefaultTimeout(15000);
+            page.setDefaultNavigationTimeout(30000);
             const errors = [];
             page.on('pageerror', error => errors.push(error.message));
             async function inspect(label) {
@@ -73,10 +75,44 @@ function otp(secret) {
             await page.getByRole('dialog').waitFor();
             await page.keyboard.press('Escape');
             assert.equal(await page.locator('dialog').evaluate(element => element.open), false);
+            await page.goto(`${base}/settings/mail`);
+            await page.getByRole('heading', { name: 'SMTP delivery' }).waitFor();
+            if (index === 0) {
+                await page.getByLabel('SMTP host', { exact: true }).fill('127.0.0.1');
+                await page.getByLabel('Port', { exact: true }).fill('25266');
+                await page.getByLabel('Encryption', { exact: true }).selectOption('none');
+                await page.getByLabel('SMTP username', { exact: true }).fill('smtp-fixture');
+                await page.getByLabel('SMTP password', { exact: true }).fill('Smtp-Fixture-Password-123!');
+                await page.getByLabel('From email', { exact: true }).fill('sender@example.test');
+                await page.getByLabel('From name', { exact: true }).fill('Trivo');
+                await page.getByLabel('Test email delivery', { exact: true }).selectOption('0');
+                await page.getByRole('button', { name: 'Save SMTP settings', exact: true }).click();
+                await page.getByRole('status').filter({ hasText: 'SMTP settings saved.' }).waitFor();
+                assert.equal(await page.getByLabel('SMTP password', { exact: true }).inputValue(), '');
+                await page.getByRole('button', { name: 'Send test email', exact: true }).click();
+                await page.getByRole('cell', { name: /^SMTP accepted at/ }).waitFor();
+            }
+            await inspect('mail-settings');
+            await page.goto(`${base}/redirects`);
+            await page.getByRole('heading', { name: 'URL redirects' }).waitFor();
+            if (index === 0) {
+                await page.getByRole('link', { name: 'Add redirect', exact: true }).click();
+                await page.getByLabel('Old path', { exact: true }).fill('/browser-old');
+                await page.getByLabel('Destination', { exact: true }).fill('/browser-current');
+                await page.getByRole('button', { name: 'Save redirect', exact: true }).click();
+                await page.waitForURL(`${base}/redirects`);
+            }
+            await inspect('redirects');
+            await page.getByRole('link', { name: 'Edit', exact: true }).first().click();
+            await inspect('redirect-form');
+            await page.goto(`${origin}/browser-missing?token=private-fixture`);
+            await page.goto(`${base}/not-found`);
+            await page.getByRole('heading', { name: 'Missing URLs' }).waitFor();
+            await inspect('not-found');
             if (!dark) {
                 const cdp = await context.newCDPSession(page);
                 await cdp.send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-transparency', value: 'reduce' }] });
-                assert.equal(await page.locator('.admin-card').first().evaluate(element => getComputedStyle(element).backdropFilter), 'none');
+                assert.equal(await page.locator('.glass').first().evaluate(element => getComputedStyle(element).backdropFilter), 'none');
             }
             assert.deepEqual(errors, [], 'Browser JavaScript errors');
             await context.close(); index++;
@@ -85,5 +121,5 @@ function otp(secret) {
         fs.writeFileSync(path.join(target, 'accessibility.json'), JSON.stringify(results, null, 2));
         await browser.close();
     }
-    console.log('Admin browser checks passed: light/dark, 390px viewport, accessibility, TOTP/recovery sign-in, theme, dialog and navigation.');
+    console.log('Admin browser checks passed: light/dark, 390px viewport, accessibility, auth, SMTP loopback delivery, redirects and 404 views.');
 })().catch(error => { console.error(error.message); process.exitCode = 1; });

@@ -14,5 +14,7 @@ These tools inspect read-only sources. Run from the repository root with Python 
 - `python tools/setup_fonts.py`: fetch Montserrat Latin WOFF2 and its license for self-hosting.
 - `python -m unittest discover -s tools -p test_*.py`: run synthetic decoder and HTML extraction tests; no production rows or secrets used.
 - `php tools/setup_admin_browser_fixture.php` and `node tools/check_admin_ui.cjs`: create an isolated local QA fixture and run true-viewport admin browser/accessibility checks with installed Chrome. See `docs/admin-preview/README.md` for the separate database/server setup. The fixture must never target production.
+- `python tools/local_smtp_sink.py`: accept one authenticated synthetic SMTP session on loopback port 25266 and store its message only under ignored `.audit/`. Used by browser QA; it cannot relay mail and must not run as a public mail service.
+- `node tools/check_media_ui.cjs`: image-library browser/accessibility checks using a generated fixture, isolated database and isolated storage roots. It runs one queued image conversion and does not process legacy uploads. See `docs/admin-preview/README.md`.
 
 Audit SQL is **never executed**. The PHP subset importer uses prepared values and hardcoded table/column identifiers. The resulting audit schema intentionally excludes revisions, users, sessions, submission data, arbitrary options and arbitrary metadata. Attachment records have their own `wp_attachments` table; this is not a full WordPress clone. PHP Laravel import commands must account for that schema explicitly.
