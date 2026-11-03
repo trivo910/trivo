@@ -1,0 +1,6 @@
+url,status,final_url,result
+https://trivo.in/,200,https://trivo.in/,retrieved
+https://trivo.in/robots.txt,200,https://trivo.in/robots.txt,retrieved
+https://trivo.in/sitemap_index.xml,200,https://trivo.in/sitemap_index.xml,retrieved
+https://trivo.in/wp-sitemap.xml,200,https://trivo.in/sitemap_index.xml,retrieved
+https://trivo.in/sitemap.xml,200,https://trivo.in/sitemap_index.xml,retrieved

@@ -1,0 +1,10 @@
+# Development safeguard when XAMPP serves the repository directory.
+# Production DocumentRoot MUST point at public/.
+Options -Indexes
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(?:\.audit|\.git|app|node_modules|vendor|storage|bootstrap|config|database|resources|routes|tests|tools|docs)(?:/|$) - [F,L,NC]
+</IfModule>
+<FilesMatch "(?i)(^\.|\.(sql|log|bak|md)(\.gz)?$|^(composer|package)(-lock)?\.json$|^artisan$)">
+    Require all denied
+</FilesMatch>

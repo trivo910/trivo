@@ -1,0 +1,57 @@
+{
+  "observed_at": "2026-11-02T11:33:52.619710+00:00",
+  "visited": 132,
+  "pending": 0,
+  "limit": 600,
+  "sitemaps": [
+    {
+      "url": "https://trivo.in/sitemap_index.xml",
+      "status": 200,
+      "final_url": "https://trivo.in/sitemap_index.xml",
+      "error": ""
+    },
+    {
+      "url": "https://trivo.in/wp-sitemap.xml",
+      "status": 301,
+      "final_url": "https://trivo.in/sitemap_index.xml",
+      "error": "",
+      "final_status": 200,
+      "redirect_hops": 1
+    },
+    {
+      "url": "https://trivo.in/sitemap.xml",
+      "status": 301,
+      "final_url": "https://trivo.in/sitemap_index.xml",
+      "error": "",
+      "final_status": 200,
+      "redirect_hops": 1
+    },
+    {
+      "url": "https://trivo.in/post-sitemap.xml",
+      "status": 200,
+      "final_url": "https://trivo.in/post-sitemap.xml",
+      "error": ""
+    },
+    {
+      "url": "https://trivo.in/page-sitemap.xml",
+      "status": 200,
+      "final_url": "https://trivo.in/page-sitemap.xml",
+      "error": ""
+    },
+    {
+      "url": "https://trivo.in/category-sitemap.xml",
+      "status": 200,
+      "final_url": "https://trivo.in/category-sitemap.xml",
+      "error": ""
+    }
+  ],
+  "status_counts": {
+    "200": 114,
+    "301": 23,
+    "404": 2
+  },
+  "word_count_scope": "whole rendered HTML text excluding script/style/svg/noscript; main content parity pending",
+  "redirects_observed": 21,
+  "inventory_rows": 139,
+  "scope": "132 crawled page/archive/link URLs plus 7 system entrypoints; media, author/attachment and query URL coverage remain incomplete"
+}

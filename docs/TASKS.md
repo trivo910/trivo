@@ -1,20 +1,20 @@
 # TASKS — tick as you go
 
 ## Phase 0 — Audit (no app code)
-- [ ] Crawl live site + sitemaps → `docs/URL-MAP.csv`
+- [x] Initial page/link crawl + recursive live sitemaps → `docs/URL-MAP.csv` (139 observed URLs; exhaustive resource/query coverage remains pending)
 - [ ] Detect permalink/category/tag/author bases, trailing slash, www/non-www
 - [ ] Read local project → `docs/SITE-INVENTORY.md`
-- [ ] Capture screenshots of key pages (desktop/mobile) for visual diff → `docs/reference/`
+- [x] Capture viewport screenshots of 13 key templates (desktop/mobile) → `docs/reference/` (review and full-page coverage pending)
 
 ## Phase 1 — Foundation
-- [ ] Laravel 12 install, env, Pint, Larastan, Pest, Vite, Tailwind, Alpine
-- [ ] Security middleware + headers, rate limiters, session/cookie config
-- [ ] Migrations + models + seeders (schema in ARCHITECTURE.md)
-- [ ] Self-hosted Montserrat, design tokens in Tailwind theme
+- [x] Laravel 12 install, env, Pint, Larastan, Pest, Vite, Tailwind, Alpine
+- [x] Foundation security middleware + headers, named rate limiters, session/cookie config (full security acceptance remains Phase 7)
+- [x] Core migrations + models; remove demo seeder (RBAC/activity-log and explicit admin provisioning remain Phase 2)
+- [x] Self-hosted Montserrat, design tokens in Tailwind theme
 
 ## Phase 2 — Admin core
-- [ ] Glassmorphism design system: tokens, `.glass` utilities, `<x-admin.*>` components, light/dark toggle, `_styleguide` page (see ADMIN-DESIGN-GLASSMORPHISM.md)
-- [ ] Hidden admin path, auth, mandatory 2FA, roles/permissions, activity log
+- [x] Shared glass components, light/dark/system preference, development styleguide; tested implemented screens with axe (remaining module screens still require QA)
+- [x] Hidden admin path, password + mandatory TOTP/recovery sign-in, roles/permissions, session expiry, activity log and explicit account provisioning (monitoring emails/user-management actions remain pending)
 - [ ] Media library with WebP/AVIF/srcset
 - [ ] Settings (site, social, analytics), **SMTP settings + test mail**, mail provider boot
 - [ ] Redirects manager + 404 log

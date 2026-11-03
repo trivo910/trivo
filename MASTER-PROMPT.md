@@ -21,7 +21,7 @@ You are a senior Laravel architect + technical SEO engineer + security engineer.
 ## Inputs I will provide
 There is **no local project**. Sources of truth are:
 1. **WordPress database file**: u802165322_KeH3A.sql (.sql / .sql.gz) — pages, posts, categories, tags, authors, menus, options, Yoast/RankMath SEO meta, media records, form entries. Treat as **read-only, sensitive**.
-2. **Images folder**: _uploads (folder) (WordPress `uploads` structure, e.g. `2024/05/file.jpg`, or a flat folder — inspect and report which). Read-only; copy, never move.
+2. **Images folder**: public/wp-content/uploads (folder) (WordPress `uploads` structure, e.g. `2024/05/file.jpg`, or a flat folder — inspect and report which). Read-only; copy, never move.
 3. **Live site** https://trivo.in — crawl for URL inventory, sitemaps, rendered HTML (needed for page-builder pages), screenshots, and the final design reference.
 
 Rule: copy/content comes from **DB first**, then the **rendered live HTML** for anything built with a page builder (Elementor/Vamtam content stored as JSON in the DB is not reliable copy). Images come from the folder; if an image referenced by DB/live site is missing from the folder, download it once from the live site and log it in `docs/MISSING-CONTENT.md`.

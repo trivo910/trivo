@@ -15,3 +15,15 @@
 ## 2026-11-02 — Design reference supplied
 - docs/DESIGN-trivo-in.md is now available, alongside docs/SKILL-trivo-in.md. The missing design-reference gap is resolved. CLAUDE.md corrections continue to override the auto-extracted type scale; verified live visuals remain authoritative.
 
+
+## 2026-11-02 — Verified audit and foundation
+- Both migration guides and MASTER-PROMPT.md now consistently name u802165322_KeH3A.sql and public/wp-content/uploads. Earlier conflicting references above are historical.
+- Selected dump header is 2026-11-02; alternate is 2026-06-04. Allowlisted site settings verify trivo.in. No source files were modified.
+- Import only an allowlisted public subset into a new wp_legacy, using prepared statements. Full raw-dump execution would import prohibited accounts and potentially secrets. Attachments use wp_attachments in this intentionally sanitized schema. Existing databases are never overwritten by the importer.
+- Initial web failures were resolved with the identified audit client. The baseline now records initial HTTP status, final status and one-hop alias behavior, rather than counting followed redirects as direct 200s.
+- Live HTML identifies page 991442 as the owner of /digital-marketing-agency-in-surat; preserve colliding post 988965 for review and record both source IDs.
+- Source-only Python tools handle the pre-Laravel audit. Application code began only after the substantive URL-MAP.csv existed. Exhaustive audit gaps remain explicit rather than being claimed complete.
+- System PHP 8.2 and MariaDB 10.4 fall below project requirements. Use checksum-verified portable PHP 8.3 in ignored .audit/php83 and isolated SQLite for local foundation validation; do not change or upgrade XAMPP without a separate environment task. Production remains MySQL 8/MariaDB 10.6+ and PHP 8.3.
+- Pest/Larastan are development-only dependencies. Alpine is the only public UI dependency. Python Pillow is audit-only, not an application dependency.
+- Encrypt all settings values at rest and exclude values from model serialization, including SMTP data. Do not create seeded/default admin accounts; explicit provisioning and mandatory TOTP belong to the admin phase.
+- Public templates and content are pending. The root route returns 503/noindex until verified rendering exists; do not publish a generic demo as the migrated site.

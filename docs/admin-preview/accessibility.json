@@ -1,0 +1,47 @@
+[
+  {
+    "page": "login",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "dashboard",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "styleguide",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "login",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "dashboard",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "styleguide",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "login",
+    "viewport": "desktop-dark",
+    "violations": []
+  },
+  {
+    "page": "dashboard",
+    "viewport": "desktop-dark",
+    "violations": []
+  },
+  {
+    "page": "styleguide",
+    "viewport": "desktop-dark",
+    "violations": []
+  }
+]

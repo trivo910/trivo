@@ -1,5 +1,13 @@
 # SEO & URL PRESERVATION (CRITICAL)
 
+## Observed baseline — 2026-11-02
+
+- Verified database host: `https://trivo.in`, no `www`; configured permalink `/%postname%` (no trailing slash).
+- Blank category/tag options use WordPress defaults `/category/` and `/tag/`. Actual observed paths and aliases are in URL-MAP.csv; author behavior remains unaudited.
+- Live system routes and redirect evidence are in PHASE-0-AUDIT.md and CRAWL-SUMMARY.json. Preserve each recorded initial status and path, including one-hop trailing-slash aliases.
+- The selected site has a feed-disabling plugin active. Do not assume `/feed/` currently returns a working feed; verify that behavior before implementing parity.
+- URL-MAP.csv is a baseline, not proof of target parity or exhaustive media/query coverage. The two existing 404s must be reviewed separately from successfully served content.
+
 ## Phase 0 — Build the URL inventory BEFORE coding
 1. Fetch `https://trivo.in/sitemap_index.xml`, `/wp-sitemap.xml`, `/sitemap.xml`, `/robots.txt`; recurse all child sitemaps (pages, posts, categories, tags, authors, images).
 2. Also crawl internal links from the home page + the local project to catch unlisted URLs.

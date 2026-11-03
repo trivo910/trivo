@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Providers;
+
+use App\Models\User;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\ServiceProvider;
+
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Register any application services.
+     */
+    public function register(): void
+    {
+        //
+    }
+
+    /**
+     * Bootstrap any application services.
+     */
+    public function boot(): void
+    {
+        RateLimiter::for('admin-login', fn (Request $request) => [
+            Limit::perMinute(5)->by('identity:'.hash('sha256', $request->ip().'|'.strtolower((string) $request->input('email')))),
+            Limit::perMinute(30)->by('ip:'.hash('sha256', (string) $request->ip())),
+        ]);
+        RateLimiter::for('leads', fn (Request $request) => Limit::perMinute(3)
+            ->by(hash('sha256', (string) $request->ip())));
+        RateLimiter::for('admin-two-factor', fn (Request $request) => Limit::perMinute(5)
+            ->by(hash('sha256', (string) $request->session()->get('admin.pending.id').'|'.$request->ip())));
+        Gate::define('view-styleguide', fn (User $user): bool => ! app()->isProduction() && $user->hasRole('Super Admin'));
+    }
+}
