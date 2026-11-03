@@ -38,4 +38,4 @@ Pest covers permissions, encrypted storage, blank/cleared passwords, queue paylo
 
 Browser checks cover seven screens in desktop light, desktop dark and true 390px mobile light layouts (21 axe A/AA audits). They exercise saving settings, password masking, redirect creation and the 404 view. The real SMTP transport authenticated to a loopback-only synthetic SMTP server and its test message was captured locally. No email was sent to an external provider or person. No real SMTP credentials or default admin accounts were added to the application database.
 
-Still pending: actual provider/inbox verification, supported MySQL/MariaDB deployment checks, complete canonical URL behavior and content parity, the media library, other settings groups and notification/monitoring modules.
+Still pending: actual provider/inbox verification, supported MySQL/MariaDB deployment checks, complete canonical URL behavior and content parity, remaining SEO settings and notification/monitoring modules. The image library and site/social/analytics settings are now implemented; see their module documentation.

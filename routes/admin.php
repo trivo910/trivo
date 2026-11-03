@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MailSettingsController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\RedirectController;
+use App\Http\Controllers\Admin\WebsiteSettingsController;
 use App\Http\Middleware\AdminIpAllow;
 use App\Http\Middleware\EnsureAdminAuthenticated;
 use App\Http\Middleware\PendingAdminLogin;
@@ -41,6 +42,8 @@ Route::middleware(['web', AdminIpAllow::class])->prefix($path)->name('admin.')->
         Route::post('media/{media}/restore', [MediaController::class, 'restore'])->withTrashed()->name('media.restore');
         Route::post('media/{media}/retry', [MediaController::class, 'retry'])->name('media.retry');
         Route::get('settings/mail', [MailSettingsController::class, 'index'])->name('mail.index');
+        Route::get('settings/{section}', [WebsiteSettingsController::class, 'edit'])->whereIn('section', ['site', 'social', 'analytics'])->name('website.edit');
+        Route::put('settings/{section}', [WebsiteSettingsController::class, 'update'])->whereIn('section', ['site', 'social', 'analytics'])->name('website.update');
         Route::put('settings/mail', [MailSettingsController::class, 'update'])->name('mail.update');
         Route::post('settings/mail/test', [MailSettingsController::class, 'test'])->middleware('throttle:admin-mail-test')->name('mail.test');
         Route::get('redirects', [RedirectController::class, 'index'])->name('redirects.index');

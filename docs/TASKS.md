@@ -16,7 +16,7 @@
 - [x] Shared glass components, light/dark/system preference, development styleguide; tested implemented screens with axe (remaining module screens still require QA)
 - [x] Hidden admin path, password + mandatory TOTP/recovery sign-in, roles/permissions, session expiry, activity log and explicit account provisioning (monitoring emails/user-management actions remain pending)
 - [x] Image library: validated private uploads, queued WebP/AVIF/srcset, metadata/folders, usage checks and archive/restore (legacy import/deployment checks remain pending; no video library)
-- [ ] Site, social and analytics settings
+- [x] Site, social and analytics settings: encrypted sections, role checks, safe IDs/URLs, brand-image reference protection (verified source import/public rendering remain pending)
 - [x] SMTP settings + encrypted credentials, test email/log, runtime mail configuration and bounded cron queue worker (external provider/cron verification pending)
 - [x] Literal redirects manager + atomic CSV import + 404 log + GET/HEAD 301/302/410 handling (complete canonical resolver remains Phase 4)
 

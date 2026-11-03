@@ -8,6 +8,15 @@
             <p class="nav-group">Media</p>
             <a href="{{ route('admin.media.index') }}" class="nav-item {{ request()->routeIs('admin.media.*') ? 'active' : '' }}" @if(request()->routeIs('admin.media.*')) aria-current="page" @endif><x-admin.icon name="grid" />Image library</a>
         @endcan
+        @can('settings.site')
+            <p class="nav-group">Website</p>
+            @foreach(['site' => 'Site settings', 'social' => 'Social profiles'] as $section => $label)
+                <a href="{{ route('admin.website.edit', $section) }}" class="nav-item {{ request()->routeIs('admin.website.*') && request()->route('section') === $section ? 'active' : '' }}" @if(request()->routeIs('admin.website.*') && request()->route('section') === $section) aria-current="page" @endif><x-admin.icon name="grid" />{{ $label }}</a>
+            @endforeach
+        @endcan
+        @can('settings.seo')
+            <a href="{{ route('admin.website.edit', 'analytics') }}" class="nav-item {{ request()->routeIs('admin.website.*') && request()->route('section') === 'analytics' ? 'active' : '' }}" @if(request()->routeIs('admin.website.*') && request()->route('section') === 'analytics') aria-current="page" @endif><x-admin.icon name="activity" />Analytics</a>
+        @endcan
         @can('settings.mail')
             <p class="nav-group">Settings</p>
             <a href="{{ route('admin.mail.index') }}" class="nav-item {{ request()->routeIs('admin.mail.*') ? 'active' : '' }}" @if(request()->routeIs('admin.mail.*')) aria-current="page" @endif><x-admin.icon name="activity" />Mail / SMTP</a>

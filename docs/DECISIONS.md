@@ -9,6 +9,12 @@
 - 404 records omit queries, referrers, raw IPs and admin paths; redact email-like path fragments and hash user agents. Redacted/sensitive paths are not offered as automatic redirect suggestions.
 - Browser QA used a separate synthetic SQLite database and tested seven screens in three layouts. The temporary PHP/SMTP servers were stopped after verification; the application database still has no default users or saved SMTP credentials.
 
+## 2026-11-03 — Website settings
+- Separate site/social (`settings.site`) and analytics/verification (`settings.seo`) sections. Use existing role permissions; grant no new permissions to Editors. Validate and encrypt each section independently, and audit section events without values.
+- Accept plain text, safe HTTPS social URLs and tracker IDs/tokens only. Do not invent or import values during implementation. Public tracking stays inactive until the public rendering/CSP integration; custom scripts and the rest of SEO settings remain separate pending work.
+- Brand images must be ready, unarchived rasters with alt text; site icons must be square and at least 48 pixels. Lock selected media rows on save so archive cannot race with assignment, and retain image reference protection.
+- Reuse shared glass form components and preserve the current section when changing theme. Synthetic tests/browser checks use isolated data and send no tracking requests.
+
 ## 2026-11-03 — Image library and manual videos
 - User requested manual video handling: keep ordinary `<video>` tags for future embeds. Do not build video libraries, transcoding or automatic video processing.
 - New image uploads use private staging and queued Intervention Image/GD conversion to sanitized JPEG/PNG masters plus responsive WebP/AVIF. Require EXIF/fileinfo and GD support for both output formats; preserve orientation while stripping metadata.

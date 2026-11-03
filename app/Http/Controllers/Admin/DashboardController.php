@@ -41,6 +41,7 @@ class DashboardController extends Controller
         abort_unless($user instanceof User, 403);
         $action->handle($user, $request->string('theme')->toString());
 
-        return redirect()->route($request->string('return_to')->toString())->with('status', 'Theme saved.');
+        return redirect()->route($request->string('return_to')->toString(), $request->input('return_to') === 'admin.website.edit'
+            ? ['section' => $request->string('return_section')->toString()] : [])->with('status', 'Theme saved.');
     }
 }

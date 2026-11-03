@@ -1,6 +1,6 @@
 # Admin access and authentication
 
-Admin authentication, shared UI, SMTP settings, literal redirects, 404 management and the image library are implemented. Other settings and content modules remain in development. The public site is still a migration work in progress. See SMTP-AND-REDIRECTS.md and IMAGE-LIBRARY.md for module behavior and verification limits.
+Admin authentication, shared UI, SMTP settings, literal redirects, 404 management, the image library and site/social/analytics settings are implemented. Remaining SEO settings and content modules remain in development. The public site is still a migration work in progress. See WEBSITE-SETTINGS.md, SMTP-AND-REDIRECTS.md and IMAGE-LIBRARY.md for module behavior and verification limits.
 
 ## Provision an account
 

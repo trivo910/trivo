@@ -36,6 +36,7 @@
                 <form method="POST" action="{{ route('admin.preferences') }}" class="theme-form">
                     @csrf @method('PATCH')
                     <input type="hidden" name="return_to" value="{{ in_array(request()->route()?->getName(), \App\Support\AdminAccess::THEME_ROUTES, true) ? request()->route()->getName() : 'admin.dashboard' }}">
+                    @if(request()->routeIs('admin.website.edit'))<input type="hidden" name="return_section" value="{{ request()->route('section') }}">@endif
                     <label for="theme">Theme</label>
                     <select name="theme" id="theme">
                         @foreach (['system' => 'System', 'light' => 'Light', 'dark' => 'Dark'] as $value => $label)

@@ -1,5 +1,7 @@
 # Admin preview evidence
 
+`site-settings-*`, `social-settings-*` and `analytics-settings-*` have a separate nine-entry report in `website-settings-accessibility.json`. Run `node tools/check_website_settings_ui.cjs` against the isolated browser fixture after regenerating its one-use authentication codes. This checks native form saves, analytics validation and theme return paths in all three layouts. It neither needs SMTP nor processes images; external requests are blocked and asserted absent.
+
 These screenshots use synthetic data in an isolated local-only SQLite database. No default account was created in the application database.
 
 `login-*`, `dashboard-*`, `styleguide-*`, `mail-settings-*`, `redirects-*`, `redirect-form-*` and `not-found-*` show desktop light (1440), desktop dark (1440) and genuine mobile light (390) viewports. `accessibility.json` records axe WCAG A/AA results for those 21 combinations. Browser checks also exercise sign-in, single-use recovery codes, saved themes, dialog dismissal, reduced-transparency surfaces, navigation, masked SMTP settings and redirect creation.

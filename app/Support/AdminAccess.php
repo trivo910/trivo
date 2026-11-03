@@ -6,7 +6,7 @@ class AdminAccess
 {
     public const ROLES = ['Super Admin', 'Admin', 'Editor', 'SEO Manager'];
 
-    public const THEME_ROUTES = ['admin.dashboard', 'admin.styleguide', 'admin.activity', 'admin.mail.index', 'admin.redirects.index', 'admin.not-found', 'admin.media.index'];
+    public const THEME_ROUTES = ['admin.dashboard', 'admin.styleguide', 'admin.activity', 'admin.mail.index', 'admin.redirects.index', 'admin.not-found', 'admin.media.index', 'admin.website.edit'];
 
     /** @return list<string> */
     public static function permissions(): array

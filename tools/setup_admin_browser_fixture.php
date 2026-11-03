@@ -35,6 +35,7 @@ foreach (['redirects', 'not_found_logs', 'mail_logs', 'jobs', 'media'] as $table
     DB::table($table)->delete();
 }
 DB::table('settings')->where('key', 'mail.smtp')->delete();
+DB::table('settings')->where('key', 'like', 'website.%')->delete();
 $password = bin2hex(random_bytes(24));
 $secret = app(Google2FA::class)->generateSecretKey(32);
 $codes = array_map(fn () => strtoupper(bin2hex(random_bytes(8))), range(1, 5));
