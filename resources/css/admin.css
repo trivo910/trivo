@@ -1,5 +1,14 @@
 @import 'tailwindcss';
 
+.page-section { border: 1px solid var(--glass-border); border-radius: 14px; padding: 20px; min-width: 0; }
+.page-section legend { padding: 0 8px; font-weight: 600; }
+.section-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.seo-preview { width: 100%; max-width: 620px; padding: 20px; border: 1px solid var(--glass-border); border-radius: 14px; overflow-wrap: anywhere; }
+.seo-preview-mobile { max-width: 360px; }
+.seo-preview-url { font-size: 13px; }
+.seo-preview-title { color: #004b8a; font-size: 20px; font-weight: 600; }
+[data-theme='dark'] .seo-preview-title { color: #93c5fd; }
+
 @source '../views/admin/**/*.blade.php';
 @source '../views/components/admin/**/*.blade.php';
 

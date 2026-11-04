@@ -1,0 +1,47 @@
+[
+  {
+    "page": "service-create",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "service-edit",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "service-list",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "service-create",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "service-edit",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "service-list",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "service-create",
+    "viewport": "desktop-dark",
+    "violations": []
+  },
+  {
+    "page": "service-edit",
+    "viewport": "desktop-dark",
+    "violations": []
+  },
+  {
+    "page": "service-list",
+    "viewport": "desktop-dark",
+    "violations": []
+  }
+]

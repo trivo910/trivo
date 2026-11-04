@@ -139,6 +139,9 @@ it('tracks content revision and setting references and only archives unused imag
     Post::query()->delete();
     Revision::query()->delete();
     Setting::query()->delete();
+    // Archived pages retain image references. Hard-delete only this synthetic fixture to test the unused branch.
+    $this->delete(route('admin.media.archive', $media))->assertSessionHasErrors('media');
+    Page::onlyTrashed()->forceDelete();
     $this->delete(route('admin.media.archive', $media))->assertRedirect(route('admin.media.index'));
     expect(Media::query()->count())->toBe(0);
     Storage::disk('public')->assertExists($media->path);

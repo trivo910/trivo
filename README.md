@@ -6,7 +6,7 @@ Laravel 12 / PHP 8.3 / Blade / Tailwind 4 / Alpine rebuild of trivo.in. This che
 
 PHP 8.3 with curl, EXIF, fileinfo, GD (WebP/AVIF support), intl, mbstring, OpenSSL, PDO MySQL, PDO SQLite and zip; Composer; Node 20.19+ or 22.12+; MySQL 8 or MariaDB 10.6+. Database queues and file cache are the deployment defaults; Redis and Supervisor are optional. For image uploads, configure PHP upload/post limits to at least 8M/12M; see `docs/IMAGE-LIBRARY.md`.
 
-The current Windows machine has PHP 8.2 and MariaDB 10.4. An isolated PHP 8.3 CLI was installed at `.audit/php83/php.exe`; XAMPP remains unchanged. Local development/tests currently use a separate SQLite file. Do not treat local MariaDB as a supported production database.
+The current Windows machine has PHP 8.2 and MariaDB 10.4. An isolated PHP 8.3 CLI was installed at `.audit/php83/php.exe`; XAMPP remains unchanged. The local application currently uses the `newtrivo` database through the MySQL connection. Automated tests and browser QA use isolated SQLite databases. Do not treat local MariaDB as a supported production database.
 
 ## Install
 

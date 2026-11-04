@@ -1,0 +1,47 @@
+[
+  {
+    "page": "portfolio-publication-draft",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "portfolio-publication-scheduled",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "portfolio-publication-published",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "portfolio-publication-draft",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "portfolio-publication-scheduled",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "portfolio-publication-published",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "portfolio-publication-draft",
+    "viewport": "desktop-dark",
+    "violations": []
+  },
+  {
+    "page": "portfolio-publication-scheduled",
+    "viewport": "desktop-dark",
+    "violations": []
+  },
+  {
+    "page": "portfolio-publication-published",
+    "viewport": "desktop-dark",
+    "violations": []
+  }
+]

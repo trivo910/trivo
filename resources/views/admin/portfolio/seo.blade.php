@@ -1,0 +1,1 @@
+<x-admin.seo-editor :model="$portfolio" :seo="$seo" :preview="$preview" :revisions="$revisions" :images="$images" :schema-options="$schemaOptions" schema-help="Choose the type that matches the case study. Public schema generation is pending." route-prefix="admin.portfolio" label="portfolio" />

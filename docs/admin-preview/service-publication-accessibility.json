@@ -1,0 +1,47 @@
+[
+  {
+    "page": "service-publication-draft",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "service-publication-scheduled",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "service-publication-published",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "service-publication-draft",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "service-publication-scheduled",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "service-publication-published",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "service-publication-draft",
+    "viewport": "desktop-dark",
+    "violations": []
+  },
+  {
+    "page": "service-publication-scheduled",
+    "viewport": "desktop-dark",
+    "violations": []
+  },
+  {
+    "page": "service-publication-published",
+    "viewport": "desktop-dark",
+    "violations": []
+  }
+]

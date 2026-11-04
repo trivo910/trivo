@@ -86,4 +86,36 @@ Alpine.data('mediaProcessing', () => ({
     destroy() { clearInterval(this.timer); },
 }));
 
+Alpine.data('pageSections', () => ({
+    blocks: [], sequence: 0, message: '',
+    init() {
+        try { this.blocks = JSON.parse(this.$el.dataset.blocks).map(block => ({ text: '', media_id: '', label: '', url: '', ...block, key: ++this.sequence })); }
+        catch { this.blocks = []; this.message = 'Sections could not be loaded. Reload before saving.'; }
+    },
+    serialize() { return JSON.stringify(this.blocks.map(({ key, ...block }) => block)); },
+    add() {
+        if (this.blocks.length >= 50) return;
+        this.blocks.push({ type: 'paragraph', text: '', media_id: '', label: '', url: '', key: ++this.sequence });
+        this.message = 'Section added.';
+        this.$nextTick(() => document.getElementById('section-type-' + this.sequence)?.focus());
+    },
+    move(index, direction) {
+        const next = index + direction;
+        if (next < 0 || next >= this.blocks.length) return;
+        [this.blocks[index], this.blocks[next]] = [this.blocks[next], this.blocks[index]];
+        this.message = 'Section moved to position ' + (next + 1) + '.';
+    },
+    remove(index) { this.blocks.splice(index, 1); this.message = 'Section removed. Save the draft to keep this change.'; },
+}));
+
+Alpine.data('pageSeoPreview', () => ({
+    defaults: { title: '', description: '', url: '' }, title: '', description: '', url: '', device: 'desktop',
+    init() {
+        this.defaults = JSON.parse(this.$el.dataset.preview);
+        this.title = this.$el.elements.seo_title.value;
+        this.description = this.$el.elements.seo_description.value;
+        this.url = this.$el.elements.canonical_url.value;
+    },
+}));
+
 Alpine.start();

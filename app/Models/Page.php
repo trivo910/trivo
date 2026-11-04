@@ -4,10 +4,21 @@ namespace App\Models;
 
 use App\Models\Concerns\HasSeo;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
+/**
+ * @property string|null $seo_title
+ * @property string|null $seo_description
+ * @property string|null $canonical_url
+ * @property Carbon|null $published_at
+ * @property bool $noindex
+ * @property bool $nofollow
+ */
 class Page extends Model
 {
     use HasSeo;
+    use SoftDeletes;
 
     /** @var list<string> */
     protected $fillable = [
@@ -20,6 +31,7 @@ class Page extends Model
         'published_at',
         'parent_id',
         'sort',
+        'content_version',
     ];
 
     /** @return array<string, string> */
@@ -28,6 +40,7 @@ class Page extends Model
         return [
             'blocks' => 'array',
             'published_at' => 'datetime',
+            'publication_locked_at' => 'datetime',
         ];
     }
 }

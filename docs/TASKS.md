@@ -21,6 +21,15 @@
 - [x] Literal redirects manager + atomic CSV import + 404 log + GET/HEAD 301/302/410 handling (complete canonical resolver remains Phase 4)
 
 ## Phase 3 — Content modules
+- [x] Page draft foundation: exact paths, typed section builder, revision restore, stale-edit checks and reversible archive (public integration pending)
+- [x] Page SEO editing: metadata/canonical/robots/social fields, search preview and separate SEO revisions (public output and blog scoring pending)
+- [x] Page publication workflow: readiness checks, UTC schedules, cancel/reschedule, permanent path locks and bounded cron publisher (public rendering/hosting acceptance pending)
+- [x] Service draft foundation: shared sections/path validation, featured images, display order, revisions and archive/restore (public templates pending)
+- [x] Service SEO editing: shared metadata validation/form, service schema choices and isolated SEO revisions (public output pending)
+- [x] Service publication workflow: shared readiness/cron execution, featured-image checks, UTC schedules and retained path locks (public rendering/hosting acceptance pending)
+- [x] Portfolio draft foundation: shared content actions/sections, featured images, ordering, revisions and archive/restore (public templates pending)
+- [x] Portfolio SEO editing: shared metadata form/validation, case-study schema choices and isolated SEO revisions (public output pending)
+- [x] Portfolio publication workflow: shared readiness/cron execution, image checks, UTC schedules and permanent path locks (public rendering/hosting acceptance pending)
 - [ ] Pages + blocks builder, Services, Portfolio, Testimonials, FAQs, Clients, Menus
 - [ ] Blog: posts, categories, tags, authors, Tiptap editor, sanitisation
 - [ ] **SEO panel + SeoScorer + ReadabilityScorer (live + server)**, SERP preview, revisions, scheduling

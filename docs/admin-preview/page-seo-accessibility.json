@@ -1,0 +1,47 @@
+[
+  {
+    "page": "page-seo",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "page-seo-narrow-preview",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "page-seo-validation",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "page-seo",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "page-seo-narrow-preview",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "page-seo-validation",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "page-seo",
+    "viewport": "desktop-dark",
+    "violations": []
+  },
+  {
+    "page": "page-seo-narrow-preview",
+    "viewport": "desktop-dark",
+    "violations": []
+  },
+  {
+    "page": "page-seo-validation",
+    "viewport": "desktop-dark",
+    "violations": []
+  }
+]

@@ -4,6 +4,16 @@
     <nav aria-label="Main navigation">
         <p class="nav-group">Overview</p>
         <a href="{{ route('admin.dashboard') }}" class="nav-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" @if(request()->routeIs('admin.dashboard')) aria-current="page" @endif><x-admin.icon name="home" />Dashboard</a>
+        @can('pages.view')
+            <p class="nav-group">Content</p>
+            <a href="{{ route('admin.pages.index') }}" class="nav-item {{ request()->routeIs('admin.pages.*') ? 'active' : '' }}" @if(request()->routeIs('admin.pages.*')) aria-current="page" @endif><x-admin.icon name="grid" />Pages</a>
+        @endcan
+        @can('services.view')
+            <a href="{{ route('admin.services.index') }}" class="nav-item {{ request()->routeIs('admin.services.*') ? 'active' : '' }}" @if(request()->routeIs('admin.services.*')) aria-current="page" @endif><x-admin.icon name="grid" />Services</a>
+        @endcan
+        @can('portfolio.view')
+            <a href="{{ route('admin.portfolio.index') }}" class="nav-item {{ request()->routeIs('admin.portfolio.*') ? 'active' : '' }}" @if(request()->routeIs('admin.portfolio.*')) aria-current="page" @endif><x-admin.icon name="grid" />Portfolio</a>
+        @endcan
         @can('media.manage')
             <p class="nav-group">Media</p>
             <a href="{{ route('admin.media.index') }}" class="nav-item {{ request()->routeIs('admin.media.*') ? 'active' : '' }}" @if(request()->routeIs('admin.media.*')) aria-current="page" @endif><x-admin.icon name="grid" />Image library</a>

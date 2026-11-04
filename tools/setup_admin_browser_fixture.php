@@ -21,6 +21,9 @@ $directory = base_path('.audit/browser-qa');
 if (! is_dir($directory)) {
     mkdir($directory, 0700, true);
 }
+if (! is_dir($directory.'/views')) {
+    mkdir($directory.'/views', 0700, true);
+}
 $database = $directory.'/ui.sqlite';
 touch($database);
 config(['database.default' => 'sqlite', 'database.connections.sqlite.database' => $database]);
@@ -31,7 +34,7 @@ if (User::query()->where('email', '!=', 'browser-fixture@example.test')->exists(
     throw new RuntimeException('Unexpected data in browser fixture database.');
 }
 // Reset only this synthetic database so browser reruns do not keep prior test rules/mail.
-foreach (['redirects', 'not_found_logs', 'mail_logs', 'jobs', 'media'] as $table) {
+foreach (['redirects', 'not_found_logs', 'mail_logs', 'jobs', 'revisions', 'pages', 'services', 'portfolio_items', 'media'] as $table) {
     DB::table($table)->delete();
 }
 DB::table('settings')->where('key', 'mail.smtp')->delete();

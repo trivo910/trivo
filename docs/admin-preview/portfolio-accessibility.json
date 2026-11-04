@@ -1,0 +1,47 @@
+[
+  {
+    "page": "portfolio-create",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "portfolio-edit",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "portfolio-list",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "portfolio-create",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "portfolio-edit",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "portfolio-list",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "portfolio-create",
+    "viewport": "desktop-dark",
+    "violations": []
+  },
+  {
+    "page": "portfolio-edit",
+    "viewport": "desktop-dark",
+    "violations": []
+  },
+  {
+    "page": "portfolio-list",
+    "viewport": "desktop-dark",
+    "violations": []
+  }
+]
