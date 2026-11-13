@@ -1,0 +1,47 @@
+[
+  {
+    "page": "blog-categories-create",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "blog-categories-edit",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "blog-categories-list",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "blog-categories-create",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "blog-categories-edit",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "blog-categories-list",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "blog-categories-create",
+    "viewport": "desktop-dark",
+    "violations": []
+  },
+  {
+    "page": "blog-categories-edit",
+    "viewport": "desktop-dark",
+    "violations": []
+  },
+  {
+    "page": "blog-categories-list",
+    "viewport": "desktop-dark",
+    "violations": []
+  }
+]

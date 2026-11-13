@@ -5,6 +5,7 @@ namespace App\Services\Content;
 use App\Models\Media;
 use App\Models\Page;
 use App\Models\PortfolioItem;
+use App\Models\Post;
 use App\Models\Revision;
 use App\Models\Service;
 use Illuminate\Validation\ValidationException;
@@ -12,8 +13,21 @@ use Illuminate\Validation\ValidationException;
 class ContentPublication
 {
     /** Called inside a transaction while holding the page and content-path locks. */
-    public function check(Page|Service|PortfolioItem $page): void
+    public function check(Page|Service|PortfolioItem|Post $page): void
     {
+        if ($page instanceof Post) {
+            if (trim($page->body) === '' || trim((string) $page->seo_title) === '' || trim((string) $page->seo_description) === '') {
+                throw ValidationException::withMessages(['publication' => 'Add post content, an SEO title and a meta description before publishing.']);
+            }
+            if ($page->featured_media_id) {
+                $image = Media::query()->whereKey($page->featured_media_id)->lockForUpdate()->first();
+                if (! $image || $image->processing_status !== 'ready' || blank($image->alt)) {
+                    throw ValidationException::withMessages(['publication' => 'Choose a ready featured image with alt text before publishing.']);
+                }
+            }
+
+            return;
+        }
         $drafts = app(ContentDrafts::class);
         $data = $drafts->validate(['title' => $page->title, 'path' => $page->path, 'blocks' => $page->blocks ?? [], 'content_version' => $page->content_version], $page);
         if ($data['blocks'] === [] || trim((string) $page->getAttribute('seo_title')) === '' || trim((string) $page->getAttribute('seo_description')) === '') {
@@ -34,7 +48,7 @@ class ContentPublication
         app(ContentSeo::class)->lockImages($seo);
     }
 
-    public function record(Page|Service|PortfolioItem $page, string $event, ?int $userId): void
+    public function record(Page|Service|PortfolioItem|Post $page, string $event, ?int $userId): void
     {
         Revision::query()->create(['revisionable_type' => $page::class, 'revisionable_id' => $page->id, 'user_id' => $userId,
             'snapshot' => ['kind' => 'publication', 'event' => $event, 'status' => $page->status,
@@ -48,10 +62,10 @@ class ContentPublication
         $activity->log($event);
     }
 
-    public function context(Page|Service|PortfolioItem $model): string
+    public function context(Page|Service|PortfolioItem|Post $model): string
     {
         return match (true) {
-            $model instanceof PortfolioItem => 'portfolio', $model instanceof Service => 'service', default => 'page',
+            $model instanceof PortfolioItem => 'portfolio', $model instanceof Service => 'service', $model instanceof Post => 'post', default => 'page',
         };
     }
 }

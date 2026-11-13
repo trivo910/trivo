@@ -31,7 +31,8 @@ beforeEach(function () {
 
 it('stages a validated upload privately and queues only its record ID', function () {
     $this->postJson(route('admin.media.store'), ['image' => UploadedFile::fake()->image('photo.png', 32, 24),
-        'alt' => 'Synthetic test image', 'folder' => 'Blog'])->assertOk()->assertJsonPath('status', 'queued');
+        'alt' => 'Synthetic test image', 'folder' => 'Blog'])->assertOk()->assertJsonPath('status', 'queued')
+        ->assertJsonPath('media.label', '#1 photo.png')->assertJsonPath('status_url', route('admin.media.status', 1));
     $media = Media::query()->sole();
     expect($media->path)->toMatch('/^media\/[a-f0-9-]{36}\/original\.png$/')->and($media->processing_status)->toBe('queued');
     Storage::disk('public')->assertMissing($media->path);
@@ -139,9 +140,10 @@ it('tracks content revision and setting references and only archives unused imag
     Post::query()->delete();
     Revision::query()->delete();
     Setting::query()->delete();
-    // Archived pages retain image references. Hard-delete only this synthetic fixture to test the unused branch.
+    // Archived content retains image references. Hard-delete these synthetic fixtures to test the unused branch.
     $this->delete(route('admin.media.archive', $media))->assertSessionHasErrors('media');
     Page::onlyTrashed()->forceDelete();
+    Post::onlyTrashed()->forceDelete();
     $this->delete(route('admin.media.archive', $media))->assertRedirect(route('admin.media.index'));
     expect(Media::query()->count())->toBe(0);
     Storage::disk('public')->assertExists($media->path);

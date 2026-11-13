@@ -30,10 +30,17 @@
 - [x] Portfolio draft foundation: shared content actions/sections, featured images, ordering, revisions and archive/restore (public templates pending)
 - [x] Portfolio SEO editing: shared metadata form/validation, case-study schema choices and isolated SEO revisions (public output pending)
 - [x] Portfolio publication workflow: shared readiness/cron execution, image checks, UTC schedules and permanent path locks (public rendering/hosting acceptance pending)
+- [x] FAQ draft foundation: optional exact paths, question/answer sections, ordering, revisions and archive/restore (SEO/publication/public integration pending)
+- [x] Testimonial draft foundation: optional exact paths, quote sections, images, ordering, revisions and archive/restore (attribution/SEO/publication/public integration pending)
+- [x] Client draft foundation: names, optional logos/paths, supporting sections, ordering, revisions and archive/restore (SEO/publication/public integration pending)
+- [x] Menu management foundation: safe links, ordering/parent validation, version checks, change history and reversible menu/item archive (import/public rendering pending)
 - [ ] Pages + blocks builder, Services, Portfolio, Testimonials, FAQs, Clients, Menus
+- [x] Blog category/tag foundation: exact paths, category hierarchy, revisions, stale-edit checks and protected archive/restore (SEO/post assignment/public integration pending)
+- [x] Blog author-profile foundation: separate profile records, exact paths, safe socials/avatar checks, revisions and protected archive/restore (post editor/assignment, author SEO/public archive pending)
+- [x] Blog post plain-text draft management: immutable paths, active author/category/tag assignment, featured-image checks, stale-edit protection, scoped revision restoration, draft archive/restore, server-side SEO/readability guidance and publish/schedule/cancel workflow (Tiptap/sanitisation and public rendering pending)
 - [ ] Blog: posts, categories, tags, authors, Tiptap editor, sanitisation
-- [ ] **SEO panel + SeoScorer + ReadabilityScorer (live + server)**, SERP preview, revisions, scheduling
-- [ ] Leads module (list/filter/export)
+- [x] Blog SEO panel: canonical/robots/sitemap/social metadata, schema choices, isolated revisions and publication scheduling (live scoring and public output pending)
+- [x] Leads inbox: list/details, validated filters, status/notes, stale-edit checks and bounded safe CSV export (public forms/replies/retention pending)
 
 ## Phase 4 — Public site
 - [ ] Layout, header/footer, nav, floating WhatsApp

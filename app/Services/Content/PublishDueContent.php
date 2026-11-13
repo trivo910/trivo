@@ -4,6 +4,7 @@ namespace App\Services\Content;
 
 use App\Models\Page;
 use App\Models\PortfolioItem;
+use App\Models\Post;
 use App\Models\Service;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -15,10 +16,10 @@ class PublishDueContent
     public function handle(string $kind, int $limit = 50): array
     {
         $model = match ($kind) {
-            'pages' => Page::class, 'services' => Service::class, 'portfolio' => PortfolioItem::class, default => throw new \InvalidArgumentException('Unsupported publication kind.')
+            'pages' => Page::class, 'services' => Service::class, 'portfolio' => PortfolioItem::class, 'posts' => Post::class, default => throw new \InvalidArgumentException('Unsupported publication kind.')
         };
         $prefix = match ($kind) {
-            'portfolio' => 'portfolio_', 'services' => 'service_', default => 'page_'
+            'portfolio' => 'portfolio_', 'services' => 'service_', 'posts' => 'post_', default => 'page_'
         };
         $counts = ['published' => 0, 'blocked' => 0];
         $lock = Cache::lock('content-path-writes', 120);

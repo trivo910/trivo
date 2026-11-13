@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call(RolePermissionSeeder::class);
+        $this->call(HomepageTestimonialsSeeder::class);
         // No default accounts. Provision explicitly with trivo:admin-create.
     }
 }

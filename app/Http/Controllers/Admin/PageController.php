@@ -28,7 +28,8 @@ class PageController extends Controller
         }
         if ($request->filled('q')) {
             $query->where(function ($query) use ($request) {
-                $query->where('title', 'like', '%'.$request->string('q').'%')->orWhere('path', 'like', '%'.$request->string('q').'%');
+                $term = '%'.$request->string('q').'%';
+                $query->where('title', 'like', $term)->orWhere('path', 'like', $term)->orWhere('archived_path', 'like', $term);
             });
         }
 

@@ -60,7 +60,15 @@ class MediaController extends Controller
         $url = route('admin.media.show', $media);
         $request->session()->flash('status', $media->wasRecentlyCreated ? 'Upload received. Responsive images will be prepared in the background.' : 'Existing image reused. Its saved metadata has been kept.');
 
-        return $request->expectsJson() ? response()->json(['redirect' => $url, 'status' => $media->processing_status])
+        return $request->expectsJson() ? response()->json([
+            'redirect' => $url,
+            'status' => $media->processing_status,
+            'media' => [
+                'id' => $media->id,
+                'label' => '#'.$media->id.' '.($media->title ?: $media->original_name),
+            ],
+            'status_url' => route('admin.media.status', $media),
+        ])
             : redirect($url);
     }
 

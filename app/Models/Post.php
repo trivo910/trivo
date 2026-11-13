@@ -4,10 +4,21 @@ namespace App\Models;
 
 use App\Models\Concerns\HasSeo;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
+/**
+ * @property array<string, array{status: string, weight: int}>|null $seo_analysis
+ * @property string|null $seo_title
+ * @property string|null $seo_description
+ * @property string|null $canonical_url
+ * @property Carbon|null $published_at
+ */
 class Post extends Model
 {
     use HasSeo;
+    use SoftDeletes;
 
     /** @var list<string> */
     protected $fillable = [
@@ -30,6 +41,7 @@ class Post extends Model
         'seo_analysis',
         'is_cornerstone',
         'show_toc',
+        'content_version',
     ];
 
     /** @return array<string, string> */
@@ -37,10 +49,18 @@ class Post extends Model
     {
         return [
             'published_at' => 'datetime',
+            'publication_locked_at' => 'datetime',
             'secondary_keywords' => 'array',
             'seo_analysis' => 'array',
             'is_cornerstone' => 'boolean',
             'show_toc' => 'boolean',
+            'content_version' => 'integer',
         ];
+    }
+
+    /** @return BelongsToMany<Tag, $this> */
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class);
     }
 }

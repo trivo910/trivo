@@ -51,7 +51,11 @@ it('enrolls new accounts, encrypts their secret and hashes recovery codes', func
     $user = adminAccount(enrolled: false);
     $this->post(route('admin.authenticate'), ['email' => $user->email, 'password' => 'password'])
         ->assertRedirect(route('admin.enroll'));
-    $this->get(route('admin.enroll'))->assertOk()->assertSee('Authenticator setup key');
+    $this->get(route('admin.enroll'))->assertOk()
+        ->assertSee('Scan this QR code')
+        ->assertSee('data-enrollment-qr', false)
+        ->assertSee('Authenticator setup QR code')
+        ->assertSee('Authenticator setup key');
     $secret = session('admin.enrollment_secret');
     expect($user->fresh()->two_factor_secret)->toBeNull();
     $code = app(Google2FA::class)->getCurrentOtp($secret);

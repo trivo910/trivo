@@ -23,7 +23,15 @@
 - Report: missing files, images >300 KB, missing alt, unused images.
 
 ## Step 4 — Content
-`trivo:import-content` (idempotent, uses `legacy_wp_id` as key, supports `--dry-run`):
+`trivo:import-content` is implemented as an idempotent import of the public page/post records available in the sanitized `wp_legacy` database. Run `php artisan trivo:import-content --dry-run` before writing:
+- Resolve every imported ID to the verified exact path in `docs/URL-MAP.csv`; use `docs/URL-CONFLICTS.csv` to retain the colliding Surat post as a draft.
+- Preserve `post_date`, `post_modified`, Rank Math title/description/focus keyword, live canonical/robots metadata and source HTML. Sanitize allowed HTML on import and render, and localize `trivo.in` links and image URLs to the local origin.
+- Skip source page 84 at `/marketing-solutions`; the existing local page is intentionally preserved.
+- The sanitized source has no excerpts, author identities, post-term relationships, Elementor metadata, menu-item records or custom-post-type content. These are not inferred or fabricated by this command. Existing upload files can still be served at their original `/wp-content/uploads/` paths.
+
+The importer does **not** make the rebuilt templates pixel-identical to WordPress. The shared public header/footer now follow the live reference, and the imported homepage uses a source-aware mapping for its hero, partner logos and section order. Other imported body HTML is cleaned of builder classes/styles and rendered with semantic local typography; each distinct page template still needs a controlled local layout mapping. Do not solve this by trusting arbitrary imported classes or inline CSS.
+
+Future import expansion:
 - **Blog posts**: `post_title`, `post_name`, `post_content`, `post_excerpt`, `post_date`/`post_modified` (preserve both), author name, categories, tags, featured image (`_thumbnail_id`), Yoast/RankMath meta (`_yoast_wpseo_title`, `_yoast_wpseo_metadesc`, `_yoast_wpseo_focuskw`, `_yoast_wpseo_canonical`, `_yoast_wpseo_meta-robots-noindex`, `_yoast_wpseo_opengraph-*`, or `rank_math_*`) → `seo_*` + `focus_keyword`. Then run the new SeoScorer on each post and store the score.
 - Clean body HTML: strip builder wrappers/inline styles/shortcodes, rewrite image URLs to new media (same path when mirrored), fix internal links, sanitise via HTMLPurifier.
 - **Pages/services/city pages**: if `_elementor_data` exists, **do not trust it for copy**; use the rendered live HTML of that URL (main content only) as the copy source, cross-checked with `post_content`. Map to blocks/sections.

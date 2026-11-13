@@ -4,6 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property string $status
+ * @property string|null $notes
+ * @property int|null $handled_by
+ * @property int $content_version
+ */
 class Lead extends Model
 {
     /** @var list<string> */
@@ -20,6 +29,7 @@ class Lead extends Model
         'status',
         'notes',
         'handled_by',
+        'content_version',
     ];
 
     /** @return array<string, string> */
@@ -27,6 +37,8 @@ class Lead extends Model
     {
         return [
             'utm' => 'array',
+            'content_version' => 'integer',
+            'handled_by' => 'integer',
         ];
     }
 }

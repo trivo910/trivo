@@ -3,6 +3,7 @@
 /** Create synthetic users only in the explicitly isolated browser-QA database. */
 declare(strict_types=1);
 
+use App\Models\Lead;
 use App\Models\User;
 use Database\Seeders\RolePermissionSeeder;
 use Illuminate\Contracts\Console\Kernel;
@@ -34,7 +35,7 @@ if (User::query()->where('email', '!=', 'browser-fixture@example.test')->exists(
     throw new RuntimeException('Unexpected data in browser fixture database.');
 }
 // Reset only this synthetic database so browser reruns do not keep prior test rules/mail.
-foreach (['redirects', 'not_found_logs', 'mail_logs', 'jobs', 'revisions', 'pages', 'services', 'portfolio_items', 'media'] as $table) {
+foreach (['post_tag', 'posts', 'categories', 'tags', 'leads', 'menu_items', 'menus', 'redirects', 'not_found_logs', 'mail_logs', 'jobs', 'revisions', 'pages', 'services', 'portfolio_items', 'faqs', 'testimonials', 'clients', 'media'] as $table) {
     DB::table($table)->delete();
 }
 DB::table('settings')->where('key', 'mail.smtp')->delete();
@@ -56,4 +57,13 @@ imagefilledrectangle($image, 40, 40, 180, 180, imagecolorallocate($image, 255, 1
 imagestring($image, 5, 40, 240, 'Synthetic media test fixture', imagecolorallocate($image, 255, 255, 255));
 imagepng($image, $directory.'/upload.png');
 imagedestroy($image);
+if (in_array('--leads', $argv, true)) {
+    foreach (['desktop-light', 'mobile-light', 'desktop-dark'] as $mode) {
+        Lead::query()->create(['name' => 'Synthetic lead '.$mode, 'email' => 'synthetic@example.test',
+            'phone' => '+919999999999', 'company' => 'Synthetic company', 'service' => 'Synthetic service',
+            'message' => "Synthetic enquiry message.\nAnother synthetic line.", 'source_url' => 'https://example.test/synthetic-source',
+            'utm' => ['source' => 'synthetic-tracking'], 'ip_hash' => hash('sha256', 'synthetic-ip')]);
+    }
+}
+
 echo "Prepared isolated browser fixture; application database unchanged.\n";

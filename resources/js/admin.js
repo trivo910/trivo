@@ -1,5 +1,36 @@
 import Alpine from 'alpinejs';
 
+const enrollmentQr = document.querySelector('[data-enrollment-qr]');
+
+if (enrollmentQr instanceof HTMLElement) {
+    const qrValue = enrollmentQr.dataset.enrollmentQr;
+    const image = enrollmentQr.querySelector('img');
+    const status = enrollmentQr.querySelector('[data-qr-status]');
+    const fallback = document.querySelector('[data-setup-key-fallback]');
+
+    if (qrValue && image instanceof HTMLImageElement && status instanceof HTMLElement) {
+        import('qrcode')
+            .then(({ default: QRCode }) => QRCode.toDataURL(qrValue, {
+                errorCorrectionLevel: 'M',
+                margin: 4,
+                width: 240,
+                color: { dark: '#000000', light: '#ffffff' },
+            }))
+            .then((dataUrl) => {
+                image.src = dataUrl;
+                image.hidden = false;
+                status.textContent = 'QR code ready. Scan it with your authenticator app.';
+            })
+            .catch((error) => {
+                console.error('Could not generate the local authenticator QR code.', error);
+                status.textContent = 'QR code could not be generated. Use the manual setup key below.';
+                if (fallback instanceof HTMLDetailsElement) fallback.open = true;
+            });
+    } else {
+        console.error('The authenticator QR code container is incomplete.');
+    }
+}
+
 Alpine.data('adminShell', () => ({
     sidebarOpen: false,
     compact: false,
@@ -87,12 +118,71 @@ Alpine.data('mediaProcessing', () => ({
 }));
 
 Alpine.data('pageSections', () => ({
-    blocks: [], sequence: 0, message: '',
+    blocks: [], images: {}, sequence: 0, message: '', uploadingKey: null, uploadMessage: '',
     init() {
-        try { this.blocks = JSON.parse(this.$el.dataset.blocks).map(block => ({ text: '', media_id: '', label: '', url: '', ...block, key: ++this.sequence })); }
+        try {
+            this.blocks = JSON.parse(this.$el.dataset.blocks).map(block => ({ text: '', media_id: '', label: '', url: '', ...block, key: ++this.sequence }));
+            this.images = JSON.parse(this.$el.dataset.images);
+        }
         catch { this.blocks = []; this.message = 'Sections could not be loaded. Reload before saving.'; }
     },
     serialize() { return JSON.stringify(this.blocks.map(({ key, ...block }) => block)); },
+    async uploadImage(event, block) {
+        const form = event.currentTarget;
+        if (this.uploadingKey !== null || !form.reportValidity()) return;
+        this.uploadingKey = block.key;
+        this.uploadMessage = 'Uploading image and preparing responsive versions...';
+
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: {
+                    Accept: 'application/json',
+                    'X-CSRF-TOKEN': form.elements._token.value,
+                },
+                credentials: 'same-origin',
+            });
+            const result = await response.json();
+
+            if (!response.ok) {
+                const errors = result.errors ? Object.values(result.errors).flat().join(' ') : '';
+                throw new Error(errors || 'The image upload was rejected. Check the file and try again.');
+            }
+
+            const statusUrl = new URL(result.status_url, window.location.origin);
+            if (statusUrl.origin !== window.location.origin || !result.media?.id || !result.media?.label) {
+                throw new Error('The upload completed, but its processing status could not be checked. Reload the page to select it once ready.');
+            }
+
+            let status = result.status;
+            for (let attempt = 0; status !== 'ready' && status !== 'failed' && attempt < 30; attempt++) {
+                await new Promise(resolve => window.setTimeout(resolve, 4000));
+                const statusResponse = await fetch(statusUrl, {
+                    headers: { Accept: 'application/json' },
+                    credentials: 'same-origin',
+                });
+                if (!statusResponse.ok) throw new Error('Image processing status could not be checked. Reload the page to check the library.');
+                status = (await statusResponse.json()).status;
+            }
+
+            if (status !== 'ready') {
+                throw new Error(status === 'failed'
+                    ? 'Image processing failed. Try another image or upload it again from the media library.'
+                    : 'Image processing is taking longer than expected. Once ready, reload this draft to select it.');
+            }
+
+            this.images[result.media.id] = result.media.label;
+            block.media_id = String(result.media.id);
+            form.reset();
+            this.uploadMessage = 'Image is ready and selected for this section.';
+        } catch (error) {
+            console.error('Could not upload and select the section image.', error);
+            this.uploadMessage = error instanceof Error ? error.message : 'The image could not be uploaded. Try again.';
+        } finally {
+            this.uploadingKey = null;
+        }
+    },
     add() {
         if (this.blocks.length >= 50) return;
         this.blocks.push({ type: 'paragraph', text: '', media_id: '', label: '', url: '', key: ++this.sequence });

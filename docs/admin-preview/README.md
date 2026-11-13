@@ -1,5 +1,17 @@
 # Admin preview evidence
 
+`blog-categories-create/edit/list-*` and `blog-tags-create/edit/list-*` have separate reports in `blog-categories-accessibility.json` and `blog-tags-accessibility.json`. Regenerate the isolated fixture and run `node tools/check_blog_terms_ui.cjs` for categories; regenerate again before `node tools/check_blog_terms_ui.cjs --tags`. Both variants pass nine audits, including fixed-path rejection, revisions and archive/restore. No real terms or public content are created.
+
+`lead-list-*`, `lead-validation-*` and `lead-details-*` are recorded in `leads-accessibility.json`. Regenerate the isolated fixture with `php tools/setup_admin_browser_fixture.php --leads`, then run `node tools/check_leads_ui.cjs`. Nine audits pass across desktop light/dark and mobile, including filters, invalid-note rejection, status/notes saves and a filtered CSV download. CSV files stay under ignored `.audit/browser-qa`; all enquiries are synthetic and no email is sent.
+
+`menu-create-*`, `menu-edit-*` and `menu-list-*` are recorded in `menus-accessibility.json`. Regenerate the isolated fixture and run `node tools/check_menu_ui.cjs` for nine audits covering native saves, hierarchy/cycle validation, item/menu archive/restore and filtered lists. All nine pass with no recorded axe violations. External requests are blocked; only synthetic navigation is created.
+
+`client-create-*`, `client-edit-*` and `client-list-*` are recorded in `clients-accessibility.json`. Regenerate the isolated fixture and run `node tools/check_service_ui.cjs --client` for nine audits covering sections, order, revisions, archive/restore and a pathless mobile entry. All nine pass with no recorded axe violations; only synthetic drafts are created.
+
+`testimonial-create-*`, `testimonial-edit-*` and `testimonial-list-*` are recorded in `testimonials-accessibility.json`. Regenerate the isolated fixture and run `node tools/check_service_ui.cjs --testimonial` for nine audits covering quote sections, display order, revisions, archive/restore and an embedded mobile entry without a URL. All nine pass with no recorded axe violations. Only synthetic drafts are created.
+
+`faq-create-*`, `faq-edit-*` and `faq-list-*` are recorded in `faqs-accessibility.json`. Regenerate the isolated fixture and run `node tools/check_service_ui.cjs --faq` for nine audits, including question/answer sections, order, revision restoration, archive/restore and a mobile entry with no path. Only synthetic drafts are created.
+
 `portfolio-publication-draft-*`, `portfolio-publication-scheduled-*` and `portfolio-publication-published-*` are recorded in `portfolio-publication-accessibility.json`. Regenerate the isolated fixture and run `node tools/check_publication_ui.cjs --portfolio` for nine audits. Regenerate again before the `--service` regression. Both workflows passed with no recorded axe violations; they change only synthetic backend publication state.
 
 `portfolio-seo-*`, `portfolio-seo-narrow-preview-*` and `portfolio-seo-validation-*` are recorded in `portfolio-seo-accessibility.json`. Run `node tools/check_page_seo_ui.cjs --portfolio` with a fresh isolated fixture for nine SEO audits. Regenerate the fixture before running `--service` to verify service metadata behavior after shared-action changes.

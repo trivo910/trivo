@@ -1,4 +1,4 @@
-﻿# Trivo Laravel migration
+# Trivo Laravel migration
 
 Laravel 12 / PHP 8.3 / Blade / Tailwind 4 / Alpine rebuild of trivo.in. This checkout currently contains the source audit and application foundation. Admin modules, content import, public templates and release acceptance are still in development. See docs/DEVELOPMENT-STATUS.md and docs/TASKS.md.
 
@@ -64,3 +64,7 @@ Set `APP_ENV=production`, `APP_DEBUG=false`, a unique `APP_KEY`, `APP_URL=https:
 Use a one-minute cron invoking `php /absolute/app/path/artisan schedule:run`. A bounded database queue worker is now scheduled every minute, with an overlap lock, a 50-second runtime limit between jobs and a 30-second per-job timeout. Validate actual cron execution before relying on queued delivery. SMTP settings, test delivery and redirect management are documented in `docs/SMTP-AND-REDIRECTS.md`.
 
 Before cut-over, lower DNS TTL, retain the WordPress backup, run the completed URL verifier and content diff, then switch only after UAT. Roll back by restoring the previous app/public release and its matching database backup; keep APP_KEY and encrypted media/settings backups together. Do not run destructive migrations against a live DB to simulate rollback. Keep the WordPress backup for at least 30 days and monitor Search Console, sitemaps and 404s after release.
+
+## Local browser database mismatch
+
+If the browser reports missing columns such as `portfolio_items.deleted_at`, `faqs.deleted_at` or `menus.deleted_at`, check the database named in the Laravel error log. An already-running development server can retain SQLite environment overrides while a new CLI terminal uses MySQL from `.env`. Run incremental migrations against that same serving database, preserving its data; migrating another connection does not update it. Restart the development server after intentionally changing its environment. Do not use `migrate:fresh` to repair this condition.

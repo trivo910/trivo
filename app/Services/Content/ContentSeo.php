@@ -2,9 +2,12 @@
 
 namespace App\Services\Content;
 
+use App\Models\Author;
+use App\Models\Faq;
 use App\Models\Media;
 use App\Models\Page;
 use App\Models\PortfolioItem;
+use App\Models\Post;
 use App\Models\Service;
 use App\Support\RedirectPaths;
 use Closure;
@@ -109,7 +112,7 @@ class ContentSeo
     }
 
     /** @return array<string, mixed> */
-    public function forForm(Page|Service|PortfolioItem $page): array
+    public function forForm(Page|Service|PortfolioItem|Post|Author|Faq $page): array
     {
         return array_intersect_key($page->getAttributes(), array_flip(self::FIELDS));
     }
@@ -120,6 +123,7 @@ class ContentSeo
         return match ($context) {
             'service' => ['WebPage' => 'Web page', 'Service' => 'Service', 'FAQPage' => 'FAQ page'],
             'portfolio' => ['WebPage' => 'Web page', 'CreativeWork' => 'Creative work / case study'],
+            'faq' => ['FAQPage' => 'FAQ page', 'WebPage' => 'Web page'],
             default => ['WebPage' => 'Web page', 'AboutPage' => 'About page', 'ContactPage' => 'Contact page', 'FAQPage' => 'FAQ page'],
         };
     }

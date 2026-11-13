@@ -4,6 +4,9 @@
     <nav aria-label="Main navigation">
         <p class="nav-group">Overview</p>
         <a href="{{ route('admin.dashboard') }}" class="nav-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" @if(request()->routeIs('admin.dashboard')) aria-current="page" @endif><x-admin.icon name="home" />Dashboard</a>
+        @can('leads.view')
+            <a href="{{ route('admin.leads.index') }}" class="nav-item {{ request()->routeIs('admin.leads.*') ? 'active' : '' }}" @if(request()->routeIs('admin.leads.*')) aria-current="page" @endif><x-admin.icon name="grid" />Leads</a>
+        @endcan
         @can('pages.view')
             <p class="nav-group">Content</p>
             <a href="{{ route('admin.pages.index') }}" class="nav-item {{ request()->routeIs('admin.pages.*') ? 'active' : '' }}" @if(request()->routeIs('admin.pages.*')) aria-current="page" @endif><x-admin.icon name="grid" />Pages</a>
@@ -13,6 +16,25 @@
         @endcan
         @can('portfolio.view')
             <a href="{{ route('admin.portfolio.index') }}" class="nav-item {{ request()->routeIs('admin.portfolio.*') ? 'active' : '' }}" @if(request()->routeIs('admin.portfolio.*')) aria-current="page" @endif><x-admin.icon name="grid" />Portfolio</a>
+        @endcan
+        @can('faqs.view')
+            <a href="{{ route('admin.faqs.index') }}" class="nav-item {{ request()->routeIs('admin.faqs.*') ? 'active' : '' }}" @if(request()->routeIs('admin.faqs.*')) aria-current="page" @endif><x-admin.icon name="grid" />FAQs</a>
+        @endcan
+        @can('testimonials.view')
+            <a href="{{ route('admin.testimonials.index') }}" class="nav-item {{ request()->routeIs('admin.testimonials.*') ? 'active' : '' }}" @if(request()->routeIs('admin.testimonials.*')) aria-current="page" @endif><x-admin.icon name="grid" />Testimonials</a>
+        @endcan
+        @can('clients.view')
+            <a href="{{ route('admin.clients.index') }}" class="nav-item {{ request()->routeIs('admin.clients.*') ? 'active' : '' }}" @if(request()->routeIs('admin.clients.*')) aria-current="page" @endif><x-admin.icon name="grid" />Clients</a>
+        @endcan
+        @can('posts.view')
+            <a href="{{ route('admin.posts.index') }}" class="nav-item {{ request()->routeIs('admin.posts.*') ? 'active' : '' }}" @if(request()->routeIs('admin.posts.*')) aria-current="page" @endif><x-admin.icon name="grid" />Blog posts</a>
+            <a href="{{ route('admin.authors.index') }}" class="nav-item {{ request()->routeIs('admin.authors.*') ? 'active' : '' }}" @if(request()->routeIs('admin.authors.*')) aria-current="page" @endif><x-admin.icon name="grid" />Blog authors</a>
+            @foreach(['categories' => 'Blog categories', 'tags' => 'Blog tags'] as $termKind => $label)
+                <a href="{{ route('admin.blog.terms.index', $termKind) }}" class="nav-item {{ request()->routeIs('admin.blog.terms.*') && request()->route('kind') === $termKind ? 'active' : '' }}" @if(request()->routeIs('admin.blog.terms.*') && request()->route('kind') === $termKind) aria-current="page" @endif><x-admin.icon name="grid" />{{ $label }}</a>
+            @endforeach
+        @endcan
+        @can('menus.view')
+            <a href="{{ route('admin.menus.index') }}" class="nav-item {{ request()->routeIs('admin.menus.*') ? 'active' : '' }}" @if(request()->routeIs('admin.menus.*')) aria-current="page" @endif><x-admin.icon name="grid" />Menus</a>
         @endcan
         @can('media.manage')
             <p class="nav-group">Media</p>

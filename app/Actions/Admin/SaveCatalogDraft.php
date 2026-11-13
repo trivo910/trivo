@@ -2,9 +2,12 @@
 
 namespace App\Actions\Admin;
 
+use App\Models\Client;
+use App\Models\Faq;
 use App\Models\PortfolioItem;
 use App\Models\Revision;
 use App\Models\Service;
+use App\Models\Testimonial;
 use App\Services\Content\ContentDrafts;
 use Illuminate\Contracts\Cache\LockTimeoutException;
 use Illuminate\Support\Facades\Cache;
@@ -16,7 +19,7 @@ use Illuminate\Validation\ValidationException;
 class SaveCatalogDraft
 {
     /** @param array<string, mixed> $values */
-    public function handle(Service|PortfolioItem $service, array $values): void
+    public function handle(Service|PortfolioItem|Faq|Testimonial|Client $service, array $values): void
     {
         Gate::authorize($service->exists ? 'update' : 'create', $service->exists ? $service : $service::class);
         try {
@@ -41,7 +44,13 @@ class SaveCatalogDraft
                 Revision::query()->create(['revisionable_type' => $service::class, 'revisionable_id' => $service->id, 'user_id' => auth()->id(),
                     'snapshot' => ['kind' => 'content', 'title' => $service->title, 'path' => $service->path, 'blocks' => $service->blocks,
                         'media_id' => $service->media_id, 'sort' => $service->sort, 'content_version' => $service->content_version]]);
-                $event = $service instanceof PortfolioItem ? 'portfolio_draft_saved' : 'service_draft_saved';
+                $event = match (true) {
+                    $service instanceof Client => 'client_draft_saved',
+                    $service instanceof Testimonial => 'testimonial_draft_saved',
+                    $service instanceof Faq => 'faq_draft_saved',
+                    $service instanceof PortfolioItem => 'portfolio_draft_saved',
+                    default => 'service_draft_saved',
+                };
                 activity('content')->causedBy(auth()->user())->performedOn($service)->event($event)->log($event);
             }));
         } catch (LockTimeoutException) {

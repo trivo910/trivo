@@ -1,0 +1,47 @@
+[
+  {
+    "page": "menu-create",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "menu-edit",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "menu-list",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "menu-create",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "menu-edit",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "menu-list",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "menu-create",
+    "viewport": "desktop-dark",
+    "violations": []
+  },
+  {
+    "page": "menu-edit",
+    "viewport": "desktop-dark",
+    "violations": []
+  },
+  {
+    "page": "menu-list",
+    "viewport": "desktop-dark",
+    "violations": []
+  }
+]

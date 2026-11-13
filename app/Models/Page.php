@@ -14,6 +14,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $published_at
  * @property bool $noindex
  * @property bool $nofollow
+ * @property list<array<string, mixed>>|null $blocks
  */
 class Page extends Model
 {

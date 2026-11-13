@@ -8,7 +8,7 @@ Existing `pages.view/create/update/delete` permissions and PagePolicy protect th
 
 Each save creates a revision containing only title, path, sections and the content version. Restoring a revision checks that it belongs to the same page and creates a new version of its title/sections, retaining the current path, template and SEO fields. The original revision remains. Stale editor submissions and stale archive/restore/revision actions are rejected using `content_version`; reload and review before saving again.
 
-Archive is a soft delete for never-published, never-scheduled, non-imported drafts only. Child pages prevent archiving their parent. Paths and revision history remain reserved after archive. Archived page and revision image references continue to protect those images; this is intentional retention, not permanent deletion.
+Archive is a soft delete for never-published, never-scheduled, non-imported drafts only. Child pages prevent archiving their parent. An archived draft releases its path for a new page while retaining the former path in `archived_path` and its revision history. Restoring is allowed only if that path remains available; resolve any collision first. Archived page and revision image references continue to protect those images.
 
 ## Section schema
 
@@ -29,7 +29,7 @@ Image rows are locked and rechecked during the save transaction, sharing the arc
 
 ## URL safeguards and integration
 
-Canonical paths retain the submitted spelling/case/trailing slash. Validation reserves the homepage, rejects unsafe/reserved routes and detects case/trailing-slash aliases against pages (including archived drafts), posts, categories, tags, authors and literal redirect sources. It never derives a path from a title. New pages cannot claim system/asset paths. Existing public paths require a separately reviewed redirect workflow rather than casual renaming.
+Canonical paths retain the submitted spelling/case/trailing slash. Validation reserves the homepage, rejects unsafe/reserved routes and detects case/trailing-slash aliases against active pages, posts, categories, tags, authors and literal redirect sources. Archived draft paths are available for reuse, but their saved path must be conflict-free before the draft can be restored. It never derives a path from a title. New pages cannot claim system/asset paths. Existing public paths require a separately reviewed redirect workflow rather than casual renaming.
 
 Page writes use a shared `content-path-writes` cache lock and a row-locked transaction. Future content/redirect writers must coordinate that lock and reuse the catalog check before cross-module path uniqueness can be claimed under concurrent writes. This is an editor safeguard, not the Phase 4 canonical resolver or proof of URL parity. Arbitrarily percent-encoded aliases, server rewrites/static assets and full legacy URL reconciliation still require release/import checks.
 

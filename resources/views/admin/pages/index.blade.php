@@ -9,7 +9,7 @@
         </form>
     </x-admin.glass-card>
     <x-admin.table caption="Pages"><x-slot:head><tr><th scope="col">Page</th><th scope="col">Path</th><th scope="col">Status</th><th scope="col">Version</th></tr></x-slot:head>
-        @forelse($items as $item)<tr><td><a href="{{ route('admin.pages.edit', $item) }}">{{ $item->title }}</a></td><td class="path-cell">{{ $item->path }}</td><td>{{ $item->trashed() ? 'Archived' : ucfirst($item->status) }}</td><td>{{ $item->content_version }}</td></tr>
+        @forelse($items as $item)<tr><td><a href="{{ route('admin.pages.edit', $item) }}">{{ $item->title }}</a></td><td class="path-cell">{{ $item->path ?? $item->archived_path }}</td><td>{{ $item->trashed() ? 'Archived' : ucfirst($item->status) }}</td><td>{{ $item->content_version }}</td></tr>
         @empty<tr><td colspan="4">No pages found. Create a draft or adjust the filters.</td></tr>@endforelse
     </x-admin.table>
     <div class="pagination">{{ $items->links() }}</div>

@@ -1,4 +1,60 @@
-﻿# Development decisions
+# Development decisions
+
+## 2026-11-12 — Public shell follows live-site reference
+- Replace placeholder public navigation, contact details, partner marks and footer with the verified Trivo menu, local upload assets, live contact/social links and blue footer treatment. Keep all existing public paths unchanged.
+- Use the existing self-hosted Montserrat variable font and add a single font preload; its local 400/600/700-named files are identical copies of the same variable font.
+- Map the imported homepage's verified hero, partner-logo and heading sequence into local semantic sections without changing its copy or images. Keep arbitrary source classes and inline CSS disabled; other imported page layouts still require per-template mapping.
+
+## 2026-11-12 — Sanitized public content import
+- Import only public pages/posts represented in the allowlisted `wp_legacy` source. Use `URL-MAP.csv` for exact paths and SEO values, preserve source IDs/dates, and make the operation transactional and repeatable.
+- Preserve local `/marketing-solutions` content; retain the duplicate Surat post as a draft because the live page owns that URL.
+- Sanitize imported HTML before storage and again before rendering. Keep the existing plain-text-only editor behavior for new blog drafts; imported legacy posts may retain sanitized HTML when edited.
+- Do not infer missing authors, excerpts, menu items, taxonomy relationships, builder data or custom-post-type records from the incomplete audit schema.
+
+## 2026-11-12 — Local authenticator enrollment QR
+- Generate the TOTP enrollment QR in the admin-only Vite bundle using a locally installed QR encoder; do not send the setup URI or secret to a hosted QR service.
+- Keep manual secret entry as an accessible fallback, and retain the existing one-time enrollment/session protections. The QR image is a data URL allowed by the existing `img-src data:` policy; enrollment remains `no-store`.
+
+## 2026-11-05 - Blog post plain-text drafts
+- Provide a deliberately plain-text post draft editor before adding Tiptap. Reject HTML rather than storing unsanitized markup; a reviewed server-side rich-text sanitiser remains required before rich formatting or public rendering.
+- Preserve post source/SEO/publication fields, reserve immutable exact paths, and allow assignments only to active author/category/tag records. Use the shared path-write lock and content version; save as draft without publishing or generating public content.
+
+## 2026-11-05 - Blog post draft groundwork
+- Add soft deletion and optimistic content versions to posts before adding post mutation routes. Preserve all existing post/source/SEO fields and do not expose a raw or unsanitized rich-text input.
+- A post draft may later be archived only when it is a non-imported draft. Publication, content sanitisation, term/author assignment writes, revisions, scoring and public rendering remain separate work.
+- Apply the additive migration to local MySQL and browser SQLite only after an ignored consistent SQLite backup. The browser database continues to retain its two accounts unchanged.
+
+## 2026-11-05 - Blog author-profile foundation
+- Treat blog author profiles as content records entirely separate from administration users and authentication. Reuse post permissions for profile access; creating a profile must never create, alter, or authorize an account.
+- Preserve source IDs and SEO/custom-schema values while adding exact-path checks, immutable saved paths, content versions, scoped revisions, and reversible archive. Imported profiles and profiles referenced by posts cannot be archived; archived paths stay reserved.
+- Accept only plain-text biographies, ready image-library avatars with alt text, and stored HTTPS social links without credentials. Do not fetch social links, generate author copy, or render public author pages yet.
+- Apply the incremental author migration to the local MySQL and browser SQLite databases only after an ignored consistent SQLite backup. The existing two browser accounts remain unchanged. Post editing/author assignment, author SEO, public archives and verified import remain pending.
+
+## 2026-11-05 - Taxonomy verification and cache isolation
+- Complete category/tag verification with 410 passing tests and 18 browser accessibility audits. Confirm the existing SQLite browser account can open the new list/create pages and the six previously affected module lists; preserve both accounts and all data.
+- Validate cache commands under ignored `.audit/cache-check` paths using Laravel's cache-path environment overrides and a separate compiled-view directory. Do not temporarily replace the serving application's MySQL/SQLite configuration cache during development checks.
+
+## 2026-11-04 - Blog category and tag foundation
+- Reuse post permissions and shared glass forms for taxonomy metadata, category parents, revisions and reversible archive. Preserve legacy IDs and SEO/custom schema fields; do not invent or import terms during development.
+- Keep exact paths immutable after creation, reserve archived/case/slash aliases through the shared catalog, and store slugs independently. Limit category hierarchy to five levels with ancestor/descendant cycle/depth checks; tags remain flat.
+- Lock content writes and versions, isolate revisions by model/ID/kind and revalidate restored parents. Protect imported terms and all post-referenced terms from archive. Future post assignment must coordinate with the same write lock.
+- Apply incremental migrations to both local MySQL and the existing browser SQLite database after an ignored consistent SQLite backup. Preserve existing accounts/content. Term SEO, post editing/assignment, public archives and verified import remain pending.
+
+## 2026-11-04 - Local browser database migration repair
+- Browser requests were using `database/database.sqlite` with seven pending migrations, while CLI `.env` configuration selected the migrated `newtrivo` MySQL database. Missing soft-delete columns caused portfolio/FAQ/testimonial/client/menu list failures.
+- Create a consistent ignored SQLite backup before applying incremental migrations to the existing browser database. Preserve both existing accounts and all records; do not reset, reseed, copy accounts or change connection preferences.
+- Authenticated in-process checks against that SQLite database return HTTP 200 for portfolio, FAQs, testimonials, clients, menus and leads. Future local migrations must target the database used by the serving process; restart it after intentional environment changes.
+
+## 2026-11-04 - Lead inbox
+- Add native lead list/detail/filter and status/notes forms under independent view/manage permissions. Lock rows and reject stale versions; preserve all original enquiry fields and set the handling account on the server.
+- Expose filtered CSV only to users with view plus manage permissions, cap it at 1,000 newest matching rows and neutralize spreadsheet formula prefixes. Exclude notes, handler IDs, tracking data and IP hashes; never log enquiry values or search filters in application activity records.
+- Display escaped enquiry/source fields without fetching links. Public submission, notifications, outbound replies, retention/deletion and legacy form-entry import remain pending. QA uses synthetic enquiries in isolated SQLite only; no external mail is sent.
+
+## 2026-11-04 - Menu management foundation
+- Use native forms and existing glass components for menu locations and item labels/URLs/parents/order/targets. Keep public rendering and verified source mapping separate; do not invent or import navigation during validation.
+- Serialize mutations on the owning menu with version checks, and location uniqueness checks with a cache lock. Bound active trees to 100 items and five levels; reject cross-menu parents, cycles and descendant depth violations.
+- Preserve imported locations/IDs and reserve archived locations. Retain menu/item rows and change history, prevent orphaned active children and require parent-first restoration. Store bounded per-change snapshots rather than copying all archived items into each revision.
+- Allow safe relative/HTTPS/anchor links without fetching URLs. Public new-window links require noopener/noreferrer when rendered. Historical revision replay, mailto/tel extensions, public caches and production database/hosting checks remain pending.
 
 ## 2026-11-03 — SMTP and redirect management
 - Store SMTP values as one encrypted settings record. Never return the saved password to the browser, serialize it into queue payloads, or cache decrypted DB credentials. HTTP boot loads runtime mail settings; console boot skips them so config:cache stays clean. Queue processing refreshes configuration at execution time.
@@ -8,6 +64,21 @@
 - Serve saved rules through a public GET/HEAD middleware, while leaving full host/HTTPS/slash canonicalization and content resolution in Phase 4. Do not claim overall URL parity from the redirect tests.
 - 404 records omit queries, referrers, raw IPs and admin paths; redact email-like path fragments and hash user agents. Redacted/sensitive paths are not offered as automatic redirect suggestions.
 - Browser QA used a separate synthetic SQLite database and tested seven screens in three layouts. The temporary PHP/SMTP servers were stopped after verification; the application database still has no default users or saved SMTP credentials.
+
+## 2026-11-04 — Client draft foundation
+- Reuse catalog actions and existing glass components under independent client permissions. Support name/logo/order entries with empty sections and optional exact paths; embedded clients never require invented URLs.
+- Preserve source body/details and imported paths, protect current/historical raster image references, reject stale changes and isolate revisions by model/ID/kind. Archive only never-published, non-imported, unlocked drafts and retain paths/history.
+- Keep verified client metadata, SEO, publication, page placement and public rendering pending. QA uses synthetic names and media records only; no source logos or real affiliations are imported or published.
+
+## 2026-11-04 — Testimonial draft foundation
+- Reuse catalog draft actions and typed quote sections under independent testimonial permissions. Preserve source body/details, optional exact paths, stale-version checks, model-scoped revisions and image readiness/reference protection.
+- Embedded testimonials may have null paths; never invent URLs, reviewers, companies or ratings. Imported paths remain immutable and archived paths remain reserved. Existing published/scheduled entries receive a lock without invented publication dates.
+- Keep source-verified attribution fields, SEO, publication, page placement and public review/schema output pending. Validation uses synthetic drafts only; no real source quotes or images are imported or published.
+
+## 2026-11-04 — FAQ draft foundation
+- Reuse shared catalog draft actions and typed answer sections with independent FAQ permissions and model-scoped revisions. Retain source body/details, enforce stale-version and image checks, and keep imported/published content protected.
+- FAQ paths are optional for embedded questions. Store absent paths as null, preserve imported null paths and never invent public URLs. Add FAQs as path owners and reserve existing FAQ/testimonial/client paths in the shared collision catalog, including archived FAQ paths.
+- Add reversible archive for never-published, non-imported drafts. FAQ SEO fields, publication, placement, source import and visible-answer/FAQPage output remain pending. No real questions, images or public content are imported by implementation or QA.
 
 ## 2026-11-04 — Portfolio publication workflow
 - Extend the shared publication workflow and explicit due-model allowlist to portfolio entries. Validate case-study schema context, content/SEO/path and ready content/featured/social images at scheduling and due time.

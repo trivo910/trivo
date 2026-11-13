@@ -4,6 +4,7 @@ namespace App\Actions\Admin;
 
 use App\Models\Page;
 use App\Models\PortfolioItem;
+use App\Models\Post;
 use App\Models\Service;
 use App\Services\Content\ContentPublication;
 use Illuminate\Contracts\Cache\LockTimeoutException;
@@ -18,7 +19,7 @@ use Illuminate\Validation\ValidationException;
 class ChangeContentPublication
 {
     /** @param array<string, mixed> $values */
-    public function handle(Page|Service|PortfolioItem $page, array $values): void
+    public function handle(Page|Service|PortfolioItem|Post $page, array $values): void
     {
         $ability = ($values['operation'] ?? null) === 'cancel' ? 'cancelPublication' : 'publish';
         Gate::authorize($ability, $page);

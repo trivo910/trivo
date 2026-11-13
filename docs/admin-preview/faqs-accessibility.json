@@ -1,0 +1,47 @@
+[
+  {
+    "page": "faq-create",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "faq-edit",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "faq-list",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "faq-create",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "faq-edit",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "faq-list",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "faq-create",
+    "viewport": "desktop-dark",
+    "violations": []
+  },
+  {
+    "page": "faq-edit",
+    "viewport": "desktop-dark",
+    "violations": []
+  },
+  {
+    "page": "faq-list",
+    "viewport": "desktop-dark",
+    "violations": []
+  }
+]

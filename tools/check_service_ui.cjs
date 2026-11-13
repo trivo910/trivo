@@ -9,10 +9,14 @@ const credentials = JSON.parse(fs.readFileSync(path.join(root, '.audit/browser-q
 const base = `http://127.0.0.1:18765/${credentials.admin_path}`;
 const target = path.join(root, 'docs/admin-preview');
 const results = [];
-const isPortfolio = process.argv.includes('--portfolio');
-const subject = isPortfolio ? 'portfolio' : 'service';
-const subjectTitle = isPortfolio ? 'Portfolio' : 'Service';
-const modulePath = isPortfolio ? 'portfolio' : 'services';
+const contexts = {
+    '--portfolio': ['portfolio', 'Portfolio', 'portfolio', false],
+    '--faq': ['faq', 'FAQ', 'faqs', true],
+    '--testimonial': ['testimonial', 'Testimonial', 'testimonials', true],
+    '--client': ['client', 'Client', 'clients', true],
+};
+const selected = Object.keys(contexts).find(flag => process.argv.includes(flag));
+const [subject, subjectTitle, modulePath, optionalPath] = selected ? contexts[selected] : ['service', 'Service', 'services', false];
 (async () => {
     const browser = await chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: true });
     try {
@@ -45,8 +49,10 @@ const modulePath = isPortfolio ? 'portfolio' : 'services';
             await page.getByRole('button', { name: 'Apply', exact: true }).click();
             await page.waitForURL(base);
             await page.goto(`${base}/${modulePath}/create`);
-            await page.getByLabel(`${subjectTitle} title`, { exact: true }).fill(`Synthetic ${subject} ${mode}`);
-            await page.getByLabel(`Full ${subject} path`, { exact: true }).fill(`/qa-${subject}-${mode}/`);
+            const titleLabel = subject === 'faq' ? 'FAQ question' : (subject === 'client' ? 'Client name' : `${subjectTitle} title`);
+            const pathLabel = `Full ${subject} path${optionalPath ? ' (optional)' : ''}`;
+            await page.getByLabel(titleLabel, { exact: true }).fill(`Synthetic ${subject} ${mode}`);
+            await page.getByLabel(pathLabel, { exact: true }).fill(optionalPath && mobile ? '' : `/qa-${subject}-${mode}/`);
             await page.getByLabel('Display order', { exact: true }).fill('5');
             await page.getByRole('button', { name: 'Add section', exact: true }).click();
             await page.getByLabel('Section text', { exact: true }).first().fill('First synthetic service section.');
@@ -57,14 +63,15 @@ const modulePath = isPortfolio ? 'portfolio' : 'services';
             await page.getByRole('button', { name: `Save ${subject} draft`, exact: true }).click();
             await page.waitForURL(new RegExp(`/${credentials.admin_path}/${modulePath}/[0-9]+/edit$`));
             assert.equal(await page.getByLabel('Section text', { exact: true }).first().inputValue(), 'Second synthetic service section.');
-            await page.getByLabel(`${subjectTitle} title`, { exact: true }).fill(`Changed synthetic ${subject}`);
+            await page.getByLabel(titleLabel, { exact: true }).fill(`Changed synthetic ${subject}`);
             await page.getByLabel('Display order', { exact: true }).fill('0');
             await page.getByRole('button', { name: `Save ${subject} draft`, exact: true }).click();
             await page.getByRole('status').filter({ hasText: `${subjectTitle} draft saved.` }).waitFor();
             await page.getByRole('button', { name: new RegExp(`^Restore ${subject} revision #`) }).last().click();
             await page.getByRole('status').filter({ hasText: `${subjectTitle} revision restored` }).waitFor();
             assert.equal(await page.getByLabel('Display order', { exact: true }).inputValue(), '5');
-            assert.equal(await page.getByLabel(`${subjectTitle} title`, { exact: true }).inputValue(), `Synthetic ${subject} ${mode}`);
+            assert.equal(await page.getByLabel(titleLabel, { exact: true }).inputValue(), `Synthetic ${subject} ${mode}`);
+            if (optionalPath && mobile) assert.equal(await page.getByLabel(pathLabel, { exact: true }).inputValue(), '');
             await inspect(`${subject}-edit`);
             const editUrl = page.url();
             await page.getByRole('button', { name: `Archive ${subject} draft`, exact: true }).click();

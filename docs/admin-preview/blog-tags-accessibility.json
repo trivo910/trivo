@@ -1,0 +1,47 @@
+[
+  {
+    "page": "blog-tags-create",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "blog-tags-edit",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "blog-tags-list",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "blog-tags-create",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "blog-tags-edit",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "blog-tags-list",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "blog-tags-create",
+    "viewport": "desktop-dark",
+    "violations": []
+  },
+  {
+    "page": "blog-tags-edit",
+    "viewport": "desktop-dark",
+    "violations": []
+  },
+  {
+    "page": "blog-tags-list",
+    "viewport": "desktop-dark",
+    "violations": []
+  }
+]

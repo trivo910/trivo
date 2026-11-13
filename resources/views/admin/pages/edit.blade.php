@@ -16,7 +16,7 @@
             </form>
         </x-admin.glass-card>
     @else
-        <x-admin.glass-card strong><h2>Page information</h2><p>{{ $page->path }}</p><p class="helper">{{ $page->trashed() ? 'Archived draft' : ucfirst($page->status) }} · Version {{ $page->content_version }}. This page is read-only here.</p>
+        <x-admin.glass-card strong><h2>Page information</h2><p>{{ $page->path ?? $page->archived_path }}</p><p class="helper">{{ $page->trashed() ? 'Archived draft' : ucfirst($page->status) }} · Version {{ $page->content_version }}. This page is read-only here.</p>
             @foreach($page->blocks ?? [] as $block)<p>{{ $block['text'] ?? $block['label'] ?? ('Image #'.($block['media_id'] ?? '')) }}</p>@endforeach
         </x-admin.glass-card>
     @endif

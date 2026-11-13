@@ -19,7 +19,7 @@ Set a private `ADMIN_PATH` in the environment; invalid, missing or reserved path
 ## Sign-in behavior
 
 1. A valid password creates a new, five-minute pending session, not an authenticated session.
-2. A new account must add the displayed setup key to a TOTP authenticator and verify a current code. An `otpauth` link is provided; no secret is sent to an external QR service.
+2. A new account can scan the locally generated QR code with a TOTP authenticator and verify a current code. If scanning is unavailable, the setup key and `otpauth` link are available as manual fallbacks. The QR image is generated in the admin bundle; no secret is sent to an external QR service.
 3. Successful enrollment encrypts the authenticator secret and stores hashes of ten random recovery codes. Plain codes are displayed once on a `no-store` response. Save them privately before continuing.
 4. Subsequent sign-ins require a current TOTP or an unused recovery code. A consumed TOTP time step cannot be replayed, and recovery-code consumption occurs under a database row lock.
 5. The complete sign-in rotates the session ID and records an authenticated user/version marker. Every protected admin route checks active status, an approved role, enrollment, marker/version and a 20-minute idle timeout. Password-only or forged partial sessions do not pass.

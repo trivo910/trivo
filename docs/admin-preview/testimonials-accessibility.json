@@ -1,0 +1,47 @@
+[
+  {
+    "page": "testimonial-create",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "testimonial-edit",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "testimonial-list",
+    "viewport": "desktop-light",
+    "violations": []
+  },
+  {
+    "page": "testimonial-create",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "testimonial-edit",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "testimonial-list",
+    "viewport": "mobile-light",
+    "violations": []
+  },
+  {
+    "page": "testimonial-create",
+    "viewport": "desktop-dark",
+    "violations": []
+  },
+  {
+    "page": "testimonial-edit",
+    "viewport": "desktop-dark",
+    "violations": []
+  },
+  {
+    "page": "testimonial-list",
+    "viewport": "desktop-dark",
+    "violations": []
+  }
+]

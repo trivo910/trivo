@@ -4,10 +4,17 @@ namespace App\Models;
 
 use App\Models\Concerns\HasSeo;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @property string|null $seo_title
+ * @property string|null $seo_description
+ * @property string|null $canonical_url
+ */
 class Author extends Model
 {
     use HasSeo;
+    use SoftDeletes;
 
     /** @var list<string> */
     protected $fillable = [
@@ -17,6 +24,7 @@ class Author extends Model
         'bio',
         'avatar_id',
         'socials',
+        'content_version',
     ];
 
     /** @return array<string, string> */
@@ -24,6 +32,7 @@ class Author extends Model
     {
         return [
             'socials' => 'array',
+            'content_version' => 'integer',
         ];
     }
 }

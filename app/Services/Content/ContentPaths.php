@@ -9,7 +9,7 @@ class ContentPaths
 {
     public function available(string $path, ?int $ownerId = null, string $ownerTable = 'pages'): bool
     {
-        if (! in_array($ownerTable, ['pages', 'services', 'portfolio_items'], true)) {
+        if (! in_array($ownerTable, ['pages', 'posts', 'services', 'portfolio_items', 'faqs', 'testimonials', 'clients', 'categories', 'tags', 'authors'], true)) {
             throw new \InvalidArgumentException('Unsupported content owner.');
         }
         if ($ownerTable !== 'pages' && $path === '/') {
@@ -34,7 +34,7 @@ class ContentPaths
         // Trailing-slash aliases are reserved together; preserve the submitted canonical path.
         $key = strtolower(rtrim($decoded, '/'));
         $encoded = strtolower(rtrim($path, '/'));
-        foreach (['pages', 'posts', 'categories', 'tags', 'authors', 'services', 'portfolio_items'] as $table) {
+        foreach (['pages', 'posts', 'categories', 'tags', 'authors', 'services', 'portfolio_items', 'faqs', 'testimonials', 'clients'] as $table) {
             $query = DB::table($table)->whereRaw('LOWER(path) IN (?, ?, ?, ?)', [$key, $key.'/', $encoded, $encoded.'/']);
             if ($table === $ownerTable && $ownerId !== null) {
                 $query->where('id', '!=', $ownerId);

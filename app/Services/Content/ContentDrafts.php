@@ -2,10 +2,14 @@
 
 namespace App\Services\Content;
 
+use App\Models\Client;
+use App\Models\Faq;
 use App\Models\Media;
 use App\Models\Page;
 use App\Models\PortfolioItem;
 use App\Models\Service;
+use App\Models\Testimonial;
+use App\Support\ContentHtml;
 use App\Support\RedirectPaths;
 use Closure;
 use Illuminate\Support\Facades\Validator;
@@ -17,7 +21,7 @@ class ContentDrafts
     /** @param array<string, mixed> $input
      * @return array<string, mixed>
      */
-    public function validate(array $input, Page|Service|PortfolioItem|null $page = null): array
+    public function validate(array $input, Page|Service|PortfolioItem|Faq|Testimonial|Client|null $page = null): array
     {
         $plain = function (string $attribute, mixed $value, Closure $fail): void {
             if (is_string($value) && preg_match('/[<>\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/', $value)) {
@@ -26,22 +30,24 @@ class ContentDrafts
         };
         $data = Validator::make($input, [
             'title' => ['required', 'string', 'max:255', $plain],
-            'path' => ['required', 'string', 'max:768'],
+            'path' => [($page instanceof Faq || $page instanceof Testimonial || $page instanceof Client) ? 'nullable' : 'required', 'string', 'max:768'],
             'content_version' => [$page?->exists ? 'required' : 'nullable', 'integer', 'min:1'],
             'blocks' => ['present', 'array', 'max:50'],
-            'blocks.*' => ['required', 'array:type,text,media_id,label,url'],
-            'blocks.*.type' => ['required', Rule::in(['heading', 'paragraph', 'image', 'link'])],
+            'blocks.*' => ['required', 'array:type,text,media_id,label,url,html'],
+            'blocks.*.type' => ['required', Rule::in(['heading', 'paragraph', 'image', 'link', 'legacy_html'])],
             'blocks.*.text' => ['nullable', 'string', 'max:8000', $plain],
             'blocks.*.media_id' => ['nullable', 'integer', 'min:1'],
             'blocks.*.label' => ['nullable', 'string', 'max:150', $plain],
             'blocks.*.url' => ['nullable', 'string', 'max:1000'],
+            'blocks.*.html' => ['nullable', 'string', 'max:200000'],
         ])->validate();
         if (! array_is_list($data['blocks'])) {
             throw ValidationException::withMessages(['blocks' => 'Sections must be an ordered list.']);
         }
-        if (! app(ContentPaths::class)->available($data['path'], $page?->id, $page?->getTable() ?? 'pages')) {
+        if (($data['path'] ?? null) !== null && ! app(ContentPaths::class)->available($data['path'], $page?->id, $page?->getTable() ?? 'pages')) {
             throw ValidationException::withMessages(['path' => 'Use a unique content path without reserved routes, aliases, queries or unsafe characters.']);
         }
+        $data['path'] ??= null;
         if ($page && ($page->legacy_wp_id !== null || $page->publication_locked_at !== null) && $page->path !== $data['path']) {
             throw ValidationException::withMessages(['path' => 'Keep the original imported content path. URL changes require a reviewed redirect.']);
         }
@@ -62,6 +68,13 @@ class ContentDrafts
                     throw ValidationException::withMessages(['blocks.'.$index.'.media_id' => 'Choose an image.']);
                 }
                 $clean['media_id'] = (int) $block['media_id'];
+            } elseif ($type === 'legacy_html') {
+                $original = $page instanceof Page ? ($page->blocks[$index] ?? null) : null;
+                if (! ($page instanceof Page) || $page->legacy_wp_id === null || ($original['type'] ?? null) !== 'legacy_html'
+                    || ! is_string($block['html'] ?? null)) {
+                    throw ValidationException::withMessages(['blocks.'.$index.'.html' => 'Imported HTML can only be retained on its original page.']);
+                }
+                $clean['html'] = app(ContentHtml::class)->clean($block['html']);
             } else {
                 $url = $block['url'] ?? '';
                 $parts = parse_url($url);

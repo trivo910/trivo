@@ -26,5 +26,14 @@ These tools inspect read-only sources. Run from the repository root with Python 
 - `node tools/check_publication_ui.cjs --portfolio`: run the portfolio publication workflow with CreativeWork schema readiness and model-specific screenshots/reports. Regenerate isolated fixture credentials before each run.
 - `node tools/check_service_ui.cjs`: synthetic service drafts, section ordering, display order, revision restore and archive/restore, with three layouts and accessibility evidence. Regenerate the isolated browser fixture before running.
 - `node tools/check_service_ui.cjs --portfolio`: run the shared draft browser workflow for portfolio entries. Regenerate the isolated fixture before switching model contexts; one-use authentication codes are consumed by each run.
+- `node tools/check_service_ui.cjs --faq`: run FAQ draft checks with question/answer sections, revisions, archive/restore and optional paths, including a pathless mobile entry. Regenerate the isolated fixture before each run; no source content is imported.
+- `node tools/check_service_ui.cjs --testimonial`: run testimonial draft checks with quote sections, ordering, revisions, archive/restore and optional paths. Regenerate the isolated fixture first; the mobile entry has no path and all content is synthetic.
+- `node tools/check_service_ui.cjs --client`: run client draft checks with supporting sections, display order, revisions, archive/restore and optional paths, including a pathless mobile entry. Regenerate the isolated fixture before each run.
+
+- `node tools/check_menu_ui.cjs`: synthetic native menu/item saves, parent/cycle validation, item/menu archive/restore and nine accessibility audits across desktop light/dark and mobile. Regenerate the isolated fixture before running.
+
+- `node tools/check_leads_ui.cjs`: synthetic lead filters, status/notes validation/saves, filtered CSV download and nine accessibility audits. First regenerate the isolated fixture with `php tools/setup_admin_browser_fixture.php --leads`; no real form entries or external mail are used.
+
+- `node tools/check_blog_terms_ui.cjs` / `--tags`: synthetic taxonomy create/edit/list, fixed-path rejection, revision restore and archive/restore, with nine accessibility audits per variant. Regenerate the isolated fixture before each variant.
 
 Audit SQL is **never executed**. The PHP subset importer uses prepared values and hardcoded table/column identifiers. The resulting audit schema intentionally excludes revisions, users, sessions, submission data, arbitrary options and arbitrary metadata. Attachment records have their own `wp_attachments` table; this is not a full WordPress clone. PHP Laravel import commands must account for that schema explicitly.

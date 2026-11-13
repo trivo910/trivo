@@ -50,6 +50,30 @@ it('supports the native hidden JSON payload and rejects malformed section JSON',
     expect(Page::query()->count())->toBe(1);
 });
 
+it('keeps entered page details and sections when validation redirects back to create', function () {
+    $blocks = [
+        ['type' => 'heading', 'text' => 'User-entered heading'],
+        ['type' => 'paragraph', 'text' => 'User-entered paragraph'],
+    ];
+
+    $this->from(route('admin.pages.create'))
+        ->post(route('admin.pages.store'), [
+            'title' => 'User-entered page title',
+            'path' => '/up',
+            'blocks_json' => json_encode($blocks),
+        ])
+        ->assertRedirect(route('admin.pages.create'))
+        ->assertSessionHasErrors('path')
+        ->assertSessionHas('_old_input.title', 'User-entered page title')
+        ->assertSessionHas('_old_input.blocks_json', json_encode($blocks));
+
+    $this->get(route('admin.pages.create'))
+        ->assertOk()
+        ->assertSee('value="User-entered page title"', false)
+        ->assertSee('data-blocks="[{&quot;type&quot;:&quot;heading&quot;,&quot;text&quot;:&quot;User-entered heading&quot;}', false)
+        ->assertSee('User-entered paragraph');
+});
+
 it('saves revisions and rejects stale edits without overwriting newer content', function () {
     $page = app(SavePageDraft::class)->handle(pageDraftFixture());
     $this->put(route('admin.pages.update', $page), array_replace(pageDraftFixture(), ['title' => 'New title', 'content_version' => 1]))->assertSessionHasNoErrors();
@@ -114,14 +138,24 @@ it('rechecks images and keeps both active sections and revision images protected
     expect(Page::query()->count())->toBe(1);
 });
 
-it('archives and restores only unpublished drafts and retains paths and history', function () {
+it('archives drafts while releasing their paths and restores them when the path is available', function () {
     $page = app(SavePageDraft::class)->handle(pageDraftFixture());
     $this->delete(route('admin.pages.archive', $page), ['content_version' => 1])->assertSessionHasNoErrors();
-    expect($page->fresh()->trashed())->toBeTrue()->and(Revision::query()->count())->toBe(1);
-    $this->post(route('admin.pages.store'), pageDraftFixture())->assertSessionHasErrors('path');
-    $this->get(route('admin.pages.edit', $page))->assertOk()->assertSee('Restore page draft');
+    expect($page->fresh()->trashed())->toBeTrue()
+        ->and($page->fresh()->path)->toBeNull()
+        ->and($page->fresh()->archived_path)->toBe(pageDraftFixture()['path'])
+        ->and(Revision::query()->count())->toBe(1);
+    $this->post(route('admin.pages.store'), pageDraftFixture())->assertSessionHasNoErrors();
+    $this->get(route('admin.pages.edit', $page))->assertOk()->assertSee('Restore page draft')->assertSee(pageDraftFixture()['path']);
+    $this->post(route('admin.pages.restore', $page), ['content_version' => 2])->assertSessionHasErrors('path');
+    expect($page->fresh()->trashed())->toBeTrue();
+    $activePage = Page::query()->where('path', pageDraftFixture()['path'])->firstOrFail();
+    $this->delete(route('admin.pages.archive', $activePage), ['content_version' => 1])->assertSessionHasNoErrors();
     $this->post(route('admin.pages.restore', $page), ['content_version' => 2])->assertSessionHasNoErrors();
-    expect($page->fresh()->trashed())->toBeFalse()->and($page->fresh()->content_version)->toBe(3);
+    expect($page->fresh()->trashed())->toBeFalse()
+        ->and($page->fresh()->path)->toBe(pageDraftFixture()['path'])
+        ->and($page->fresh()->archived_path)->toBeNull()
+        ->and($page->fresh()->content_version)->toBe(3);
 });
 
 it('protects published scheduled previously published and imported paths', function () {
