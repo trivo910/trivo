@@ -3,6 +3,7 @@
 .env
 .env.*
 !.env.example
+!.env.docker.example
 /_uploads/
 /vendor/
 /node_modules/
