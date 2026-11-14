@@ -7,7 +7,7 @@
 /_uploads/
 /vendor/
 /node_modules/
-/public/wp-content/uploads/
+# /public/wp-content/uploads/
 
 /.audit/
 __pycache__/
