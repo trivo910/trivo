@@ -10,7 +10,7 @@ class ServicePageLayout
 {
     public const PATHS = [
         '/paid-search-marketing', '/social-media-marketing', '/search-engine-optimization',
-        '/email-marketing', '/google-shopping', '/amazon-shopping', '/graphic-design',
+        '/email-marketing', '/google-shopping', '/amazon-shopping', '/rate-optimization', '/graphic-design',
     ];
 
     public const LOCATION_PATHS = [
@@ -24,7 +24,7 @@ class ServicePageLayout
         return in_array('/'.trim($path, '/'), [...self::PATHS, ...self::LOCATION_PATHS], true);
     }
 
-    public function render(string $html, string $path): string
+    public function render(string $html, string $path, array $testimonials = []): string
     {
         if ($path === '/paid-search-marketing') {
             return app(PaidSearchPageLayout::class)->render($html);
@@ -49,6 +49,9 @@ class ServicePageLayout
         foreach ($nodes as $node) {
             $tag = strtolower($node->tagName);
             $text = strtolower(trim(preg_replace('/\s+/', ' ', $node->textContent)));
+            if ($path === '/rate-optimization' && $tag === 'h6' && $text === 'what you get') {
+                break;
+            }
             if ($tag === 'h1') {
                 continue;
             }
@@ -137,13 +140,32 @@ class ServicePageLayout
                 $class .= ' service-section--intro';
             }
             if ($path === '/graphic-design') {
-                $heading = (new DOMXPath($document))->query('./*[self::h2 or self::h3 or self::h4]', $copy)->item(0);
-                $label = strtolower(trim($heading?->textContent ?? ''));
+                $headingLabels = [];
+                foreach ((new DOMXPath($document))->query('./*[self::h2 or self::h3 or self::h4]', $copy) as $heading) {
+                    $headingLabels[] = strtolower(trim($heading->textContent));
+                }
+                $label = $headingLabels[0] ?? '';
                 if (in_array($label, ['creative designs', 'high quality', 'fast delivery'], true)) {
                     $class .= ' service-section--benefit';
                 }
                 if (str_contains($label, 'proof is in the numbers')) {
                     $class .= ' service-section--stats';
+                }
+                if (in_array('we do', $headingLabels, true)
+                    && in_array('professional graphics designing for your brand', $headingLabels, true)) {
+                    $class .= ' service-section--brand-intro';
+                }
+                if (in_array('why choose us?', $headingLabels, true)) {
+                    $class .= ' service-section--why-choose';
+                }
+            } elseif ($path === '/rate-optimization') {
+                $heading = (new DOMXPath($document))->query('./*[self::h2 or self::h3 or self::h4]', $copy)->item(0);
+                $label = strtolower(trim($heading?->textContent ?? ''));
+                if (str_starts_with($label, 'combining search engine marketing')) {
+                    $class .= ' service-section--cro-explanation';
+                }
+                if (str_starts_with($label, 'real certified google ads professionals')) {
+                    $class .= ' service-section--certified';
                 }
             }
             $group->setAttribute('class', $class);
@@ -152,6 +174,9 @@ class ServicePageLayout
                 $group->appendChild($media);
             }
             $this->featureCards($document, $copy);
+            if ($path === '/search-engine-optimization') {
+                $this->seoServicePoints($document, $copy);
+            }
             if (in_array($path, self::LOCATION_PATHS, true)) {
                 $this->locationDetails($document, $copy);
                 if ($copy->getElementsByTagName('details')->length > 0) {
@@ -168,9 +193,16 @@ class ServicePageLayout
                 }
             }
         }
-        if ($path === '/email-marketing') {
+        if ($path === '/rate-optimization') {
+            $this->tabs($document, $groups, [
+                'UI/UX Design', 'Web Development', '3D Designs', 'Digital Marketing Design', 'Motion Graphics',
+            ]);
+        } elseif ($path === '/email-marketing') {
             $this->tabs($document, $groups, ['PPC audit services', 'Remarketing services', 'Geofencing ad services', 'Social media ad services']);
         } elseif ($path === '/graphic-design') {
+            $this->graphicDesignHero($document, $output, $groups);
+            $this->graphicDesignBanner($document, $groups);
+            $this->graphicDesignStatsAndReviews($document, $output, $groups, $testimonials);
             $this->tabs($document, $groups, ['Motion Graphics', 'UI/UX Design', 'Marketing Design']);
         }
         foreach ((new DOMXPath($document))->query('.//a[not(@href)]', $output) ?: [] as $link) {
@@ -190,6 +222,412 @@ class ServicePageLayout
         }
 
         return $document->saveHTML($output);
+    }
+
+    private function graphicDesignHero(DOMDocument $document, DOMElement $output, array $groups): void
+    {
+        $xpath = new DOMXPath($document);
+        $intro = null;
+        $summary = null;
+
+        foreach ($groups as $group) {
+            $copy = $xpath->query(
+                './div[contains(concat(" ", normalize-space(@class), " "), " service-copy ")]',
+                $group,
+            )->item(0);
+            if (! $copy instanceof DOMElement) {
+                continue;
+            }
+
+            if (str_contains(' '.$group->getAttribute('class').' ', ' service-section--intro ')) {
+                $intro = $group;
+            }
+
+            foreach ($copy->getElementsByTagName('h4') as $heading) {
+                if (str_starts_with(trim($heading->textContent), '2,120,240,368')) {
+                    $summary = $group;
+                    break 2;
+                }
+            }
+        }
+
+        if (! $intro instanceof DOMElement) {
+            return;
+        }
+
+        $introCopy = $xpath->query(
+            './div[contains(concat(" ", normalize-space(@class), " "), " service-copy ")]',
+            $intro,
+        )->item(0);
+        $media = $xpath->query(
+            './div[contains(concat(" ", normalize-space(@class), " "), " service-media ")]',
+            $intro,
+        )->item(0);
+        if (! $introCopy instanceof DOMElement || ! $media instanceof DOMElement) {
+            return;
+        }
+
+        $images = array_values(array_filter(
+            iterator_to_array($media->getElementsByTagName('img')),
+            fn ($image): bool => $image instanceof DOMElement,
+        ));
+        if (count($images) < 2) {
+            return;
+        }
+
+        $collage = $document->createElement('div');
+        $collage->setAttribute('class', 'graphic-design-hero__collage');
+        foreach (['left', 'upper-right'] as $shape) {
+            $block = $document->createElement('div');
+            $block->setAttribute('class', 'graphic-design-hero__shape graphic-design-hero__shape--'.$shape);
+            $block->setAttribute('aria-hidden', 'true');
+            $collage->appendChild($block);
+        }
+
+        $artwork = $document->createElement('div');
+        $artwork->setAttribute('class', 'graphic-design-hero__artwork');
+        $images[1]->setAttribute('loading', 'eager');
+        $images[1]->setAttribute('fetchpriority', 'high');
+        $artwork->appendChild($images[1]);
+        $collage->appendChild($artwork);
+
+        $award = $document->createElement('div');
+        $award->setAttribute('class', 'graphic-design-hero__award');
+        $images[0]->setAttribute('loading', 'eager');
+        if ($images[0]->getAttribute('alt') === '') {
+            $images[0]->setAttribute('alt', 'Award trophy');
+        }
+        $award->appendChild($images[0]);
+        $awardLabel = $document->createElement('span');
+        $awardLabel->appendChild($document->createTextNode('Award Winning Agency'));
+        $award->appendChild($awardLabel);
+        $collage->appendChild($award);
+
+        $talkLink = null;
+        $expertsLink = null;
+        foreach (iterator_to_array($introCopy->getElementsByTagName('a')) as $link) {
+            $label = strtolower(trim($link->textContent));
+            if (! $talkLink && str_contains($label, 'talk')) {
+                $talkLink = $link;
+            } elseif (! $expertsLink && str_contains($label, 'experts')) {
+                $expertsLink = $link;
+            }
+        }
+
+        $callout = $document->createElement('div');
+        $callout->setAttribute('class', 'graphic-design-hero__callout');
+        $calloutTitle = $document->createElement('p');
+        $calloutTitle->appendChild($document->createTextNode('Get Stunning Designs Today!'));
+        $callout->appendChild($calloutTitle);
+        if ($talkLink instanceof DOMElement) {
+            $talkLink->setAttribute('class', 'graphic-design-hero__talk');
+            $callout->appendChild($talkLink);
+        } else {
+            $talkLink = $document->createElement('a');
+            $talkLink->setAttribute('class', 'graphic-design-hero__talk');
+            $talkLink->setAttribute('href', url('/contact'));
+            $talkLink->appendChild($document->createTextNode('Let’s talk'));
+            $callout->appendChild($talkLink);
+        }
+        $collage->appendChild($callout);
+
+        $intro->removeChild($media);
+        $intro->appendChild($collage);
+
+        $proof = $document->createElement('div');
+        $proof->setAttribute('class', 'graphic-design-hero__proof');
+        $experts = $document->createElement('div');
+        $experts->setAttribute('class', 'graphic-design-hero__experts');
+        $avatars = $document->createElement('div');
+        $avatars->setAttribute('class', 'graphic-design-hero__avatars');
+        $avatars->setAttribute('aria-hidden', 'true');
+        foreach (array_slice($images, 2) as $image) {
+            $avatars->appendChild($image);
+        }
+        if ($avatars->hasChildNodes()) {
+            $experts->appendChild($avatars);
+        }
+        if ($expertsLink instanceof DOMElement) {
+            $expertsLink->setAttribute('class', 'graphic-design-hero__experts-link');
+            $experts->appendChild($expertsLink);
+        }
+        $proof->appendChild($experts);
+
+        if ($summary instanceof DOMElement) {
+            $summaryCopy = $xpath->query(
+                './div[contains(concat(" ", normalize-space(@class), " "), " service-copy ")]',
+                $summary,
+            )->item(0);
+            if ($summaryCopy instanceof DOMElement) {
+                $revenue = $document->createElement('div');
+                $revenue->setAttribute('class', 'graphic-design-hero__revenue');
+                foreach (iterator_to_array($summaryCopy->childNodes) as $child) {
+                    if (! $child instanceof DOMElement) {
+                        continue;
+                    }
+
+                    if ($child->tagName === 'h4' && str_starts_with(trim($child->textContent), '2,120,240,368')) {
+                        $child->setAttribute('class', 'graphic-design-hero__number');
+                        $revenue->appendChild($child);
+                    } elseif ($child->tagName === 'p' && str_contains(strtolower($child->textContent), 'revenue driven')) {
+                        $child->setAttribute('class', 'graphic-design-hero__revenue-label');
+                        $revenue->appendChild($child);
+                    }
+                }
+                if ($revenue->hasChildNodes()) {
+                    $proof->appendChild($revenue);
+                }
+
+                $rating = $document->createElement('div');
+                $rating->setAttribute('class', 'graphic-design-hero__rating');
+                foreach (iterator_to_array($summaryCopy->childNodes) as $child) {
+                    if ($child instanceof DOMElement
+                        && (($child->tagName === 'ul' && $child->getElementsByTagName('li')->length >= 5)
+                            || ($child->tagName === 'p' && str_contains(strtolower($child->textContent), 'client reviews')))) {
+                        $rating->appendChild($child);
+                    }
+                }
+                if ($rating->hasChildNodes()) {
+                    $proof->appendChild($rating);
+                }
+            }
+            if ($summary->parentNode === $output) {
+                $output->removeChild($summary);
+            }
+        }
+
+        if ($talkLink instanceof DOMElement && $talkLink->parentNode === $introCopy) {
+            $introCopy->removeChild($talkLink);
+        }
+        $intro->appendChild($proof);
+        $classes = array_values(array_filter(
+            explode(' ', $intro->getAttribute('class')),
+            fn (string $class): bool => $class !== 'service-section--illustrated',
+        ));
+        $intro->setAttribute('class', implode(' ', $classes));
+    }
+
+    private function graphicDesignBanner(DOMDocument $document, array $groups): void
+    {
+        $xpath = new DOMXPath($document);
+        foreach ($groups as $group) {
+            $heading = $xpath->query(
+                './div[contains(concat(" ", normalize-space(@class), " "), " service-copy ")]/*[self::h2 or self::h3 or self::h4]',
+                $group,
+            )->item(0);
+            if (strtolower(trim($heading?->textContent ?? '')) !== 'fast delivery') {
+                continue;
+            }
+
+            $media = $xpath->query(
+                './div[contains(concat(" ", normalize-space(@class), " "), " service-media ")]',
+                $group,
+            )->item(0);
+            if (! $media instanceof DOMElement || ! $media->hasChildNodes()) {
+                return;
+            }
+
+            $group->removeChild($media);
+            $classes = array_values(array_filter(
+                explode(' ', $group->getAttribute('class')),
+                fn (string $class): bool => $class !== 'service-section--illustrated',
+            ));
+            $group->setAttribute('class', implode(' ', $classes));
+
+            $banner = $document->createElement('div');
+            $banner->setAttribute('class', 'service-design-banner');
+            $banner->setAttribute('aria-hidden', 'true');
+            $banner->appendChild($media);
+            $group->parentNode->insertBefore($banner, $group->nextSibling);
+
+            return;
+        }
+    }
+
+    /**
+     * @param  list<array{quote: string, title: string, role: string|null}>  $testimonials
+     */
+    private function graphicDesignStatsAndReviews(DOMDocument $document, DOMElement $output, array $groups, array $testimonials): void
+    {
+        $stats = null;
+        foreach ($groups as $group) {
+            if (str_contains(' '.$group->getAttribute('class').' ', ' service-section--stats ')) {
+                $stats = $group;
+                break;
+            }
+        }
+        if (! $stats) {
+            return;
+        }
+
+        $xpath = new DOMXPath($document);
+        $copy = $xpath->query(
+            './div[contains(concat(" ", normalize-space(@class), " "), " service-copy ")]',
+            $stats,
+        )->item(0);
+        if (! $copy instanceof DOMElement) {
+            return;
+        }
+
+        $metricLabels = [
+            '37%' => 'Average increase in sales for our clients',
+            '100%' => 'Google and Facebook-certified team',
+            '81%' => 'Results improved compared to previous agencies',
+        ];
+        $statistics = $document->createElement('div');
+        $statistics->setAttribute('class', 'graphic-design-statistics');
+        $metricNodes = [];
+        foreach ($metricLabels as $value => $label) {
+            $metricHeading = null;
+            foreach ($copy->getElementsByTagName('h2') as $candidate) {
+                if (trim($candidate->textContent) === $value) {
+                    $metricHeading = $candidate;
+                    break;
+                }
+            }
+            if (! $metricHeading instanceof DOMElement) {
+                continue;
+            }
+
+            $card = $document->createElement('article');
+            $card->setAttribute('class', 'graphic-design-statistic');
+            $metricHeading->setAttribute('class', 'graphic-design-statistic__value');
+            $card->appendChild($metricHeading);
+            $next = $metricHeading->nextSibling;
+            while ($next && $next->nodeType === XML_TEXT_NODE && trim($next->textContent) === '') {
+                $next = $next->nextSibling;
+            }
+            if ($next instanceof DOMElement && strtolower($next->tagName) === 'p') {
+                $next->setAttribute('class', 'graphic-design-statistic__label');
+                $card->appendChild($next);
+            } else {
+                $description = $document->createElement('p');
+                $description->setAttribute('class', 'graphic-design-statistic__label');
+                $description->textContent = $label;
+                $card->appendChild($description);
+            }
+            $metricNodes[] = $card;
+        }
+
+        if ($metricNodes !== []) {
+            $title = $copy->getElementsByTagName('h4')->item(0);
+            $firstMetric = $copy->getElementsByTagName('h2')->item(0);
+            $copy->insertBefore($statistics, $firstMetric ?? $title?->nextSibling);
+            foreach ($metricNodes as $card) {
+                $statistics->appendChild($card);
+            }
+        }
+
+        $leadHeading = null;
+        foreach ($copy->getElementsByTagName('h3') as $candidate) {
+            if (str_starts_with(trim($candidate->textContent), '282,000+')) {
+                $leadHeading = $candidate;
+                break;
+            }
+        }
+        if ($leadHeading instanceof DOMElement) {
+            $lead = $document->createElement('article');
+            $lead->setAttribute('class', 'graphic-design-statistic graphic-design-statistic--lead');
+            $leadHeading->setAttribute('class', 'graphic-design-statistic__lead-value');
+            $lead->appendChild($leadHeading);
+            foreach (iterator_to_array($copy->childNodes) as $child) {
+                if ($child instanceof DOMElement
+                    && (($child->tagName === 'p' && str_contains(strtolower($child->textContent), 'leads generated'))
+                        || ($child->tagName === 'a' && str_contains(strtolower($child->textContent), 'contact us')))) {
+                    $lead->appendChild($child);
+                }
+            }
+            $statistics->appendChild($lead);
+        }
+
+        if ($testimonials === []) {
+            return;
+        }
+
+        $reviews = $document->createElement('section');
+        $reviews->setAttribute('class', 'graphic-design-reviews');
+        $reviews->setAttribute('aria-label', 'Client reviews');
+        $quoteColumn = $document->createElement('div');
+        $quoteColumn->setAttribute('class', 'graphic-design-reviews__quote');
+        $cards = $document->createElement('div');
+        $cards->setAttribute('class', 'home-results__testimonials');
+        $cards->setAttribute('aria-label', 'Customer testimonials');
+        foreach ($testimonials as $index => $testimonial) {
+            $quote = trim($testimonial['quote'] ?? '');
+            if ($quote === '') {
+                continue;
+            }
+
+            $card = $document->createElement('blockquote');
+            $card->setAttribute('class', 'home-results__testimonial');
+            if ($index > 0) {
+                $card->setAttribute('hidden', '');
+            }
+            $text = $document->createElement('p');
+            $text->appendChild($document->createTextNode($quote));
+            $card->appendChild($text);
+            $footer = $document->createElement('footer');
+            $author = $document->createElement('cite');
+            $author->appendChild($document->createTextNode($testimonial['title']));
+            $footer->appendChild($author);
+            if (filled($testimonial['role'])) {
+                $role = $document->createElement('span');
+                $role->appendChild($document->createTextNode($testimonial['role']));
+                $footer->appendChild($role);
+            }
+            $card->appendChild($footer);
+            $cards->appendChild($card);
+        }
+        if (! $cards->hasChildNodes()) {
+            return;
+        }
+        $quoteColumn->appendChild($cards);
+
+        $proofColumn = $document->createElement('div');
+        $proofColumn->setAttribute('class', 'graphic-design-reviews__proof');
+        foreach (iterator_to_array($copy->childNodes) as $child) {
+            if (! $child instanceof DOMElement) {
+                continue;
+            }
+            $isRating = $child->tagName === 'ul' && $child->getElementsByTagName('li')->length >= 5;
+            $isReviewCount = $child->tagName === 'p' && str_contains(strtolower($child->textContent), 'client reviews');
+            $isReviewLink = $child->tagName === 'a' && str_contains(strtolower($child->textContent), 'view all reviews');
+            if ($isRating || $isReviewCount || $isReviewLink) {
+                $proofColumn->appendChild($child);
+            }
+        }
+
+        $media = $xpath->query(
+            './div[contains(concat(" ", normalize-space(@class), " "), " service-media ")]',
+            $stats,
+        )->item(0);
+        if ($media instanceof DOMElement) {
+            $avatars = $document->createElement('div');
+            $avatars->setAttribute('class', 'graphic-design-reviews__avatars');
+            $avatars->setAttribute('aria-hidden', 'true');
+            foreach (iterator_to_array($media->getElementsByTagName('img')) as $image) {
+                if (str_ends_with(strtolower($image->getAttribute('src')), '.svg')) {
+                    $image->setAttribute('class', 'graphic-design-reviews__arrow');
+                    $image->setAttribute('aria-hidden', 'true');
+                    $quoteColumn->appendChild($image);
+                } else {
+                    $avatars->appendChild($image);
+                }
+            }
+            if ($avatars->hasChildNodes()) {
+                $proofColumn->appendChild($avatars);
+            }
+            $stats->removeChild($media);
+            $classes = array_values(array_filter(
+                explode(' ', $stats->getAttribute('class')),
+                fn (string $class): bool => $class !== 'service-section--illustrated',
+            ));
+            $stats->setAttribute('class', implode(' ', $classes));
+        }
+
+        $reviews->appendChild($quoteColumn);
+        $reviews->appendChild($proofColumn);
+        $output->insertBefore($reviews, $stats->nextSibling);
     }
 
     private function locationDetails(DOMDocument $document, DOMElement $copy): void
@@ -225,6 +663,78 @@ class ServicePageLayout
             if ($card) {
                 $card->appendChild($child);
             }
+        }
+    }
+
+    private function seoServicePoints(DOMDocument $document, DOMElement $copy): void
+    {
+        $heading = $copy->getElementsByTagName('h3')->item(0);
+        if (! $heading || trim($heading->textContent) !== 'Our Complete SEO Services') {
+            return;
+        }
+
+        $cards = (new DOMXPath($document))->query(
+            './div[contains(concat(" ", normalize-space(@class), " "), " service-feature-cards ")]',
+            $copy,
+        )->item(0);
+        if (! $cards instanceof DOMElement) {
+            return;
+        }
+
+        $hasDescription = false;
+        foreach ($copy->childNodes as $child) {
+            if ($child instanceof DOMElement && $child->tagName === 'p') {
+                $hasDescription = true;
+                break;
+            }
+        }
+        if (! $hasDescription) {
+            $description = $document->createElement('p');
+            $description->setAttribute('class', 'service-section__description');
+            $description->textContent = 'We offer a full range of SEO services designed to improve your website’s visibility, drive organic traffic, and increase conversions. Our strategies are tailored to your business goals and continuously optimized for better results.';
+            $copy->insertBefore($description, $cards);
+        }
+
+        $pointsByService = [
+            'On-Page SEO' => [
+                'Keyword Research & Optimization',
+                'SEO-Friendly Content Creation',
+                'Meta Tags, Headers & URL Structuring',
+                'Image Optimization & Internal Linking',
+            ],
+            'Off-Page SEO' => [
+                'High-Quality Link Building',
+                'Guest Blogging & Outreach',
+                'Social Media & Brand Mentions',
+                'Local SEO & Google My Business Optimization',
+            ],
+            'Technical SEO' => [
+                'Website Speed & Mobile Optimization',
+                'Fixing Broken Links & Redirects',
+                'Schema Markup Implementation',
+                'Secure HTTPS & Core Web Vitals Optimization',
+            ],
+        ];
+
+        foreach ($cards->getElementsByTagName('article') as $card) {
+            $serviceHeading = $card->getElementsByTagName('h5')->item(0);
+            $points = $pointsByService[trim($serviceHeading?->textContent ?? '')] ?? null;
+            if (! $points || $card->getElementsByTagName('ul')->length > 0) {
+                continue;
+            }
+
+            $list = $document->createElement('ul');
+            $list->setAttribute('class', 'service-feature-points');
+            foreach ($points as $point) {
+                $item = $document->createElement('li');
+                $pin = $document->createElement('span', '📌');
+                $pin->setAttribute('class', 'service-feature-point__pin');
+                $pin->setAttribute('aria-hidden', 'true');
+                $item->appendChild($pin);
+                $item->appendChild($document->createTextNode($point));
+                $list->appendChild($item);
+            }
+            $card->appendChild($list);
         }
     }
 

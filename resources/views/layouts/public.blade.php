@@ -1,4 +1,4 @@
-@php($usesMarketingLayout = request()->routeIs('home') || \App\Services\Content\ServicePageLayout::supports(request()->path()))
+@php($usesMarketingLayout = request()->routeIs('home', 'portfolio', 'contact', 'team', 'awards', 'career', 'blog', 'return-refund-policy') || request()->is('about-us') || request()->is('marketing-solutions') || \App\Services\Content\ServicePageLayout::supports(request()->path()))
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -25,7 +25,28 @@
 
                 <nav class="site-header__nav" aria-label="Main navigation">
                     <a href="{{ route('home') }}" @if (request()->routeIs('home')) aria-current="page" @endif>Home</a>
-                    <a href="{{ url('/marketing-solutions') }}" @if (request()->is('marketing-solutions')) aria-current="page" @endif>Marketing Solutions</a>
+                    <div class="site-header__solutions">
+                        <a class="site-header__solutions-trigger" href="{{ url('/marketing-solutions') }}" @if (request()->is('marketing-solutions')) aria-current="page" @endif>Marketing Solutions</a>
+                        <div class="site-header__solutions-menu" aria-label="Marketing solutions">
+                            <ul class="site-header__solutions-list">
+                                <li><a href="{{ url('/paid-search-marketing') }}"><span aria-hidden="true">⌕</span>Paid Search Marketing</a></li>
+                                <li><a href="{{ url('/search-engine-optimization') }}"><span aria-hidden="true">◎</span>Search Engine Optimization</a></li>
+                                <li><a href="{{ url('/email-marketing') }}"><span aria-hidden="true">✉</span>Email Marketing</a></li>
+                                <li><a href="{{ url('/graphic-design') }}"><span aria-hidden="true">✎</span>Graphic Design</a></li>
+                                <li><a href="{{ url('/rate-optimization') }}"><span aria-hidden="true">▥</span>Conversion Rate Optimization</a></li>
+                            </ul>
+                            <ul class="site-header__solutions-list">
+                                <li><a href="{{ url('/social-media-marketing') }}"><span aria-hidden="true">▣</span>Social Media Marketing</a></li>
+                                <li><a href="{{ url('/google-shopping') }}"><span aria-hidden="true">g</span>Google Shopping</a></li>
+                                <li><a href="{{ url('/performance-marketing-agency-nagpur') }}"><span aria-hidden="true">⌁</span>Performance Marketing</a></li>
+                                <li><a href="{{ url('/amazon-shopping') }}"><span aria-hidden="true">a</span>Amazon Shopping</a></li>
+                            </ul>
+                            <div class="site-header__solutions-feature">
+                                <div class="site-header__solutions-art" aria-hidden="true"><span></span></div>
+                                <a href="{{ url('/marketing-solutions') }}">Explore all<br>solutions <span>→</span></a>
+                            </div>
+                        </div>
+                    </div>
                     <a href="{{ url('/about-us') }}" @if (request()->is('about-us')) aria-current="page" @endif>Who We Are</a>
                     <a href="{{ route('portfolio') }}" @if (request()->routeIs('portfolio', 'portfolio.item')) aria-current="page" @endif>Portfolio</a>
                     <a href="{{ route('contact') }}" @if (request()->routeIs('contact')) aria-current="page" @endif>Contact</a>
@@ -49,6 +70,18 @@
             <nav id="mobile-navigation" class="site-header__mobile-nav" aria-label="Mobile navigation" x-cloak x-show="open" @click.outside="open = false">
                 <a href="{{ route('home') }}" @click="open = false">Home</a>
                 <a href="{{ url('/marketing-solutions') }}" @click="open = false">Marketing Solutions</a>
+                <details class="site-header__mobile-solutions">
+                    <summary>Explore services</summary>
+                    <a href="{{ url('/paid-search-marketing') }}" @click="open = false">Paid Search Marketing</a>
+                    <a href="{{ url('/search-engine-optimization') }}" @click="open = false">Search Engine Optimization</a>
+                    <a href="{{ url('/email-marketing') }}" @click="open = false">Email Marketing</a>
+                    <a href="{{ url('/graphic-design') }}" @click="open = false">Graphic Design</a>
+                    <a href="{{ url('/rate-optimization') }}" @click="open = false">Conversion Rate Optimization</a>
+                    <a href="{{ url('/social-media-marketing') }}" @click="open = false">Social Media Marketing</a>
+                    <a href="{{ url('/google-shopping') }}" @click="open = false">Google Shopping</a>
+                    <a href="{{ url('/performance-marketing-agency-nagpur') }}" @click="open = false">Performance Marketing</a>
+                    <a href="{{ url('/amazon-shopping') }}" @click="open = false">Amazon Shopping</a>
+                </details>
                 <a href="{{ url('/about-us') }}" @click="open = false">Who We Are</a>
                 <a href="{{ route('portfolio') }}" @click="open = false">Portfolio</a>
                 <a href="{{ route('contact') }}" @click="open = false">Contact</a>

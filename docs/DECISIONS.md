@@ -1,5 +1,18 @@
 # Development decisions
 
+## 2026-11-14 — Rate optimization page layout
+- Render `/rate-optimization` through the shared imported-service template and preserve its existing page title, canonical URL, and URL.
+- Match the reference with a lavender title band, split hero, accessible service tabs, and alternating CRO/Google Ads content sections, reusing imported page copy and imagery.
+- Stop rendering this page at the imported “what you get” marker because the remaining source HTML is unrelated paid-search copy. This is a page-specific presentation boundary; stored content and other routes remain unchanged.
+
+## 2026-11-14 — Graphic design page layout
+- Recompose the imported hero artwork, trophy, links, avatars and proof figures into the reference collage and bottom strip. Keep the wide design artwork out of the Fast Delivery card as a full-width banner, and render published pathless testimonials in the review section.
+- Build the results metrics from imported values, using the live page’s labels only when those labels are missing. Preserve the existing public path and link destinations.
+
+## 2026-11-14 — SEO service card details
+- The imported SEO page contains headings for On-Page, Off-Page and Technical SEO cards but no supporting points. Add the reviewed reference copy during rendering only for those existing cards; preserve imported page data, metadata and public URLs.
+- Keep the points as semantic lists with visible pin markers, and do not alter other service pages.
+
 ## 2026-11-12 — Public shell follows live-site reference
 - Replace placeholder public navigation, contact details, partner marks and footer with the verified Trivo menu, local upload assets, live contact/social links and blue footer treatment. Keep all existing public paths unchanged.
 - Use the existing self-hosted Montserrat variable font and add a single font preload; its local 400/600/700-named files are identical copies of the same variable font.

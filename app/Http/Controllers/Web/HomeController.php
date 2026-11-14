@@ -25,6 +25,21 @@ class HomeController extends Controller
         return $this->page('/services', 'pages.services', $renderer);
     }
 
+    public function meetTheTeam(PublicContentRenderer $renderer): View
+    {
+        return $this->page('/meet-the-team', 'pages.meet-the-team', $renderer);
+    }
+
+    public function awards(PublicContentRenderer $renderer): View
+    {
+        return $this->page('/awards', 'pages.awards', $renderer);
+    }
+
+    public function career(PublicContentRenderer $renderer): View
+    {
+        return $this->page('/career', 'pages.career', $renderer);
+    }
+
     public function contact(PublicContentRenderer $renderer): View
     {
         return $this->page('/contact', 'pages.contact', $renderer);

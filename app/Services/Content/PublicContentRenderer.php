@@ -19,6 +19,38 @@ class PublicContentRenderer
 {
     public function render(Page|Post $content): View
     {
+        if ($content instanceof Page && $content->path === '/marketing-solutions') {
+            return view('pages.marketing-solutions', ['record' => $content]);
+        }
+
+        if ($content instanceof Page && $content->path === '/about-us') {
+            return view('pages.about', ['record' => $content]);
+        }
+
+        if ($content instanceof Page && $content->path === '/portfolio') {
+            return view('pages.portfolio', ['record' => $content]);
+        }
+
+        if ($content instanceof Page && $content->path === '/contact') {
+            return view('pages.contact', ['record' => $content]);
+        }
+
+        if ($content instanceof Page && $content->path === '/meet-the-team') {
+            return view('pages.meet-the-team', ['record' => $content]);
+        }
+
+        if ($content instanceof Page && $content->path === '/awards') {
+            return view('pages.awards', ['record' => $content]);
+        }
+
+        if ($content instanceof Page && $content->path === '/career') {
+            return view('pages.career', ['record' => $content]);
+        }
+
+        if ($content instanceof Page && $content->path === '/return-refund-policy') {
+            return view('pages.return-refund-policy', ['record' => $content]);
+        }
+
         $body = $content instanceof Page ? $this->pageBody($content) : $content->body;
         $bodyHtml = app(ContentHtml::class)->clean($body);
         $hasHeadingOne = app(ContentHtml::class)->hasHeadingOne($bodyHtml);
@@ -32,9 +64,11 @@ class PublicContentRenderer
         }
 
         if ($content instanceof Page && ServicePageLayout::supports($content->path)) {
+            $testimonials = $content->path === '/graphic-design' ? $this->publishedTestimonials() : [];
+
             return view('pages.imported-service', [
                 'record' => $content,
-                'bodyHtml' => app(ServicePageLayout::class)->render($bodyHtml, $content->path),
+                'bodyHtml' => app(ServicePageLayout::class)->render($bodyHtml, $content->path, $testimonials),
             ]);
         }
 
@@ -538,15 +572,8 @@ class PublicContentRenderer
 
     private function homeResultsTestimonials(DOMDocument $document): ?DOMElement
     {
-        $testimonials = Testimonial::query()
-            ->where('status', 'published')
-            ->whereNull('path')
-            ->orderBy('sort')
-            ->orderBy('id')
-            ->limit(4)
-            ->get(['title', 'blocks', 'details']);
-
-        if ($testimonials->isEmpty()) {
+        $testimonials = $this->publishedTestimonials();
+        if ($testimonials === []) {
             return null;
         }
 
@@ -565,25 +592,18 @@ class PublicContentRenderer
         $cards = $document->createElement('div');
         $cards->setAttribute('class', 'home-results__testimonials');
         foreach ($testimonials as $testimonial) {
-            $quote = collect($testimonial->blocks ?? [])
-                ->first(fn (mixed $block): bool => is_array($block) && ($block['type'] ?? null) === 'paragraph' && is_string($block['text'] ?? null));
-            if (! is_array($quote)) {
-                continue;
-            }
-
             $card = $document->createElement('blockquote');
             $card->setAttribute('class', 'home-results__testimonial');
             $quoteText = $document->createElement('p');
-            $quoteText->appendChild($document->createTextNode($quote['text']));
+            $quoteText->appendChild($document->createTextNode($testimonial['quote']));
             $card->appendChild($quoteText);
             $attribution = $document->createElement('footer');
             $author = $document->createElement('cite');
-            $author->appendChild($document->createTextNode($testimonial->title));
+            $author->appendChild($document->createTextNode($testimonial['title']));
             $attribution->appendChild($author);
-            $details = is_array($testimonial->details) ? $testimonial->details : [];
-            if (filled($details['role'] ?? null)) {
+            if (filled($testimonial['role'])) {
                 $role = $document->createElement('span');
-                $role->appendChild($document->createTextNode($details['role']));
+                $role->appendChild($document->createTextNode($testimonial['role']));
                 $attribution->appendChild($role);
             }
             $card->appendChild($attribution);
@@ -592,6 +612,38 @@ class PublicContentRenderer
         $proof->appendChild($cards);
 
         return $proof;
+    }
+
+    /**
+     * @return list<array{quote: string, title: string, role: string|null}>
+     */
+    private function publishedTestimonials(): array
+    {
+        $testimonials = Testimonial::query()
+            ->where('status', 'published')
+            ->whereNull('path')
+            ->orderBy('sort')
+            ->orderBy('id')
+            ->limit(4)
+            ->get(['title', 'blocks', 'details']);
+        $published = [];
+
+        foreach ($testimonials as $testimonial) {
+            $quote = collect($testimonial->blocks ?? [])
+                ->first(fn (mixed $block): bool => is_array($block) && ($block['type'] ?? null) === 'paragraph' && is_string($block['text'] ?? null));
+            if (! is_array($quote)) {
+                continue;
+            }
+
+            $details = is_array($testimonial->details) ? $testimonial->details : [];
+            $published[] = [
+                'quote' => $quote['text'],
+                'title' => $testimonial->title,
+                'role' => filled($details['role'] ?? null) ? (string) $details['role'] : null,
+            ];
+        }
+
+        return $published;
     }
 
     private function pageBody(Page $page): string

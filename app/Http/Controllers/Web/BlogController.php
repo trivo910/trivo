@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\Page;
 use App\Models\Post;
 use App\Services\Content\PublicContentRenderer;
 use Illuminate\Support\Str;
@@ -12,6 +13,7 @@ class BlogController extends Controller
 {
     public function index(): View
     {
+        $record = Page::query()->where('status', 'published')->where('path', '/blog')->first();
         $published = Post::query()->where('status', 'published')->whereNotNull('published_at')
             ->orderByDesc('published_at')->limit(30)->get();
         if ($published->isNotEmpty()) {
@@ -29,10 +31,12 @@ class BlogController extends Controller
 
             return view('pages.blog', [
                 'posts' => $posts,
+                'record' => $record,
             ]);
         }
 
         return view('pages.blog', [
+            'record' => $record,
             'posts' => [
                 [
                     'title' => 'How to turn intent into pipeline with SEO-led content',
