@@ -8,6 +8,7 @@
 /vendor/
 /node_modules/
 # /public/wp-content/uploads/
+/public/wp-content.zip
 
 /.audit/
 __pycache__/
