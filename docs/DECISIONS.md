@@ -1,5 +1,10 @@
 # Development decisions
 
+## 2026-11-14 — Nagpur performance marketing page layout
+- Keep the existing location page path, SEO metadata, imported copy and shared page shell.
+- Recompose the hero, review metrics, partner-benefit cards, marketing service rows, industry and tool grids, process, FAQs, client carousel and contact block to match the supplied reference.
+- Add page-local enquiry forms using the existing mail-draft handler; leave the shared footer form and other location layouts unchanged.
+
 ## 2026-11-14 — Rate optimization page layout
 - Render `/rate-optimization` through the shared imported-service template and preserve its existing page title, canonical URL, and URL.
 - Match the reference with a lavender title band, split hero, accessible service tabs, and alternating CRO/Google Ads content sections, reusing imported page copy and imagery.

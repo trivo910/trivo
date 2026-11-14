@@ -173,7 +173,9 @@ class ServicePageLayout
             if ($media->hasChildNodes()) {
                 $group->appendChild($media);
             }
-            $this->featureCards($document, $copy);
+            if ($path !== '/performance-marketing-agency-nagpur') {
+                $this->featureCards($document, $copy);
+            }
             if ($path === '/search-engine-optimization') {
                 $this->seoServicePoints($document, $copy);
             }
@@ -183,7 +185,7 @@ class ServicePageLayout
                     $group->setAttribute('class', $group->getAttribute('class').' service-section--accordion');
                 }
                 $figures = (new DOMXPath($document))->query('./figure', $copy);
-                if ($figures->length > 1) {
+                if ($path !== '/performance-marketing-agency-nagpur' && $figures->length > 1) {
                     $gallery = $document->createElement('div');
                     $gallery->setAttribute('class', 'location-logo-grid');
                     $copy->insertBefore($gallery, $figures->item(0));
@@ -192,6 +194,9 @@ class ServicePageLayout
                     }
                 }
             }
+        }
+        if ($path === '/performance-marketing-agency-nagpur') {
+            $this->performanceMarketingAgencyLayout($document, $output, $groups);
         }
         if ($path === '/rate-optimization') {
             $this->tabs($document, $groups, [
@@ -643,6 +648,419 @@ class ServicePageLayout
                 $details->appendChild($child);
             }
         }
+    }
+
+    private function performanceMarketingAgencyLayout(DOMDocument $document, DOMElement $output, array $groups): void
+    {
+        $xpath = new DOMXPath($document);
+        $inServices = false;
+
+        foreach ($groups as $index => $group) {
+            $copy = $this->serviceCopy($xpath, $group);
+            if (! $copy) {
+                continue;
+            }
+
+            $headings = $this->directHeadings($copy);
+            $labels = array_map(fn (DOMElement $heading): string => strtolower(trim($heading->textContent)), $headings);
+            $label = $labels[0] ?? '';
+
+            if (str_starts_with($label, 'our performance marketing services')) {
+                $inServices = true;
+                $this->addClasses($group, ['service-section--performance-services-heading'], ['service-section--text']);
+            } elseif (str_starts_with($label, 'industries we serve')) {
+                $inServices = false;
+            } elseif ($inServices && preg_match('/^\d+\s*\./', $label)) {
+                $this->addClasses($group, ['service-section--performance-service'], ['service-section--text']);
+            }
+
+            if ($index === 0) {
+                $this->addClasses($group, ['service-section--performance-hero'], ['service-section--text']);
+                $group->appendChild($this->performanceMarketingForm($document, 'performance-hero'));
+            }
+            if (str_starts_with($label, 'what is performance marketing')) {
+                $this->addClasses($group, ['service-section--performance-definition']);
+            }
+            if (array_filter($labels, fn (string $heading): bool => str_starts_with($heading, 'why trivo is the right performance marketing partner'))) {
+                $this->addClasses($group, ['service-section--performance-partner'], ['service-section--text']);
+            }
+            if (str_starts_with($label, 'our performance process')) {
+                $this->addClasses($group, ['service-section--performance-process'], ['service-section--text']);
+            }
+            if (str_starts_with($label, 'tools & platforms we use')) {
+                $this->addClasses($group, ['service-section--performance-tools'], ['service-section--text']);
+            }
+            if (str_starts_with($label, 'ready to grow with a result-driven performance marketing agency')) {
+                $this->addClasses($group, ['service-section--performance-cta'], ['service-section--text']);
+            }
+            if (str_starts_with($label, 'frequently asked questions')) {
+                $this->addClasses($group, ['service-section--performance-faq']);
+            }
+            if (str_starts_with($label, 'get in touch')) {
+                $this->addClasses($group, ['service-section--performance-contact'], ['service-section--text']);
+                $group->appendChild($this->performanceMarketingForm($document, 'performance-contact'));
+            }
+
+            $clientReviews = null;
+            foreach ($headings as $heading) {
+                if ($heading->tagName === 'h3' && strtolower(trim($heading->textContent)) === 'client reviews') {
+                    $clientReviews = $heading;
+                    break;
+                }
+            }
+            if ($clientReviews) {
+                $copy->removeChild($clientReviews);
+                $proof = $document->createElement('section');
+                $proof->setAttribute('class', 'performance-marketing-proof');
+                $proof->setAttribute('aria-label', 'Client reviews and results');
+                $proof->appendChild($clientReviews);
+
+                $metrics = $document->createElement('div');
+                $metrics->setAttribute('class', 'performance-marketing-proof__metrics');
+                foreach ([
+                    ['0+', 'Client reviews'],
+                    ['0+', 'Client'],
+                    ['0', 'Clutch rating'],
+                ] as [$value, $label]) {
+                    $metric = $document->createElement('article');
+                    $metric->setAttribute('class', 'performance-marketing-proof__metric');
+                    $metricValue = $document->createElement('strong', $value);
+                    $metricLabel = $document->createElement('span', $label);
+                    $metric->appendChild($metricValue);
+                    $metric->appendChild($metricLabel);
+                    $metrics->appendChild($metric);
+                }
+                $proof->appendChild($metrics);
+                $output->insertBefore($proof, $group);
+                $this->addClasses($group, ['service-section--performance-partner'], ['service-section--text']);
+            }
+        }
+
+        $this->performanceMarketingBenefitCards($document, $output, $groups);
+        $this->performanceMarketingIndustries($document, $output, $groups);
+        $this->performanceMarketingToolCards($document, $groups, $xpath);
+    }
+
+    private function performanceMarketingBenefitCards(DOMDocument $document, DOMElement $output, array $groups): void
+    {
+        $start = null;
+        $end = null;
+        $xpath = new DOMXPath($document);
+
+        foreach ($groups as $group) {
+            $copy = $this->serviceCopy($xpath, $group);
+            if (! $copy) {
+                continue;
+            }
+            foreach ($this->directHeadings($copy) as $heading) {
+                $label = strtolower(trim($heading->textContent));
+                if (str_contains($label, 'why hundreds of businesses choose us')) {
+                    $start = $group;
+                }
+                if (str_starts_with($label, 'our performance marketing services')) {
+                    $end = $group;
+                }
+            }
+        }
+        if (! $start || ! $end) {
+            return;
+        }
+
+        $section = $document->createElement('section');
+        $section->setAttribute('class', 'performance-marketing-benefits');
+        $grid = $document->createElement('div');
+        $grid->setAttribute('class', 'performance-marketing-benefits__grid');
+        $activeCard = null;
+        $started = false;
+
+        foreach ($groups as $group) {
+            if ($group === $end) {
+                break;
+            }
+            if (! $started && $group !== $start) {
+                continue;
+            }
+            $started = true;
+            $copy = $this->serviceCopy($xpath, $group);
+            if (! $copy) {
+                continue;
+            }
+
+            foreach (iterator_to_array($copy->childNodes) as $child) {
+                if (! $child instanceof DOMElement) {
+                    continue;
+                }
+                $label = strtolower(trim($child->textContent));
+                if (in_array($child->tagName, ['h2', 'h3', 'h4'], true)
+                    && str_contains($label, 'why hundreds of businesses choose us')) {
+                    $section->appendChild($child);
+                    $activeCard = null;
+                    continue;
+                }
+                if (in_array($child->tagName, ['h2', 'h3', 'h4'], true) && preg_match('/^\d+\s*\./', $label)) {
+                    $activeCard = $document->createElement('article');
+                    $activeCard->setAttribute('class', 'performance-marketing-benefit');
+                    $cardHeading = $document->createElement('h3');
+                    while ($child->firstChild) {
+                        $cardHeading->appendChild($child->firstChild);
+                    }
+                    $activeCard->appendChild($cardHeading);
+                    $grid->appendChild($activeCard);
+                    continue;
+                }
+                if ($activeCard) {
+                    $activeCard->appendChild($child);
+                } else {
+                    $section->appendChild($child);
+                }
+            }
+            $output->removeChild($group);
+        }
+
+        $section->appendChild($grid);
+        $output->insertBefore($section, $end);
+    }
+
+    private function performanceMarketingIndustries(DOMDocument $document, DOMElement $output, array $groups): void
+    {
+        $xpath = new DOMXPath($document);
+        $start = null;
+        $end = null;
+
+        foreach ($groups as $group) {
+            $copy = $this->serviceCopy($xpath, $group);
+            if (! $copy) {
+                continue;
+            }
+            $heading = $this->firstHeading($copy);
+            $label = strtolower(trim($heading?->textContent ?? ''));
+            if (str_starts_with($label, 'industries we serve')) {
+                $start = $group;
+            }
+            if (str_starts_with($label, 'our performance process')) {
+                $end = $group;
+            }
+        }
+        if (! $start || ! $end) {
+            return;
+        }
+
+        $section = $document->createElement('section');
+        $section->setAttribute('class', 'performance-marketing-industries');
+        $grid = $document->createElement('div');
+        $grid->setAttribute('class', 'performance-marketing-industries__grid');
+        $pendingFigure = null;
+        $pendingTitle = null;
+        $cardsStarted = false;
+        $started = false;
+
+        foreach ($groups as $group) {
+            if ($group === $end) {
+                break;
+            }
+            if (! $started && $group !== $start) {
+                continue;
+            }
+            $started = true;
+            $copy = $this->serviceCopy($xpath, $group);
+            if (! $copy) {
+                continue;
+            }
+
+            foreach (iterator_to_array($copy->childNodes) as $child) {
+                if (! $child instanceof DOMElement) {
+                    continue;
+                }
+                $label = strtolower(trim($child->textContent));
+                if ($child->tagName === 'h4' && str_starts_with($label, 'industries we serve')) {
+                    $heading = $document->createElement('h2');
+                    while ($child->firstChild) {
+                        $heading->appendChild($child->firstChild);
+                    }
+                    $section->appendChild($heading);
+                } elseif ($child->tagName === 'figure') {
+                    $cardsStarted = true;
+                    if ($pendingTitle) {
+                        $this->appendPerformanceIndustry($document, $grid, $child, $pendingTitle);
+                        $pendingTitle = null;
+                    } else {
+                        $pendingFigure = $child;
+                    }
+                } elseif ($child->tagName === 'h6') {
+                    $cardsStarted = true;
+                    if ($pendingFigure) {
+                        $this->appendPerformanceIndustry($document, $grid, $pendingFigure, $child);
+                        $pendingFigure = null;
+                    } else {
+                        $pendingTitle = $child;
+                    }
+                } elseif ($child->tagName === 'p' && $cardsStarted) {
+                    $section->appendChild($grid);
+                    $section->appendChild($child);
+                    $grid = $document->createElement('div');
+                    $grid->setAttribute('class', 'performance-marketing-industries__grid');
+                    $cardsStarted = false;
+                } else {
+                    $section->appendChild($child);
+                }
+            }
+            $output->removeChild($group);
+        }
+
+        if ($pendingFigure && $pendingTitle) {
+            $this->appendPerformanceIndustry($document, $grid, $pendingFigure, $pendingTitle);
+        }
+        if ($grid->hasChildNodes()) {
+            $section->appendChild($grid);
+        }
+        $output->insertBefore($section, $end);
+    }
+
+    private function appendPerformanceIndustry(
+        DOMDocument $document,
+        DOMElement $grid,
+        DOMElement $figure,
+        DOMElement $title,
+    ): void {
+        $card = $document->createElement('article');
+        $card->setAttribute('class', 'performance-marketing-industry');
+        $card->appendChild($figure);
+        $heading = $document->createElement('h3');
+        while ($title->firstChild) {
+            $heading->appendChild($title->firstChild);
+        }
+        $card->appendChild($heading);
+        $grid->appendChild($card);
+    }
+
+    private function performanceMarketingToolCards(DOMDocument $document, array $groups, DOMXPath $xpath): void
+    {
+        foreach ($groups as $group) {
+            $copy = $this->serviceCopy($xpath, $group);
+            if (! $copy || ! str_starts_with(strtolower(trim($this->firstHeading($copy)?->textContent ?? '')), 'tools & platforms we use')) {
+                continue;
+            }
+
+            $grid = $document->createElement('div');
+            $grid->setAttribute('class', 'performance-marketing-tools__grid');
+            $pendingFigure = null;
+            foreach (iterator_to_array($copy->childNodes) as $child) {
+                if (! $child instanceof DOMElement) {
+                    continue;
+                }
+                if ($child->tagName === 'figure') {
+                    $pendingFigure = $child;
+                    continue;
+                }
+                if ($child->tagName !== 'h5' || ! $pendingFigure) {
+                    continue;
+                }
+
+                $card = $document->createElement('article');
+                $card->setAttribute('class', 'performance-marketing-tool');
+                $card->appendChild($pendingFigure);
+                $pendingFigure = null;
+                $heading = $document->createElement('h3');
+                while ($child->firstChild) {
+                    $heading->appendChild($child->firstChild);
+                }
+                $card->appendChild($heading);
+                $grid->appendChild($card);
+            }
+            $copy->appendChild($grid);
+            break;
+        }
+    }
+
+    private function performanceMarketingForm(DOMDocument $document, string $prefix): DOMElement
+    {
+        $form = $document->createElement('form');
+        $form->setAttribute('class', 'performance-marketing-form');
+        $form->setAttribute('data-home-enquiry', '');
+        $form->setAttribute('aria-label', 'Contact Trivo');
+        $form->setAttribute('action', 'mailto:contact@trivo.in');
+        $form->setAttribute('method', 'post');
+        $form->setAttribute('enctype', 'text/plain');
+
+        foreach ([
+            ['name', 'Name', 'text', 'name'],
+            ['email', 'Email', 'email', 'email'],
+            ['phone', 'Phone number', 'tel', 'tel'],
+            ['message', 'How can we help you?', 'textarea', 'off'],
+        ] as [$name, $placeholder, $type, $autocomplete]) {
+            $id = $prefix.'-'.$name;
+            $label = $document->createElement('label', $placeholder);
+            $label->setAttribute('class', 'sr-only');
+            $label->setAttribute('for', $id);
+            $form->appendChild($label);
+
+            $field = $type === 'textarea'
+                ? $document->createElement('textarea')
+                : $document->createElement('input');
+            $field->setAttribute('id', $id);
+            $field->setAttribute('name', $name);
+            $field->setAttribute('placeholder', $placeholder);
+            $field->setAttribute('aria-label', $placeholder);
+            if ($type === 'textarea') {
+                $field->setAttribute('rows', '3');
+            } else {
+                $field->setAttribute('type', $type);
+                $field->setAttribute('autocomplete', $autocomplete);
+            }
+            if ($name !== 'message') {
+                $field->setAttribute('required', '');
+            }
+            $form->appendChild($field);
+        }
+
+        $company = $document->createElement('input');
+        $company->setAttribute('type', 'hidden');
+        $company->setAttribute('name', 'company');
+        $company->setAttribute('value', '');
+        $form->appendChild($company);
+
+        $button = $document->createElement('button', 'Send me a proposal');
+        $button->setAttribute('type', 'submit');
+        $arrow = $document->createElement('span', '→');
+        $arrow->setAttribute('aria-hidden', 'true');
+        $button->appendChild($arrow);
+        $form->appendChild($button);
+
+        return $form;
+    }
+
+    private function serviceCopy(DOMXPath $xpath, DOMElement $group): ?DOMElement
+    {
+        $copy = $xpath->query('./div[contains(concat(" ", normalize-space(@class), " "), " service-copy ")]', $group)->item(0);
+
+        return $copy instanceof DOMElement ? $copy : null;
+    }
+
+    /** @return list<DOMElement> */
+    private function directHeadings(DOMElement $copy): array
+    {
+        return array_values(array_filter(
+            iterator_to_array($copy->childNodes),
+            fn ($child): bool => $child instanceof DOMElement && preg_match('/^h[1-6]$/', $child->tagName) === 1,
+        ));
+    }
+
+    private function firstHeading(DOMElement $copy): ?DOMElement
+    {
+        return $this->directHeadings($copy)[0] ?? null;
+    }
+
+    /** @param list<string> $add @param list<string> $remove */
+    private function addClasses(DOMElement $element, array $add, array $remove = []): void
+    {
+        $classes = array_filter(preg_split('/\s+/', trim($element->getAttribute('class'))) ?: []);
+        $classes = array_values(array_diff($classes, $remove));
+        foreach ($add as $class) {
+            if (! in_array($class, $classes, true)) {
+                $classes[] = $class;
+            }
+        }
+        $element->setAttribute('class', implode(' ', $classes));
     }
 
     private function featureCards(DOMDocument $document, DOMElement $copy): void
