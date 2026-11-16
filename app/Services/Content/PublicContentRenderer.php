@@ -13,6 +13,7 @@ use DOMNode;
 use DOMXPath;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class PublicContentRenderer
@@ -54,6 +55,35 @@ class PublicContentRenderer
         $body = $content instanceof Page ? $this->pageBody($content) : $content->body;
         $bodyHtml = app(ContentHtml::class)->clean($body);
         $hasHeadingOne = app(ContentHtml::class)->hasHeadingOne($bodyHtml);
+
+        if ($content instanceof Post) {
+            $blogPostLayout = app(BlogPostLayout::class);
+            $articleHeading = $blogPostLayout->heading($bodyHtml, $content->title);
+            $featuredMedia = $content->featured_media_id
+                ? Media::query()->find($content->featured_media_id)
+                : null;
+            $preparedBody = $blogPostLayout->prepare(
+                $bodyHtml,
+                $articleHeading,
+                ! $featuredMedia || $featuredMedia->processing_status !== 'ready'
+            );
+
+            return view('pages.blog-post', [
+                'article' => [
+                    'title' => $content->title,
+                    'heading' => $articleHeading,
+                    'date' => $content->published_at?->format('F j, Y') ?? '',
+                    'content' => $bodyHtml,
+                    'seo_title' => $content->seo_title,
+                    'seo_description' => $content->seo_description ?: ($content->excerpt ?: Str::limit(strip_tags($bodyHtml), 180)),
+                    'canonical_url' => $content->canonical_url,
+                    'robots' => $content->robots,
+                ],
+                'bodyHtml' => $preparedBody['html'],
+                'featuredMedia' => $featuredMedia,
+                'featuredImage' => $preparedBody['featuredImage'],
+            ]);
+        }
 
         if ($content instanceof Page && $content->path === '/') {
             return view('pages.imported-home', [
@@ -221,6 +251,7 @@ class PublicContentRenderer
                     $currentGroup->setAttribute('class', 'home-section__group');
                     $currentSection->appendChild($currentGroup);
                     $currentGroup->appendChild($element);
+
                     continue;
                 }
             }
@@ -256,6 +287,7 @@ class PublicContentRenderer
                 } elseif ($tag === 'h3' && str_contains(strtolower($text), 'driving digital revenue') && $resultsTestimonials instanceof DOMElement) {
                     $currentGroup->appendChild($resultsTestimonials);
                 }
+
                 continue;
             }
 

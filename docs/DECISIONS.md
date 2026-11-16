@@ -155,6 +155,11 @@
 - Separate site/social (`settings.site`) and analytics/verification (`settings.seo`) sections. Use existing role permissions; grant no new permissions to Editors. Validate and encrypt each section independently, and audit section events without values.
 - Accept plain text, safe HTTPS social URLs and tracker IDs/tokens only. Do not invent or import values during implementation. Public tracking stays inactive until the public rendering/CSP integration; custom scripts and the rest of SEO settings remain separate pending work.
 - Brand images must be ready, unarchived rasters with alt text; site icons must be square and at least 48 pixels. Lock selected media rows on save so archive cannot race with assignment, and retain image reference protection.
+
+## 2026-11-16 — Blog article layout
+- Render every published post through a shared responsive article template at its existing public path. Preserve post SEO metadata and sanitize imported body HTML before layout transformations.
+- Prefer assigned featured media; when absent, promote the first sanitized body image for the article hero and blog card. Keep remaining inline media and turn sanitized FAQ summaries into native disclosure controls.
+- Keep the existing shared marketing footer.
 - Reuse shared glass form components and preserve the current section when changing theme. Synthetic tests/browser checks use isolated data and send no tracking requests.
 
 ## 2026-11-03 — Image library and manual videos

@@ -488,7 +488,23 @@
         background: #f7f7fa;
     }
 
+    .site-header__mobile-who {
+        display: grid;
+        margin: 0 16px 8px;
+        border-radius: 12px;
+        background: #f7f7fa;
+    }
+
     .site-header__mobile-solutions summary {
+        min-height: 46px;
+        padding: 12px 16px;
+        color: #005ba9;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .site-header__mobile-who summary {
         min-height: 46px;
         padding: 12px 16px;
         color: #005ba9;
@@ -503,7 +519,14 @@
         font-size: 14px;
     }
 
+    .site-header__mobile-who a {
+        min-height: 42px;
+        padding-left: 28px;
+        font-size: 14px;
+    }
+
     .site-header__solutions { display: none; }
+    .site-header__who { display: none; }
 
     .site-footer {
         overflow: hidden;
@@ -1125,6 +1148,55 @@
         .site-header__toggle,
         .site-header__mobile-nav { display: none; }
         .site-header__solutions { display: block; }
+        .site-header__who { position: relative; display: block; }
+        .site-header__who::after {
+            position: absolute;
+            top: 100%;
+            right: -80px;
+            left: -12px;
+            z-index: 19;
+            display: none;
+            height: 14px;
+            content: '';
+        }
+        .site-header__who-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            z-index: 20;
+            display: none;
+            width: min(314px, calc(100vw - 32px));
+            margin: 0;
+            padding: 10px;
+            border-radius: 24px;
+            background: #f7f7fa;
+            box-shadow: 0 16px 36px #172b4d18;
+            list-style: none;
+        }
+        .site-header__who:hover .site-header__who-menu,
+        .site-header__who:focus-within .site-header__who-menu { display: grid; }
+        .site-header__who:hover::after,
+        .site-header__who:focus-within::after { display: block; }
+        .site-header__who:hover .site-header__who-trigger,
+        .site-header__who:focus-within .site-header__who-trigger { background: #f7f7fa; }
+        .site-header__who-menu a {
+            display: flex;
+            width: 100%;
+            min-height: 48px;
+            align-items: center;
+            padding: 0 18px;
+            border-radius: 14px;
+            color: #111;
+            font-size: 16px;
+            font-weight: 400;
+            white-space: normal;
+        }
+        .site-header__who-menu a:hover,
+        .site-header__who-menu a:focus-visible,
+        .site-header__who-menu a[aria-current="page"] {
+            color: #005ba9;
+            background: #fff;
+        }
         .site-header__solutions::after {
             position: absolute;
             top: calc(100% - 22px);
@@ -3877,7 +3949,10 @@
         box-shadow: 0 3px 12px #0000000d;
     }
     .blog-page__card[hidden] { display: none !important; }
-    .blog-page__card-image { background: linear-gradient(180deg, #fff 0%, #b8b8b8 100%); }
+    .blog-page__card-image { overflow: hidden; background: linear-gradient(180deg, #fff 0%, #b8b8b8 100%); }
+    .blog-page__card-image picture,
+    .blog-page__card-img { display: block; width: 100%; height: 100%; }
+    .blog-page__card-img { object-fit: cover; }
     .blog-page__card-copy { display: flex; flex-direction: column; align-items: center; padding: 16px 18px 14px; text-align: center; }
     .blog-page__card-copy h2 {
         display: -webkit-box;
@@ -3949,6 +4024,111 @@
         .blog-page__card { min-height: 300px; grid-template-rows: 140px 1fr; }
         .blog-page__card-copy { padding-inline: 18px; }
         .blog-page__card-copy h2 { font-size: 17px; }
+    }
+}
+
+@layer components {
+    .blog-post-page { padding-bottom: 82px; }
+    .blog-post__header {
+        width: min(calc(100% - 48px), 1220px);
+        margin: 0 auto;
+        padding: 48px 0 18px;
+        text-align: center;
+    }
+    .blog-post__header h1 {
+        margin: 0;
+        font-size: clamp(22px, 3vw, 36px);
+        font-weight: 700;
+        line-height: 1.2;
+        letter-spacing: -1.2px;
+    }
+    .blog-post__header time {
+        display: block;
+        margin-top: 12px;
+        color: #69727d;
+        font-size: 12px;
+    }
+    .blog-post__hero {
+        width: min(calc(100% - 48px), 1220px);
+        height: clamp(280px, 45vw, 520px);
+        margin: 0 auto 30px;
+        overflow: hidden;
+        border: 1px solid #e8e8e8;
+        border-radius: 12px;
+        background: #fff;
+        box-shadow: 0 2px 8px #00000014;
+    }
+    .blog-post__hero picture,
+    .blog-post__hero-image,
+    .blog-post__hero-placeholder {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+    .blog-post__hero-image { object-fit: cover; }
+    .blog-post__body {
+        width: min(calc(100% - 48px), 1220px);
+        margin-inline: auto;
+        color: #69727d;
+        font-size: 15px;
+        line-height: 1.55;
+    }
+    .blog-post__body > p:first-child { margin-bottom: 20px; }
+    .blog-post__body p { margin-block: 0 14px; text-align: justify; }
+    .blog-post__body h2,
+    .blog-post__body h3,
+    .blog-post__body h4 {
+        margin-block: 18px 12px;
+        color: #000;
+        font-weight: 700;
+        line-height: 1.3;
+    }
+    .blog-post__body h2 { font-size: clamp(22px, 2.5vw, 28px); }
+    .blog-post__body h3 { font-size: 22px; }
+    .blog-post__body ul,
+    .blog-post__body ol { margin: 0 0 18px; padding-left: 24px; }
+    .blog-post__body li { margin-block: 5px; }
+    .blog-post__body a { color: #006ace; text-decoration: underline; text-underline-offset: 3px; }
+    .blog-post__body img {
+        float: right;
+        width: min(45%, 420px);
+        max-height: 320px;
+        margin: 8px 0 20px 30px;
+        border: 1px solid #e8e8e8;
+        border-radius: 8px;
+        object-fit: cover;
+        box-shadow: 0 2px 8px #00000014;
+    }
+    .blog-post__body figure { margin-block: 18px; }
+    .blog-post__body figure::after { display: block; clear: both; content: ''; }
+    .blog-post__body figure img { float: none; width: auto; max-width: 100%; margin: 0 auto; }
+    .blog-post__body .blog-post__faq-heading { margin-top: 48px; text-align: center; }
+    .blog-post__body .blog-post__faq-item {
+        margin: 8px auto;
+        border: 1px solid #e1e4e9;
+        border-radius: 12px;
+        color: #111;
+    }
+    .blog-post__body .blog-post__faq-item summary {
+        min-height: 44px;
+        padding: 12px 16px;
+        color: #111;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    .blog-post__body .blog-post__faq-item > :not(summary) { margin: 0 16px 14px; }
+    @media (max-width: 39.99rem) {
+        .blog-post-page { padding-bottom: 48px; }
+        .blog-post__header,
+        .blog-post__hero,
+        .blog-post__body { width: calc(100% - 40px); }
+        .blog-post__header { padding-top: 34px; }
+        .blog-post__header h1 { font-size: 28px; letter-spacing: -.6px; }
+        .blog-post__hero { height: 220px; margin-bottom: 22px; border-radius: 10px; }
+        .blog-post__body { font-size: 14px; }
+        .blog-post__body img { float: none; display: block; width: min(100%, 460px); max-height: 280px; margin: 14px auto; }
+        .blog-post__body figure img { width: auto; }
+        .blog-post__body p { text-align: left; }
     }
 }
 
@@ -4202,24 +4382,24 @@
 }
 
 @layer components {
-    .service-page--performance-marketing-agency-in-nagpur {
+    .service-page--performance-marketing-agency-nagpur {
         background: linear-gradient(180deg, #f3f0ff 0, #fff 680px);
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .paid-search-heading {
+    .service-page--performance-marketing-agency-nagpur .paid-search-heading {
         padding: 22px 24px;
         background: #e9e5ff;
         text-align: center;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .paid-search-heading h1 {
+    .service-page--performance-marketing-agency-nagpur .paid-search-heading h1 {
         margin: 0;
         font-size: clamp(28px, 3.2vw, 40px);
         font-weight: 700;
         letter-spacing: -.8px;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-content {
+    .service-page--performance-marketing-agency-nagpur .service-content {
         display: grid;
         grid-template-columns: repeat(12, minmax(0, 1fr));
         gap: 0 24px;
@@ -4227,16 +4407,16 @@
         margin-inline: auto;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-content > .service-section,
-    .service-page--performance-marketing-agency-in-nagpur .service-content > .paid-search-clients,
-    .service-page--performance-marketing-agency-in-nagpur .service-content > .performance-marketing-proof,
-    .service-page--performance-marketing-agency-in-nagpur .service-content > .performance-marketing-benefits,
-    .service-page--performance-marketing-agency-in-nagpur .service-content > .performance-marketing-industries {
+    .service-page--performance-marketing-agency-nagpur .service-content > .service-section,
+    .service-page--performance-marketing-agency-nagpur .service-content > .paid-search-clients,
+    .service-page--performance-marketing-agency-nagpur .service-content > .performance-marketing-proof,
+    .service-page--performance-marketing-agency-nagpur .service-content > .performance-marketing-benefits,
+    .service-page--performance-marketing-agency-nagpur .service-content > .performance-marketing-industries {
         grid-column: 1 / -1;
         min-width: 0;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-hero {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-hero {
         display: grid;
         grid-template-columns: minmax(0, 1.05fr) minmax(300px, .85fr);
         align-items: center;
@@ -4245,16 +4425,16 @@
         text-align: left;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-hero .service-copy > h2 {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-hero .service-copy > h2 {
         margin-bottom: 20px;
         font-size: clamp(30px, 3vw, 42px);
         font-weight: 700;
         letter-spacing: -1px;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-hero .service-copy > p,
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-definition .service-copy > p,
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-service .service-copy > p {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-hero .service-copy > p,
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-definition .service-copy > p,
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-service .service-copy > p {
         color: #69727d;
         font-size: 15px;
         line-height: 1.6;
@@ -4339,50 +4519,50 @@
         outline-offset: 3px;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-hero .performance-marketing-form {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-hero .performance-marketing-form {
         width: min(100%, 440px);
         justify-self: end;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-definition {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-definition {
         align-items: center;
         gap: 72px;
         padding-block: 34px 52px;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-definition .service-copy > h2,
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-services-heading .service-copy > h2,
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-process .service-copy > h2,
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-tools .service-copy > h2 {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-definition .service-copy > h2,
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-services-heading .service-copy > h2,
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-process .service-copy > h2,
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-tools .service-copy > h2 {
         font-size: clamp(27px, 3vw, 36px);
         font-weight: 700;
         letter-spacing: -.8px;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-definition .service-copy > ul {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-definition .service-copy > ul {
         gap: 7px;
         margin-block: 14px;
         padding-left: 20px;
         list-style: disc;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-definition .service-copy > ul li {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-definition .service-copy > ul li {
         padding-left: 0;
         color: #505050;
         font-size: 14px;
         line-height: 1.45;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-definition .service-copy > ul li::before {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-definition .service-copy > ul li::before {
         display: none;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-definition .service-media > img {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-definition .service-media > img {
         max-height: 390px;
         border-radius: 0;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .performance-marketing-proof {
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-proof {
         display: grid;
         grid-template-columns: minmax(0, 1.2fr) repeat(3, minmax(0, 1fr));
         align-items: center;
@@ -4391,13 +4571,13 @@
         padding: 14px 0;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .performance-marketing-proof > h3 {
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-proof > h3 {
         margin: 0;
         font-size: 22px;
         font-weight: 700;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .performance-marketing-proof__metric {
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-proof__metric {
         display: grid;
         min-height: 74px;
         align-content: center;
@@ -4410,29 +4590,29 @@
         text-align: center;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .performance-marketing-proof__metric strong {
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-proof__metric strong {
         font-size: 24px;
         line-height: 1.1;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .performance-marketing-proof__metric span {
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-proof__metric span {
         color: #69727d;
         font-size: 11px;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-partner {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-partner {
         padding-block: 30px 24px;
         text-align: center;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-partner .service-copy > h2 {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-partner .service-copy > h2 {
         max-width: 850px;
         margin: 0 auto 16px;
         font-size: clamp(27px, 3vw, 36px);
         font-weight: 700;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-partner .service-copy > p {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-partner .service-copy > p {
         max-width: 920px;
         margin-inline: auto;
         color: #69727d;
@@ -4440,14 +4620,14 @@
         line-height: 1.6;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .performance-marketing-benefits {
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-benefits {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 18px;
         padding: 10px 10px 70px;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .performance-marketing-benefits > h2 {
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-benefits > h2 {
         grid-column: 1 / -1;
         margin: 0 0 4px;
         font-size: clamp(24px, 2.8vw, 34px);
@@ -4455,7 +4635,7 @@
         text-align: center;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .performance-marketing-benefit {
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-benefit {
         min-width: 0;
         padding: 20px;
         border: 1px solid #e4e4ea;
@@ -4464,21 +4644,21 @@
         box-shadow: 0 5px 18px #00000008;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .performance-marketing-benefit h3 {
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-benefit h3 {
         margin: 0 0 12px;
         font-size: 17px;
         font-weight: 700;
         line-height: 1.35;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .performance-marketing-benefit p,
-    .service-page--performance-marketing-agency-in-nagpur .performance-marketing-benefit li {
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-benefit p,
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-benefit li {
         color: #69727d;
         font-size: 12px;
         line-height: 1.55;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .performance-marketing-benefit ul {
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-benefit ul {
         display: grid;
         gap: 5px;
         margin: 12px 0;
@@ -4486,16 +4666,16 @@
         list-style: disc;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-services-heading {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-services-heading {
         padding-block: 38px 10px;
         text-align: center;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-services-heading .service-copy > h2 {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-services-heading .service-copy > h2 {
         margin-bottom: 12px;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-services-heading .service-copy > p {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-services-heading .service-copy > p {
         max-width: 900px;
         margin-inline: auto;
         color: #69727d;
@@ -4503,7 +4683,7 @@
         line-height: 1.6;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-service {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-service {
         display: grid;
         grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
         align-items: center;
@@ -4512,57 +4692,57 @@
         text-align: left;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-service .service-copy > h2 {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-service .service-copy > h2 {
         margin-bottom: 14px;
         font-size: clamp(23px, 2.4vw, 30px);
         font-weight: 700;
         letter-spacing: -.5px;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-service .service-copy > ul {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-service .service-copy > ul {
         gap: 6px;
         margin-block: 14px;
         padding-left: 20px;
         list-style: disc;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-service .service-copy > ul li {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-service .service-copy > ul li {
         padding-left: 0;
         color: #69727d;
         font-size: 13px;
         line-height: 1.45;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-service .service-copy > ul li::before {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-service .service-copy > ul li::before {
         display: none;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-service .service-media {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-service .service-media {
         gap: 14px;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-service .service-media > img {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-service .service-media > img {
         max-height: 310px;
         border-radius: 20px;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-service .service-media > img:only-child {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-service .service-media > img:only-child {
         max-width: 480px;
         justify-self: center;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .performance-marketing-industries {
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-industries {
         padding: 48px 10px 62px;
         text-align: center;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .performance-marketing-industries > h2 {
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-industries > h2 {
         margin-bottom: 10px;
         font-size: clamp(27px, 3vw, 36px);
         font-weight: 700;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .performance-marketing-industries > p {
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-industries > p {
         max-width: 880px;
         margin: 0 auto 25px;
         color: #69727d;
@@ -4570,14 +4750,14 @@
         line-height: 1.6;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .performance-marketing-industries__grid {
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-industries__grid {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 14px;
         margin-block: 26px;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .performance-marketing-industry {
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-industry {
         min-width: 0;
         padding: 12px;
         border: 1px solid #e3e7ed;
@@ -4586,7 +4766,7 @@
         text-align: center;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .performance-marketing-industry figure {
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-industry figure {
         display: grid;
         min-height: 112px;
         margin: 0 0 10px;
@@ -4596,30 +4776,30 @@
         background: #fff;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .performance-marketing-industry figure img {
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-industry figure img {
         display: block;
         width: 100%;
         height: 112px;
         object-fit: cover;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .performance-marketing-industry h3 {
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-industry h3 {
         margin: 0;
         font-size: 13px;
         font-weight: 700;
         line-height: 1.35;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-process {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-process {
         padding-block: 32px 54px;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-process .service-copy > h2,
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-tools .service-copy > h2 {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-process .service-copy > h2,
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-tools .service-copy > h2 {
         text-align: center;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-process .service-copy > ol {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-process .service-copy > ol {
         display: grid;
         gap: 10px;
         max-width: 940px;
@@ -4630,18 +4810,18 @@
         line-height: 1.55;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-tools {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-tools {
         padding-block: 25px 56px;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .performance-marketing-tools__grid {
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-tools__grid {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 14px;
         margin-top: 26px;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .performance-marketing-tool {
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-tool {
         display: grid;
         min-width: 0;
         min-height: 112px;
@@ -4655,7 +4835,7 @@
         text-align: center;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .performance-marketing-tool figure {
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-tool figure {
         display: grid;
         width: 100%;
         height: 55px;
@@ -4663,35 +4843,35 @@
         place-items: center;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .performance-marketing-tool img {
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-tool img {
         display: block;
         max-width: 100%;
         max-height: 54px;
         object-fit: contain;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .performance-marketing-tool h3 {
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-tool h3 {
         margin: 0;
         font-size: 12px;
         font-weight: 600;
         line-height: 1.35;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-cta {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-cta {
         padding: 34px 28px;
         border-radius: 24px;
         background: #e9e5ff;
         text-align: center;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-cta .service-copy > h2 {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-cta .service-copy > h2 {
         max-width: 900px;
         margin: 0 auto 14px;
         font-size: clamp(25px, 3vw, 36px);
         font-weight: 700;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-cta .service-copy > p {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-cta .service-copy > p {
         max-width: 900px;
         margin-inline: auto;
         color: #505050;
@@ -4699,16 +4879,16 @@
         line-height: 1.6;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-faq {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-faq {
         padding-block: 38px 52px;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-faq .service-copy > h2 {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-faq .service-copy > h2 {
         margin-bottom: 24px;
         font-size: clamp(25px, 3vw, 34px);
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-faq .location-disclosure {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-faq .location-disclosure {
         margin-bottom: 0;
         padding-inline: 0;
         border: 0;
@@ -4717,30 +4897,30 @@
         background: transparent;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-faq .location-disclosure > summary {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-faq .location-disclosure > summary {
         padding-block: 15px;
         padding-left: 20px;
         font-size: 14px;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-faq .location-disclosure > summary::before {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-faq .location-disclosure > summary::before {
         position: absolute;
         left: 0;
         color: #006ace;
         content: '\2022';
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-faq .location-disclosure > summary::after {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-faq .location-disclosure > summary::after {
         display: none;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-content > .paid-search-clients {
+    .service-page--performance-marketing-agency-nagpur .service-content > .paid-search-clients {
         width: 100%;
         margin: 32px 0 20px;
         padding: 30px 0;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-contact {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-contact {
         display: grid;
         grid-template-columns: minmax(0, 1fr) minmax(300px, .9fr);
         align-items: center;
@@ -4749,19 +4929,19 @@
         text-align: left;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-contact .service-copy > h3 {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-contact .service-copy > h3 {
         margin-bottom: 18px;
         font-size: 30px;
         font-weight: 700;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-contact .service-copy > p {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-contact .service-copy > p {
         margin: 12px 0 4px;
         color: #69727d;
         font-size: 13px;
     }
 
-    .service-page--performance-marketing-agency-in-nagpur .service-section--performance-contact .service-copy > a {
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-contact .service-copy > a {
         display: inline-flex;
         min-height: 44px;
         align-items: center;
@@ -4776,118 +4956,118 @@
     }
 
     @media (max-width: 63.99rem) {
-        .service-page--performance-marketing-agency-in-nagpur .service-section--performance-hero,
-        .service-page--performance-marketing-agency-in-nagpur .service-section--performance-contact {
+        .service-page--performance-marketing-agency-nagpur .service-section--performance-hero,
+        .service-page--performance-marketing-agency-nagpur .service-section--performance-contact {
             gap: 32px;
         }
 
-        .service-page--performance-marketing-agency-in-nagpur .performance-marketing-benefits {
+        .service-page--performance-marketing-agency-nagpur .performance-marketing-benefits {
             grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
-        .service-page--performance-marketing-agency-in-nagpur .performance-marketing-industries__grid,
-        .service-page--performance-marketing-agency-in-nagpur .performance-marketing-tools__grid {
+        .service-page--performance-marketing-agency-nagpur .performance-marketing-industries__grid,
+        .service-page--performance-marketing-agency-nagpur .performance-marketing-tools__grid {
             grid-template-columns: repeat(3, minmax(0, 1fr));
         }
 
-        .service-page--performance-marketing-agency-in-nagpur .service-section--performance-service {
+        .service-page--performance-marketing-agency-nagpur .service-section--performance-service {
             gap: 35px;
         }
     }
 
     @media (max-width: 39.99rem) {
-        .service-page--performance-marketing-agency-in-nagpur .paid-search-heading {
+        .service-page--performance-marketing-agency-nagpur .paid-search-heading {
             padding: 20px;
         }
 
-        .service-page--performance-marketing-agency-in-nagpur .paid-search-heading h1 {
+        .service-page--performance-marketing-agency-nagpur .paid-search-heading h1 {
             font-size: 27px;
         }
 
-        .service-page--performance-marketing-agency-in-nagpur .service-content {
+        .service-page--performance-marketing-agency-nagpur .service-content {
             display: block;
             width: calc(100% - 40px);
         }
 
-        .service-page--performance-marketing-agency-in-nagpur .service-section--performance-hero,
-        .service-page--performance-marketing-agency-in-nagpur .service-section--performance-contact {
+        .service-page--performance-marketing-agency-nagpur .service-section--performance-hero,
+        .service-page--performance-marketing-agency-nagpur .service-section--performance-contact {
             grid-template-columns: minmax(0, 1fr);
             gap: 30px;
             padding-block: 36px 46px;
         }
 
-        .service-page--performance-marketing-agency-in-nagpur .service-section--performance-hero .service-copy > h2 {
+        .service-page--performance-marketing-agency-nagpur .service-section--performance-hero .service-copy > h2 {
             font-size: 29px;
         }
 
-        .service-page--performance-marketing-agency-in-nagpur .service-section--performance-hero .performance-marketing-form {
+        .service-page--performance-marketing-agency-nagpur .service-section--performance-hero .performance-marketing-form {
             justify-self: center;
         }
 
-        .service-page--performance-marketing-agency-in-nagpur .performance-marketing-proof {
+        .service-page--performance-marketing-agency-nagpur .performance-marketing-proof {
             grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 8px;
         }
 
-        .service-page--performance-marketing-agency-in-nagpur .performance-marketing-proof > h3 {
+        .service-page--performance-marketing-agency-nagpur .performance-marketing-proof > h3 {
             grid-column: 1 / -1;
         }
 
-        .service-page--performance-marketing-agency-in-nagpur .performance-marketing-proof__metric {
+        .service-page--performance-marketing-agency-nagpur .performance-marketing-proof__metric {
             min-height: 64px;
             padding: 7px 4px;
         }
 
-        .service-page--performance-marketing-agency-in-nagpur .performance-marketing-proof__metric strong {
+        .service-page--performance-marketing-agency-nagpur .performance-marketing-proof__metric strong {
             font-size: 20px;
         }
 
-        .service-page--performance-marketing-agency-in-nagpur .performance-marketing-proof__metric span {
+        .service-page--performance-marketing-agency-nagpur .performance-marketing-proof__metric span {
             font-size: 9px;
         }
 
-        .service-page--performance-marketing-agency-in-nagpur .performance-marketing-benefits {
+        .service-page--performance-marketing-agency-nagpur .performance-marketing-benefits {
             grid-template-columns: minmax(0, 1fr);
             gap: 12px;
             padding-bottom: 45px;
         }
 
-        .service-page--performance-marketing-agency-in-nagpur .service-section--performance-service {
+        .service-page--performance-marketing-agency-nagpur .service-section--performance-service {
             grid-template-columns: minmax(0, 1fr);
             gap: 22px;
             padding-block: 28px 38px;
         }
 
-        .service-page--performance-marketing-agency-in-nagpur .service-section--performance-service .service-copy > h2 {
+        .service-page--performance-marketing-agency-nagpur .service-section--performance-service .service-copy > h2 {
             font-size: 24px;
         }
 
-        .service-page--performance-marketing-agency-in-nagpur .performance-marketing-industries__grid,
-        .service-page--performance-marketing-agency-in-nagpur .performance-marketing-tools__grid {
+        .service-page--performance-marketing-agency-nagpur .performance-marketing-industries__grid,
+        .service-page--performance-marketing-agency-nagpur .performance-marketing-tools__grid {
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 10px;
         }
 
-        .service-page--performance-marketing-agency-in-nagpur .performance-marketing-industry {
+        .service-page--performance-marketing-agency-nagpur .performance-marketing-industry {
             padding: 8px;
         }
 
-        .service-page--performance-marketing-agency-in-nagpur .performance-marketing-industry figure,
-        .service-page--performance-marketing-agency-in-nagpur .performance-marketing-industry figure img {
+        .service-page--performance-marketing-agency-nagpur .performance-marketing-industry figure,
+        .service-page--performance-marketing-agency-nagpur .performance-marketing-industry figure img {
             height: 86px;
             min-height: 86px;
         }
 
-        .service-page--performance-marketing-agency-in-nagpur .service-section--performance-process .service-copy > ol {
+        .service-page--performance-marketing-agency-nagpur .service-section--performance-process .service-copy > ol {
             gap: 8px;
             font-size: 12px;
         }
 
-        .service-page--performance-marketing-agency-in-nagpur .service-section--performance-cta {
+        .service-page--performance-marketing-agency-nagpur .service-section--performance-cta {
             padding: 28px 18px;
         }
 
-        .service-page--performance-marketing-agency-in-nagpur .service-section--performance-contact .service-copy > a {
+        .service-page--performance-marketing-agency-nagpur .service-section--performance-contact .service-copy > a {
             margin-bottom: 8px;
         }
     }

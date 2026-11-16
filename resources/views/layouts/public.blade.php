@@ -1,4 +1,4 @@
-@php($usesMarketingLayout = request()->routeIs('home', 'portfolio', 'contact', 'team', 'awards', 'career', 'blog', 'return-refund-policy') || request()->is('about-us') || request()->is('marketing-solutions') || \App\Services\Content\ServicePageLayout::supports(request()->path()))
+@php($usesMarketingLayout = $__env->yieldContent('marketingLayout') === 'true' || request()->routeIs('home', 'portfolio', 'contact', 'team', 'awards', 'career', 'blog', 'blog.post', 'return-refund-policy') || request()->is('about-us') || request()->is('marketing-solutions') || \App\Services\Content\ServicePageLayout::supports(request()->path()))
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -47,7 +47,15 @@
                             </div>
                         </div>
                     </div>
-                    <a href="{{ url('/about-us') }}" @if (request()->is('about-us')) aria-current="page" @endif>Who We Are</a>
+                    <div class="site-header__who">
+                        <a class="site-header__who-trigger" href="{{ url('/about-us') }}" @if (request()->is('about-us', 'awards', 'meet-the-team', 'career')) aria-current="page" @endif>Who We Are</a>
+                        <ul class="site-header__who-menu" aria-label="Who We Are">
+                            <li><a href="{{ url('/about-us') }}" @if (request()->is('about-us')) aria-current="page" @endif>About Us</a></li>
+                            <li><a href="{{ url('/awards') }}" @if (request()->is('awards')) aria-current="page" @endif>Awards</a></li>
+                            <li><a href="{{ url('/meet-the-team') }}" @if (request()->is('meet-the-team')) aria-current="page" @endif>Meet the Team</a></li>
+                            <li><a href="{{ url('/career') }}" @if (request()->is('career')) aria-current="page" @endif>Career – Explore Opportunities</a></li>
+                        </ul>
+                    </div>
                     <a href="{{ route('portfolio') }}" @if (request()->routeIs('portfolio', 'portfolio.item')) aria-current="page" @endif>Portfolio</a>
                     <a href="{{ route('contact') }}" @if (request()->routeIs('contact')) aria-current="page" @endif>Contact</a>
                 </nav>
@@ -82,7 +90,13 @@
                     <a href="{{ url('/performance-marketing-agency-nagpur') }}" @click="open = false">Performance Marketing</a>
                     <a href="{{ url('/amazon-shopping') }}" @click="open = false">Amazon Shopping</a>
                 </details>
-                <a href="{{ url('/about-us') }}" @click="open = false">Who We Are</a>
+                <details class="site-header__mobile-who">
+                    <summary>Who We Are</summary>
+                    <a href="{{ url('/about-us') }}" @click="open = false">About Us</a>
+                    <a href="{{ url('/awards') }}" @click="open = false">Awards</a>
+                    <a href="{{ url('/meet-the-team') }}" @click="open = false">Meet the Team</a>
+                    <a href="{{ url('/career') }}" @click="open = false">Career – Explore Opportunities</a>
+                </details>
                 <a href="{{ route('portfolio') }}" @click="open = false">Portfolio</a>
                 <a href="{{ route('contact') }}" @click="open = false">Contact</a>
                 <a href="{{ url('/free-audit') }}" @click="open = false">Get a Free Audit →</a>

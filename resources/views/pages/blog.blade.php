@@ -34,7 +34,17 @@
             <div class="blog-page__cards" id="blog-articles" data-blog-grid>
                 @foreach ($posts as $post)
                     <article class="blog-page__card" data-blog-card @if ($loop->iteration > 6) hidden @endif>
-                        <div class="blog-page__card-image" aria-hidden="true"></div>
+                        <div class="blog-page__card-image" aria-hidden="true">
+                            @if (($post['featured_media'] ?? null)?->processing_status === 'ready')
+                                <x-media.picture
+                                    :media="$post['featured_media']"
+                                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                    class="blog-page__card-img"
+                                />
+                            @elseif (! empty($post['image']['src']))
+                                <img class="blog-page__card-img" src="{{ $post['image']['src'] }}" alt="" loading="lazy" decoding="async">
+                            @endif
+                        </div>
                         <div class="blog-page__card-copy">
                             <h2><a href="{{ $post['url'] ?? route('blog.post', ['slug' => $post['slug']]) }}">{{ $post['title'] }}</a></h2>
                             <p>{{ $post['excerpt'] }}</p>
