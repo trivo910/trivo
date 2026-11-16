@@ -65,6 +65,308 @@
         border-bottom: 1px solid #ececf0;
     }
 
+        .about-page { overflow: hidden; }
+        .about-page__banner {
+            display: grid;
+            min-height: 112px;
+            padding: 28px 20px;
+            place-items: center;
+            background: linear-gradient(180deg, #e9e5ff 0%, #fff 100%);
+        }
+        .about-page__banner h1 {
+            margin: 0;
+            font-size: clamp(30px, 4vw, 48px);
+            line-height: 1.2;
+            text-align: center;
+        }
+        .about-page__hero,
+        .about-page__story,
+        .about-page__values,
+        .about-page__provider,
+        .about-page__testimonial,
+        .about-page__clients {
+            width: min(100% - 48px, 1200px);
+            margin-inline: auto;
+        }
+        .about-page__hero {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(300px, .75fr);
+            align-items: center;
+            gap: clamp(32px, 7vw, 100px);
+            padding-block: 36px 68px;
+        }
+        .about-page__hero h2 {
+            max-width: 620px;
+            margin: 0;
+            font-size: clamp(32px, 4vw, 50px);
+            font-weight: 600;
+            line-height: 1.2;
+            letter-spacing: -1.5px;
+        }
+        .about-page__hero img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 1.08;
+            border-radius: 24px;
+            object-fit: cover;
+        }
+        .about-page__story {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px 36px;
+            padding-block: 32px 72px;
+            border-top: 1px solid #f0f0f0;
+        }
+        .about-page__story p,
+        .about-page__provider p {
+            color: #69727d;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        .about-page__values { padding-block: 20px 88px; }
+        .about-page__values > h2,
+        .about-page__testimonial > h2,
+        .about-page__clients > h2 {
+            margin: 0 0 32px;
+            font-size: clamp(28px, 3vw, 38px);
+            line-height: 1.25;
+            letter-spacing: -1px;
+            text-align: center;
+        }
+        .about-page__value-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 28px;
+        }
+        .about-page__value { min-width: 0; }
+        .about-page__value-icon {
+            display: grid;
+            width: 48px;
+            height: 48px;
+            margin-bottom: 18px;
+            place-items: center;
+            border-radius: 50%;
+            background: #f3f5f9;
+            color: #00538d;
+            font-size: 17px;
+            font-weight: 700;
+        }
+        .about-page__value h3 {
+            margin: 0 0 10px;
+            font-size: 17px;
+            font-weight: 600;
+        }
+        .about-page__value p {
+            margin: 0;
+            color: #69727d;
+            font-size: 14px;
+            line-height: 1.65;
+        }
+        .about-page__provider { padding-block: 12px 80px; }
+        .about-page__provider > p {
+            margin-bottom: 30px;
+            color: #000;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .about-page__provider > div {
+            display: grid;
+            grid-template-columns: 1fr .9fr;
+            align-items: start;
+            gap: 64px;
+        }
+        .about-page__provider h2 {
+            max-width: 560px;
+            margin: 0;
+            font-size: clamp(30px, 3.2vw, 42px);
+            line-height: 1.25;
+            letter-spacing: -1.2px;
+        }
+        .about-page__provider > div > div p { margin: 0; }
+        .about-page__provider a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #00538d;
+            color: #000;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .about-page__testimonial { padding-block: 22px 72px; }
+        .about-page__testimonial figure {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            min-height: 420px;
+            margin: 0;
+            padding: clamp(28px, 6vw, 72px);
+            border-radius: 36px;
+            background: #f7f7fa;
+        }
+        .about-page__testimonial blockquote { max-width: 720px; margin: 0; }
+        .about-page__testimonial blockquote p {
+            color: #69727d;
+            font-size: clamp(17px, 2vw, 23px);
+            font-style: italic;
+            line-height: 1.6;
+        }
+        .about-page__testimonial figcaption { display: grid; gap: 3px; margin-top: 24px; }
+        .about-page__testimonial figcaption strong { font-size: 15px; font-weight: 600; }
+        .about-page__testimonial figcaption span { color: #69727d; font-size: 12px; }
+        .about-page__review-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            margin-top: auto;
+            padding-top: 48px;
+        }
+        .about-page__rating { display: grid; gap: 2px; justify-items: start; }
+        .about-page__rating span { color: #ffb800; letter-spacing: 2px; }
+        .about-page__rating small { color: #69727d; font-size: 11px; }
+        .about-page__reviews-link {
+            display: inline-flex;
+            min-height: 44px;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            color: #00538d;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .about-page__reviews-link:hover { text-decoration: underline; }
+        .about-page__reviews-link:focus-visible { outline: 2px solid #00538d; outline-offset: 4px; }
+        .about-page__clients { padding-block: 4px 76px; }
+        .about-page__clients > h2 { margin-bottom: 22px; }
+        .about-page__clients ul {
+            display: flex;
+            gap: 16px;
+            margin: 0;
+            padding: 0;
+            overflow-x: auto;
+            list-style: none;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: thin;
+        }
+        .about-page__clients ul.is-enhanced {
+            scrollbar-width: none;
+        }
+        .about-page__clients ul.is-enhanced::-webkit-scrollbar {
+            display: none;
+        }
+        .about-page__clients li {
+            display: grid;
+            flex: 0 0 calc((100% - 48px) / 4);
+            min-height: 138px;
+            padding: 5px;
+            place-items: center;
+            border: 1px solid #eee;
+            background: #fafafa;
+            scroll-snap-align: start;
+        }
+        .about-page__clients img {
+            display: block;
+            width: 100%;
+            /* max-width: 220px;
+            max-height: 100px; */
+            object-fit: contain;
+        }
+        .about-page__client-controls {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin-top: 14px;
+        }
+        .about-page__client-controls button {
+            display: grid;
+            width: 23px;
+            min-height: 44px;
+            padding: 0;
+            place-items: center;
+            background: transparent;
+            cursor: pointer;
+        }
+        .about-page__client-controls button::before {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ccc;
+            content: '';
+        }
+        .about-page__client-controls button[aria-current='true']::before { background: #000; }
+        .about-page__client-controls button:focus-visible { outline: 2px solid #00538d; outline-offset: -2px; }
+        body:has(.about-page) .site-footer {
+            border-radius: 40px 40px 0 0;
+            background: linear-gradient(#064f88, #006ace);
+        }
+        body:has(.about-page) .site-footer__contact {
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0;
+            padding: 0;
+            overflow: hidden;
+            border-radius: 40px;
+            box-shadow: none;
+        }
+        body:has(.about-page) .site-footer__contact-copy { padding: 40px; }
+        body:has(.about-page) .site-footer__contact-copy h2 { font-size: 22px; }
+        body:has(.about-page) .site-footer__contact-links { padding: 40px; border-inline: 1px solid #eee; }
+        body:has(.about-page) .site-footer__rating { padding: 40px; }
+        body:has(.about-page) .site-footer__partners {
+            grid-column: 1 / -1;
+            justify-content: space-around;
+            padding: 35px;
+            background: #f7f7fa;
+        }
+        body:has(.about-page) .site-footer__links { padding: 70px 48px 40px; }
+        body:has(.about-page) .site-footer__bottom { border-radius: 40px 40px 0 0; }
+        @media (max-width: 63.99rem) {
+            .about-page__hero { grid-template-columns: minmax(0, 1fr) minmax(220px, .8fr); gap: 28px; }
+            .about-page__story { gap: 18px 24px; }
+            .about-page__value-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 24px; }
+            .about-page__provider > div { gap: 32px; }
+            body:has(.about-page) .site-footer__contact { grid-template-columns: 1fr 1fr; }
+            body:has(.about-page) .site-footer__contact-copy { grid-column: 1 / -1; padding-bottom: 0; }
+        }
+        @media (max-width: 39.99rem) {
+            .about-page__banner { min-height: 96px; }
+            .about-page__hero,
+            .about-page__story,
+            .about-page__values,
+            .about-page__provider,
+            .about-page__testimonial,
+            .about-page__clients { width: min(100% - 40px, 1200px); }
+            .about-page__hero { grid-template-columns: 1.1fr .9fr; gap: 16px; padding-block: 28px 46px; }
+            .about-page__hero h2 { font-size: clamp(22px, 6vw, 30px); letter-spacing: -.7px; }
+            .about-page__hero img { min-height: 150px; border-radius: 18px; }
+            .about-page__story { grid-template-columns: 1fr; padding-block: 26px 52px; }
+            .about-page__story p { font-size: 14px; }
+            .about-page__values { padding-block: 12px 58px; }
+            .about-page__values > h2,
+            .about-page__testimonial > h2,
+            .about-page__clients > h2 { margin-bottom: 24px; font-size: 28px; }
+            .about-page__value-grid { gap: 26px 18px; }
+            .about-page__value-icon { width: 42px; height: 42px; margin-bottom: 12px; }
+            .about-page__value h3 { font-size: 15px; }
+            .about-page__value p { font-size: 13px; }
+            .about-page__provider { padding-block: 4px 54px; }
+            .about-page__provider > p { margin-bottom: 18px; }
+            .about-page__provider > div { grid-template-columns: 1fr; gap: 18px; }
+            .about-page__provider h2 { font-size: 30px; }
+            .about-page__testimonial { padding-block: 10px 52px; }
+            .about-page__testimonial figure { min-height: 0; padding: 28px 24px; border-radius: 26px; }
+            .about-page__testimonial blockquote p { font-size: 16px; }
+            .about-page__review-footer { gap: 14px; padding-top: 28px; }
+            .about-page__reviews-link { gap: 8px; font-size: 14px; }
+            .about-page__clients { padding-bottom: 52px; }
+            .about-page__clients ul { gap: 8px; }
+            .about-page__clients li { flex-basis: calc((100% - 8px) / 2); min-height: 92px; padding: 10px; }
+            body:has(.about-page) .site-footer__contact { grid-template-columns: 1fr; border-radius: 28px; }
+            body:has(.about-page) .site-footer__contact-copy,
+            body:has(.about-page) .site-footer__contact-links,
+            body:has(.about-page) .site-footer__rating { padding: 24px; }
+        }
     .site-header__inner {
         display: flex;
         align-items: center;
@@ -102,7 +404,7 @@
         padding: 0 16px;
         border-radius: 14px;
         color: #111;
-        font-size: 15px;
+        font-size: 16px;
         font-weight: 600;
         white-space: nowrap;
         transition: background-color 160ms ease, color 160ms ease;
@@ -178,6 +480,53 @@
     }
 
     .site-header__mobile-nav a { min-height: 46px; }
+
+    .site-header__mobile-solutions {
+        display: grid;
+        margin: 0 16px 8px;
+        border-radius: 12px;
+        background: #f7f7fa;
+    }
+
+    .site-header__mobile-who {
+        display: grid;
+        margin: 0 16px 8px;
+        border-radius: 12px;
+        background: #f7f7fa;
+    }
+
+    .site-header__mobile-solutions summary {
+        min-height: 46px;
+        padding: 12px 16px;
+        color: #005ba9;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .site-header__mobile-who summary {
+        min-height: 46px;
+        padding: 12px 16px;
+        color: #005ba9;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .site-header__mobile-solutions a {
+        min-height: 42px;
+        padding-left: 28px;
+        font-size: 14px;
+    }
+
+    .site-header__mobile-who a {
+        min-height: 42px;
+        padding-left: 28px;
+        font-size: 14px;
+    }
+
+    .site-header__solutions { display: none; }
+    .site-header__who { display: none; }
 
     .site-footer {
         overflow: hidden;
@@ -274,13 +623,13 @@
 
     .site-footer__links h2 {
         margin-bottom: 3px;
-        font-size: 15px;
+        font-size: 20px;
         font-weight: 700;
     }
 
     .site-footer__links a {
         color: rgba(255, 255, 255, 0.9);
-        font-size: 12px;
+        font-size: 16px;
         line-height: 1.5;
     }
 
@@ -290,6 +639,7 @@
     .site-footer__bottom {
         background: #fff;
         color: #69727d;
+        border-radius: 50px 50px 0px 0px;
     }
 
     .site-footer__bottom-inner {
@@ -299,9 +649,10 @@
         justify-content: space-between;
         gap: 14px 22px;
         width: min(100% - 40px, 1280px);
-        min-height: 62px;
+        min-height: 100px;
         margin-inline: auto;
-        font-size: 11px;
+        font-size: 14px;
+        font-weight: 500;
     }
 
     .site-footer__bottom nav,
@@ -316,15 +667,37 @@
 
     .site-footer__social a {
         display: inline-grid;
-        width: 24px;
-        height: 24px;
+        width: 48px;
+        height: 48px;
         place-items: center;
         border-radius: 50%;
-        background: #f7f7fa;
-        color: #006ace;
-        font-size: 11px;
-        font-weight: 700;
+        background: #fff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+        transition: transform 160ms ease, box-shadow 160ms ease;
     }
+
+    .site-footer__social a:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 14px rgba(0, 0, 0, 0.16);
+    }
+
+    .site-footer__social a:focus-visible {
+        outline: 2px solid #006ace;
+        outline-offset: 3px;
+    }
+
+    .site-footer__icon {
+        display: block;
+        width: 20px;
+        height: 20px;
+        fill: currentColor;
+    }
+
+    .site-footer__icon--linkedin { color: #0077b5; }
+    .site-footer__icon--twitter { color: #1da1f2; }
+    .site-footer__icon--instagram { color: #e1306c; }
+    .site-footer__icon--facebook { color: #1877f2; }
+    .site-footer__icon--pinterest { color: #bd081c; }
 
     .site-whatsapp {
         position: fixed;
@@ -746,7 +1119,7 @@
         box-shadow: 0 12px 30px rgba(0, 44, 99, 0.07);
         text-align: center;
     }
-    .home-results__stat strong { color: #006ace; font-size: 30px; font-weight: 700; line-height: 1.1; }
+    .home-results__stat strong { color: #006ace; font-size: 30px; font-weight: 600; line-height: 1.1; }
     .home-results__stat span { margin-top: 10px; color: #69727d; font-size: 13px; line-height: 1.4; }
     .home-results__proof {
         display: grid;
@@ -798,6 +1171,195 @@
         .site-header__talk { display: inline-flex; }
         .site-header__toggle,
         .site-header__mobile-nav { display: none; }
+        .site-header__solutions { display: block; }
+        .site-header__who { position: relative; display: block; }
+        .site-header__who::after {
+            position: absolute;
+            top: 100%;
+            right: -80px;
+            left: -12px;
+            z-index: 19;
+            display: none;
+            height: 14px;
+            content: '';
+        }
+        .site-header__who-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            z-index: 20;
+            display: none;
+            width: min(314px, calc(100vw - 32px));
+            margin: 0;
+            padding: 10px;
+            border-radius: 24px;
+            background: #f7f7fa;
+            box-shadow: 0 16px 36px #172b4d18;
+            list-style: none;
+        }
+        .site-header__who:hover .site-header__who-menu,
+        .site-header__who:focus-within .site-header__who-menu { display: grid; }
+        .site-header__who:hover::after,
+        .site-header__who:focus-within::after { display: block; }
+        .site-header__who:hover .site-header__who-trigger,
+        .site-header__who:focus-within .site-header__who-trigger { background: #f7f7fa; }
+        .site-header__who-menu a {
+            display: flex;
+            width: 100%;
+            min-height: 48px;
+            align-items: center;
+            padding: 0 18px;
+            border-radius: 14px;
+            color: #111;
+            font-size: 16px;
+            font-weight: 400;
+            white-space: normal;
+        }
+        .site-header__who-menu a:hover,
+        .site-header__who-menu a:focus-visible,
+        .site-header__who-menu a[aria-current="page"] {
+            color: #005ba9;
+            background: #fff;
+        }
+        .site-header__solutions::after {
+            position: absolute;
+            top: calc(100% - 22px);
+            right: max(24px, calc((100% - 1280px) / 2));
+            left: max(24px, calc((100% - 1280px) / 2));
+            z-index: 19;
+            display: none;
+            height: 22px;
+            content: '';
+        }
+        .site-header__solutions-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            z-index: 20;
+            display: none;
+            grid-template-columns: 1fr 1fr .8fr;
+            gap: 48px;
+            width: min(calc(100vw - 48px), 1280px);
+            min-height: 360px;
+            padding: 40px 68px;
+            transform: translateX(-50%);
+            border-radius: 0 0 24px 24px;
+            background: #fff;
+            box-shadow: 0 16px 36px #172b4d18;
+        }
+        .site-header__solutions:hover .site-header__solutions-menu,
+        .site-header__solutions:focus-within .site-header__solutions-menu { display: grid; }
+        .site-header__solutions:hover::after,
+        .site-header__solutions:focus-within::after { display: block; }
+        .site-header__solutions-list {
+            display: grid;
+            align-content: center;
+            gap: 4px;
+            margin: 0;
+            padding: 0 40px 0 0;
+            border-right: 1px solid #dedde5;
+            list-style: none;
+        }
+        .site-header__solutions-list:nth-child(2) { border-right: 0; }
+        .site-header__solutions-list a {
+            display: flex;
+            min-height: 52px;
+            align-items: center;
+            gap: 18px;
+            padding: 4px 0;
+            border-radius: 0;
+            color: #111;
+            font-size: 16px;
+            font-weight: 400;
+            white-space: nowrap;
+        }
+        .site-header__solutions-list a:hover,
+        .site-header__solutions-list a:focus-visible { color: #005ba9; background: transparent; }
+        .site-header__solutions-list a > span {
+            display: grid;
+            flex: 0 0 44px;
+            width: 44px;
+            height: 44px;
+            place-items: center;
+            border-radius: 50%;
+            background: #f7f7fa;
+            color: #00538d;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .site-header__solutions-feature {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 0;
+            padding-left: 4px;
+        }
+        .site-header__solutions-art {
+            position: relative;
+            display: grid;
+            height: 184px;
+            place-items: center;
+            border-radius: 24px;
+            background: #e9e5ff;
+        }
+        .site-header__solutions-art::before {
+            position: absolute;
+            top: -34px;
+            right: 24px;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #514bd0 0 12%, #aaa5ff 13% 27%, #fff 28% 35%, #7971f4 36% 51%, #c4bfff 52% 64%, #efedff 65% 74%, transparent 75%);
+            content: '';
+        }
+        .site-header__solutions-art::after {
+            position: absolute;
+            top: -52px;
+            right: 69px;
+            width: 7px;
+            height: 94px;
+            transform: rotate(43deg);
+            border-radius: 5px;
+            background: linear-gradient(#766df2 0 78%, #fff 79%);
+            box-shadow: 0 1px 3px #514bd044;
+            content: '';
+        }
+        .site-header__solutions-art > span {
+            position: absolute;
+            top: -54px;
+            right: 42px;
+            z-index: 1;
+            width: 0;
+            height: 0;
+            transform: rotate(43deg);
+            border-right: 11px solid transparent;
+            border-bottom: 20px solid #766df2;
+            border-left: 11px solid transparent;
+        }
+        .site-header__solutions-feature > a {
+            display: flex;
+            min-height: 50px;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            color: #111;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.3;
+            white-space: normal;
+        }
+        .site-header__solutions-feature > a > span {
+            display: grid;
+            flex: 0 0 36px;
+            width: 36px;
+            height: 36px;
+            place-items: center;
+            border-radius: 50%;
+            background: #000;
+            color: #fff;
+            font-size: 22px;
+            line-height: 1;
+        }
         .site-footer__contact { grid-template-columns: 1.6fr 1fr 0.75fr; align-items: center; }
         .site-footer__partners { grid-column: 1 / -1; }
         .site-footer__links { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 36px; }
@@ -866,6 +1428,129 @@
         .site-header__nav a,
         .site-header__mobile-nav a,
         .home-case-studies { transition: none; }
+    }
+}
+@layer components {
+    .contact-page { overflow: hidden; }
+    .contact-page__banner {
+        display: grid;
+        min-height: 110px;
+        padding: 24px 20px;
+        place-items: center;
+        background: linear-gradient(180deg, #eeeaff 0%, #fff 100%);
+    }
+    .contact-page__banner h1 { margin: 0; font-size: 30px; line-height: 1.2; text-align: center; }
+    .contact-page__main,
+    .contact-page__locations { width: min(calc(100% - 48px), 1200px); margin-inline: auto; }
+    .contact-page__main {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(340px, .9fr);
+        align-items: center;
+        gap: clamp(42px, 8vw, 110px);
+        padding-block: 34px 66px;
+    }
+    .contact-page__details h2 { margin: 0 0 14px; font-size: clamp(23px, 2.4vw, 30px); line-height: 1.3; letter-spacing: -.6px; }
+    .contact-page__details > p { max-width: 470px; color: #242a31; font-size: 14px; line-height: 1.45; }
+    .contact-page__channels { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
+    .contact-page__channels > div { display: grid; gap: 7px; }
+    .contact-page__channels span,
+    .contact-page__location-label { color: #69727d; font-size: 12px; }
+    .contact-page__channels a,
+    .contact-page__location > a { width: fit-content; min-height: 44px; color: #111; font-size: 14px; }
+    .contact-page__channels a:hover,
+    .contact-page__location > a:hover { color: #006ace; text-decoration: underline; }
+    .contact-page__map { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; align-items: center; gap: 12px; margin-top: 18px; }
+    .contact-page__map-icon,
+    .contact-page__location-icon { display: grid; width: 40px; height: 40px; place-items: center; border-radius: 50%; background: #f7f7fa; }
+    .contact-page__map-icon img,
+    .contact-page__location-icon img { display: block; width: 24px; height: 24px; object-fit: contain; }
+    .contact-page__map address { color: #20252b; font-size: 13px; font-style: normal; line-height: 1.45; }
+    .contact-page__map > a { display: inline-flex; min-height: 44px; align-items: center; color: #000; font-size: 10px; font-weight: 700; text-transform: uppercase; text-decoration: underline; text-underline-offset: 3px; }
+    .contact-page__form {
+        position: relative;
+        display: grid;
+        gap: 11px;
+        width: 100%;
+        max-width: 470px;
+        margin-left: auto;
+        padding: 30px 28px 32px;
+        border: 1px solid #e8e8ec;
+        border-radius: 22px;
+        background: #fff;
+        box-shadow: 7px 8px 0 #000;
+    }
+    .contact-page__spark { position: absolute; top: -34px; right: 24px; width: 38px; color: #000; }
+    .contact-page__form input,
+    .contact-page__form textarea {
+        display: block;
+        width: 100%;
+        min-height: 44px;
+        padding: 10px 14px;
+        border: 1px solid #e5e5e8;
+        border-radius: 14px;
+        background: #fff;
+        color: #000;
+        font-size: 12px;
+        line-height: 1.4;
+    }
+    .contact-page__form input::placeholder,
+    .contact-page__form textarea::placeholder { color: #929292; opacity: 1; }
+    .contact-page__form textarea { min-height: 70px; resize: vertical; }
+    .contact-page__form input:focus-visible,
+    .contact-page__form textarea:focus-visible { outline: 2px solid #006ace; outline-offset: 2px; }
+    .contact-page__form button {
+        display: flex;
+        min-height: 44px;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 12px;
+        padding: 10px 18px;
+        border-radius: 16px;
+        background: #000;
+        color: #fff;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+    .contact-page__form button:focus-visible { outline: 2px solid #006ace; outline-offset: 3px; }
+    .contact-page__locations { position: relative; padding-block: 38px 86px; border-top: 1px solid #ededf0; }
+    .contact-page__locations::before {
+        position: absolute;
+        top: -1px;
+        left: 50%;
+        width: 150px;
+        height: 25px;
+        transform: translateX(-50%);
+        border-top: 1px solid #fff;
+        border-radius: 50%;
+        background: #fff;
+        content: '';
+    }
+    .contact-page__locations h2 { margin: 0 0 20px; font-size: 24px; line-height: 1.3; }
+    .contact-page__location-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .contact-page__location { min-width: 0; min-height: 160px; padding: 22px 24px 18px; border-radius: 22px; background: #f7f7fa; }
+    .contact-page__location-icon { width: 40px; height: 40px; margin-bottom: 4px; background: #fff; }
+    .contact-page__location p { margin: 0 0 5px; color: #20252b; font-size: 13px; line-height: 1.4; }
+    .contact-page__location-label { display: block; }
+    .contact-page__location > a { display: inline-flex; align-items: center; font-size: 13px; }
+    @media (max-width: 63.99rem) {
+        .contact-page__main { grid-template-columns: minmax(0, 1fr) minmax(300px, .9fr); gap: 32px; }
+        .contact-page__location-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 47.99rem) {
+        .contact-page__banner { min-height: 96px; }
+        .contact-page__main,
+        .contact-page__locations { width: calc(100% - 40px); }
+        .contact-page__main { grid-template-columns: minmax(0, 1fr); gap: 36px; padding-block: 30px 48px; }
+        .contact-page__details h2 { font-size: 26px; }
+        .contact-page__channels { margin-top: 24px; }
+        .contact-page__form { max-width: none; margin: 0 7px 8px 0; padding: 28px 22px; }
+        .contact-page__spark { top: -28px; right: 18px; width: 32px; }
+        .contact-page__locations { padding-block: 32px 58px; }
+        .contact-page__location-grid { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+        .contact-page__location { min-height: 0; padding: 18px 20px; }
     }
 }
 
@@ -1101,20 +1786,20 @@
     .home-section--clients h3 { position: absolute; top: 0; left: 0; width: 100%; margin: 0; font-size: 38px; text-align: center; }
     .home-section--clients figure { flex: 0 0 calc((100% - 48px) / 4); min-height: 140px; margin: 0; border: 1px solid #eee; border-radius: 0; background: #fafafa; scroll-snap-align: start; }
     .home-section--clients figure img { max-width: 85%; max-height: 95px; }
-    body:has(:is(.imported-home, .paid-search-page)) .site-footer { border-radius: 40px 40px 0 0; background: linear-gradient(#064f88, #006ace); }
+    body:has(:is(.imported-home, .paid-search-page, .portfolio-page, .contact-page, .team-page, .awards-page, .career-page, .blog-page, .return-refund-policy)) .site-footer { border-radius: 40px 40px 0 0; background: linear-gradient(#064f88, #006ace); }
     .home-enquiry--contact { padding: 50px 0 90px; }
     .home-enquiry--contact .home-enquiry__copy > p { color: #c3d5e9; }
     .home-enquiry--contact .home-enquiry__copy h2 { font-size: 34px; }
     .home-enquiry--contact .home-enquiry__copy ul { padding-top: 28px; border-top: 1px solid #ffffff30; }
     .home-enquiry--contact .home-enquiry__copy li::before { color: #fff; }
-    body:has(:is(.imported-home, .paid-search-page)) .site-footer__contact { grid-template-columns: 1fr 1fr 1fr; gap: 0; padding: 0; overflow: hidden; border-radius: 40px; box-shadow: none; }
-    body:has(:is(.imported-home, .paid-search-page)) .site-footer__contact-copy { padding: 40px; }
-    body:has(:is(.imported-home, .paid-search-page)) .site-footer__contact-copy h2 { font-size: 22px; }
-    body:has(:is(.imported-home, .paid-search-page)) .site-footer__contact-links { padding: 40px; border-inline: 1px solid #eee; }
-    body:has(:is(.imported-home, .paid-search-page)) .site-footer__rating { padding: 40px; }
-    body:has(:is(.imported-home, .paid-search-page)) .site-footer__partners { grid-column: 1 / -1; justify-content: space-around; padding: 35px; background: #f7f7fa; }
-    body:has(:is(.imported-home, .paid-search-page)) .site-footer__links { padding: 70px 48px 40px; }
-    body:has(:is(.imported-home, .paid-search-page)) .site-footer__bottom { border-radius: 40px 40px 0 0; }
+    body:has(:is(.imported-home, .paid-search-page, .portfolio-page, .contact-page, .team-page, .awards-page, .career-page, .blog-page, .return-refund-policy)) .site-footer__contact { grid-template-columns: 1fr 1fr 1fr; gap: 0; padding: 0; overflow: hidden; border-radius: 40px; box-shadow: none; }
+    body:has(:is(.imported-home, .paid-search-page, .portfolio-page, .contact-page, .team-page, .awards-page, .career-page, .blog-page, .return-refund-policy)) .site-footer__contact-copy { padding: 40px; }
+    body:has(:is(.imported-home, .paid-search-page, .portfolio-page, .contact-page, .team-page, .awards-page, .career-page, .blog-page, .return-refund-policy)) .site-footer__contact-copy h2 { font-size: 22px; }
+    body:has(:is(.imported-home, .paid-search-page, .portfolio-page, .contact-page, .team-page, .awards-page, .career-page, .blog-page, .return-refund-policy)) .site-footer__contact-links { padding: 40px; border-inline: 1px solid #eee; }
+    body:has(:is(.imported-home, .paid-search-page, .portfolio-page, .contact-page, .team-page, .awards-page, .career-page, .blog-page, .return-refund-policy)) .site-footer__rating { padding: 40px; }
+    body:has(:is(.imported-home, .paid-search-page, .portfolio-page, .contact-page, .team-page, .awards-page, .career-page, .blog-page, .return-refund-policy)) .site-footer__partners { grid-column: 1 / -1; justify-content: space-around; padding: 35px; background: #f7f7fa; }
+    body:has(:is(.imported-home, .paid-search-page, .portfolio-page, .contact-page, .team-page, .awards-page, .career-page, .blog-page, .return-refund-policy)) .site-footer__links { padding: 70px 48px 40px; }
+    body:has(:is(.imported-home, .paid-search-page, .portfolio-page, .contact-page, .team-page, .awards-page, .career-page, .blog-page, .return-refund-policy)) .site-footer__bottom { border-radius: 40px 40px 0 0; }
     @media (max-width: 79.99rem) and (min-width: 64rem) {
         .home-service-tabs__list { padding-inline: 22px; }
         .home-service-tabs__tab { padding-left: 22px; font-size: 17px; }
@@ -1148,8 +1833,8 @@
         .home-section--blog { grid-template-columns: 1fr; }
         .home-blog-cards { grid-column: 1; grid-row: 3; margin-top: 30px; }
         .home-section--clients figure { flex-basis: calc((100% - 16px) / 2); }
-        body:has(:is(.imported-home, .paid-search-page)) .site-footer__contact { grid-template-columns: 1fr 1fr; }
-        body:has(:is(.imported-home, .paid-search-page)) .site-footer__contact-copy { grid-column: 1 / -1; padding-bottom: 0; }
+        body:has(:is(.imported-home, .paid-search-page, .portfolio-page, .contact-page, .team-page, .awards-page, .career-page, .blog-page, .return-refund-policy)) .site-footer__contact { grid-template-columns: 1fr 1fr; }
+        body:has(:is(.imported-home, .paid-search-page, .portfolio-page, .contact-page, .team-page, .awards-page, .career-page, .blog-page, .return-refund-policy)) .site-footer__contact-copy { grid-column: 1 / -1; padding-bottom: 0; }
     }
     @media (max-width: 39.99rem) {
         .home-hero__inner { padding: 42px 0 36px; min-height: 0; }
@@ -1204,12 +1889,12 @@
         .home-section--clients figure { min-height: 100px; }
         .home-enquiry--contact { padding-block: 24px 60px; }
         .home-enquiry--contact .home-enquiry__copy h2 { font-size: 28px; }
-        body:has(:is(.imported-home, .paid-search-page)) .site-footer__contact { grid-template-columns: 1fr; border-radius: 28px; }
-        body:has(:is(.imported-home, .paid-search-page)) .site-footer__contact-copy,
-        body:has(:is(.imported-home, .paid-search-page)) .site-footer__contact-links,
-        body:has(:is(.imported-home, .paid-search-page)) .site-footer__rating { padding: 24px; }
-        body:has(:is(.imported-home, .paid-search-page)) .site-footer__partners { flex-wrap: wrap; padding: 24px; }
-        body:has(:is(.imported-home, .paid-search-page)) .site-footer__links { padding: 40px 5px 20px; }
+        body:has(:is(.imported-home, .paid-search-page, .portfolio-page, .contact-page, .team-page, .awards-page, .career-page, .blog-page, .return-refund-policy)) .site-footer__contact { grid-template-columns: 1fr; border-radius: 28px; }
+        body:has(:is(.imported-home, .paid-search-page, .portfolio-page, .contact-page, .team-page, .awards-page, .career-page, .blog-page, .return-refund-policy)) .site-footer__contact-copy,
+        body:has(:is(.imported-home, .paid-search-page, .portfolio-page, .contact-page, .team-page, .awards-page, .career-page, .blog-page, .return-refund-policy)) .site-footer__contact-links,
+        body:has(:is(.imported-home, .paid-search-page, .portfolio-page, .contact-page, .team-page, .awards-page, .career-page, .blog-page, .return-refund-policy)) .site-footer__rating { padding: 24px; }
+        body:has(:is(.imported-home, .paid-search-page, .portfolio-page, .contact-page, .team-page, .awards-page, .career-page, .blog-page, .return-refund-policy)) .site-footer__partners { flex-wrap: wrap; padding: 24px; }
+        body:has(:is(.imported-home, .paid-search-page, .portfolio-page, .contact-page, .team-page, .awards-page, .career-page, .blog-page, .return-refund-policy)) .site-footer__links { padding: 40px 5px 20px; }
     }
 }
 @layer components {
@@ -1316,6 +2001,100 @@
 }
 
 @layer components {
+    .marketing-solutions-page {
+        width: min(calc(100% - 48px), 1220px);
+        margin-inline: auto;
+        padding-block: 48px 80px;
+    }
+
+    .marketing-solutions-page__title {
+        margin: 0 0 24px;
+        font-size: clamp(30px, 4vw, 42px);
+        font-weight: 700;
+        line-height: 1.2;
+        letter-spacing: -0.8px;
+        text-align: center;
+    }
+
+    .marketing-solution {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: center;
+        gap: 48px;
+        min-height: 280px;
+        padding: 36px 10px;
+    }
+
+    .marketing-solution__copy {
+        grid-column: 1;
+        min-width: 0;
+    }
+
+    .marketing-solution:nth-child(even) .marketing-solution__copy {
+        grid-column: 2;
+    }
+
+    .marketing-solution__copy h2 {
+        margin: 0 0 12px;
+        font-size: 28px;
+        font-weight: 600;
+        line-height: 1.3;
+    }
+
+    .marketing-solution__copy p {
+        margin: 0;
+        color: #505050;
+        font-size: 16px;
+        line-height: 1.6;
+        text-align: justify;
+    }
+
+    .marketing-solution__link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-height: 44px;
+        margin-top: 16px;
+        padding: 0 20px;
+        border-radius: 15px;
+        background: #000;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    .marketing-solution__link span {
+        font-size: 16px;
+        line-height: 1;
+    }
+
+    .marketing-solution__link:focus-visible {
+        outline: 3px solid #006ace;
+        outline-offset: 4px;
+    }
+
+    .marketing-solution__media {
+        grid-column: 2;
+        display: grid;
+        min-width: 0;
+        place-items: center;
+    }
+
+    .marketing-solution:nth-child(even) .marketing-solution__media {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .marketing-solution__media img {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        max-height: 260px;
+        object-fit: contain;
+    }
+
     .service-content { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 60px; }
     .service-section, .service-content > [hidden], .service-content > .paid-search-clients, .service-tabs { grid-column: 1 / -1; min-width: 0; }
     .service-section { padding: 65px 10px; }
@@ -1416,6 +2195,994 @@
         .service-page--graphic-design .service-section:has(.service-feature-card:nth-child(4)) .service-feature-cards { grid-template-columns: minmax(0, 1fr); }
     }
 }
+@layer components {
+    .service-page--graphic-design .service-section--brand-intro {
+        padding-block: 55px 35px;
+        text-align: left;
+    }
+
+    .service-page--graphic-design .service-section--brand-intro .service-copy {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+        column-gap: 12%;
+        align-items: start;
+    }
+
+    .service-page--graphic-design .service-section--brand-intro .service-copy > h2 {
+        grid-column: 1;
+        grid-row: 1;
+        margin: 0;
+        color: #006ace;
+        font-size: 15px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .service-page--graphic-design .service-section--brand-intro .service-copy > h3 {
+        grid-column: 1;
+        grid-row: 2;
+        max-width: 560px;
+        margin: 8px 0 0;
+        font-size: clamp(26px, 3vw, 38px);
+        font-weight: 700;
+        letter-spacing: -.8px;
+    }
+
+    .service-page--graphic-design .service-section--brand-intro .service-copy > p {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+        max-width: none;
+        margin: 0;
+        color: #69727d;
+        font-size: 16px;
+        line-height: 1.6;
+        text-align: left;
+    }
+
+    .service-page--graphic-design .service-section--brand-intro .service-copy > a {
+        grid-column: 2;
+        grid-row: 3;
+        justify-self: start;
+        margin-top: 12px;
+    }
+
+    .service-page--graphic-design .service-section--benefit {
+        min-height: 250px;
+        border-color: #e6e6e6;
+        border-radius: 30px;
+        background: #fff;
+        box-shadow: 0 10px 24px #514bd010;
+    }
+
+    .service-page--graphic-design .service-section--benefit .service-copy > h4 {
+        margin-bottom: 14px;
+        font-size: 20px;
+    }
+
+    .service-page--graphic-design .service-section--benefit .service-copy > p {
+        color: #69727d;
+        font-size: 14px;
+        line-height: 1.55;
+    }
+
+    .service-page--graphic-design .service-design-banner {
+        grid-column: 1 / -1;
+        overflow: hidden;
+        margin-block: 22px 46px;
+        border-radius: 32px;
+        background: #00538d;
+    }
+
+    .service-page--graphic-design .service-design-banner .service-media {
+        display: block;
+    }
+
+    .service-page--graphic-design .service-design-banner .service-media > img {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        max-height: none;
+        border-radius: 0;
+        object-fit: cover;
+    }
+
+    .service-page--graphic-design .service-section--stats {
+        padding: 38px;
+        border-radius: 36px;
+        background: #f7f7fa;
+        text-align: left;
+    }
+
+    .service-page--graphic-design .service-section--stats .service-copy > h4 {
+        margin-bottom: 24px;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .service-page--graphic-design .graphic-design-statistics {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        align-items: stretch;
+        gap: 16px;
+    }
+
+    .service-page--graphic-design .graphic-design-statistic {
+        display: flex;
+        min-width: 0;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        text-align: center;
+    }
+
+    .service-page--graphic-design .graphic-design-statistic__value {
+        display: grid;
+        width: 100px;
+        height: 100px;
+        margin: 0 0 14px;
+        place-items: center;
+        border: 1px solid #006ace;
+        border-radius: 50%;
+        color: #111;
+        font-size: 28px;
+        font-weight: 700;
+    }
+
+    .service-page--graphic-design .graphic-design-statistic__label {
+        max-width: 170px;
+        margin: 0;
+        color: #69727d;
+        font-size: 12px;
+        line-height: 1.45;
+        text-align: center;
+    }
+
+    .service-page--graphic-design .graphic-design-statistic--lead {
+        justify-content: center;
+        padding: 22px;
+        border-radius: 26px;
+        background: #e9e5ff;
+    }
+
+    .service-page--graphic-design .graphic-design-statistic__lead-value {
+        margin: 0 0 8px;
+        font-size: 26px;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .service-page--graphic-design .graphic-design-statistic--lead p {
+        margin: 0;
+        color: #69727d;
+        font-size: 13px;
+        text-align: center;
+    }
+
+    .service-page--graphic-design .graphic-design-statistic--lead a {
+        align-self: center;
+        margin-top: 16px;
+    }
+
+    .service-page--graphic-design .graphic-design-reviews {
+        display: grid;
+        grid-column: 1 / -1;
+        grid-template-columns: minmax(0, 1.3fr) minmax(260px, .7fr);
+        align-items: center;
+        gap: 64px;
+        margin: 8px 0 72px;
+        padding: 54px 60px;
+        border-radius: 36px;
+        background: #fff;
+    }
+
+    .service-page--graphic-design .graphic-design-reviews__quote {
+        position: relative;
+        min-width: 0;
+        padding-left: 52px;
+    }
+
+    .service-page--graphic-design .graphic-design-reviews__quote::before {
+        position: absolute;
+        top: -30px;
+        left: 0;
+        color: #00538d;
+        content: '\201C';
+        font-size: 64px;
+        font-weight: 700;
+        line-height: 1;
+    }
+
+    .service-page--graphic-design .graphic-design-reviews .home-results__testimonials {
+        display: block;
+        padding: 0;
+        border: 0;
+    }
+
+    .service-page--graphic-design .graphic-design-reviews .home-results__testimonial {
+        padding: 0;
+        border: 0;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    .service-page--graphic-design .graphic-design-reviews .home-results__testimonial p {
+        margin: 0;
+        color: #69727d;
+        font-size: 17px;
+        font-style: italic;
+        line-height: 1.6;
+    }
+
+    .service-page--graphic-design .graphic-design-reviews .home-results__testimonial footer {
+        display: grid;
+        gap: 4px;
+        margin-top: 24px;
+    }
+
+    .service-page--graphic-design .graphic-design-reviews .home-results__testimonial cite {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+    }
+
+    .service-page--graphic-design .graphic-design-reviews .home-results__testimonial footer span {
+        color: #69727d;
+        font-size: 12px;
+    }
+
+    .service-page--graphic-design .graphic-design-reviews .home-testimonial-controls {
+        justify-content: flex-start;
+        margin-top: 20px;
+    }
+
+    .service-page--graphic-design .graphic-design-reviews .home-testimonial-controls button {
+        border: 1px solid #dfe5eb;
+        background: #fff;
+        color: #00538d;
+    }
+
+    .service-page--graphic-design .graphic-design-reviews__arrow {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 150px;
+        opacity: .35;
+        pointer-events: none;
+    }
+
+    .service-page--graphic-design .graphic-design-reviews__proof {
+        display: flex;
+        min-width: 0;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+        text-align: center;
+    }
+
+    .service-page--graphic-design .graphic-design-reviews__proof .service-rating {
+        display: flex;
+        gap: 4px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .service-page--graphic-design .graphic-design-reviews__proof .service-rating li {
+        color: #ffbe11;
+        font-size: 0;
+    }
+
+    .service-page--graphic-design .graphic-design-reviews__proof .service-rating li::before {
+        content: '\2605';
+        font-size: 22px;
+    }
+
+    .service-page--graphic-design .graphic-design-reviews__proof > p {
+        margin: 0;
+        color: #69727d;
+        font-size: 13px;
+    }
+
+    .service-page--graphic-design .graphic-design-reviews__avatars {
+        display: flex;
+        justify-content: center;
+        margin-block: 8px;
+    }
+
+    .service-page--graphic-design .graphic-design-reviews__avatars img {
+        width: 42px;
+        height: 42px;
+        margin-left: -9px;
+        border: 3px solid #fff;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .service-page--graphic-design .graphic-design-reviews__avatars img:first-child {
+        margin-left: 0;
+    }
+
+    .service-page--graphic-design .graphic-design-reviews__proof > a {
+        display: inline-flex;
+        min-height: 44px;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 18px;
+        border-radius: 999px;
+        background: #000;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .service-page--graphic-design .service-tabs {
+        grid-column: 1 / span 3;
+        grid-template-columns: minmax(0, 1fr);
+        min-height: 0;
+        margin: 48px 0;
+        overflow: hidden;
+        border-radius: 30px;
+        background: #e9e5ff;
+    }
+
+    .service-page--graphic-design .service-tabs .home-service-tabs__list {
+        grid-column: 1;
+        grid-row: 1;
+        flex-direction: row;
+        gap: 8px;
+        padding: 14px;
+        border-radius: 30px 30px 0 0;
+        background: #e9e5ff;
+    }
+
+    .service-page--graphic-design .service-tabs .home-service-tabs__tab,
+    .service-page--graphic-design .service-tabs .home-service-tabs__tab[aria-selected="true"] {
+        width: auto;
+        min-width: 0;
+        min-height: 44px;
+        flex: 1 1 auto;
+        padding: 10px 12px;
+        border-radius: 14px;
+        background: transparent;
+        color: #111;
+        font-size: 12px;
+        text-align: center;
+    }
+
+    .service-page--graphic-design .service-tabs .home-service-tabs__tab[aria-selected="true"] {
+        background: #fff;
+    }
+
+    .service-page--graphic-design .service-tabs .home-service-tabs__tab[aria-selected="true"]::after {
+        display: none;
+    }
+
+    .service-page--graphic-design .service-tabs .home-service-tabs__panel {
+        grid-column: 1;
+        grid-row: 2;
+        grid-template-columns: minmax(0, 1fr);
+        min-height: 360px;
+        margin: 0;
+        padding: 30px;
+        border-radius: 0 0 30px 30px;
+        background: #e9e5ff;
+    }
+
+    .service-page--graphic-design .service-section--why-choose {
+        grid-column: span 3;
+        align-self: center;
+        padding: 48px 20px;
+        text-align: left;
+    }
+
+    .service-page--graphic-design .service-section--why-choose .service-copy > h3 {
+        font-size: clamp(30px, 3vw, 40px);
+        text-align: left;
+    }
+
+    .service-page--graphic-design .service-section--why-choose .service-copy > p {
+        max-width: none;
+        margin: 0;
+        color: #69727d;
+        line-height: 1.6;
+        text-align: left;
+    }
+
+    @media (max-width: 63.99rem) {
+        .service-page--graphic-design .service-section--brand-intro .service-copy {
+            column-gap: 7%;
+        }
+
+        .service-page--graphic-design .service-section--benefit {
+            min-height: 230px;
+            padding: 24px;
+        }
+
+        .service-page--graphic-design .graphic-design-statistics {
+            gap: 10px;
+        }
+
+        .service-page--graphic-design .graphic-design-statistic--lead {
+            padding: 14px;
+        }
+
+        .service-page--graphic-design .graphic-design-reviews {
+            grid-template-columns: minmax(0, 1.1fr) minmax(220px, .9fr);
+            gap: 32px;
+            padding: 36px;
+        }
+
+        .service-page--graphic-design .service-tabs {
+            grid-column: span 3;
+            margin-block: 36px;
+        }
+
+        .service-page--graphic-design .service-section--why-choose {
+            grid-column: span 3;
+            padding-inline: 8px;
+        }
+    }
+
+    @media (max-width: 39.99rem) {
+        .service-page--graphic-design .service-section--brand-intro {
+            padding-block: 36px 24px;
+        }
+
+        .service-page--graphic-design .service-section--brand-intro .service-copy {
+            grid-template-columns: minmax(0, 1fr);
+            row-gap: 6px;
+        }
+
+        .service-page--graphic-design .service-section--brand-intro .service-copy > h2,
+        .service-page--graphic-design .service-section--brand-intro .service-copy > h3,
+        .service-page--graphic-design .service-section--brand-intro .service-copy > p,
+        .service-page--graphic-design .service-section--brand-intro .service-copy > a {
+            grid-column: 1;
+            grid-row: auto;
+        }
+
+        .service-page--graphic-design .service-section--brand-intro .service-copy > p {
+            margin-top: 14px;
+        }
+
+        .service-page--graphic-design .service-design-banner {
+            margin-block: 12px 30px;
+            border-radius: 20px;
+        }
+
+        .service-page--graphic-design .service-section--stats {
+            padding: 20px 14px;
+            border-radius: 24px;
+        }
+
+        .service-page--graphic-design .service-section--stats .service-copy > h4 {
+            margin-bottom: 18px;
+        }
+
+        .service-page--graphic-design .graphic-design-statistics {
+            gap: 6px;
+        }
+
+        .service-page--graphic-design .graphic-design-statistic__value {
+            width: 56px;
+            height: 56px;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .service-page--graphic-design .graphic-design-statistic__label {
+            font-size: 10px;
+        }
+
+        .service-page--graphic-design .graphic-design-statistic--lead {
+            padding: 10px 6px;
+            border-radius: 18px;
+        }
+
+        .service-page--graphic-design .graphic-design-statistic__lead-value {
+            font-size: 16px;
+        }
+
+        .service-page--graphic-design .graphic-design-statistic--lead p {
+            font-size: 10px;
+        }
+
+        .service-page--graphic-design .graphic-design-reviews {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 26px;
+            margin-block: 18px 42px;
+            padding: 30px 20px;
+            border-radius: 24px;
+        }
+
+        .service-page--graphic-design .graphic-design-reviews__quote {
+            padding-left: 34px;
+        }
+
+        .service-page--graphic-design .graphic-design-reviews__quote::before {
+            top: -14px;
+            font-size: 48px;
+        }
+
+        .service-page--graphic-design .graphic-design-reviews__arrow {
+            display: none;
+        }
+
+        .service-page--graphic-design .service-tabs {
+            grid-column: 1 / -1;
+            margin-block: 30px;
+        }
+
+        .service-page--graphic-design .service-tabs .home-service-tabs__list {
+            overflow-x: auto;
+            padding: 10px;
+        }
+
+        .service-page--graphic-design .service-tabs .home-service-tabs__tab,
+        .service-page--graphic-design .service-tabs .home-service-tabs__tab[aria-selected="true"] {
+            flex: 0 0 auto;
+            min-height: 44px;
+            padding-inline: 12px;
+            white-space: nowrap;
+        }
+
+        .service-page--graphic-design .service-tabs .home-service-tabs__panel {
+            min-height: 0;
+            padding: 22px;
+        }
+
+        .service-page--graphic-design .service-section--why-choose {
+            grid-column: 1 / -1;
+            padding: 28px 8px;
+        }
+    }
+}
+
+@layer components {
+    .service-page--graphic-design {
+        background: linear-gradient(180deg, #f3f0ff 0, #fff 520px);
+    }
+
+    .service-page--graphic-design .paid-search-heading {
+        padding: 18px 24px 0;
+    }
+
+    .service-page--graphic-design .paid-search-heading h1 {
+        font-size: clamp(24px, 2.8vw, 28px);
+        letter-spacing: -.5px;
+    }
+
+    .service-page--graphic-design .service-section--intro {
+        padding: 40px 10px 26px;
+        text-align: center;
+    }
+
+    .service-page--graphic-design .service-section--intro .service-copy > h2 {
+        margin: 0 0 4px;
+        font-size: clamp(28px, 3.8vw, 36px);
+        font-weight: 700;
+        letter-spacing: -.8px;
+    }
+
+    .service-page--graphic-design .service-section--intro .service-copy > p {
+        margin: 0;
+        color: #69727d;
+        font-size: 14px;
+        line-height: 1.45;
+        text-align: center;
+    }
+
+    .service-page--graphic-design .graphic-design-hero__collage {
+        position: relative;
+        width: min(100%, 1200px);
+        height: 320px;
+        margin: 34px auto 0;
+    }
+
+    .service-page--graphic-design .graphic-design-hero__shape {
+        position: absolute;
+    }
+
+    .service-page--graphic-design .graphic-design-hero__shape--left {
+        top: 0;
+        left: 0;
+        width: 40.5%;
+        height: 100%;
+        border-radius: 36px 36px 18px 36px;
+        background: #aaa7ff;
+    }
+
+    .service-page--graphic-design .graphic-design-hero__shape--upper-right {
+        top: 0;
+        left: 42.7%;
+        width: 40.3%;
+        height: 54%;
+        border-radius: 34px;
+        background: linear-gradient(115deg, #afd0ff, #91b3ff);
+    }
+
+    .service-page--graphic-design .graphic-design-hero__artwork {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 40%;
+        height: 44%;
+        overflow: hidden;
+        border-radius: 0 0 36px 36px;
+    }
+
+    .service-page--graphic-design .graphic-design-hero__artwork img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 56%;
+    }
+
+    .service-page--graphic-design .graphic-design-hero__award {
+        position: absolute;
+        z-index: 5;
+        top: -4px;
+        right: 0;
+        display: flex;
+        width: 14.5%;
+        min-width: 108px;
+        height: 55%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        border-radius: 40px;
+        background: #eeeaff;
+        text-align: center;
+    }
+
+    .service-page--graphic-design .graphic-design-hero__award img {
+        display: block;
+        width: 78px;
+        height: 94px;
+        object-fit: contain;
+    }
+
+    .service-page--graphic-design .graphic-design-hero__award span {
+        max-width: 100px;
+        color: #69727d;
+        font-size: 12px;
+        line-height: 1.2;
+    }
+
+    .service-page--graphic-design .graphic-design-hero__collage::before {
+        position: absolute;
+        z-index: 4;
+        top: -24px;
+        right: 10%;
+        width: 150px;
+        height: 38px;
+        border-bottom: 1px dashed #73717b;
+        border-radius: 50%;
+        content: '';
+        transform: rotate(-15deg);
+    }
+
+    .service-page--graphic-design .graphic-design-hero__collage::after {
+        position: absolute;
+        z-index: 4;
+        top: -15px;
+        right: 9%;
+        color: #111;
+        content: '\2198';
+        font-size: 16px;
+    }
+
+    .service-page--graphic-design .graphic-design-hero__callout {
+        position: absolute;
+        z-index: 6;
+        bottom: -4px;
+        left: 26%;
+        display: flex;
+        width: 34%;
+        min-height: 152px;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 14px 24px;
+        border: 18px solid #fff;
+        border-radius: 48px;
+        background: #ffbe11;
+    }
+
+    .service-page--graphic-design .graphic-design-hero__callout p {
+        max-width: 180px;
+        margin: 0 0 6px;
+        color: #473600;
+        font-size: 13px;
+        line-height: 1.3;
+    }
+
+    .service-page--graphic-design .graphic-design-hero__talk {
+        display: inline-flex;
+        min-height: 34px;
+        align-items: center;
+        gap: 8px;
+        padding: 0 18px;
+        border-radius: 16px;
+        background: #000;
+        color: #fff;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    .service-page--graphic-design .graphic-design-hero__talk::after {
+        content: '\2192';
+        font-size: 15px;
+    }
+
+    .service-page--graphic-design .graphic-design-hero__proof {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr 1fr;
+        align-items: center;
+        gap: 24px;
+        width: min(100%, 960px);
+        min-height: 54px;
+        margin: 34px auto 0;
+    }
+
+    .service-page--graphic-design .graphic-design-hero__experts {
+        display: flex;
+        min-width: 0;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .service-page--graphic-design .graphic-design-hero__avatars {
+        display: flex;
+        flex: 0 0 auto;
+        padding-left: 2px;
+    }
+
+    .service-page--graphic-design .graphic-design-hero__avatars img {
+        width: 32px;
+        height: 32px;
+        margin-left: -8px;
+        border: 2px solid #fff;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .service-page--graphic-design .graphic-design-hero__avatars img:first-child {
+        margin-left: 0;
+    }
+
+    .service-page--graphic-design .graphic-design-hero__experts-link {
+        position: relative;
+        display: inline-flex;
+        min-height: 44px;
+        align-items: center;
+        gap: 8px;
+        color: #111;
+        font-size: 12px;
+        white-space: nowrap;
+    }
+
+    .service-page--graphic-design .graphic-design-hero__experts-link::after {
+        content: '\2192';
+        font-size: 17px;
+    }
+
+    .service-page--graphic-design .graphic-design-hero__revenue {
+        position: relative;
+        display: grid;
+        grid-template-columns: auto auto;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+    }
+
+    .service-page--graphic-design .graphic-design-hero__revenue::before,
+    .service-page--graphic-design .graphic-design-hero__rating::before {
+        position: absolute;
+        top: 50%;
+        left: -12px;
+        width: 1px;
+        height: 34px;
+        background: #e2dfea;
+        content: '';
+        transform: translateY(-50%) rotate(-28deg);
+    }
+
+    .service-page--graphic-design .graphic-design-hero__number {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+
+    .service-page--graphic-design .graphic-design-hero__revenue-label {
+        max-width: 100px;
+        margin: 0;
+        color: #333;
+        font-size: 12px;
+        line-height: 1.2;
+    }
+
+    .service-page--graphic-design .graphic-design-hero__rating {
+        position: relative;
+        display: grid;
+        justify-items: end;
+        gap: 1px;
+    }
+
+    .service-page--graphic-design .graphic-design-hero__rating .service-rating {
+        display: flex;
+        gap: 4px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .service-page--graphic-design .graphic-design-hero__rating .service-rating li {
+        padding: 0;
+        color: #ffb800;
+        font-size: 0;
+    }
+
+    .service-page--graphic-design .graphic-design-hero__rating .service-rating li::before {
+        content: '\2605';
+        font-size: 15px;
+    }
+
+    .service-page--graphic-design .graphic-design-hero__rating p {
+        margin: 0;
+        color: #333;
+        font-size: 12px;
+        white-space: nowrap;
+    }
+
+    @media (max-width: 47.99rem) {
+        .service-page--graphic-design .graphic-design-hero__collage {
+            height: 290px;
+        }
+
+        .service-page--graphic-design .graphic-design-hero__callout {
+            min-height: 138px;
+            padding-inline: 16px;
+            border-width: 14px;
+        }
+
+        .service-page--graphic-design .graphic-design-hero__proof {
+            gap: 16px;
+        }
+
+        .service-page--graphic-design .graphic-design-hero__number {
+            font-size: 18px;
+        }
+    }
+
+    @media (max-width: 39.99rem) {
+        .service-page--graphic-design .paid-search-heading {
+            padding: 14px 20px 0;
+        }
+
+        .service-page--graphic-design .paid-search-heading h1 {
+            font-size: 24px;
+        }
+
+        .service-page--graphic-design .service-section--intro {
+            padding: 28px 0 22px;
+        }
+
+        .service-page--graphic-design .service-section--intro .service-copy > h2 {
+            font-size: 28px;
+        }
+
+        .service-page--graphic-design .service-section--intro .service-copy > p {
+            font-size: 13px;
+        }
+
+        .service-page--graphic-design .graphic-design-hero__collage {
+            height: 260px;
+            margin-top: 24px;
+        }
+
+        .service-page--graphic-design .graphic-design-hero__shape--left {
+            width: 44%;
+            height: 78%;
+            border-radius: 28px;
+        }
+
+        .service-page--graphic-design .graphic-design-hero__shape--upper-right {
+            left: 46%;
+            width: 54%;
+            height: 52%;
+            border-radius: 26px;
+        }
+
+        .service-page--graphic-design .graphic-design-hero__artwork {
+            width: 52%;
+            height: 48%;
+            border-radius: 28px;
+        }
+
+        .service-page--graphic-design .graphic-design-hero__award {
+            top: -2px;
+            min-width: 84px;
+            width: 26%;
+            height: 53%;
+            padding: 6px;
+            border-radius: 28px;
+        }
+
+        .service-page--graphic-design .graphic-design-hero__award img {
+            width: 58px;
+            height: 68px;
+        }
+
+        .service-page--graphic-design .graphic-design-hero__award span {
+            font-size: 10px;
+        }
+
+        .service-page--graphic-design .graphic-design-hero__collage::before {
+            right: 16%;
+            width: 75px;
+            height: 25px;
+        }
+
+        .service-page--graphic-design .graphic-design-hero__collage::after {
+            right: 14%;
+            font-size: 12px;
+        }
+
+        .service-page--graphic-design .graphic-design-hero__callout {
+            bottom: -2px;
+            left: 14%;
+            width: 63%;
+            min-height: 124px;
+            padding: 10px 14px;
+            border-width: 12px;
+            border-radius: 32px;
+        }
+
+        .service-page--graphic-design .graphic-design-hero__callout p {
+            font-size: 11px;
+        }
+
+        .service-page--graphic-design .graphic-design-hero__proof {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 14px 10px;
+            margin-top: 26px;
+        }
+
+        .service-page--graphic-design .graphic-design-hero__experts {
+            grid-column: 1 / -1;
+            justify-content: center;
+        }
+
+        .service-page--graphic-design .graphic-design-hero__revenue {
+            grid-template-columns: minmax(0, 1fr);
+            justify-items: center;
+            gap: 2px;
+        }
+
+        .service-page--graphic-design .graphic-design-hero__revenue::before,
+        .service-page--graphic-design .graphic-design-hero__rating::before {
+            display: none;
+        }
+
+        .service-page--graphic-design .graphic-design-hero__number {
+            font-size: 17px;
+        }
+
+        .service-page--graphic-design .graphic-design-hero__revenue-label {
+            max-width: none;
+            text-align: center;
+        }
+
+        .service-page--graphic-design .graphic-design-hero__rating {
+            justify-items: center;
+        }
+    }
+}
 
 @layer components {
     .location-page .service-section--intro .service-copy > h2 { font-size: clamp(30px, 3vw, 44px); }
@@ -1456,6 +3223,273 @@
     }
 }
 @layer components {
+    .service-page--search-engine-optimization .paid-search-heading h1 {
+        font-size: clamp(34px, 4vw, 48px);
+        letter-spacing: -1.2px;
+    }
+
+    .service-page--search-engine-optimization .service-content {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: start;
+        column-gap: 0;
+    }
+
+    .service-page--search-engine-optimization .service-content > .service-section {
+        grid-column: 1 / -1;
+        min-width: 0;
+    }
+
+    .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(1) {
+        grid-column: 1;
+        padding: 48px 36px 64px 30px;
+        text-align: left;
+    }
+
+    .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(1) .service-copy > h4 {
+        font-size: clamp(28px, 3vw, 36px);
+        line-height: 1.2;
+        letter-spacing: -1px;
+    }
+
+    .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(1) .service-copy > p {
+        max-width: none;
+        margin: 0;
+        color: #505050;
+        font-size: 17px;
+        line-height: 1.65;
+    }
+
+    .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(2) {
+        grid-column: 2;
+        align-self: stretch;
+        padding: 32px 28px 64px 48px;
+        border-left: 1px solid #dedde5;
+        text-align: center;
+    }
+
+    .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(2) .service-copy > h4 {
+        margin-bottom: 24px;
+        font-size: 28px;
+    }
+
+    .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(2) .service-copy > strong {
+        width: min(100%, 500px);
+        margin: 18px auto;
+        color: #333;
+        font-size: 16px;
+        line-height: 1.5;
+        text-align: left;
+    }
+
+    .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(2) .service-copy > strong::before {
+        display: inline-grid;
+        width: 24px;
+        height: 24px;
+        margin-right: 12px;
+        border-radius: 50%;
+        background: #e9e5ff;
+        color: #006ace;
+        content: "✓";
+        font-size: 14px;
+        font-weight: 700;
+        place-items: center;
+    }
+
+    .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(2) .service-copy > br {
+        display: none;
+    }
+
+    .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(3) {
+        margin-block: 12px 38px;
+        padding: 48px 0;
+        background: transparent;
+    }
+
+    .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(3) .service-copy > h3 {
+        margin-bottom: 24px;
+        font-size: clamp(30px, 3vw, 40px);
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(3) .service-section__description {
+        max-width: 1280px;
+        margin: 0 auto 36px;
+        color: #69727d;
+        font-size: 16px;
+        line-height: 1.6;
+        text-align: center;
+    }
+
+    .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(3) .service-feature-cards {
+        gap: 44px;
+        margin-top: 0;
+    }
+
+    .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(3) .service-feature-card {
+        min-height: 270px;
+        padding: 28px 30px;
+        border-color: #dedede;
+        border-radius: 44px;
+        box-shadow: none;
+    }
+
+    .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(3) .service-feature-card::before {
+        display: none;
+    }
+
+    .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(3) .service-feature-card h5 {
+        margin-bottom: 18px;
+        font-size: 20px;
+    }
+
+    .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(3) .service-feature-points {
+        display: grid;
+        gap: 8px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(3) .service-feature-points li {
+        position: relative;
+        padding-left: 24px;
+        color: #333;
+        font-size: 16px;
+        line-height: 1.55;
+    }
+
+    .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(3) .service-feature-point__pin {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(4) {
+        padding-block: 55px 70px;
+    }
+
+    .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(4) .service-copy > h3,
+    .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(4) .service-copy > h4:first-of-type {
+        text-align: center;
+    }
+
+    .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(4) .service-copy > h4:nth-of-type(2) {
+        margin-top: 42px;
+        font-size: 26px;
+    }
+
+    .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(4) .service-copy > p {
+        padding: 22px 26px;
+        border-radius: 24px;
+        background: #f7f7fa;
+        text-align: left;
+    }
+
+    .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(5) {
+        padding: 48px 30px;
+        border-radius: 30px;
+        background: #f7f7fa;
+    }
+
+    .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(5) .service-copy > ul,
+    .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(7) .service-copy > ul {
+        gap: 14px;
+    }
+
+    .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(6) {
+        padding-block: 64px 72px;
+    }
+
+    .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(6) .service-copy > h4 {
+        text-align: center;
+    }
+
+    .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(6) .service-feature-card {
+        border-color: #e5e1fa;
+        border-radius: 24px;
+        box-shadow: 0 12px 28px #514bd010;
+    }
+
+    .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(7) {
+        padding: 48px 40px;
+        border-radius: 30px;
+        background: #f7f7fa;
+    }
+
+    @media (max-width: 63.99rem) {
+        .service-page--search-engine-optimization .service-content {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(1),
+        .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(2) {
+            grid-column: 1;
+            padding: 42px 24px;
+        }
+
+        .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(2) {
+            border-top: 1px solid #dedde5;
+            border-left: 0;
+        }
+
+        .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(3) {
+            padding: 40px 0;
+        }
+
+        .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(3) .service-feature-cards {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px;
+        }
+    }
+
+    @media (max-width: 39.99rem) {
+        .service-page--search-engine-optimization .paid-search-heading {
+            padding: 42px 20px 48px;
+        }
+
+        .service-page--search-engine-optimization .paid-search-heading h1 {
+            font-size: 30px;
+        }
+
+        .service-page--search-engine-optimization .service-content {
+            width: calc(100% - 40px);
+        }
+
+        .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(1),
+        .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(2),
+        .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(4),
+        .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(5),
+        .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(6),
+        .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(7) {
+            padding: 32px 16px;
+        }
+
+        .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(3) {
+            padding: 32px 0;
+        }
+
+        .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(3) .service-feature-cards,
+        .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(6) .service-feature-cards {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(3) .service-feature-cards {
+            gap: 18px;
+        }
+
+        .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(3) .service-feature-card {
+            min-height: 0;
+            padding: 26px;
+            border-radius: 32px;
+        }
+
+        .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(4) .service-copy > h4:nth-of-type(2) {
+            margin-top: 28px;
+        }
+    }
+}
+@layer components {
     .service-copy p a, .service-copy li a, .service-copy h5 a {
         display: inline;
         min-height: 0;
@@ -1468,5 +3502,1597 @@
         text-transform: none;
         text-decoration: underline;
         text-underline-offset: 3px;
+    }
+}
+@layer components {
+    @media (max-width: 39.99rem) {
+        .marketing-solutions-page {
+            width: calc(100% - 40px);
+            padding-block: 36px 56px;
+        }
+
+        .marketing-solutions-page__title {
+            margin-bottom: 12px;
+            font-size: 30px;
+        }
+
+        .marketing-solution {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 20px;
+            min-height: 0;
+            padding: 32px 0;
+        }
+
+        .marketing-solution__copy,
+        .marketing-solution:nth-child(even) .marketing-solution__copy,
+        .marketing-solution__media,
+        .marketing-solution:nth-child(even) .marketing-solution__media {
+            grid-column: 1;
+        }
+
+        .marketing-solution:nth-child(even) .marketing-solution__media {
+            grid-row: 1;
+        }
+
+        .marketing-solution__copy h2 {
+            font-size: 22px;
+        }
+
+        .marketing-solution__copy p {
+            text-align: left;
+        }
+
+        .marketing-solution__media img {
+            max-height: 220px;
+        }
+    }
+}
+@layer components {
+    .portfolio-page { overflow: hidden; }
+    .portfolio-page__banner {
+        display: grid;
+        min-height: 112px;
+        padding: 24px 20px;
+        place-items: center;
+        background: linear-gradient(180deg, #e9e5ff 0%, #fff 100%);
+    }
+    .portfolio-page__banner h1 { margin: 0; font-size: clamp(32px, 4vw, 48px); line-height: 1.2; text-align: center; }
+    .portfolio-page__intro { width: min(calc(100% - 48px), 1120px); margin: 0 auto; padding: 44px 0 42px; text-align: center; }
+    .portfolio-page__intro h2 { margin: 0 auto 16px; font-size: clamp(24px, 3vw, 36px); line-height: 1.25; letter-spacing: -.8px; }
+    .portfolio-page__intro p { max-width: 960px; margin-inline: auto; color: #69727d; font-size: 15px; line-height: 1.7; }
+    .portfolio-page__projects { width: min(calc(100% - 48px), 1200px); margin: 0 auto; padding-bottom: 56px; }
+    .portfolio-page__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+    .portfolio-project { min-width: 0; overflow: hidden; border: 1px solid #ececf0; border-radius: 24px; background: #fff; box-shadow: 0 8px 26px #006ace0d; }
+    .portfolio-project__link { display: flex; min-height: 100%; flex-direction: column; color: inherit; }
+    .portfolio-project__link:focus-visible { outline: 3px solid #006ace; outline-offset: -3px; }
+    .portfolio-project__link > img { display: block; width: 100%; aspect-ratio: 1.4; object-fit: cover; background: #f7f7fa; }
+    .portfolio-project__details { flex: 1; padding: 14px 18px 18px; }
+    .portfolio-project__details time { color: #69727d; font-size: 12px; }
+    .portfolio-project__details h3 { margin: 4px 0 0; font-size: 17px; font-weight: 600; line-height: 1.4; }
+    .portfolio-page__reviews { width: min(calc(100% - 48px), 1200px); margin: 0 auto; padding: 34px 0 70px; }
+    .portfolio-page__reviews > h2 { margin: 0 0 30px; font-size: clamp(28px, 3vw, 38px); line-height: 1.25; letter-spacing: -1px; text-align: center; }
+    .portfolio-page__review-card { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(240px, .75fr); align-items: stretch; gap: 32px; min-height: 380px; padding: clamp(28px, 5vw, 58px); border-radius: 36px; background: #f7f7fa; }
+    .portfolio-page__testimonial-carousel.home-results__testimonials { position: relative; display: flex; min-width: 0; min-height: 285px; flex-direction: column; padding: 0 104px 0 0; border: 0; }
+    .portfolio-page__testimonial.home-results__testimonial { flex: 1; margin: 0; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+    .portfolio-page__testimonial blockquote { margin: 0; }
+    .portfolio-page__testimonial blockquote p { color: #4f5965; font-size: clamp(17px, 1.7vw, 21px); font-style: italic; line-height: 1.6; }
+    .portfolio-page__testimonial figcaption { display: grid; gap: 3px; margin-top: 24px; }
+    .portfolio-page__testimonial figcaption strong { font-size: 15px; font-weight: 600; }
+    .portfolio-page__testimonial figcaption span { color: #69727d; font-size: 12px; }
+    .portfolio-page__review-arrow { position: absolute; top: -12px; right: 0; width: 108px; color: #ffbe11; }
+    .portfolio-page .home-testimonial-controls { justify-content: flex-start; gap: 10px; margin-top: auto; padding-top: 24px; }
+    .portfolio-page .home-testimonial-controls button { width: 44px; height: 44px; border: 1px solid #dfe1e6; background: #fff; }
+    .portfolio-page__review-proof { display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end; gap: 24px; }
+    .portfolio-page__review-rating { display: grid; gap: 3px; }
+    .portfolio-page__review-rating > span { color: #ffb800; font-size: 23px; letter-spacing: 2px; line-height: 1.2; }
+    .portfolio-page__review-rating small { color: #69727d; font-size: 12px; }
+    .portfolio-page__review-avatars { display: flex; padding-left: 2px; }
+    .portfolio-page__review-avatars img { width: 40px; height: 40px; margin-left: -2px; border: 2px solid #f7f7fa; border-radius: 50%; object-fit: cover; }
+    .portfolio-page__reviews-link { display: inline-flex; min-height: 44px; align-items: center; gap: 10px; color: #00538d; font-size: 15px; font-weight: 600; }
+    .portfolio-page__reviews-link:hover { text-decoration: underline; }
+    .portfolio-page__reviews-link:focus-visible { outline: 2px solid #00538d; outline-offset: 4px; }
+    .portfolio-page__clients { padding-top: 0; }
+    .portfolio-page__clients > h2 { text-transform: none; }
+    @media (prefers-reduced-motion: no-preference) {
+        .portfolio-project { transition: transform 180ms ease, box-shadow 180ms ease; }
+        .portfolio-project:hover { transform: translateY(-3px); box-shadow: 0 14px 32px #006ace1a; }
+    }
+    @media (max-width: 63.99rem) {
+        .portfolio-page__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .portfolio-page__review-card { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+        .portfolio-page__testimonial-carousel.home-results__testimonials { min-height: 260px; }
+        .portfolio-page__review-proof { flex-direction: row; align-items: center; justify-content: space-between; }
+    }
+    @media (max-width: 39.99rem) {
+        .portfolio-page__banner { min-height: 96px; }
+        .portfolio-page__intro,
+        .portfolio-page__projects,
+        .portfolio-page__reviews { width: calc(100% - 40px); }
+        .portfolio-page__intro { padding: 30px 0 28px; }
+        .portfolio-page__intro h2 { margin-bottom: 12px; font-size: 25px; }
+        .portfolio-page__intro p { font-size: 14px; text-align: left; }
+        .portfolio-page__projects { padding-bottom: 36px; }
+        .portfolio-page__grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+        .portfolio-project { border-radius: 20px; }
+        .portfolio-project__details { padding: 12px 15px 15px; }
+        .portfolio-page__reviews { padding: 22px 0 48px; }
+        .portfolio-page__reviews > h2 { margin-bottom: 20px; font-size: 28px; }
+        .portfolio-page__review-card { gap: 22px; padding: 26px 22px; border-radius: 26px; }
+        .portfolio-page__testimonial-carousel.home-results__testimonials { min-height: 0; padding-right: 58px; }
+        .portfolio-page__testimonial blockquote p { font-size: 16px; }
+        .portfolio-page__review-arrow { top: -12px; width: 58px; }
+        .portfolio-page .home-testimonial-controls { padding-top: 22px; }
+        .portfolio-page__review-proof { display: grid; grid-template-columns: auto 1fr; gap: 14px; }
+        .portfolio-page__review-rating > span { font-size: 20px; }
+        .portfolio-page__reviews-link { grid-column: 1 / -1; }
+        .portfolio-page__clients { padding-bottom: 52px; }
+    }
+}
+@layer components {
+    .team-page { overflow: hidden; }
+    .team-page__banner {
+        display: grid;
+        min-height: 110px;
+        padding: 24px 20px;
+        place-items: center;
+        background: linear-gradient(180deg, #eeeaff 0%, #fff 100%);
+    }
+    .team-page__banner h1 { margin: 0; font-size: 30px; line-height: 1.2; text-align: center; }
+    .team-page__hero,
+    .team-page__beliefs,
+    .team-page__testimonial,
+    .team-page__mission,
+    .team-page__opportunities { width: min(calc(100% - 48px), 1200px); margin-inline: auto; }
+    .team-page__hero {
+        display: grid;
+        grid-template-columns: minmax(0, .95fr) minmax(340px, .85fr);
+        align-items: center;
+        gap: clamp(42px, 8vw, 110px);
+        padding-block: 34px 48px;
+    }
+    .team-page__hero h2 { max-width: 540px; margin: 0 0 12px; font-size: clamp(28px, 3.5vw, 42px); line-height: 1.2; letter-spacing: -1px; }
+    .team-page__hero p { max-width: 510px; color: #333; font-size: 15px; line-height: 1.55; }
+    .team-page__hero > img { display: block; width: 100%; aspect-ratio: 1.25; border-radius: 22px; object-fit: cover; }
+    .team-page__beliefs { padding-block: 44px 68px; border-top: 1px solid #ededf0; }
+    .team-page__belief-intro { display: grid; grid-template-columns: 1fr 1fr; align-items: end; gap: 48px; }
+    .team-page__eyebrow { margin: 0 0 22px; font-size: 12px; font-weight: 600; }
+    .team-page__belief-intro h2 { max-width: 510px; margin: 0; font-size: clamp(26px, 3vw, 36px); line-height: 1.2; letter-spacing: -.8px; }
+    .team-page__belief-intro > p { color: #69727d; font-size: 13px; line-height: 1.55; text-align: justify; }
+    .team-page__values { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; margin: 42px 0 0; padding: 28px 0 0; list-style: none; }
+    .team-page__values::before { position: absolute; top: 0; right: 0; left: 0; border-top: 1px dashed #dfe1e6; content: ''; }
+    .team-page__values li { position: relative; color: #414852; font-size: 12px; }
+    .team-page__values li::before { position: absolute; top: -32px; left: 0; width: 11px; height: 11px; border-radius: 50%; background: #00538d; content: ''; }
+    .team-page__testimonial { padding-block: 0 72px; }
+    .team-page__testimonial figure { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1fr); grid-template-rows: auto auto 1fr; align-items: center; gap: 0 36px; margin: 0; padding: clamp(30px, 5vw, 58px); border-radius: 34px; background: #f7f7fa; }
+    .team-page__quote-mark { grid-column: 1; grid-row: 1; color: #00538d; font-size: 54px; font-weight: 700; line-height: .8; }
+    .team-page__testimonial blockquote { grid-column: 1; grid-row: 2; margin: 12px 0 0; }
+    .team-page__testimonial blockquote p { color: #69727d; font-size: 15px; font-style: italic; line-height: 1.55; }
+    .team-page__testimonial-author { grid-column: 1; grid-row: 3; align-self: end; margin-top: 18px; font-size: 13px; font-weight: 600; }
+    .team-page__testimonial figure > img { grid-column: 2; grid-row: 1 / 4; display: block; width: 100%; border-radius: 22px; object-fit: contain; }
+    .team-page__mission { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .8fr); align-items: center; gap: clamp(40px, 8vw, 110px); padding-block: 0 82px; }
+    .team-page__gallery-track { display: flex; gap: 0; margin: 0; padding: 0; overflow-x: auto; list-style: none; scroll-snap-type: x mandatory; scrollbar-width: thin; }
+    .team-page__gallery-track.is-enhanced { scrollbar-width: none; }
+    .team-page__gallery-track.is-enhanced::-webkit-scrollbar { display: none; }
+    .team-page__gallery-track li { flex: 0 0 100%; min-width: 0; scroll-snap-align: start; }
+    .team-page__gallery-track img { display: block; width: 100%; aspect-ratio: 1.8; border-radius: 24px; object-fit: cover; }
+    .team-page__gallery-controls { display: flex; justify-content: center; gap: 0; margin-top: 4px; }
+    .team-page__gallery-controls button { display: grid; width: 23px; min-height: 44px; padding: 0; place-items: center; background: transparent; cursor: pointer; }
+    .team-page__gallery-controls button::before { width: 9px; height: 9px; border-radius: 50%; background: #d7d4ee; content: ''; }
+    .team-page__gallery-controls button[aria-current='true']::before { background: #00538d; }
+    .team-page__gallery-controls button:focus-visible { outline: 2px solid #00538d; outline-offset: -2px; }
+    .team-page__mission-copy h2 { margin: 0 0 14px; font-size: clamp(26px, 3vw, 36px); line-height: 1.2; }
+    .team-page__mission-copy p { color: #69727d; font-size: 13px; line-height: 1.6; text-align: justify; }
+    .team-page__opportunities { position: relative; margin-bottom: 66px; padding: 48px 40px 42px; border-radius: 36px; background: #f7f7fa; text-align: center; }
+    .team-page__opportunities > img { position: absolute; top: -18px; right: 9%; width: 34px; height: 34px; }
+    .team-page__opportunities h2 { max-width: 620px; margin: 0 auto 12px; font-size: clamp(24px, 3vw, 32px); line-height: 1.2; }
+    .team-page__opportunities > p { max-width: 760px; margin-inline: auto; color: #69727d; font-size: 13px; line-height: 1.55; }
+    .team-page__opportunities > a { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; gap: 10px; margin-top: 16px; padding: 0 22px; border-radius: 24px; background: #000; color: #fff; font-size: 12px; font-weight: 600; }
+    .team-page__opportunities > a:hover { background: #00538d; }
+    .team-page__opportunities > a:focus-visible { outline: 2px solid #00538d; outline-offset: 3px; }
+    .team-page__clients { padding-top: 0; }
+    .team-page__clients > h2 { text-transform: none; }
+    body:has(.team-page) .site-footer { border-radius: 40px 40px 0 0; background: linear-gradient(#064f88, #006ace); }
+    @media (max-width: 63.99rem) {
+        .team-page__hero { grid-template-columns: minmax(0, 1fr) minmax(260px, .9fr); gap: 32px; }
+        .team-page__belief-intro { gap: 28px; }
+        .team-page__testimonial figure { grid-template-columns: minmax(0, 1fr); }
+        .team-page__quote-mark,
+        .team-page__testimonial blockquote,
+        .team-page__testimonial-author,
+        .team-page__testimonial figure > img { grid-column: 1; }
+        .team-page__testimonial figure > img { grid-row: 4; width: min(100%, 520px); max-height: 360px; margin: 24px auto 0; }
+        .team-page__testimonial-author { grid-row: 3; }
+        .team-page__mission { grid-template-columns: minmax(0, 1fr) minmax(0, .9fr); gap: 32px; }
+    }
+    @media (max-width: 47.99rem) {
+        .team-page__banner { min-height: 96px; }
+        .team-page__hero,
+        .team-page__beliefs,
+        .team-page__testimonial,
+        .team-page__mission,
+        .team-page__opportunities { width: calc(100% - 40px); }
+        .team-page__hero { grid-template-columns: minmax(0, 1fr); gap: 24px; padding-block: 30px 42px; }
+        .team-page__hero h2 { font-size: 30px; }
+        .team-page__hero p { font-size: 14px; }
+        .team-page__hero > img { aspect-ratio: 1.3; }
+        .team-page__beliefs { padding-block: 34px 52px; }
+        .team-page__belief-intro { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+        .team-page__eyebrow { margin-bottom: 12px; }
+        .team-page__belief-intro h2 { font-size: 29px; }
+        .team-page__belief-intro > p { font-size: 13px; text-align: left; }
+        .team-page__values { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 25px 14px; margin-top: 30px; padding-top: 0; }
+        .team-page__values::before { display: none; }
+        .team-page__values li { padding-top: 18px; border-top: 1px dashed #dfe1e6; }
+        .team-page__values li::before { top: -5px; width: 10px; height: 10px; }
+        .team-page__testimonial { padding-bottom: 48px; }
+        .team-page__testimonial figure { gap: 0; padding: 28px 24px; border-radius: 26px; }
+        .team-page__testimonial blockquote p { font-size: 14px; }
+        .team-page__testimonial figure > img { max-height: 300px; }
+        .team-page__mission { grid-template-columns: minmax(0, 1fr); gap: 22px; padding-bottom: 54px; }
+        .team-page__gallery-track img { aspect-ratio: 1.55; border-radius: 20px; }
+        .team-page__mission-copy h2 { font-size: 30px; }
+        .team-page__mission-copy p { font-size: 13px; text-align: left; }
+        .team-page__opportunities { margin-bottom: 50px; padding: 38px 22px 30px; border-radius: 26px; }
+        .team-page__opportunities > p { font-size: 13px; }
+        .team-page__clients { padding-bottom: 52px; }
+    }
+}
+
+.awards-page { overflow: hidden; color: #000; }
+.awards-page__banner { display: grid; min-height: 105px; place-items: center; padding: 22px 24px; background: #f7f7fa; }
+.awards-page__banner h1 { margin: 0; font-size: clamp(32px, 4vw, 46px); font-weight: 700; line-height: 1.15; }
+.awards-page__intro { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, .92fr); align-items: center; gap: clamp(34px, 6vw, 80px); width: min(1200px, calc(100% - 48px)); margin: 0 auto; padding: 90px 0 74px; }
+.awards-page__intro-copy h2 { margin: 0 0 20px; font-size: clamp(32px, 4vw, 48px); font-weight: 700; line-height: 1.12; }
+.awards-page__intro-copy p,
+.awards-page__intro-copy li { color: #69727d; font-size: 15px; line-height: 1.75; }
+.awards-page__intro-copy p { margin: 0 0 16px; }
+.awards-page__intro-copy p strong,
+.awards-page__intro-copy li strong { color: #000; font-weight: 600; }
+.awards-page__intro-copy ul { display: grid; gap: 7px; margin: 0 0 18px; padding-left: 21px; }
+.awards-page__intro-copy li::marker { color: #006ace; }
+.awards-page__intro-copy a { color: #006ace; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.awards-page__intro > img { display: block; width: 100%; height: auto; object-fit: contain; }
+.awards-page__timeline-section { padding: 18px 24px 62px; }
+.awards-page__timeline { position: relative; display: grid; gap: 0; width: min(1000px, 100%); margin: 0 auto; padding: 0; list-style: none; }
+.awards-page__timeline::before { position: absolute; top: 8px; bottom: 8px; left: 50%; width: 1px; background: #d7dbe0; content: ""; transform: translateX(-50%); }
+.awards-page__item { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 32px minmax(0, 1fr); align-items: center; min-height: 270px; margin: 0; }
+.awards-page__item figure { display: grid; width: min(100%, 300px); aspect-ratio: 1.15; place-items: center; justify-self: end; margin: 0 38px 0 0; padding: 28px; border-radius: 24px; background: #f7f7fa; }
+.awards-page__item figure img { display: block; width: 100%; max-height: 190px; object-fit: contain; }
+.awards-page__timeline-dot { z-index: 1; align-self: start; justify-self: center; width: 12px; height: 12px; margin-top: 40px; border: 2px solid #fff; border-radius: 50%; background: #006ace; box-shadow: 0 0 0 2px #006ace; }
+.awards-page__item-copy { grid-column: 3; padding-left: 38px; }
+.awards-page__item-copy > span { display: block; margin-bottom: 9px; color: #69727d; font-size: 13px; font-weight: 500; }
+.awards-page__item-copy h2 { max-width: 390px; margin: 0 0 10px; font-size: clamp(22px, 2.4vw, 30px); font-weight: 700; line-height: 1.2; }
+.awards-page__item-copy p { margin: 0; color: #69727d; font-size: 14px; line-height: 1.55; }
+.awards-page__item-copy p strong { color: #000; font-weight: 600; }
+.awards-page__cta { position: relative; display: grid; justify-items: center; width: min(1100px, calc(100% - 48px)); margin: 0 auto 72px; padding: 56px 28px 50px; overflow: hidden; border-radius: 30px; background: #f7f7fa; text-align: center; }
+.awards-page__google-logo { width: 70px; height: auto; }
+.awards-page__partner-label { margin-top: 4px; color: #69727d; font-size: 12px; }
+.awards-page__cta h2 { max-width: 680px; margin: 19px 0 24px; font-size: clamp(28px, 4vw, 42px); font-weight: 700; line-height: 1.18; }
+.awards-page__cta > a { display: inline-flex; min-height: 52px; align-items: center; gap: 12px; justify-content: center; padding: 13px 25px; border-radius: 18px; background: #006ace; color: #fff; font-size: 15px; font-weight: 600; text-decoration: none; }
+.awards-page__cta > a span { font-size: 20px; line-height: 1; }
+.awards-page__rocket { position: absolute; top: 14px; right: 7%; width: 68px; height: auto; }
+.awards-page__clients { width: min(1200px, calc(100% - 48px)); margin: 0 auto; }
+
+@media (max-width: 767px) {
+    .awards-page__banner { min-height: 84px; }
+    .awards-page__intro { grid-template-columns: minmax(0, 1fr) minmax(200px, .8fr); gap: 24px; width: calc(100% - 40px); padding: 56px 0 48px; }
+    .awards-page__intro-copy h2 { margin-bottom: 14px; }
+    .awards-page__intro-copy p,
+    .awards-page__intro-copy li { font-size: 13px; }
+    .awards-page__timeline-section { padding: 8px 20px 46px; }
+    .awards-page__item { grid-template-columns: minmax(0, 1fr) 22px minmax(0, 1.15fr); min-height: 190px; }
+    .awards-page__item figure { width: 100%; margin-right: 12px; padding: 14px; border-radius: 18px; }
+    .awards-page__item figure img { max-height: 120px; }
+    .awards-page__timeline-dot { width: 10px; height: 10px; margin-top: 30px; }
+    .awards-page__item-copy { padding-left: 12px; }
+    .awards-page__item-copy > span { margin-bottom: 6px; font-size: 11px; }
+    .awards-page__item-copy h2 { margin-bottom: 7px; font-size: clamp(17px, 4.2vw, 22px); }
+    .awards-page__item-copy p { font-size: 11px; }
+    .awards-page__cta { width: calc(100% - 40px); margin-bottom: 50px; padding: 42px 18px 36px; border-radius: 24px; }
+    .awards-page__cta h2 { margin: 16px 0 20px; }
+    .awards-page__cta > a { min-height: 48px; border-radius: 16px; }
+    .awards-page__rocket { top: 10px; right: 5%; width: 44px; }
+    .awards-page__clients { width: calc(100% - 40px); }
+}
+
+@media (max-width: 479px) {
+    .awards-page__intro { grid-template-columns: 1fr; }
+    .awards-page__intro > img { width: min(100%, 360px); justify-self: center; }
+    .awards-page__item { grid-template-columns: minmax(0, 1fr) 18px minmax(0, 1.15fr); min-height: 164px; }
+    .awards-page__item figure { margin-right: 7px; padding: 10px; border-radius: 15px; }
+    .awards-page__item figure img { max-height: 95px; }
+    .awards-page__item-copy { padding-left: 8px; }
+    .awards-page__item-copy h2 { font-size: 16px; }
+    .awards-page__item-copy p { font-size: 10px; }
+}
+
+.career-page { overflow: hidden; color: #000; }
+.career-page__banner { display: grid; min-height: 92px; place-items: center; padding: 20px 24px; background: linear-gradient(180deg, #e9e5ff 0%, #fff 100%); }
+.career-page__banner h1 { margin: 0; font-size: clamp(30px, 4vw, 44px); font-weight: 700; line-height: 1.2; text-align: center; }
+.career-page__hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, .92fr); align-items: center; gap: clamp(34px, 6vw, 76px); width: min(1120px, calc(100% - 48px)); margin: 0 auto; padding: 42px 0 52px; }
+.career-page__hero-copy h2 { margin: 0 0 14px; font-size: clamp(25px, 3vw, 36px); font-weight: 700; line-height: 1.2; }
+.career-page__hero-copy p { margin: 0 0 12px; color: #69727d; font-size: 14px; line-height: 1.7; }
+.career-page__hero-copy a { color: #000; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.career-page__hero-copy .career-page__resume-note { margin: 15px 0 0; font-size: 13px; }
+.career-page__video { position: relative; overflow: hidden; aspect-ratio: 16 / 9; border-radius: 12px; background: #111; box-shadow: 0 10px 26px #0b31501c; }
+.career-page__video > img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.career-page__video > button { position: absolute; top: 50%; left: 50%; display: grid; width: 68px; height: 48px; place-items: center; padding: 0; border: 0; border-radius: 14px; background: transparent; cursor: pointer; transform: translate(-50%, -50%); transition: transform .2s ease; }
+.career-page__video > button:hover { transform: translate(-50%, -50%) scale(1.08); }
+.career-page__video > button svg { display: block; width: 68px; height: 48px; }
+.career-page__video iframe { display: block; width: 100%; height: 100%; border: 0; }
+.career-page__why { width: min(1120px, calc(100% - 48px)); margin: 0 auto; padding: 24px 0 48px; }
+.career-page__section-heading { max-width: 760px; margin: 0 auto 34px; text-align: center; }
+.career-page__section-heading h2,
+.career-page__openings > h2,
+.career-page__about h2 { margin: 0 0 8px; font-size: clamp(24px, 3vw, 30px); font-weight: 700; line-height: 1.25; }
+.career-page__section-heading p { margin: 0; color: #69727d; font-size: 14px; line-height: 1.6; }
+.career-page__benefits { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 38px 44px; margin: 0; padding: 0; list-style: none; }
+.career-page__benefits li { display: grid; justify-items: center; align-content: start; text-align: center; }
+.career-page__benefits img { width: 72px; height: 72px; margin-bottom: 12px; border-radius: 50%; object-fit: cover; }
+.career-page__benefits h3 { max-width: 300px; margin: 0 0 6px; font-size: 17px; font-weight: 700; line-height: 1.25; }
+.career-page__benefits p { max-width: 310px; margin: 0; color: #69727d; font-size: 13px; line-height: 1.55; }
+.career-page__divider { position: relative; display: grid; height: 40px; place-items: center; margin: 0 24px 24px; }
+.career-page__divider::before { position: absolute; top: 50%; right: 0; left: 0; height: 1px; background: #e7e8eb; content: ""; }
+.career-page__divider span { z-index: 1; width: min(180px, 35vw); height: 34px; border-bottom: 1px solid #e7e8eb; border-radius: 0 0 50% 50%; background: #fff; }
+.career-page__openings { width: min(1120px, calc(100% - 48px)); margin: 0 auto; padding: 0 0 44px; }
+.career-page__openings > h2 { margin-bottom: 20px; text-align: center; }
+.career-page__position-list { display: grid; gap: 12px; }
+.career-page__position-list details { overflow: hidden; border: 1px solid #dfe1e6; border-radius: 10px; background: #fff; }
+.career-page__position-list summary { min-height: 46px; padding: 12px 16px; cursor: pointer; font-size: 16px; font-weight: 500; line-height: 1.4; }
+.career-page__position-list summary::marker { color: #006ace; }
+.career-page__position-list details > p { padding: 0 16px 14px; color: #69727d; font-size: 13px; }
+.career-page__position-list a { color: #000; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.career-page__culture { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px; width: min(1020px, calc(100% - 48px)); margin: 0 auto; padding: 0 0 44px; }
+.career-page__culture article { padding: 22px 24px; border: 1px solid #cfd2d6; border-radius: 12px; }
+.career-page__culture h2 { margin: 0 0 10px; font-size: 21px; font-weight: 700; line-height: 1.3; }
+.career-page__culture p { margin: 0 0 10px; color: #69727d; font-size: 13px; line-height: 1.65; }
+.career-page__culture p:last-child { margin-bottom: 0; }
+.career-page__about { width: min(1120px, calc(100% - 48px)); margin: 0 auto; padding: 0 0 44px; }
+.career-page__about h2 { margin-bottom: 14px; text-align: center; }
+.career-page__about p { margin: 0 0 10px; color: #69727d; font-size: 13px; line-height: 1.65; }
+.career-page__apply { width: min(780px, calc(100% - 48px)); margin: 0 auto; padding: 10px 0 24px; }
+.career-page__apply > h2 { margin: 0 0 18px; font-size: clamp(28px, 3.5vw, 36px); font-weight: 600; line-height: 1.2; }
+.career-page__form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 18px; }
+.career-page__form-grid label,
+.career-page__message,
+.career-page__resume { display: block; min-width: 0; }
+.career-page__apply input:not([type="file"]),
+.career-page__apply textarea { display: block; width: 100%; min-height: 44px; padding: 11px 15px; border: 1px solid #e6e7ea; border-radius: 15px; outline: none; background: #fff; color: #000; font-size: 13px; }
+.career-page__apply input:focus,
+.career-page__apply textarea:focus { border-color: #006ace; box-shadow: 0 0 0 3px #006ace20; }
+.career-page__apply input::placeholder,
+.career-page__apply textarea::placeholder { color: #8a9099; opacity: 1; }
+.career-page__message { margin-top: 16px; }
+.career-page__apply textarea { min-height: 150px; resize: vertical; border: 0; border-radius: 20px; background: #f5f5f6; }
+.career-page__resume { margin-top: 12px; }
+.career-page__apply input[type="file"] { display: block; width: 100%; min-height: 44px; padding: 6px; border: 1px solid #e6e7ea; border-radius: 14px; color: #69727d; font-size: 12px; }
+.career-page__apply input[type="file"]::file-selector-button { min-height: 28px; margin-right: 10px; border: 1px solid #d6d8dd; border-radius: 6px; background: #f7f7fa; color: #000; font: inherit; }
+.career-page__form-note { margin: 9px 0 12px; color: #69727d; font-size: 11px; line-height: 1.5; }
+.career-page__apply button { min-width: 105px; min-height: 44px; padding: 11px 20px; border: 0; border-radius: 14px; background: #000; color: #fff; cursor: pointer; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+.career-page__apply button:hover { background: #006ace; }
+.career-page__quick-links { display: flex; width: min(1120px, calc(100% - 48px)); align-items: center; justify-content: center; gap: 40px; margin: 0 auto 30px; padding: 12px 20px; border: 1px solid #cfd2d6; border-radius: 14px; }
+.career-page__quick-links a { display: inline-flex; min-height: 44px; align-items: center; gap: 7px; color: #000; font-size: 10px; font-weight: 700; }
+.career-page__quick-links a span:first-child { color: #006ace; font-size: 15px; }
+
+@media (max-width: 767px) {
+    .career-page__hero { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 32px 0 40px; }
+    .career-page__video { width: min(100%, 620px); justify-self: center; }
+    .career-page__why { padding-top: 14px; }
+    .career-page__benefits { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 22px; }
+    .career-page__culture { gap: 16px; }
+    .career-page__culture article { padding: 18px; }
+}
+
+@media (max-width: 639px) {
+    .career-page__banner { min-height: 78px; }
+    .career-page__hero,
+    .career-page__why,
+    .career-page__openings,
+    .career-page__about { width: calc(100% - 40px); }
+    .career-page__hero-copy h2 { font-size: 26px; }
+    .career-page__hero-copy p { font-size: 13px; }
+    .career-page__section-heading { margin-bottom: 26px; }
+    .career-page__benefits img { width: 62px; height: 62px; }
+    .career-page__benefits h3 { font-size: 15px; }
+    .career-page__benefits p { font-size: 12px; }
+    .career-page__divider { margin-inline: 20px; }
+    .career-page__culture { grid-template-columns: 1fr; width: calc(100% - 40px); }
+    .career-page__apply { width: calc(100% - 40px); }
+    .career-page__form-grid { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+    .career-page__quick-links { width: calc(100% - 40px); gap: 22px; }
+}
+
+@media (max-width: 420px) {
+    .career-page__benefits { grid-template-columns: 1fr; }
+    .career-page__benefits li { max-width: 340px; justify-self: center; }
+    .career-page__position-list summary { font-size: 14px; }
+    .career-page__quick-links { flex-direction: column; gap: 8px; }
+}
+@layer components {
+    .return-refund-policy {
+        min-height: 460px;
+        background: linear-gradient(180deg, #f3f0ff 0, #fff 130px);
+    }
+    .return-refund-policy__content {
+        width: min(calc(100% - 48px), 1280px);
+        margin-inline: auto;
+        padding-block: 48px 30px;
+    }
+    .return-refund-policy h1 {
+        margin: 0 0 8px;
+        font-size: clamp(22px, 2.5vw, 30px);
+        font-weight: 600;
+        line-height: 1.3;
+        letter-spacing: -.5px;
+    }
+    .return-refund-policy p {
+        margin: 0;
+        color: #333;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.55;
+    }
+    .return-refund-policy p + p { margin-top: 24px; }
+
+    @media (max-width: 39.99rem) {
+        .return-refund-policy { min-height: 0; }
+        .return-refund-policy__content { width: calc(100% - 40px); padding-block: 38px 48px; }
+        .return-refund-policy h1 { font-size: 24px; }
+        .return-refund-policy p { font-size: 14px; }
+        .return-refund-policy p + p { margin-top: 22px; }
+    }
+}
+@layer components {
+    .blog-page { overflow: hidden; color: #000; }
+    .blog-page__banner {
+        display: grid;
+        min-height: 148px;
+        padding: 30px 20px;
+        place-items: center;
+        background: linear-gradient(110deg, #f3efff 0%, #e9e5ff 100%);
+        text-align: center;
+    }
+    .blog-page__banner h1 {
+        margin: 0;
+        font-size: clamp(36px, 5vw, 52px);
+        font-weight: 700;
+        line-height: 1.15;
+        letter-spacing: -1px;
+    }
+    .blog-page__content { width: min(calc(100% - 48px), 1220px); margin-inline: auto; padding-top: 30px; }
+    .blog-page__cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px 20px; }
+    .blog-page__card {
+        display: grid;
+        min-width: 0;
+        min-height: 310px;
+        grid-template-rows: 145px 1fr;
+        overflow: hidden;
+        border: 1px solid #e8e8e8;
+        border-radius: 18px;
+        background: #fff;
+        box-shadow: 0 3px 12px #0000000d;
+    }
+    .blog-page__card[hidden] { display: none !important; }
+    .blog-page__card-image { overflow: hidden; background: linear-gradient(180deg, #fff 0%, #b8b8b8 100%); }
+    .blog-page__card-image picture,
+    .blog-page__card-img { display: block; width: 100%; height: 100%; }
+    .blog-page__card-img { object-fit: cover; }
+    .blog-page__card-copy { display: flex; flex-direction: column; align-items: center; padding: 16px 18px 14px; text-align: center; }
+    .blog-page__card-copy h2 {
+        display: -webkit-box;
+        overflow: hidden;
+        margin: 0;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        font-size: 17px;
+        font-weight: 700;
+        line-height: 1.3;
+    }
+    .blog-page__card-copy h2 a { color: inherit; text-decoration: none; }
+    .blog-page__card-copy h2 a:hover { color: #006ace; }
+    .blog-page__card-copy p {
+        display: -webkit-box;
+        overflow: hidden;
+        margin: 8px 0 10px;
+        color: #69727d;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        font-size: 12px;
+        line-height: 1.45;
+    }
+    .blog-page__read-more {
+        display: inline-flex;
+        min-height: 38px;
+        align-items: center;
+        gap: 4px;
+        margin-top: auto;
+        color: #000;
+        font-size: 11px;
+        font-weight: 700;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+    .blog-page__read-more:hover { color: #006ace; }
+    .blog-page__read-more:focus-visible,
+    .blog-page__card-copy h2 a:focus-visible { outline: 2px solid #006ace; outline-offset: 3px; }
+    .blog-page__load-more {
+        display: block;
+        min-width: 142px;
+        min-height: 44px;
+        margin: 26px auto 0;
+        padding: 0 22px;
+        border-radius: 24px;
+        background: #000;
+        color: #fff;
+        cursor: pointer;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+    .blog-page__load-more:hover { background: #006ace; }
+    .blog-page__load-more:focus-visible { outline: 3px solid #006ace; outline-offset: 4px; }
+    .blog-page__clients { width: min(calc(100% - 48px), 1220px); margin-inline: auto; padding-block: 60px 110px; }
+    .blog-page__clients > h2 { font-size: clamp(26px, 3.2vw, 38px); text-align: center; }
+
+    @media (max-width: 39.99rem) {
+        .blog-page__content, .blog-page__clients { width: calc(100% - 40px); }
+        .blog-page__cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+        .blog-page__card { min-height: 290px; grid-template-rows: 120px 1fr; border-radius: 14px; }
+        .blog-page__card-copy { padding: 12px 10px; }
+        .blog-page__card-copy h2 { font-size: 15px; }
+        .blog-page__card-copy p { font-size: 11px; }
+        .blog-page__clients { padding-block: 48px 80px; }
+    }
+    @media (max-width: 26rem) {
+        .blog-page__cards { grid-template-columns: minmax(0, 1fr); }
+        .blog-page__card { min-height: 300px; grid-template-rows: 140px 1fr; }
+        .blog-page__card-copy { padding-inline: 18px; }
+        .blog-page__card-copy h2 { font-size: 17px; }
+    }
+}
+
+@layer components {
+    .blog-post-page { padding-bottom: 82px; }
+    .blog-post__header {
+        width: min(calc(100% - 48px), 1220px);
+        margin: 0 auto;
+        padding: 48px 0 18px;
+        text-align: center;
+    }
+    .blog-post__header h1 {
+        margin: 0;
+        font-size: clamp(22px, 3vw, 36px);
+        font-weight: 700;
+        line-height: 1.2;
+        letter-spacing: -1.2px;
+    }
+    .blog-post__header time {
+        display: block;
+        margin-top: 12px;
+        color: #69727d;
+        font-size: 12px;
+    }
+    .blog-post__hero {
+        width: min(calc(100% - 48px), 1220px);
+        height: clamp(280px, 45vw, 520px);
+        margin: 0 auto 30px;
+        overflow: hidden;
+        border: 1px solid #e8e8e8;
+        border-radius: 12px;
+        background: #fff;
+        box-shadow: 0 2px 8px #00000014;
+    }
+    .blog-post__hero picture,
+    .blog-post__hero-image,
+    .blog-post__hero-placeholder {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+    .blog-post__hero-image { object-fit: cover; }
+    .blog-post__body {
+        width: min(calc(100% - 48px), 1220px);
+        margin-inline: auto;
+        color: #69727d;
+        font-size: 15px;
+        line-height: 1.55;
+    }
+    .blog-post__body > p:first-child { margin-bottom: 20px; }
+    .blog-post__body p { margin-block: 0 14px; text-align: justify; }
+    .blog-post__body h2,
+    .blog-post__body h3,
+    .blog-post__body h4 {
+        margin-block: 18px 12px;
+        color: #000;
+        font-weight: 700;
+        line-height: 1.3;
+    }
+    .blog-post__body h2 { font-size: clamp(22px, 2.5vw, 28px); }
+    .blog-post__body h3 { font-size: 22px; }
+    .blog-post__body ul,
+    .blog-post__body ol { margin: 0 0 18px; padding-left: 24px; }
+    .blog-post__body li { margin-block: 5px; }
+    .blog-post__body a { color: #006ace; text-decoration: underline; text-underline-offset: 3px; }
+    .blog-post__body img {
+        float: right;
+        width: min(45%, 420px);
+        max-height: 320px;
+        margin: 8px 0 20px 30px;
+        border: 1px solid #e8e8e8;
+        border-radius: 8px;
+        object-fit: cover;
+        box-shadow: 0 2px 8px #00000014;
+    }
+    .blog-post__body figure { margin-block: 18px; }
+    .blog-post__body figure::after { display: block; clear: both; content: ''; }
+    .blog-post__body figure img { float: none; width: auto; max-width: 100%; margin: 0 auto; }
+    .blog-post__body .blog-post__faq-heading { margin-top: 48px; text-align: center; }
+    .blog-post__body .blog-post__faq-item {
+        margin: 8px auto;
+        border: 1px solid #e1e4e9;
+        border-radius: 12px;
+        color: #111;
+    }
+    .blog-post__body .blog-post__faq-item summary {
+        min-height: 44px;
+        padding: 12px 16px;
+        color: #111;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    .blog-post__body .blog-post__faq-item > :not(summary) { margin: 0 16px 14px; }
+    @media (max-width: 39.99rem) {
+        .blog-post-page { padding-bottom: 48px; }
+        .blog-post__header,
+        .blog-post__hero,
+        .blog-post__body { width: calc(100% - 40px); }
+        .blog-post__header { padding-top: 34px; }
+        .blog-post__header h1 { font-size: 28px; letter-spacing: -.6px; }
+        .blog-post__hero { height: 220px; margin-bottom: 22px; border-radius: 10px; }
+        .blog-post__body { font-size: 14px; }
+        .blog-post__body img { float: none; display: block; width: min(100%, 460px); max-height: 280px; margin: 14px auto; }
+        .blog-post__body figure img { width: auto; }
+        .blog-post__body p { text-align: left; }
+    }
+}
+
+@layer components {
+    .service-page--rate-optimization {
+        background: linear-gradient(180deg, #f3f0ff 0, #fff 620px);
+    }
+
+    .service-page--rate-optimization .paid-search-heading {
+        padding: 32px 24px;
+        background: #e9e5ff;
+        text-align: center;
+    }
+
+    .service-page--rate-optimization .paid-search-heading h1 {
+        margin: 0;
+        font-size: clamp(32px, 4vw, 48px);
+        font-weight: 700;
+        letter-spacing: -1px;
+    }
+
+    .service-page--rate-optimization .service-content {
+        display: block;
+        width: min(calc(100% - 48px), 1220px);
+        margin-inline: auto;
+    }
+
+    .service-page--rate-optimization .service-section--intro {
+        display: grid;
+        grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+        align-items: center;
+        gap: 64px;
+        padding: 64px 10px 24px;
+        text-align: left;
+    }
+
+    .service-page--rate-optimization .service-section--intro .service-copy > h2 {
+        margin-bottom: 18px;
+        font-size: clamp(30px, 3.2vw, 42px);
+        font-weight: 700;
+        letter-spacing: -1px;
+    }
+
+    .service-page--rate-optimization .service-section--intro .service-copy > p,
+    .service-page--rate-optimization .service-section--illustrated .service-copy > p {
+        color: #69727d;
+        font-size: 16px;
+        line-height: 1.65;
+    }
+
+    .service-page--rate-optimization .service-section--intro .service-copy > a {
+        min-height: 48px;
+        border-radius: 18px;
+        background: #006ace;
+        font-size: 13px;
+        text-transform: none;
+    }
+
+    .service-page--rate-optimization .service-section--intro .service-media {
+        display: grid;
+        place-items: center;
+    }
+
+    .service-page--rate-optimization .service-section--intro .service-media > img {
+        width: 100%;
+        max-width: 520px;
+        max-height: 500px;
+        border-radius: 0;
+        object-fit: contain;
+    }
+
+    .service-page--rate-optimization .service-tabs {
+        grid-template-columns: minmax(220px, .36fr) minmax(0, .64fr);
+        min-height: 540px;
+        margin: 36px 0 68px;
+        overflow: hidden;
+        border-radius: 30px;
+        background: #fff;
+    }
+
+    .service-page--rate-optimization .service-tabs .home-service-tabs__list {
+        gap: 12px;
+        padding: 30px 22px;
+        background: #fff;
+    }
+
+    .service-page--rate-optimization .service-tabs .home-service-tabs__tab {
+        min-height: 52px;
+        padding: 12px 48px 12px 18px;
+        border-radius: 999px;
+        background: transparent;
+        color: #111;
+        font-size: 15px;
+        font-weight: 600;
+        text-align: left;
+    }
+
+    .service-page--rate-optimization .service-tabs .home-service-tabs__tab[aria-selected="true"] {
+        width: 100%;
+        padding-right: 48px;
+        background: #006ace;
+        color: #fff;
+    }
+
+    .service-page--rate-optimization .service-tabs .home-service-tabs__panel {
+        grid-template-columns: minmax(0, 1fr);
+        align-content: center;
+        min-height: 540px;
+        margin: 0;
+        padding: 58px 64px;
+        border-radius: 0;
+        background: #f7f7fa;
+    }
+
+    .service-page--rate-optimization .service-tabs .home-service-tabs__panel h3 {
+        margin-bottom: 16px;
+        font-size: clamp(26px, 3vw, 36px);
+        font-weight: 700;
+    }
+
+    .service-page--rate-optimization .service-tabs .home-service-tabs__panel p {
+        color: #69727d;
+        line-height: 1.6;
+    }
+
+    .service-page--rate-optimization .service-tabs .service-copy p a {
+        display: block;
+        min-height: 0;
+        margin: 22px 0 0;
+        padding: 0;
+        border-radius: 18px;
+        background: transparent;
+        color: inherit;
+        text-transform: none;
+    }
+
+    .service-page--rate-optimization .service-tabs .service-copy p a img {
+        display: block;
+        width: 100%;
+        max-height: 300px;
+        border-radius: 18px;
+        object-fit: contain;
+    }
+
+    .service-page--rate-optimization .service-tabs .service-media > img {
+        max-height: 340px;
+    }
+
+    .service-page--rate-optimization .service-section--cro-explanation,
+    .service-page--rate-optimization .service-section--certified {
+        padding-block: 48px 62px;
+    }
+
+    .service-page--rate-optimization .service-section--cro-explanation .service-copy > h4,
+    .service-page--rate-optimization .service-section--certified .service-copy > h3 {
+        margin-bottom: 18px;
+        font-size: clamp(26px, 3vw, 38px);
+        font-weight: 700;
+        line-height: 1.2;
+        letter-spacing: -.8px;
+    }
+
+    .service-page--rate-optimization .service-section--cro-explanation .service-media > img {
+        max-height: 430px;
+    }
+
+    .service-page--rate-optimization .service-section--certified .service-media > img {
+        max-height: 430px;
+        border-radius: 24px;
+    }
+
+    @media (max-width: 63.99rem) {
+        .service-page--rate-optimization .service-section--intro {
+            gap: 34px;
+        }
+
+        .service-page--rate-optimization .service-tabs {
+            grid-template-columns: minmax(190px, .38fr) minmax(0, .62fr);
+            min-height: 460px;
+        }
+
+        .service-page--rate-optimization .service-tabs .home-service-tabs__panel {
+            min-height: 460px;
+            padding: 38px;
+        }
+    }
+
+    @media (max-width: 39.99rem) {
+        .service-page--rate-optimization .paid-search-heading {
+            padding: 22px 20px;
+        }
+
+        .service-page--rate-optimization .paid-search-heading h1 {
+            font-size: 30px;
+        }
+
+        .service-page--rate-optimization .service-content {
+            width: calc(100% - 40px);
+        }
+
+        .service-page--rate-optimization .service-section--intro {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 24px;
+            padding: 36px 0 20px;
+        }
+
+        .service-page--rate-optimization .service-section--intro .service-copy > h2 {
+            font-size: 28px;
+        }
+
+        .service-page--rate-optimization .service-tabs {
+            grid-template-columns: minmax(0, 1fr);
+            min-height: 0;
+            margin-block: 28px 42px;
+        }
+
+        .service-page--rate-optimization .service-tabs .home-service-tabs__list {
+            grid-column: 1;
+            grid-row: 1;
+            flex-direction: row;
+            overflow-x: auto;
+            padding: 12px;
+        }
+
+        .service-page--rate-optimization .service-tabs .home-service-tabs__tab {
+            flex: 0 0 auto;
+            width: auto;
+            min-width: 150px;
+            min-height: 46px;
+            padding: 10px 38px 10px 14px;
+            font-size: 12px;
+        }
+
+        .service-page--rate-optimization .service-tabs .home-service-tabs__tab[aria-selected="true"] {
+            width: auto;
+        }
+
+        .service-page--rate-optimization .service-tabs .home-service-tabs__panel {
+            grid-column: 1;
+            grid-row: 2;
+            min-height: 0;
+            padding: 26px 20px;
+            border-radius: 0 0 24px 24px;
+        }
+
+        .service-page--rate-optimization .service-section--cro-explanation,
+        .service-page--rate-optimization .service-section--certified {
+            padding-block: 32px;
+        }
+    }
+}
+
+@layer components {
+    .service-page--performance-marketing-agency-nagpur {
+        background: linear-gradient(180deg, #f3f0ff 0, #fff 680px);
+    }
+
+    .service-page--performance-marketing-agency-nagpur .paid-search-heading {
+        padding: 22px 24px;
+        background: #e9e5ff;
+        text-align: center;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .paid-search-heading h1 {
+        margin: 0;
+        font-size: clamp(28px, 3.2vw, 40px);
+        font-weight: 700;
+        letter-spacing: -.8px;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-content {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: 0 24px;
+        width: min(calc(100% - 48px), 1220px);
+        margin-inline: auto;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-content > .service-section,
+    .service-page--performance-marketing-agency-nagpur .service-content > .paid-search-clients,
+    .service-page--performance-marketing-agency-nagpur .service-content > .performance-marketing-proof,
+    .service-page--performance-marketing-agency-nagpur .service-content > .performance-marketing-benefits,
+    .service-page--performance-marketing-agency-nagpur .service-content > .performance-marketing-industries {
+        grid-column: 1 / -1;
+        min-width: 0;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(300px, .85fr);
+        align-items: center;
+        gap: 64px;
+        padding: 54px 10px 68px;
+        text-align: left;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-hero .service-copy > h2 {
+        margin-bottom: 20px;
+        font-size: clamp(30px, 3vw, 42px);
+        font-weight: 700;
+        letter-spacing: -1px;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-hero .service-copy > p,
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-definition .service-copy > p,
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-service .service-copy > p {
+        color: #69727d;
+        font-size: 15px;
+        line-height: 1.6;
+        text-align: left;
+    }
+
+    .performance-marketing-form {
+        position: relative;
+        display: grid;
+        gap: 10px;
+        min-width: 0;
+        padding: 24px;
+        border: 2px solid #111;
+        border-radius: 22px;
+        background: #fff;
+        box-shadow: 7px 7px 0 #111;
+    }
+
+    .performance-marketing-form::before {
+        position: absolute;
+        top: -24px;
+        right: 12px;
+        color: #111;
+        content: '\2726';
+        font-size: 28px;
+    }
+
+    .performance-marketing-form .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        clip-path: inset(50%);
+    }
+
+    .performance-marketing-form input,
+    .performance-marketing-form textarea {
+        width: 100%;
+        min-width: 0;
+        min-height: 42px;
+        padding: 10px 14px;
+        border: 1px solid #dedde5;
+        border-radius: 10px;
+        background: #fff;
+        color: #111;
+        font: inherit;
+        font-size: 13px;
+    }
+
+    .performance-marketing-form textarea {
+        min-height: 82px;
+        resize: vertical;
+    }
+
+    .performance-marketing-form input:focus-visible,
+    .performance-marketing-form textarea:focus-visible {
+        outline: 2px solid #006ace;
+        outline-offset: 2px;
+    }
+
+    .performance-marketing-form button {
+        display: flex;
+        min-height: 44px;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 4px;
+        padding: 10px 18px;
+        border-radius: 999px;
+        background: #000;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+
+    .performance-marketing-form button:focus-visible {
+        outline: 3px solid #006ace;
+        outline-offset: 3px;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-hero .performance-marketing-form {
+        width: min(100%, 440px);
+        justify-self: end;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-definition {
+        align-items: center;
+        gap: 72px;
+        padding-block: 34px 52px;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-definition .service-copy > h2,
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-services-heading .service-copy > h2,
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-process .service-copy > h2,
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-tools .service-copy > h2 {
+        font-size: clamp(27px, 3vw, 36px);
+        font-weight: 700;
+        letter-spacing: -.8px;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-definition .service-copy > ul {
+        gap: 7px;
+        margin-block: 14px;
+        padding-left: 20px;
+        list-style: disc;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-definition .service-copy > ul li {
+        padding-left: 0;
+        color: #505050;
+        font-size: 14px;
+        line-height: 1.45;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-definition .service-copy > ul li::before {
+        display: none;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-definition .service-media > img {
+        max-height: 390px;
+        border-radius: 0;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-proof {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) repeat(3, minmax(0, 1fr));
+        align-items: center;
+        gap: 12px;
+        margin-block: 0 36px;
+        padding: 14px 0;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-proof > h3 {
+        margin: 0;
+        font-size: 22px;
+        font-weight: 700;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-proof__metric {
+        display: grid;
+        min-height: 74px;
+        align-content: center;
+        justify-items: center;
+        gap: 2px;
+        padding: 10px;
+        border: 1px solid #e8e8ed;
+        border-radius: 14px;
+        background: #fff;
+        text-align: center;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-proof__metric strong {
+        font-size: 24px;
+        line-height: 1.1;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-proof__metric span {
+        color: #69727d;
+        font-size: 11px;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-partner {
+        padding-block: 30px 24px;
+        text-align: center;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-partner .service-copy > h2 {
+        max-width: 850px;
+        margin: 0 auto 16px;
+        font-size: clamp(27px, 3vw, 36px);
+        font-weight: 700;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-partner .service-copy > p {
+        max-width: 920px;
+        margin-inline: auto;
+        color: #69727d;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-benefits {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+        padding: 10px 10px 70px;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-benefits > h2 {
+        grid-column: 1 / -1;
+        margin: 0 0 4px;
+        font-size: clamp(24px, 2.8vw, 34px);
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-benefit {
+        min-width: 0;
+        padding: 20px;
+        border: 1px solid #e4e4ea;
+        border-radius: 18px;
+        background: #fff;
+        box-shadow: 0 5px 18px #00000008;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-benefit h3 {
+        margin: 0 0 12px;
+        font-size: 17px;
+        font-weight: 700;
+        line-height: 1.35;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-benefit p,
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-benefit li {
+        color: #69727d;
+        font-size: 12px;
+        line-height: 1.55;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-benefit ul {
+        display: grid;
+        gap: 5px;
+        margin: 12px 0;
+        padding-left: 18px;
+        list-style: disc;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-services-heading {
+        padding-block: 38px 10px;
+        text-align: center;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-services-heading .service-copy > h2 {
+        margin-bottom: 12px;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-services-heading .service-copy > p {
+        max-width: 900px;
+        margin-inline: auto;
+        color: #69727d;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-service {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        align-items: center;
+        gap: 64px;
+        padding-block: 28px 50px;
+        text-align: left;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-service .service-copy > h2 {
+        margin-bottom: 14px;
+        font-size: clamp(23px, 2.4vw, 30px);
+        font-weight: 700;
+        letter-spacing: -.5px;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-service .service-copy > ul {
+        gap: 6px;
+        margin-block: 14px;
+        padding-left: 20px;
+        list-style: disc;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-service .service-copy > ul li {
+        padding-left: 0;
+        color: #69727d;
+        font-size: 13px;
+        line-height: 1.45;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-service .service-copy > ul li::before {
+        display: none;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-service .service-media {
+        gap: 14px;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-service .service-media > img {
+        max-height: 310px;
+        border-radius: 20px;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-service .service-media > img:only-child {
+        max-width: 480px;
+        justify-self: center;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-industries {
+        padding: 48px 10px 62px;
+        text-align: center;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-industries > h2 {
+        margin-bottom: 10px;
+        font-size: clamp(27px, 3vw, 36px);
+        font-weight: 700;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-industries > p {
+        max-width: 880px;
+        margin: 0 auto 25px;
+        color: #69727d;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-industries__grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        margin-block: 26px;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-industry {
+        min-width: 0;
+        padding: 12px;
+        border: 1px solid #e3e7ed;
+        border-radius: 18px;
+        background: #f7f7fa;
+        text-align: center;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-industry figure {
+        display: grid;
+        min-height: 112px;
+        margin: 0 0 10px;
+        place-items: center;
+        overflow: hidden;
+        border-radius: 12px;
+        background: #fff;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-industry figure img {
+        display: block;
+        width: 100%;
+        height: 112px;
+        object-fit: cover;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-industry h3 {
+        margin: 0;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 1.35;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-process {
+        padding-block: 32px 54px;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-process .service-copy > h2,
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-tools .service-copy > h2 {
+        text-align: center;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-process .service-copy > ol {
+        display: grid;
+        gap: 10px;
+        max-width: 940px;
+        margin: 24px auto 0;
+        padding-left: 25px;
+        color: #505050;
+        font-size: 13px;
+        line-height: 1.55;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-tools {
+        padding-block: 25px 56px;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-tools__grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 26px;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-tool {
+        display: grid;
+        min-width: 0;
+        min-height: 112px;
+        align-content: center;
+        justify-items: center;
+        gap: 9px;
+        padding: 15px;
+        border: 1px solid #e4e4ea;
+        border-radius: 16px;
+        background: #fff;
+        text-align: center;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-tool figure {
+        display: grid;
+        width: 100%;
+        height: 55px;
+        margin: 0;
+        place-items: center;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-tool img {
+        display: block;
+        max-width: 100%;
+        max-height: 54px;
+        object-fit: contain;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .performance-marketing-tool h3 {
+        margin: 0;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 1.35;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-cta {
+        padding: 34px 28px;
+        border-radius: 24px;
+        background: #e9e5ff;
+        text-align: center;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-cta .service-copy > h2 {
+        max-width: 900px;
+        margin: 0 auto 14px;
+        font-size: clamp(25px, 3vw, 36px);
+        font-weight: 700;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-cta .service-copy > p {
+        max-width: 900px;
+        margin-inline: auto;
+        color: #505050;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-faq {
+        padding-block: 38px 52px;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-faq .service-copy > h2 {
+        margin-bottom: 24px;
+        font-size: clamp(25px, 3vw, 34px);
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-faq .location-disclosure {
+        margin-bottom: 0;
+        padding-inline: 0;
+        border: 0;
+        border-bottom: 1px solid #e5e5ea;
+        border-radius: 0;
+        background: transparent;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-faq .location-disclosure > summary {
+        padding-block: 15px;
+        padding-left: 20px;
+        font-size: 14px;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-faq .location-disclosure > summary::before {
+        position: absolute;
+        left: 0;
+        color: #006ace;
+        content: '\2022';
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-faq .location-disclosure > summary::after {
+        display: none;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-content > .paid-search-clients {
+        width: 100%;
+        margin: 32px 0 20px;
+        padding: 30px 0;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-contact {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(300px, .9fr);
+        align-items: center;
+        gap: 56px;
+        padding-block: 30px 64px;
+        text-align: left;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-contact .service-copy > h3 {
+        margin-bottom: 18px;
+        font-size: 30px;
+        font-weight: 700;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-contact .service-copy > p {
+        margin: 12px 0 4px;
+        color: #69727d;
+        font-size: 13px;
+    }
+
+    .service-page--performance-marketing-agency-nagpur .service-section--performance-contact .service-copy > a {
+        display: inline-flex;
+        min-height: 44px;
+        align-items: center;
+        margin: 0 8px 0 0;
+        padding: 8px 12px;
+        border: 1px solid #e3e3e8;
+        border-radius: 999px;
+        background: #fff;
+        color: #111;
+        font-size: 12px;
+        text-transform: none;
+    }
+
+    @media (max-width: 63.99rem) {
+        .service-page--performance-marketing-agency-nagpur .service-section--performance-hero,
+        .service-page--performance-marketing-agency-nagpur .service-section--performance-contact {
+            gap: 32px;
+        }
+
+        .service-page--performance-marketing-agency-nagpur .performance-marketing-benefits {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .service-page--performance-marketing-agency-nagpur .performance-marketing-industries__grid,
+        .service-page--performance-marketing-agency-nagpur .performance-marketing-tools__grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .service-page--performance-marketing-agency-nagpur .service-section--performance-service {
+            gap: 35px;
+        }
+    }
+
+    @media (max-width: 39.99rem) {
+        .service-page--performance-marketing-agency-nagpur .paid-search-heading {
+            padding: 20px;
+        }
+
+        .service-page--performance-marketing-agency-nagpur .paid-search-heading h1 {
+            font-size: 27px;
+        }
+
+        .service-page--performance-marketing-agency-nagpur .service-content {
+            display: block;
+            width: calc(100% - 40px);
+        }
+
+        .service-page--performance-marketing-agency-nagpur .service-section--performance-hero,
+        .service-page--performance-marketing-agency-nagpur .service-section--performance-contact {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 30px;
+            padding-block: 36px 46px;
+        }
+
+        .service-page--performance-marketing-agency-nagpur .service-section--performance-hero .service-copy > h2 {
+            font-size: 29px;
+        }
+
+        .service-page--performance-marketing-agency-nagpur .service-section--performance-hero .performance-marketing-form {
+            justify-self: center;
+        }
+
+        .service-page--performance-marketing-agency-nagpur .performance-marketing-proof {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 8px;
+        }
+
+        .service-page--performance-marketing-agency-nagpur .performance-marketing-proof > h3 {
+            grid-column: 1 / -1;
+        }
+
+        .service-page--performance-marketing-agency-nagpur .performance-marketing-proof__metric {
+            min-height: 64px;
+            padding: 7px 4px;
+        }
+
+        .service-page--performance-marketing-agency-nagpur .performance-marketing-proof__metric strong {
+            font-size: 20px;
+        }
+
+        .service-page--performance-marketing-agency-nagpur .performance-marketing-proof__metric span {
+            font-size: 9px;
+        }
+
+        .service-page--performance-marketing-agency-nagpur .performance-marketing-benefits {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 12px;
+            padding-bottom: 45px;
+        }
+
+        .service-page--performance-marketing-agency-nagpur .service-section--performance-service {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 22px;
+            padding-block: 28px 38px;
+        }
+
+        .service-page--performance-marketing-agency-nagpur .service-section--performance-service .service-copy > h2 {
+            font-size: 24px;
+        }
+
+        .service-page--performance-marketing-agency-nagpur .performance-marketing-industries__grid,
+        .service-page--performance-marketing-agency-nagpur .performance-marketing-tools__grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .service-page--performance-marketing-agency-nagpur .performance-marketing-industry {
+            padding: 8px;
+        }
+
+        .service-page--performance-marketing-agency-nagpur .performance-marketing-industry figure,
+        .service-page--performance-marketing-agency-nagpur .performance-marketing-industry figure img {
+            height: 86px;
+            min-height: 86px;
+        }
+
+        .service-page--performance-marketing-agency-nagpur .service-section--performance-process .service-copy > ol {
+            gap: 8px;
+            font-size: 12px;
+        }
+
+        .service-page--performance-marketing-agency-nagpur .service-section--performance-cta {
+            padding: 28px 18px;
+        }
+
+        .service-page--performance-marketing-agency-nagpur .service-section--performance-contact .service-copy > a {
+            margin-bottom: 8px;
+        }
     }
 }

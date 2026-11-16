@@ -1,46 +1,93 @@
 @extends('layouts.public')
 
-@section('title', 'Contact Trivo | Digital Marketing Consultant in India')
-@section('description', 'Speak with Trivo about SEO, PPC, social media growth, website strategy, and performance marketing for your business.')
+@section('title', isset($record) ? ($record->seo_title ?: $record->title.' | Trivo') : 'Contact Trivo | Digital Marketing Consultant in India')
+@section('description', isset($record) ? ($record->seo_description ?: 'Speak with Trivo about SEO, PPC, social media growth, website strategy, and performance marketing for your business.') : 'Speak with Trivo about SEO, PPC, social media growth, website strategy, and performance marketing for your business.')
+@section('canonical', isset($record) ? ($record->canonical_url ?: request()->url()) : request()->url())
+@section('robots', isset($record) ? ($record->robots ?: config('seo.default_robots')) : config('seo.default_robots'))
 
 @section('content')
-    <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-        <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-            <div>
-                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-primary">Contact</p>
-                <h1 class="mt-4 text-5xl font-black tracking-[-0.07em] text-slate-900 sm:text-6xl">Let's talk about your next growth move.</h1>
-                <div class="mt-8 space-y-5 text-slate-600">
-                    <p><strong class="text-slate-900">Email:</strong> <a href="mailto:letstalk@trivo.in" class="text-primary hover:text-[#004b8a]">letstalk@trivo.in</a></p>
-                    <p><strong class="text-slate-900">Phone:</strong> <a href="tel:+919999999999" class="text-primary hover:text-[#004b8a]">+91 99999 99999</a></p>
-                    <p><strong class="text-slate-900">Location:</strong> India</p>
+    <article class="contact-page">
+        <header class="contact-page__banner">
+            <h1>Contact</h1>
+        </header>
+
+        <section class="contact-page__main" aria-labelledby="contact-intro-title">
+            <div class="contact-page__details">
+                <h2 id="contact-intro-title">We’re here to help you grow</h2>
+                <p>Feel free to reach out to us through your preferred method of contact. We are eager to connect with you and explore how our digital marketing team can contribute to your success.</p>
+
+                <div class="contact-page__channels">
+                    <div>
+                        <span>Phone number:</span>
+                        <a href="tel:+919673537026">+91 96735 37026</a>
+                    </div>
+                    <div>
+                        <span>Email address:</span>
+                        <a href="mailto:contact@trivo.in">contact@trivo.in</a>
+                    </div>
+                </div>
+
+                <div class="contact-page__map">
+                    <span class="contact-page__map-icon">
+                        <img src="{{ asset('wp-content/uploads/2023/05/gogle-maps.svg') }}" alt="" width="24" height="24">
+                    </span>
+                    <address>Kalmana, Nagpur,<br> Maharashtra 440035</address>
+                    <a href="https://www.google.com/maps/search/Trivo/@21.1618064,79.1568915,17z?authuser=0&amp;entry=ttu&amp;g_ep=EgoyMDI1MDIyNi4xIKXMDSoJLDEwMjExNDUzSAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">View on map</a>
                 </div>
             </div>
 
-            <div class="rounded-[32px] border border-slate-200 bg-[#f7f7fa] p-6 sm:p-8">
-                <form action="{{ route('thank-you') }}" method="get" class="space-y-5">
-                    <div>
-                        <label for="name" class="mb-2 block text-sm font-semibold text-slate-700">Name</label>
-                        <input id="name" type="text" class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-primary focus:outline-none" placeholder="Your name" required>
-                    </div>
+            <form
+                class="contact-page__form"
+                action="mailto:contact@trivo.in?subject=Contact%20enquiry"
+                method="post"
+                enctype="text/plain"
+                data-home-enquiry="contact"
+            >
+                <svg class="contact-page__spark" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+                    <path d="M22 0c1.9 12.1 8 18.2 22 22-14 3.8-20.1 9.9-22 22C20.1 31.9 14 25.8 0 22 14 18.2 20.1 12.1 22 0Z" fill="currentColor"/>
+                    <path d="M37 1v10M32 6h10" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                <label class="sr-only" for="contact-name">Name</label>
+                <input id="contact-name" type="text" name="name" placeholder="Name" autocomplete="name" aria-label="Name" required>
 
-                    <div>
-                        <label for="email" class="mb-2 block text-sm font-semibold text-slate-700">Email</label>
-                        <input id="email" type="email" class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-primary focus:outline-none" placeholder="you@example.com" required>
-                    </div>
+                <label class="sr-only" for="contact-email">Email</label>
+                <input id="contact-email" type="email" name="email" placeholder="Email" autocomplete="email" aria-label="Email" required>
 
-                    <div>
-                        <label for="company" class="mb-2 block text-sm font-semibold text-slate-700">Company</label>
-                        <input id="company" type="text" class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-primary focus:outline-none" placeholder="Your company">
-                    </div>
+                <label class="sr-only" for="contact-company">Company name</label>
+                <input id="contact-company" type="text" name="company" placeholder="Company name" autocomplete="organization" aria-label="Company name">
 
-                    <div>
-                        <label for="message" class="mb-2 block text-sm font-semibold text-slate-700">Project goals</label>
-                        <textarea id="message" rows="5" class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-primary focus:outline-none" placeholder="Tell us about your business and goals" required></textarea>
-                    </div>
+                <label class="sr-only" for="contact-phone">Phone number</label>
+                <input id="contact-phone" type="tel" name="phone" placeholder="Phone number" autocomplete="tel" aria-label="Phone number" required>
 
-                    <button type="submit" class="inline-flex w-full items-center justify-center rounded-full bg-primary px-5 py-3.5 text-sm font-semibold text-white shadow-lg shadow-primary/20 transition hover:bg-[#004b8a]">Send enquiry</button>
-                </form>
+                <label class="sr-only" for="contact-message">What can we help you with?</label>
+                <textarea id="contact-message" name="message" rows="4" placeholder="What can we help you with?" aria-label="What can we help you with?" required></textarea>
+
+                <button type="submit">Get in touch <span aria-hidden="true">→</span></button>
+            </form>
+        </section>
+
+        <section class="contact-page__locations" aria-labelledby="contact-locations-title">
+            <h2 id="contact-locations-title">Locations</h2>
+            <div class="contact-page__location-grid">
+                <article class="contact-page__location">
+                    <span class="contact-page__location-icon"><img src="{{ asset('wp-content/uploads/2023/05/gogle-maps.svg') }}" alt="" width="24" height="24"></span>
+                    <p>Rd No 1725, Riffa, Bahrain</p>
+                    <span class="contact-page__location-label">Phone number:</span>
+                    <a href="tel:+97336084903">+973 36084903</a>
+                </article>
+                <article class="contact-page__location">
+                    <span class="contact-page__location-icon"><img src="{{ asset('wp-content/uploads/2023/05/gogle-maps.svg') }}" alt="" width="24" height="24"></span>
+                    <p>Jogeshwari West, Mumbai,<br> Maharashtra 400102</p>
+                    <span class="contact-page__location-label">Phone number:</span>
+                    <a href="tel:+919029449582">+91 90294 49582</a>
+                </article>
+                <article class="contact-page__location">
+                    <span class="contact-page__location-icon"><img src="{{ asset('wp-content/uploads/2023/05/gogle-maps.svg') }}" alt="" width="24" height="24"></span>
+                    <p>Surat, Gujarat<br>394210</p>
+                    <span class="contact-page__location-label">Phone number:</span>
+                    <a href="tel:+918806409826">+91 88064 09826</a>
+                </article>
             </div>
-        </div>
-    </section>
+        </section>
+    </article>
 @endsection

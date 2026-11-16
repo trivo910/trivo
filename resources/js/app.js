@@ -128,15 +128,74 @@ document.addEventListener('keydown', (event) => {
 
 Alpine.start();
 
+function openMailDraft(recipient, subject, fields) {
+    const body = fields.join('\n');
+    window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+document.querySelectorAll('[data-career-video]').forEach((container) => {
+    const button = container.querySelector('button');
+    if (!(button instanceof HTMLButtonElement)) return;
+
+    button.addEventListener('click', () => {
+        const iframe = document.createElement('iframe');
+        iframe.src = 'https://www.youtube-nocookie.com/embed/YiWWP5iIyPU?rel=0&autoplay=1';
+        iframe.title = 'Trivo IT Solution Pvt Ltd | Digital Marketing Services';
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+        iframe.allowFullscreen = true;
+        iframe.loading = 'eager';
+        iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+        container.replaceChildren(iframe);
+    });
+});
+
 document.querySelectorAll('[data-home-enquiry]').forEach((form) => {
     form.addEventListener('submit', (event) => {
         event.preventDefault();
         if (!form.reportValidity()) return;
         const data = new FormData(form);
         const audit = form.closest('.home-enquiry--audit');
-        const subject = audit ? 'Free marketing audit enquiry' : 'Marketing proposal enquiry';
-        const body = ['Name: ' + data.get('name'), 'Email: ' + data.get('email'), 'Phone: ' + data.get('phone'), 'Company: ' + data.get('company')].join('\n');
-        window.location.href = `mailto:contact@trivo.in?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        const subject = audit ? 'Free marketing audit enquiry' : form.dataset.homeEnquiry === 'contact' ? 'Contact enquiry' : 'Marketing proposal enquiry';
+        const fields = ['Name: ' + data.get('name'), 'Email: ' + data.get('email'), 'Phone: ' + data.get('phone'), 'Company: ' + data.get('company')];
+        const message = data.get('message');
+        if (typeof message === 'string' && message.trim() !== '') fields.push('Message: ' + message);
+        openMailDraft('contact@trivo.in', subject, fields);
+    });
+});
+
+document.querySelectorAll('[data-career-application]').forEach((form) => {
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        if (!form.reportValidity()) return;
+        const data = new FormData(form);
+        const fields = [
+            'Name: ' + data.get('name'),
+            'Email: ' + data.get('email'),
+            'Phone: ' + data.get('phone'),
+            'Position: ' + data.get('position'),
+            'Current location: ' + data.get('location'),
+            'Professional experience: ' + data.get('experience') + ' years',
+            'Message: ' + data.get('message'),
+        ];
+        const resume = data.get('resume');
+        if (resume instanceof File && resume.name !== '') {
+            fields.push('Selected resume: ' + resume.name);
+            fields.push('Please attach the selected resume file before sending.');
+        }
+        openMailDraft('letstalk@trivo.in', 'Career application', fields);
+    });
+});
+
+document.querySelectorAll('[data-blog-load-more]').forEach((button) => {
+    const gridId = button.getAttribute('aria-controls');
+    const grid = gridId ? document.getElementById(gridId) : null;
+    if (!grid) return;
+
+    button.addEventListener('click', () => {
+        [...grid.querySelectorAll('[data-blog-card][hidden]')].slice(0, 6).forEach((card) => {
+            card.hidden = false;
+        });
+        if (grid.querySelector('[data-blog-card][hidden]') === null) button.remove();
     });
 });
 
@@ -162,6 +221,59 @@ document.querySelectorAll('.home-results__testimonials').forEach((container) => 
     show(0);
 });
 
+let horizontalCarouselId = 0;
+
+function setupHorizontalCarousel(section, track, items, controlsClass, trackId, itemLabel = 'client logos') {
+    if (items.length < 2) return;
+
+    track.id = `${trackId}-${++horizontalCarouselId}`;
+    track.classList.add('is-enhanced');
+    const controls = document.createElement('div');
+    controls.className = controlsClass;
+    controls.setAttribute('role', 'group');
+    controls.setAttribute('aria-label', `Choose ${itemLabel}`);
+    let activeIndex = 0;
+
+    const update = () => {
+        const firstItem = items[0];
+        const step = firstItem.getBoundingClientRect().width + (Number.parseFloat(getComputedStyle(track).columnGap) || 0);
+        if (step <= 0 || track.clientWidth === 0) return;
+
+        const visibleItems = Math.max(1, Math.round(track.clientWidth / step));
+        const lastIndex = Math.max(0, items.length - visibleItems);
+        activeIndex = Math.min(lastIndex, Math.round(track.scrollLeft / step));
+        const pageCount = lastIndex + 1;
+
+        if (controls.children.length !== pageCount) {
+            controls.replaceChildren();
+            for (let index = 0; index < pageCount; index++) {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.setAttribute('aria-label', `Show ${itemLabel} ${index + 1}`);
+                button.setAttribute('aria-controls', track.id);
+                button.addEventListener('click', () => {
+                    const targetLeft = items[index].getBoundingClientRect().left - track.getBoundingClientRect().left + track.scrollLeft;
+                    track.scrollTo({
+                        left: targetLeft,
+                        behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
+                    });
+                });
+                controls.appendChild(button);
+            }
+        }
+
+        [...controls.children].forEach((button, index) => {
+            if (index === activeIndex) button.setAttribute('aria-current', 'true');
+            else button.removeAttribute('aria-current');
+        });
+    };
+
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    section.appendChild(controls);
+    update();
+}
+
 document.querySelectorAll('.paid-search-clients').forEach((section) => {
     const figures = [...section.querySelectorAll(':scope > figure')];
     if (figures.length < 2) return;
@@ -169,23 +281,18 @@ document.querySelectorAll('.paid-search-clients').forEach((section) => {
     track.className = 'paid-search-client-track';
     track.setAttribute('aria-label', 'Client logos');
     figures.forEach((figure) => track.appendChild(figure));
-    const controls = document.createElement('div');
-    controls.className = 'paid-search-client-controls';
-    controls.setAttribute('role', 'group');
-    controls.setAttribute('aria-label', 'Choose client logos');
-    figures.forEach((figure, index) => {
-        const button = document.createElement('button');
-        button.type = 'button';
-        button.setAttribute('aria-label', `Show client ${index + 1}`);
-        button.addEventListener('click', () => track.scrollTo({left: figure.offsetLeft - figures[0].offsetLeft, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'}));
-        controls.appendChild(button);
-    });
-    const update = () => {
-        const step = figures[0].getBoundingClientRect().width + 16;
-        const active = Math.round(track.scrollLeft / step);
-        [...controls.children].forEach((button, index) => button.setAttribute('aria-current', String(index === active)));
-    };
-    track.addEventListener('scroll', update, {passive: true});
-    section.append(track, controls);
-    update();
+    section.appendChild(track);
+    setupHorizontalCarousel(section, track, figures, 'paid-search-client-controls', 'paid-search-client-track');
+});
+
+document.querySelectorAll('.about-page__clients').forEach((section) => {
+    const track = section.querySelector(':scope > .about-page__client-track');
+    if (!(track instanceof HTMLUListElement)) return;
+    setupHorizontalCarousel(section, track, [...track.children], 'about-page__client-controls', 'about-page-client-track');
+});
+
+document.querySelectorAll('.team-page__gallery').forEach((section) => {
+    const track = section.querySelector(':scope > .team-page__gallery-track');
+    if (!(track instanceof HTMLUListElement)) return;
+    setupHorizontalCarousel(section, track, [...track.children], 'team-page__gallery-controls', 'team-page-gallery', 'team photos');
 });

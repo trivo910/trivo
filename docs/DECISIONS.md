@@ -1,5 +1,23 @@
 # Development decisions
 
+## 2026-11-14 — Nagpur performance marketing page layout
+- Keep the existing location page path, SEO metadata, imported copy and shared page shell.
+- Recompose the hero, review metrics, partner-benefit cards, marketing service rows, industry and tool grids, process, FAQs, client carousel and contact block to match the supplied reference.
+- Add page-local enquiry forms using the existing mail-draft handler; leave the shared footer form and other location layouts unchanged.
+
+## 2026-11-14 — Rate optimization page layout
+- Render `/rate-optimization` through the shared imported-service template and preserve its existing page title, canonical URL, and URL.
+- Match the reference with a lavender title band, split hero, accessible service tabs, and alternating CRO/Google Ads content sections, reusing imported page copy and imagery.
+- Stop rendering this page at the imported “what you get” marker because the remaining source HTML is unrelated paid-search copy. This is a page-specific presentation boundary; stored content and other routes remain unchanged.
+
+## 2026-11-14 — Graphic design page layout
+- Recompose the imported hero artwork, trophy, links, avatars and proof figures into the reference collage and bottom strip. Keep the wide design artwork out of the Fast Delivery card as a full-width banner, and render published pathless testimonials in the review section.
+- Build the results metrics from imported values, using the live page’s labels only when those labels are missing. Preserve the existing public path and link destinations.
+
+## 2026-11-14 — SEO service card details
+- The imported SEO page contains headings for On-Page, Off-Page and Technical SEO cards but no supporting points. Add the reviewed reference copy during rendering only for those existing cards; preserve imported page data, metadata and public URLs.
+- Keep the points as semantic lists with visible pin markers, and do not alter other service pages.
+
 ## 2026-11-12 — Public shell follows live-site reference
 - Replace placeholder public navigation, contact details, partner marks and footer with the verified Trivo menu, local upload assets, live contact/social links and blue footer treatment. Keep all existing public paths unchanged.
 - Use the existing self-hosted Montserrat variable font and add a single font preload; its local 400/600/700-named files are identical copies of the same variable font.
@@ -137,6 +155,11 @@
 - Separate site/social (`settings.site`) and analytics/verification (`settings.seo`) sections. Use existing role permissions; grant no new permissions to Editors. Validate and encrypt each section independently, and audit section events without values.
 - Accept plain text, safe HTTPS social URLs and tracker IDs/tokens only. Do not invent or import values during implementation. Public tracking stays inactive until the public rendering/CSP integration; custom scripts and the rest of SEO settings remain separate pending work.
 - Brand images must be ready, unarchived rasters with alt text; site icons must be square and at least 48 pixels. Lock selected media rows on save so archive cannot race with assignment, and retain image reference protection.
+
+## 2026-11-16 — Blog article layout
+- Render every published post through a shared responsive article template at its existing public path. Preserve post SEO metadata and sanitize imported body HTML before layout transformations.
+- Prefer assigned featured media; when absent, promote the first sanitized body image for the article hero and blog card. Keep remaining inline media and turn sanitized FAQ summaries into native disclosure controls.
+- Keep the existing shared marketing footer.
 - Reuse shared glass form components and preserve the current section when changing theme. Synthetic tests/browser checks use isolated data and send no tracking requests.
 
 ## 2026-11-03 — Image library and manual videos

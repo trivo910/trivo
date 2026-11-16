@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\Media;
+use App\Models\Page;
 use App\Models\Post;
+use App\Services\Content\BlogPostLayout;
 use App\Services\Content\PublicContentRenderer;
+use App\Support\ContentHtml;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -12,11 +16,24 @@ class BlogController extends Controller
 {
     public function index(): View
     {
+        $record = Page::query()->where('status', 'published')->where('path', '/blog')->first();
         $published = Post::query()->where('status', 'published')->whereNotNull('published_at')
             ->orderByDesc('published_at')->limit(30)->get();
         if ($published->isNotEmpty()) {
+            $media = Media::query()
+                ->whereIn('id', $published->pluck('featured_media_id')->filter())
+                ->get()
+                ->keyBy('id');
+            $blogPostLayout = app(BlogPostLayout::class);
             $posts = [];
             foreach ($published as $post) {
+                $featuredMedia = $media->get($post->featured_media_id);
+                $featuredImage = null;
+                if (! $featuredMedia || $featuredMedia->processing_status !== 'ready') {
+                    $bodyHtml = app(ContentHtml::class)->clean($post->body);
+                    $featuredImage = $blogPostLayout->firstImage($bodyHtml);
+                }
+
                 $posts[] = [
                     'title' => $post->title,
                     'excerpt' => $post->excerpt ?: $post->seo_description ?: Str::limit(strip_tags($post->body), 180),
@@ -24,15 +41,19 @@ class BlogController extends Controller
                     'date' => $post->published_at?->format('F Y') ?? '',
                     'slug' => $post->slug,
                     'url' => $post->path,
+                    'featured_media' => $featuredMedia,
+                    'image' => $featuredImage,
                 ];
             }
 
             return view('pages.blog', [
                 'posts' => $posts,
+                'record' => $record,
             ]);
         }
 
         return view('pages.blog', [
+            'record' => $record,
             'posts' => [
                 [
                     'title' => 'How to turn intent into pipeline with SEO-led content',
@@ -91,6 +112,21 @@ class BlogController extends Controller
 
         abort_if(! $article, 404);
 
-        return view('pages.blog-post', ['article' => $article]);
+        $bodyHtml = app(ContentHtml::class)->clean($article['content']);
+        $article['content'] = $bodyHtml;
+        $article['heading'] = app(BlogPostLayout::class)->heading($bodyHtml, $article['title']);
+        $article['seo_title'] = null;
+        $article['seo_description'] = Str::limit(strip_tags($bodyHtml), 180);
+        $article['canonical_url'] = request()->url();
+        $article['robots'] = null;
+
+        $preparedBody = app(BlogPostLayout::class)->prepare($bodyHtml, $article['heading'], true);
+
+        return view('pages.blog-post', [
+            'article' => $article,
+            'bodyHtml' => $preparedBody['html'],
+            'featuredMedia' => null,
+            'featuredImage' => $preparedBody['featuredImage'],
+        ]);
     }
 }
