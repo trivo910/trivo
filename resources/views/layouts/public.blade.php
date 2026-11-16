@@ -194,11 +194,33 @@
                         <a href="{{ route('return-refund-policy') }}">Return &amp; Refund Policy</a>
                     </nav>
                     <div class="site-footer__social" aria-label="Social media">
-                        <a href="https://www.linkedin.com/company/trivo-in/" aria-label="LinkedIn">in</a>
-                        <a href="https://twitter.com/trivooffical" aria-label="Twitter">t</a>
-                        <a href="https://www.instagram.com/trivooffical/" aria-label="Instagram">ig</a>
-                        <a href="https://www.facebook.com/trivooffical/" aria-label="Facebook">f</a>
-                        <a href="https://in.pinterest.com/trivooffical/" aria-label="Pinterest">p</a>
+                        <a href="https://www.linkedin.com/company/trivo-in/" aria-label="LinkedIn">
+                            <svg class="site-footer__icon site-footer__icon--linkedin" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path d="M20.45 2H3.55C2.69 2 2 2.68 2 3.53v16.94c0 .85.69 1.53 1.55 1.53h16.9c.86 0 1.55-.68 1.55-1.53V3.53C22 2.68 21.31 2 20.45 2ZM8 19H5V9h3v10ZM6.5 7.7a1.75 1.75 0 1 1 0-3.5 1.75 1.75 0 0 1 0 3.5ZM19 19h-3v-4.9c0-1.17-.02-2.67-1.63-2.67-1.63 0-1.88 1.27-1.88 2.59V19h-3V9h2.88v1.37h.04c.4-.76 1.38-1.57 2.84-1.57C18.28 8.8 19 10.77 19 13.34V19Z"/>
+                            </svg>
+                        </a>
+                        <a href="https://twitter.com/trivooffical" aria-label="Twitter">
+                            <svg class="site-footer__icon site-footer__icon--twitter" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path d="M23.95 4.57a10 10 0 0 1-2.83.78 4.93 4.93 0 0 0 2.16-2.72 9.86 9.86 0 0 1-3.13 1.2 4.92 4.92 0 0 0-8.39 4.48A13.98 13.98 0 0 1 1.64 2.16a4.92 4.92 0 0 0 1.52 6.57 4.9 4.9 0 0 1-2.23-.62v.06a4.93 4.93 0 0 0 3.95 4.83 4.93 4.93 0 0 1-2.22.08 4.94 4.94 0 0 0 4.6 3.42A9.9 9.9 0 0 1 0 18.54a13.96 13.96 0 0 0 7.56 2.22c9.05 0 14-7.5 14-14v-.64a10 10 0 0 0 2.46-2.55Z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.instagram.com/trivooffical/" aria-label="Instagram">
+                            <svg class="site-footer__icon site-footer__icon--instagram" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="17.5" cy="6.8" r="1.2"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.facebook.com/trivooffical/" aria-label="Facebook">
+                            <svg class="site-footer__icon site-footer__icon--facebook" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path d="M24 12a12 12 0 1 0-13.88 11.86v-8.39H7.08V12h3.04V9.35c0-3 1.79-4.66 4.52-4.66 1.31 0 2.68.23 2.68.23v2.95h-1.51c-1.49 0-1.95.92-1.95 1.86V12h3.32l-.53 3.47h-2.79v8.39A12 12 0 0 0 24 12Z"/>
+                            </svg>
+                        </a>
+                        <a href="https://in.pinterest.com/trivooffical/" aria-label="Pinterest">
+                            <svg class="site-footer__icon site-footer__icon--pinterest" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path d="M12 0a12 12 0 0 0-4.37 23.18c-.1-.95-.18-2.4.04-3.43l1.58-6.7s-.4-.8-.4-1.98c0-1.85 1.08-3.23 2.42-3.23 1.14 0 1.69.86 1.69 1.88 0 1.15-.73 2.88-1.1 4.48-.32 1.34.67 2.43 1.99 2.43 2.38 0 4.21-2.51 4.21-6.13 0-3.2-2.3-5.43-5.58-5.43-3.8 0-6.03 2.85-6.03 5.8 0 1.15.44 2.38 1 3.05.11.13.12.25.09.39l-.37 1.5c-.06.24-.19.29-.44.18-1.66-.77-2.7-3.2-2.7-5.15 0-4.2 3.05-8.07 8.8-8.07 4.62 0 8.22 3.3 8.22 7.7 0 4.6-2.9 8.3-6.92 8.3-1.35 0-2.62-.7-3.06-1.53l-.83 3.17c-.3 1.16-1.12 2.62-1.67 3.51A12 12 0 1 0 12 0Z"/>
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>

@@ -32,6 +32,14 @@ it('renders the marketing solutions page as an alternating service layout', func
         ->assertSee('Explore all<br>solutions', false)
         ->assertSee('Get In Touch')
         ->assertSee('/paid-search-marketing');
+
+    preg_match_all('/<div class="marketing-solution__media">\s*<img\s+src="([^"]+)"/', $response->getContent(), $imageMatches);
+    expect($imageMatches[1])->toHaveCount(8);
+
+    foreach ($imageMatches[1] as $source) {
+        $relativePath = ltrim((string) parse_url($source, PHP_URL_PATH), '/');
+        expect(file_exists(public_path($relativePath)))->toBeTrue();
+    }
 });
 
 it('renders SEO content in the dedicated service layout and preserves its SEO metadata', function () {
