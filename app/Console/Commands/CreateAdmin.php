@@ -12,7 +12,7 @@ class CreateAdmin extends Command
 {
     protected $signature = 'trivo:admin-create {--from-env : Read ADMIN_INITIAL_* from the process environment once}';
 
-    protected $description = 'Explicitly provision an admin; mandatory authenticator enrollment happens on first sign-in';
+    protected $description = 'Explicitly provision an admin account';
 
     public function handle(ProvisionAdmin $provision): int
     {
@@ -41,7 +41,7 @@ class CreateAdmin extends Command
         } finally {
             unset($password);
         }
-        $this->info('Admin created. Complete authenticator enrollment at the configured admin sign-in page.');
+        $this->info('Admin created. Sign in with your email and password at the configured admin sign-in page.');
         if ($fromEnv) {
             $this->warn('Remove ADMIN_INITIAL_* credentials from the environment before caching configuration.');
         }

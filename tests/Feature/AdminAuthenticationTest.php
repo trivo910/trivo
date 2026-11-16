@@ -3,9 +3,6 @@
 use Database\Seeders\RolePermissionSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use PragmaRX\Google2FA\Google2FA;
 use Spatie\Activitylog\Models\Activity;
 
 uses(RefreshDatabase::class);
@@ -23,71 +20,26 @@ it('renders an accessible private sign-in page without public assets', function 
 
 it('requires sign-in before all protected admin screens', function (string $route) {
     $this->get(route($route))->assertRedirect(route('admin.login'));
-})->with(['admin.dashboard', 'admin.styleguide', 'admin.activity', 'admin.recovery-codes']);
+})->with(['admin.dashboard', 'admin.styleguide', 'admin.activity']);
 
-it('does not authenticate from a password alone', function () {
-    $user = adminAccount();
+it('authenticates with email and password without an authenticator', function (bool $enrolled) {
+    $user = adminAccount(enrolled: $enrolled);
     $this->post(route('admin.authenticate'), ['email' => $user->email, 'password' => 'password'])
-        ->assertRedirect(route('admin.challenge'));
-    $this->assertGuest();
-    $this->get(route('admin.dashboard'))->assertRedirect(route('admin.login'));
-});
-
-it('authenticates only after a valid TOTP and rejects replay of that code', function () {
-    $user = adminAccount();
-    $code = app(Google2FA::class)->getCurrentOtp($user->two_factor_secret);
-    $this->post(route('admin.authenticate'), ['email' => $user->email, 'password' => 'password']);
-    $this->post(route('admin.challenge.store'), ['code' => $code])->assertRedirect(route('admin.dashboard'));
+        ->assertRedirect(route('admin.dashboard'))
+        ->assertSessionHas('admin.verified_user_id', $user->id)
+        ->assertSessionMissing('admin.pending');
     $this->assertAuthenticatedAs($user);
     $this->get(route('admin.dashboard'))->assertOk()->assertSee('Average SEO score');
-    $this->post(route('admin.logout'))->assertRedirect(route('admin.login'));
-    $this->post(route('admin.authenticate'), ['email' => $user->email, 'password' => 'password']);
-    $this->post(route('admin.challenge.store'), ['code' => $code])->assertSessionHasErrors('code');
-    $this->assertGuest();
+    expect($user->fresh()->last_login_at)->not->toBeNull();
     expect(Activity::query()->where('event', 'login_succeeded')->count())->toBe(1);
-});
-
-it('enrolls new accounts, encrypts their secret and hashes recovery codes', function () {
-    $user = adminAccount(enrolled: false);
-    $this->post(route('admin.authenticate'), ['email' => $user->email, 'password' => 'password'])
-        ->assertRedirect(route('admin.enroll'));
-    $this->get(route('admin.enroll'))->assertOk()
-        ->assertSee('Scan this QR code')
-        ->assertSee('data-enrollment-qr', false)
-        ->assertSee('Authenticator setup QR code')
-        ->assertSee('Authenticator setup key');
-    $secret = session('admin.enrollment_secret');
-    expect($user->fresh()->two_factor_secret)->toBeNull();
-    $code = app(Google2FA::class)->getCurrentOtp($secret);
-    $this->post(route('admin.enroll.store'), ['code' => $code])->assertRedirect(route('admin.recovery-codes'));
-    $this->assertAuthenticatedAs($user);
-    $codes = session('admin.recovery_codes');
-    $user->refresh();
-    expect($codes)->toHaveCount(10)->and($user->two_factor_recovery_codes)->toHaveCount(10)
-        ->and(Hash::check($codes[0], $user->two_factor_recovery_codes[0]))->toBeTrue()
-        ->and(DB::table('users')->where('id', $user->id)->value('two_factor_secret'))->not->toBe($secret);
-    $this->get(route('admin.recovery-codes'))->assertOk()->assertSee($codes[0]);
-    $this->get(route('admin.recovery-codes'))->assertRedirect(route('admin.dashboard'));
-    expect(Activity::query()->pluck('properties')->toJson())->not->toContain($secret)->not->toContain($codes[0]);
-});
-
-it('consumes a recovery code once', function () {
-    $user = adminAccount();
-    $recovery = 'AABBCCDD-11223344';
-    $user->forceFill(['two_factor_recovery_codes' => [Hash::make($recovery)]])->save();
-    $this->post(route('admin.authenticate'), ['email' => $user->email, 'password' => 'password']);
-    $this->post(route('admin.challenge.store'), ['code' => $recovery])->assertRedirect(route('admin.dashboard'));
-    expect($user->fresh()->two_factor_recovery_codes)->toBe([]);
-    $this->post(route('admin.logout'));
-    $this->post(route('admin.authenticate'), ['email' => $user->email, 'password' => 'password']);
-    $this->post(route('admin.challenge.store'), ['code' => $recovery])->assertSessionHasErrors('code');
+    $this->post(route('admin.logout'))->assertRedirect(route('admin.login'));
     $this->assertGuest();
-});
+})->with([true, false]);
 
-it('rejects expired pending logins', function () {
-    $user = adminAccount();
-    $this->withSession(['admin.pending' => ['id' => $user->id, 'expires' => now()->timestamp - 1, 'version' => 1]])
-        ->get(route('admin.challenge'))->assertRedirect(route('admin.login'));
+it('rejects incorrect passwords', function () {
+    $user = adminAccount(enrolled: false);
+    $this->post(route('admin.authenticate'), ['email' => $user->email, 'password' => 'incorrect'])
+        ->assertSessionHasErrors('email');
     $this->assertGuest();
 });
 
@@ -98,7 +50,7 @@ it('rejects disabled accounts without disclosing account existence', function ()
     $this->assertGuest();
 });
 
-it('denies a forged authenticated session without the 2FA marker', function () {
+it('denies a forged authenticated session without the admin sign-in marker', function () {
     $user = adminAccount();
     $this->actingAs($user)->get(route('admin.dashboard'))->assertRedirect(route('admin.login'));
     $this->assertGuest();
