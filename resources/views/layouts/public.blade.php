@@ -9,6 +9,7 @@
         <meta name="description" content="{{ $__env->yieldContent('description', 'Trivo is a leading digital marketing services company in India offering SEO, PPC, social media and performance marketing solutions.') }}">
         <link rel="canonical" href="{{ $__env->yieldContent('canonical', request()->url()) }}">
         <meta name="robots" content="{{ $__env->yieldContent('robots', config('seo.default_robots')) }}">
+        @yield('socialMeta')
         <link rel="preload" href="{{ asset('fonts/montserrat-latin-400.woff2') }}" as="font" type="font/woff2" crossorigin>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>

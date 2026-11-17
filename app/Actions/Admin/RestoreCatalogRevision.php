@@ -21,6 +21,7 @@ class RestoreCatalogRevision
 
         app(SaveCatalogDraft::class)->handle($service, ['title' => $snapshot['title'] ?? null, 'path' => $service->path,
             'blocks' => $snapshot['blocks'] ?? [], 'media_id' => $snapshot['media_id'] ?? null, 'sort' => $snapshot['sort'] ?? 0,
-            'content_version' => $version]);
+            'content_version' => $version,
+            ...($service instanceof PortfolioItem && isset($snapshot['case_study']) ? ['case_study' => $snapshot['case_study']] : [])]);
     }
 }

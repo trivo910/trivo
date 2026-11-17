@@ -1,7 +1,7 @@
 @props(['model', 'history', 'routePrefix', 'label' => 'page'])
 <x-admin.glass-card strong>
     <h2>Publication</h2><p>{{ ucfirst($model->status) }}{{ $model->published_at ? ' · '.$model->published_at->format('Y-m-d H:i').' UTC' : '' }}</p>
-    <p class="helper">Publication changes the backend state. Public templates and URL rendering are still in development. Published content stays locked in this workflow.</p>
+    <p class="helper">{{ $model instanceof \App\Models\PortfolioItem && isset($model->details['case_study']) ? 'Publishing makes this profile available at its URL. Published profiles remain editable; saving updates the live content.' : ($model instanceof \App\Models\Page ? 'Publishing makes this page available at its URL. Published pages remain editable.' : 'Manage publication and scheduling here. Availability on the public website depends on the content template.') }}</p>
     @if($model->publication_error)<p class="field-error" role="status">Scheduled publication is blocked. Review content, SEO, images and URL conflicts, then cancel or reschedule.</p>@endif
     @can('publish', $model)
         <form method="POST" action="{{ route($routePrefix.'.publication', $model) }}" class="form-stack">@csrf<input type="hidden" name="content_version" value="{{ $model->content_version }}">

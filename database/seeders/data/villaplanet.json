@@ -1,0 +1,163 @@
+{
+  "title": "Villa Planet",
+  "path": "/villaplanet",
+  "source_titles": [
+    "Villa Planet"
+  ],
+  "sort": 11,
+  "reference_url": "https://trivo.in/villaplanet",
+  "seo": {
+    "seo_title": "Digital Marketing Portfolio | VillaPlanet Travel Marketing Success Story | Trivo",
+    "seo_description": "Explore Trivo's digital marketing portfolio for VillaPlanet and discover\nhow our SEO, social media, and performance marketing strategies\nhelped increase online visibility, bookings, and customer\nengagement.",
+    "canonical_url": "https://trivo.in/villaplanet",
+    "robots": "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+    "og_title": null,
+    "og_description": null,
+    "twitter_title": null,
+    "twitter_description": null,
+    "schema_type": null,
+    "schema_json": null,
+    "noindex": 0,
+    "nofollow": 0,
+    "sitemap_include": 1,
+    "sitemap_priority": null
+  },
+  "layout": {
+    "version": 1,
+    "design": "legacy",
+    "display_date": "2023-05",
+    "thumbnail_path": "wp-content/uploads/2026/05/Villa-Planet-Thumbnail.png",
+    "background": "#ffffff",
+    "gradient_start": "#034e87",
+    "gradient_end": "#006ace",
+    "heading_color": "#050505",
+    "body_color": "#4a4a50",
+    "container_width": 1280,
+    "sections": [
+      {
+        "type": "intro",
+        "title": "Villa Planet",
+        "eyebrow": "Transforming Digital Presence for Premier Luxury Villas",
+        "body": "<p style=\"text-align: justify;\">Villa Planet is a high-end vacation rental platform offering luxurious villas for rent in prime locations. Catering to upscale clients, it provides a seamless booking experience for travelers seeking a getaway in destinations such as Lonavala, Goa, and Alibaug. Trivo IT Solution Pvt. Ltd. partnered with Villa Planet to enhance their digital presence and build an efficient online platform for both guests and property owners.</p>\t\t\t\t\t\t\t\t",
+        "image_path": null,
+        "image_position": "right",
+        "button_label": "",
+        "button_url": "",
+        "badge_value": "",
+        "badge_label": "",
+        "visible": true,
+        "padding_top": 80,
+        "padding_bottom": 60,
+        "cards": []
+      },
+      {
+        "type": "report",
+        "title": "Instagram Growth",
+        "eyebrow": "4.6k followers",
+        "body": "<p style=\"text-align: justify;\">We boost your Instagram presence by enhancing engagement, increasing followers, and improving brand visibility through targeted strategies and creative content. By analyzing your audience, we craft custom campaigns to drive growth and establish a loyal community.</p>\t\t\t\t\t\t\t\t",
+        "image_path": "wp-content/uploads/2023/05/Screenshot-2025-03-05-at-12.07.11%E2%80%AFPM-1024x479.png",
+        "image_position": "left",
+        "button_label": "",
+        "button_url": "",
+        "badge_value": "",
+        "badge_label": "",
+        "visible": true,
+        "padding_top": 50,
+        "padding_bottom": 30,
+        "cards": [],
+        "heading_url": "https://www.instagram.com/villaplanet_01/",
+        "hide_title": false,
+        "image_url": "https://www.instagram.com/villaplanet_01/"
+      },
+      {
+        "type": "report",
+        "title": "Website Development",
+        "eyebrow": "",
+        "body": "<p style=\"text-align: justify;\">We design visually appealing, user-friendly websites tailored to your brand’s needs, ensuring a seamless digital experience for visitors and boosting engagement. Our team focuses on responsive design, fast load times, and an intuitive layout to enhance the user journey.</p>\t\t\t\t\t\t\t\t",
+        "image_path": "wp-content/uploads/2023/05/Trivo-Client-3-1024x578.png",
+        "image_position": "left",
+        "button_label": "",
+        "button_url": "",
+        "badge_value": "",
+        "badge_label": "",
+        "visible": true,
+        "padding_top": 50,
+        "padding_bottom": 30,
+        "cards": [],
+        "heading_url": "https://villaplanet.in/",
+        "hide_title": false,
+        "image_url": "https://villaplanet.in/"
+      },
+      {
+        "type": "report",
+        "title": "SEO",
+        "eyebrow": "",
+        "body": "<p style=\"text-align: justify;\">Our SEO strategies for Villa Planet are designed to enhance online visibility, ensuring higher rankings on search engines. This approach helps attract organic traffic, making it easier for potential customers to discover and book their luxury villa experiences, ultimately boosting bookings and brand presence.</p>\t\t\t\t\t\t\t\t",
+        "image_path": "wp-content/uploads/2023/05/WhatsApp-Image-2025-03-05-at-12.59.20-e1741417301479-1024x744.jpeg",
+        "image_position": "left",
+        "button_label": "",
+        "button_url": "",
+        "badge_value": "",
+        "badge_label": "",
+        "visible": true,
+        "padding_top": 50,
+        "padding_bottom": 30,
+        "cards": [],
+        "heading_url": "https://villaplanet.in/",
+        "hide_title": false,
+        "image_url": "https://villaplanet.in/"
+      },
+      {
+        "type": "text",
+        "title": "Services Used:",
+        "eyebrow": "",
+        "body": "<p>SEO, Social Growth, Website Design & Development</p>",
+        "image_path": null,
+        "image_position": "right",
+        "button_label": "",
+        "button_url": "",
+        "badge_value": "",
+        "badge_label": "",
+        "visible": true,
+        "padding_top": 80,
+        "padding_bottom": 60,
+        "cards": []
+      },
+      {
+        "type": "impact",
+        "title": "Business impact",
+        "eyebrow": "STRENGTH IN NUMBERS",
+        "body": "<p>Our collaboration with Villa Planet has boosted their online presence, driving more traffic and improving bookings. Through a custom website design, we streamlined the booking process for a better user experience. Our SEO efforts enhanced their visibility on search engines, while Instagram growth strategies increased engagement and followers. These combined efforts have strengthened their brand presence and contributed to greater business success.</p>\t\t\t\t\t\t\t\t",
+        "image_path": null,
+        "image_position": "right",
+        "button_label": "",
+        "button_url": "",
+        "badge_value": "",
+        "badge_label": "",
+        "visible": true,
+        "padding_top": 100,
+        "padding_bottom": 200,
+        "cards": [
+          {
+            "title": "198%",
+            "label": "Organic transactions increased",
+            "url": "",
+            "image_path": null
+          },
+          {
+            "title": "20%",
+            "label": "Organic conversion rate improved",
+            "url": "",
+            "image_path": null
+          },
+          {
+            "title": "160%",
+            "label": "Increase new users from organic traffic",
+            "url": "",
+            "image_path": null
+          }
+        ]
+      }
+    ]
+  }
+}

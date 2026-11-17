@@ -113,8 +113,8 @@ it('archives restores and preserves imported or previously published entries', f
     $this->put(route('admin.portfolio.update', $item), array_replace(portfolioDraftFixture(), ['path' => '/renamed', 'content_version' => 3]))->assertSessionHasErrors('path');
     $this->delete(route('admin.portfolio.archive', $item), ['content_version' => 3])->assertForbidden();
     $item->update(['status' => 'published']);
-    $this->put(route('admin.portfolio.update', $item), portfolioDraftFixture() + ['content_version' => 3])->assertForbidden();
-    $this->get(route('admin.portfolio.edit', $item))->assertOk()->assertDontSee('Save portfolio draft');
+    $this->put(route('admin.portfolio.update', $item), portfolioDraftFixture() + ['content_version' => 3])->assertSessionHasNoErrors();
+    $this->get(route('admin.portfolio.edit', $item))->assertOk()->assertSee('Save published portfolio');
 });
 
 it('orders and filters portfolio items and keeps SEO managers read-only', function () {

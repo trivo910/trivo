@@ -1,0 +1,163 @@
+{
+  "title": "Brady Morris",
+  "path": "/bradymorris",
+  "source_titles": [
+    "Brady Morris"
+  ],
+  "sort": 12,
+  "reference_url": "https://trivo.in/bradymorris",
+  "seo": {
+    "seo_title": "Digital Marketing Portfolio | Brady Morris Success Story &amp; Growth Case Study | Trivo",
+    "seo_description": "Explore Trivo's digital marketing portfolio for Brady Morris and\ndiscover how our SEO, social media, and performance marketing\nstrategies helped grow online visibility, engagement, and brand\nauthority",
+    "canonical_url": "https://trivo.in/bradymorris",
+    "robots": "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+    "og_title": null,
+    "og_description": null,
+    "twitter_title": null,
+    "twitter_description": null,
+    "schema_type": null,
+    "schema_json": null,
+    "noindex": 0,
+    "nofollow": 0,
+    "sitemap_include": 1,
+    "sitemap_priority": null
+  },
+  "layout": {
+    "version": 1,
+    "design": "legacy",
+    "display_date": "2023-05",
+    "thumbnail_path": "wp-content/uploads/2026/05/Brady-Morris-Thumbnail.png",
+    "background": "#ffffff",
+    "gradient_start": "#034e87",
+    "gradient_end": "#006ace",
+    "heading_color": "#050505",
+    "body_color": "#4a4a50",
+    "container_width": 1280,
+    "sections": [
+      {
+        "type": "intro",
+        "title": "Brady Morris",
+        "eyebrow": "Brady & Morris Engineering Co. Ltd. – Enhancing Digital Presence for a Leading Crane Manufacturer",
+        "body": "<p style=\"text-align: justify;\">Brady &amp; Morris Engineering Co. Ltd., established in 1946, is a prominent manufacturer of material handling equipment, including overhead and gantry cranes, electric and manual hoists, and chain pulley blocks. With over 60 years of experience, they serve diverse sectors such as steel, oil &amp; gas, cement, mining, power, chemicals, defense, and nuclear energy. The company is headquartered in Mumbai, India, and has been listed on the Bombay Stock Exchange for over 50 years.</p>\t\t\t\t\t\t\t\t",
+        "image_path": null,
+        "image_position": "right",
+        "button_label": "",
+        "button_url": "",
+        "badge_value": "",
+        "badge_label": "",
+        "visible": true,
+        "padding_top": 80,
+        "padding_bottom": 60,
+        "cards": []
+      },
+      {
+        "type": "report",
+        "title": "Google Analytics",
+        "eyebrow": "",
+        "body": "<p style=\"text-align: justify;\">We boost your reach by leveraging <strong data-start=\"34\" data-end=\"63\">Google Analytics insights</strong>, optimizing your website, and implementing targeted marketing strategies to attract more visitors and drive higher conversions.</p>\t\t\t\t\t\t\t\t",
+        "image_path": "wp-content/uploads/2023/05/WhatsApp-Image-2025-03-08-at-10.33.39-1-1024x526.jpeg",
+        "image_position": "left",
+        "button_label": "",
+        "button_url": "",
+        "badge_value": "",
+        "badge_label": "",
+        "visible": true,
+        "padding_top": 50,
+        "padding_bottom": 30,
+        "cards": [],
+        "heading_url": "https://bradymorris.in/",
+        "hide_title": false,
+        "image_url": "https://bradymorris.in/"
+      },
+      {
+        "type": "report",
+        "title": "Website Development",
+        "eyebrow": "",
+        "body": "<p style=\"text-align: justify;\">Developed a responsive, user-friendly website to showcase their extensive range of products and services, enhancing online visibility and customer engagement.</p>\t\t\t\t\t\t\t\t",
+        "image_path": "wp-content/uploads/2023/05/Screenshot-2025-03-05-at-2.49.02%E2%80%AFPM-1024x546.png",
+        "image_position": "left",
+        "button_label": "",
+        "button_url": "",
+        "badge_value": "",
+        "badge_label": "",
+        "visible": true,
+        "padding_top": 50,
+        "padding_bottom": 30,
+        "cards": [],
+        "heading_url": "https://bradymorris.in/",
+        "hide_title": false,
+        "image_url": "https://bradymorris.in/"
+      },
+      {
+        "type": "report",
+        "title": "SEO",
+        "eyebrow": "",
+        "body": "<p style=\"text-align: justify;\">Implemented SEO best practices to improve search engine rankings, driving organic traffic and increasing brand awareness in the competitive material handling industry.</p>\t\t\t\t\t\t\t\t",
+        "image_path": "wp-content/uploads/2023/05/Screenshot-2025-03-05-at-3.07.38%E2%80%AFPM-1024x452.png",
+        "image_position": "left",
+        "button_label": "",
+        "button_url": "",
+        "badge_value": "",
+        "badge_label": "",
+        "visible": true,
+        "padding_top": 50,
+        "padding_bottom": 30,
+        "cards": [],
+        "heading_url": "https://bradymorris.in/",
+        "hide_title": false,
+        "image_url": "https://bradymorris.in/"
+      },
+      {
+        "type": "text",
+        "title": "Services Used:",
+        "eyebrow": "",
+        "body": "<p>SEO, Website Design & Development</p>",
+        "image_path": null,
+        "image_position": "right",
+        "button_label": "",
+        "button_url": "",
+        "badge_value": "",
+        "badge_label": "",
+        "visible": true,
+        "padding_top": 80,
+        "padding_bottom": 60,
+        "cards": []
+      },
+      {
+        "type": "impact",
+        "title": "Business impact",
+        "eyebrow": "STRENGTH IN NUMBERS",
+        "body": "<p>Our website development and SEO strategies helped Brady &amp; Morris Engineering Co. Ltd. significantly enhance their online presence, making it easier for customers to find them. By optimizing their website, we drove more organic traffic, resulting in increased inquiries. The seamless user experience has led to higher engagement and conversion rates. Our SEO efforts have also established them as an authority in the material handling industry. Overall, our contributions have generated quality leads, fueling their business growth.</p>\t\t\t\t\t\t\t\t",
+        "image_path": null,
+        "image_position": "right",
+        "button_label": "",
+        "button_url": "",
+        "badge_value": "",
+        "badge_label": "",
+        "visible": true,
+        "padding_top": 100,
+        "padding_bottom": 200,
+        "cards": [
+          {
+            "title": "198%",
+            "label": "Organic transactions increased",
+            "url": "",
+            "image_path": null
+          },
+          {
+            "title": "20%",
+            "label": "Organic conversion rate improved",
+            "url": "",
+            "image_path": null
+          },
+          {
+            "title": "160%",
+            "label": "Increase new users from organic traffic",
+            "url": "",
+            "image_path": null
+          }
+        ]
+      }
+    ]
+  }
+}

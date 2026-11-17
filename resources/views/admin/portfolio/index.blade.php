@@ -1,5 +1,5 @@
 <x-admin.layout title="Portfolio">
-    <div class="page-intro"><h2>Case studies</h2><p class="helper">Manage case-study sections, images, order, SEO and publication schedules. Public templates and URL rendering are still in development.</p></div>
+    <div class="page-intro"><h2>Case studies</h2><p class="helper">Manage case-study sections, images, order, SEO and publication schedules. Entries with a case-study design render at their published URL.</p></div>
     @can('create', App\Models\PortfolioItem::class)<div><x-admin.button :href="route('admin.portfolio.create')">Create portfolio draft</x-admin.button></div>@endcan
     <x-admin.glass-card strong><form method="GET" action="{{ route('admin.portfolio.index') }}" class="form-grid">
         <x-admin.input name="q" label="Search portfolio" :value="request('q')" maxlength="120" />

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Models\Page;
 use App\Models\Post;
+use App\Models\PortfolioItem;
 use App\Services\Content\PublicContentRenderer;
 use Illuminate\View\View;
 
@@ -72,6 +73,10 @@ class HomeController extends Controller
 
     public function portfolioItem(string $slug, PublicContentRenderer $renderer): View
     {
+        $portfolio = PortfolioItem::query()->where('path', '/'.$slug)->where('status', 'published')->first();
+        if ($portfolio) {
+            return app(PortfolioPublicController::class)->show($portfolio);
+        }
         $post = Post::query()->where('status', 'published')->where('path', '/'.$slug)->first();
         if ($post) {
             return $renderer->render($post);

@@ -158,8 +158,8 @@ it('archives drafts while releasing their paths and restores them when the path 
         ->and($page->fresh()->content_version)->toBe(3);
 });
 
-it('protects published scheduled previously published and imported paths', function () {
-    foreach (['published', 'scheduled'] as $status) {
+it('protects scheduled previously published and imported paths', function () {
+    foreach (['scheduled'] as $status) {
         $page = Page::query()->create(['title' => $status, 'path' => '/'.$status, 'status' => $status]);
         $this->get(route('admin.pages.edit', $page))->assertOk()->assertDontSee('Save page draft');
         $this->put(route('admin.pages.update', $page), pageDraftFixture() + ['content_version' => 1])->assertForbidden();
@@ -184,6 +184,36 @@ it('permits SEO managers to read but not mutate page drafts', function () {
     $this->put(route('admin.pages.update', $page), pageDraftFixture() + ['content_version' => 1])->assertForbidden();
     $this->delete(route('admin.pages.archive', $page), ['content_version' => 1])->assertForbidden();
     $this->post(route('admin.pages.revision', [$page, $revision]), ['content_version' => 1])->assertForbidden();
+});
+
+it('keeps published pages editable with revision and URL protection', function () {
+    $page = app(SavePageDraft::class)->handle(pageDraftFixture());
+    $originalRevision = Revision::query()->sole();
+    $page->update(['seo_title' => 'Page SEO', 'seo_description' => 'Page description', 'robots' => 'index,follow']);
+    app(\App\Actions\Admin\ChangePagePublication::class)->handle($page, ['operation' => 'publish', 'content_version' => 1]);
+    $page->refresh();
+    $publishedAt = $page->published_at->toIso8601String();
+    $lockedAt = $page->publication_locked_at->toIso8601String();
+    $this->get(route('admin.pages.edit', $page))->assertOk()->assertSee('Save published page')->assertSee('updates the live page immediately');
+    $this->put(route('admin.pages.update', $page), [...pageDraftFixture(), 'title' => 'Updated live title', 'content_version' => 2])
+        ->assertSessionHasNoErrors()->assertSessionHas('status', 'Published page updated.');
+    $page->refresh();
+    expect($page->title)->toBe('Updated live title')->and($page->status)->toBe('published')
+        ->and($page->published_at->toIso8601String())->toBe($publishedAt)
+        ->and($page->publication_locked_at->toIso8601String())->toBe($lockedAt)
+        ->and($page->seo_title)->toBe('Page SEO')->and($page->content_version)->toBe(3);
+    $this->put(route('admin.pages.update', $page), [...pageDraftFixture(), 'path' => '/renamed-live-page', 'content_version' => 3])
+        ->assertSessionHasErrors('path');
+    $this->put(route('admin.pages.update', $page), [...pageDraftFixture(), 'content_version' => 2])
+        ->assertSessionHasErrors('content_version');
+    $this->delete(route('admin.pages.archive', $page), ['content_version' => 3])->assertForbidden();
+    $this->post(route('admin.pages.revision', [$page, $originalRevision]), ['content_version' => 3])->assertSessionHasNoErrors();
+    expect($page->fresh()->title)->toBe('Synthetic page')->and($page->fresh()->status)->toBe('published')
+        ->and($page->fresh()->content_version)->toBe(4)->and(Revision::query()->count())->toBe(4);
+    $seoManager = adminAccount('SEO Manager');
+    $this->actingAs($seoManager)->withSession(verifiedAdminSession($seoManager));
+    $this->get(route('admin.pages.edit', $page))->assertOk()->assertDontSee('Save published page');
+    $this->put(route('admin.pages.update', $page), [...pageDraftFixture(), 'content_version' => 4])->assertForbidden();
 });
 
 it('requires authentication and CSRF and does not save without them', function () {

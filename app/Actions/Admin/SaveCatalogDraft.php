@@ -9,6 +9,7 @@ use App\Models\Revision;
 use App\Models\Service;
 use App\Models\Testimonial;
 use App\Services\Content\ContentDrafts;
+use App\Services\Content\PortfolioLayout;
 use Illuminate\Contracts\Cache\LockTimeoutException;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -31,6 +32,12 @@ class SaveCatalogDraft
                         throw ValidationException::withMessages(['content_version' => 'This content changed. Reload before saving.']);
                     }
                 }
+                $layout = null;
+                if ($service instanceof PortfolioItem && array_key_exists('case_study', $values)) {
+                    $layout = app(PortfolioLayout::class)->validate($values['case_study']);
+                    $values['blocks'] = app(PortfolioLayout::class)->blocks($layout);
+                    $values['media_id'] = $layout['thumbnail_media_id'] ?? null;
+                }
                 $extra = Validator::make($values, ['sort' => ['required', 'integer', 'between:0,10000'], 'media_id' => ['nullable', 'integer', 'min:1']])->validate();
                 $data = app(ContentDrafts::class)->validate($values, $service);
                 $imageBlocks = $data['blocks'];
@@ -40,10 +47,16 @@ class SaveCatalogDraft
                 app(ContentDrafts::class)->lockImages($imageBlocks);
                 $service->fill(['title' => $data['title'], 'path' => $data['path'], 'blocks' => $data['blocks'], 'sort' => (int) $extra['sort'],
                     'media_id' => ! empty($extra['media_id']) ? (int) $extra['media_id'] : null, 'content_version' => $service->exists ? $service->content_version + 1 : 1]);
+                if ($layout !== null) {
+                    $details = $service->details ?? [];
+                    $details['case_study'] = $layout;
+                    $service->details = $details;
+                }
                 $service->save();
                 Revision::query()->create(['revisionable_type' => $service::class, 'revisionable_id' => $service->id, 'user_id' => auth()->id(),
                     'snapshot' => ['kind' => 'content', 'title' => $service->title, 'path' => $service->path, 'blocks' => $service->blocks,
-                        'media_id' => $service->media_id, 'sort' => $service->sort, 'content_version' => $service->content_version]]);
+                        'media_id' => $service->media_id, 'sort' => $service->sort, 'content_version' => $service->content_version,
+                        ...($service instanceof PortfolioItem && isset($service->details['case_study']) ? ['case_study' => $service->details['case_study']] : [])]]);
                 $event = match (true) {
                     $service instanceof Client => 'client_draft_saved',
                     $service instanceof Testimonial => 'testimonial_draft_saved',

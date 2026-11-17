@@ -71,7 +71,7 @@ class PageController extends Controller
     {
         $action->handle($request->validated(), $page);
 
-        return redirect()->route('admin.pages.edit', $page)->with('status', 'Page draft saved.');
+        return redirect()->route('admin.pages.edit', $page)->with('status', $page->status === 'published' ? 'Published page updated.' : 'Page draft saved.');
     }
 
     public function archive(PageMutationRequest $request, Page $page, ArchivePageDraft $action): RedirectResponse
@@ -99,6 +99,6 @@ class PageController extends Controller
     {
         $action->handle($page, $revision, $request->integer('content_version'));
 
-        return redirect()->route('admin.pages.edit', $page)->with('status', 'Revision content restored as a new draft version.');
+        return redirect()->route('admin.pages.edit', $page)->with('status', 'Revision content restored as a new version.');
     }
 }

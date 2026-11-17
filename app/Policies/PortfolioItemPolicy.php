@@ -29,12 +29,14 @@ class PortfolioItemPolicy
 
     public function update(User $user, PortfolioItem $portfolio): bool
     {
-        return $user->is_active && $user->can('portfolio.update') && ! $portfolio->trashed() && $portfolio->status === 'draft' && $portfolio->published_at === null;
+        return $user->is_active && $user->can('portfolio.update') && ! $portfolio->trashed()
+            && ($portfolio->status === 'published' || ($portfolio->status === 'draft' && $portfolio->published_at === null));
     }
 
     public function delete(User $user, PortfolioItem $portfolio): bool
     {
-        return $this->update($user, $portfolio) && $user->can('portfolio.delete') && $portfolio->legacy_wp_id === null && $portfolio->publication_locked_at === null;
+        return $this->update($user, $portfolio) && $portfolio->status === 'draft' && $portfolio->published_at === null
+            && $user->can('portfolio.delete') && $portfolio->legacy_wp_id === null && $portfolio->publication_locked_at === null;
     }
 
     public function restore(User $user, PortfolioItem $portfolio): bool

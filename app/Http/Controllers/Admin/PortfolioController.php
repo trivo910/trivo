@@ -14,6 +14,7 @@ use App\Http\Requests\Admin\PortfolioPublicationRequest;
 use App\Models\Media;
 use App\Models\PortfolioItem;
 use App\Models\Revision;
+use App\Services\Content\PortfolioLayout;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
@@ -37,7 +38,8 @@ class PortfolioController extends Controller
     {
         Gate::authorize('create', PortfolioItem::class);
 
-        return $this->form(new PortfolioItem(['status' => 'draft', 'blocks' => [], 'sort' => 0, 'content_version' => 1]));
+        return $this->form(new PortfolioItem(['status' => 'draft', 'blocks' => [], 'sort' => 0, 'content_version' => 1,
+            'details' => ['case_study' => app(PortfolioLayout::class)->blank()]]));
     }
 
     public function edit(PortfolioItem $portfolio): View
@@ -67,7 +69,7 @@ class PortfolioController extends Controller
     {
         $action->handle($request->validated(), $portfolio);
 
-        return redirect()->route('admin.portfolio.edit', $portfolio)->with('status', 'Portfolio draft saved.');
+        return redirect()->route('admin.portfolio.edit', $portfolio)->with('status', $portfolio->status === 'published' ? 'Published portfolio updated.' : 'Portfolio draft saved.');
     }
 
     public function archive(PortfolioMutationRequest $request, PortfolioItem $portfolio, ArchivePortfolioDraft $action): RedirectResponse
@@ -95,6 +97,6 @@ class PortfolioController extends Controller
     {
         $action->handle($portfolio, $revision, $request->integer('content_version'));
 
-        return redirect()->route('admin.portfolio.edit', $portfolio)->with('status', 'Portfolio revision restored as a new draft version.');
+        return redirect()->route('admin.portfolio.edit', $portfolio)->with('status', 'Portfolio revision restored as a new version.');
     }
 }

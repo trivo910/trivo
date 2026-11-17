@@ -1,0 +1,47 @@
+[
+  {
+    "mode": "desktop-light",
+    "create": true,
+    "reopen": true,
+    "edit": true,
+    "addSectionAndCard": true,
+    "reorder": true,
+    "validationPreservesInput": true,
+    "staleEditRejected": true,
+    "publish": true,
+    "publishedEditVisible": true,
+    "listingVisible": true,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "mode": "mobile-light",
+    "create": true,
+    "reopen": true,
+    "edit": true,
+    "addSectionAndCard": true,
+    "reorder": true,
+    "validationPreservesInput": true,
+    "staleEditRejected": true,
+    "publish": true,
+    "publishedEditVisible": true,
+    "listingVisible": true,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "mode": "desktop-dark",
+    "create": true,
+    "reopen": true,
+    "edit": true,
+    "addSectionAndCard": true,
+    "reorder": true,
+    "validationPreservesInput": true,
+    "staleEditRejected": true,
+    "publish": true,
+    "publishedEditVisible": true,
+    "listingVisible": true,
+    "overflow": false,
+    "errors": []
+  }
+]
