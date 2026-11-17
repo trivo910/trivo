@@ -1,0 +1,163 @@
+{
+  "title": "Holiday Aapke Liye",
+  "path": "/holidayaapkliye",
+  "source_titles": [
+    "Holiday Aapke Liye"
+  ],
+  "sort": 10,
+  "reference_url": "https://trivo.in/holidayaapkliye",
+  "seo": {
+    "seo_title": "Digital Marketing Portfolio | Holiday Aap K Liye Travel Growth Case Study | Trivo",
+    "seo_description": "Explore Trivo's digital marketing portfolio for Holiday Aap K Liye and\nsee how our SEO, social media marketing, and performance\ncampaigns helped increase website traffic, travel inquiries, and\nbookings.",
+    "canonical_url": "https://trivo.in/holidayaapkliye",
+    "robots": "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+    "og_title": null,
+    "og_description": null,
+    "twitter_title": null,
+    "twitter_description": null,
+    "schema_type": null,
+    "schema_json": null,
+    "noindex": 0,
+    "nofollow": 0,
+    "sitemap_include": 1,
+    "sitemap_priority": null
+  },
+  "layout": {
+    "version": 1,
+    "design": "legacy",
+    "display_date": "2023-05",
+    "thumbnail_path": "wp-content/uploads/2026/05/Holiday-Aapke-Liye-Thumbnail.png",
+    "background": "#ffffff",
+    "gradient_start": "#034e87",
+    "gradient_end": "#006ace",
+    "heading_color": "#050505",
+    "body_color": "#4a4a50",
+    "container_width": 1280,
+    "sections": [
+      {
+        "type": "intro",
+        "title": "Holiday Aapke Liye",
+        "eyebrow": "Enhancing Digital Presence for a Premier Getaway Destination",
+        "body": "<p style=\"text-align: justify;\">Holiday Aapke Liye is a luxury villa estate nestled in Khopoli, Maharashtra, offering serene retreats for those seeking a peaceful escape. Located just a short drive from Mumbai, it is an ideal destination for weekend getaways, family events, corporate retreats, and destination weddings. Trivo IT Solution Pvt. Ltd. had the privilege of partnering with them to enhance their online presence and provide a seamless digital experience for visitors.</p>\t\t\t\t\t\t\t\t",
+        "image_path": null,
+        "image_position": "right",
+        "button_label": "",
+        "button_url": "",
+        "badge_value": "",
+        "badge_label": "",
+        "visible": true,
+        "padding_top": 80,
+        "padding_bottom": 60,
+        "cards": []
+      },
+      {
+        "type": "report",
+        "title": "Instagram Report",
+        "eyebrow": "",
+        "body": "<p><strong><span style=\"color: #ff0000;\">5.5 k</span> followers</strong></p>\t\t\t\t\t\t\t\t\n<p style=\"text-align: justify;\">We helped <a href=\"https://www.instagram.com/holidayaapkeliye/\" target=\"_blank\" rel=\"noopener\"><strong data-start=\"10\" data-end=\"32\">Holiday Aapke Liye</strong></a> boost their Instagram presence by creating engaging content and implementing a targeted growth strategy. This increased their follower count and enhanced engagement with their audience, leading to more bookings and brand visibility.</p>\t\t\t\t\t\t\t\t",
+        "image_path": "wp-content/uploads/2023/05/Screenshot-2025-03-05-at-11.13.35%E2%80%AFAM-1024x502.png",
+        "image_position": "left",
+        "button_label": "",
+        "button_url": "",
+        "badge_value": "",
+        "badge_label": "",
+        "visible": true,
+        "padding_top": 50,
+        "padding_bottom": 30,
+        "cards": [],
+        "heading_url": "",
+        "hide_title": false,
+        "image_url": "https://www.instagram.com/holidayaapkeliye/"
+      },
+      {
+        "type": "report",
+        "title": "Website Development",
+        "eyebrow": "",
+        "body": "<p style=\"text-align: justify;\">We developed a custom, user-friendly website for <a href=\"https://holidayaapkeliye.com/\" target=\"_blank\" rel=\"noopener\"><strong data-start=\"49\" data-end=\"71\">Holiday Aapke Liye</strong></a>, showcasing their luxury villas and offerings. The website’s intuitive design and seamless booking system have enhanced the user experience, making it easier for customers to explore and reserve their dream getaway.</p>\t\t\t\t\t\t\t\t",
+        "image_path": "wp-content/uploads/2023/05/Trivo-Client-4-1024x568.png",
+        "image_position": "left",
+        "button_label": "",
+        "button_url": "",
+        "badge_value": "",
+        "badge_label": "",
+        "visible": true,
+        "padding_top": 50,
+        "padding_bottom": 30,
+        "cards": [],
+        "heading_url": "",
+        "hide_title": false,
+        "image_url": "https://holidayaapkeliye.com/"
+      },
+      {
+        "type": "report",
+        "title": "Google My Buisness Growth",
+        "eyebrow": "",
+        "body": "<p style=\"text-align: justify;\">We optimized <a href=\"https://holidayaapkeliye.com/\" target=\"_blank\" rel=\"noopener\"><strong data-start=\"13\" data-end=\"37\">Holiday Aapke Liye’s</strong></a> Google Business profile to enhance local search visibility and improve customer engagement. By keeping their information up-to-date and encouraging reviews, we helped boost their credibility and attract more potential clients.</p>\t\t\t\t\t\t\t\t",
+        "image_path": "wp-content/uploads/2023/05/WhatsApp-Image-2025-03-08-at-11.51.31-1024x455.jpeg",
+        "image_position": "left",
+        "button_label": "",
+        "button_url": "",
+        "badge_value": "",
+        "badge_label": "",
+        "visible": true,
+        "padding_top": 50,
+        "padding_bottom": 30,
+        "cards": [],
+        "heading_url": "",
+        "hide_title": false,
+        "image_url": "https://holidayaapkeliye.com/"
+      },
+      {
+        "type": "text",
+        "title": "Services Used:",
+        "eyebrow": "",
+        "body": "<p>Google Buisness, Social Growth, Website Design & Development</p>",
+        "image_path": null,
+        "image_position": "right",
+        "button_label": "",
+        "button_url": "",
+        "badge_value": "",
+        "badge_label": "",
+        "visible": true,
+        "padding_top": 80,
+        "padding_bottom": 60,
+        "cards": []
+      },
+      {
+        "type": "impact",
+        "title": "Business impact",
+        "eyebrow": "STRENGTH IN NUMBERS",
+        "body": "<p>By partnering with Holiday Aapke Liye, we significantly boosted their online visibility and user engagement. We developed a custom website and implemented a targeted Instagram growth strategy, enhancing their digital presence and increasing brand awareness. Additionally, we helped register their properties on popular booking platforms like Airbnb and Booking.com, expanding their reach to a global audience. These efforts led to more inquiries, increased bookings, and overall business growth.</p>\t\t\t\t\t\t\t\t",
+        "image_path": null,
+        "image_position": "right",
+        "button_label": "",
+        "button_url": "",
+        "badge_value": "",
+        "badge_label": "",
+        "visible": true,
+        "padding_top": 100,
+        "padding_bottom": 200,
+        "cards": [
+          {
+            "title": "198%",
+            "label": "Organic transactions increased",
+            "url": "",
+            "image_path": null
+          },
+          {
+            "title": "20%",
+            "label": "Organic conversion rate improved",
+            "url": "",
+            "image_path": null
+          },
+          {
+            "title": "160%",
+            "label": "Increase new users from organic traffic",
+            "url": "",
+            "image_path": null
+          }
+        ]
+      }
+    ]
+  }
+}

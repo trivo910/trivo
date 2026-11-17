@@ -30,9 +30,12 @@ it('publishes valid content without modifying its path content or metadata', fun
     expect($page->status)->toBe('published')->and($page->path)->toBe('/publication-fixture')->and($page->blocks)->toHaveCount(1)
         ->and($page->seo_title)->toBe('Synthetic SEO title')->and($page->published_at)->not->toBeNull()->and($page->publication_locked_at)->not->toBeNull()
         ->and($page->content_version)->toBe(2)->and(Revision::query()->sole()->snapshot['kind'])->toBe('publication');
-    $this->get(route('admin.pages.edit', $page))->assertOk()->assertDontSee('Save page draft')->assertDontSee('Restore revision #');
+    $this->get(route('admin.pages.edit', $page))->assertOk()->assertSee('Save published page')->assertDontSee('Restore revision #');
     $this->post(route('admin.pages.publication', $page), ['operation' => 'publish', 'content_version' => 2])->assertForbidden();
-    $this->get('/publication-fixture')->assertNotFound();
+    $this->get('/publication-fixture')->assertOk()->assertSee('Synthetic copy');
+    $this->put(route('admin.pages.update', $page), ['title' => 'Updated page', 'path' => $page->path,
+        'blocks' => [['type' => 'paragraph', 'text' => 'Updated live copy']], 'content_version' => 2])->assertSessionHasNoErrors();
+    $this->get('/publication-fixture')->assertOk()->assertSee('Updated live copy')->assertDontSee('Synthetic copy');
 });
 
 it('schedules exact UTC minutes cancels and keeps the canonical path locked', function () {

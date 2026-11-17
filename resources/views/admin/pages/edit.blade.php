@@ -11,8 +11,8 @@
                     <x-admin.input name="path" label="Full page path" :value="old('path', $page->path)" maxlength="768" placeholder="/existing-page-path" help="Use the exact original path. Imported page paths are locked." required />
                 </div>
                 <x-admin.page-sections :blocks="is_array(old('blocks', $page->blocks ?? [])) ? old('blocks', $page->blocks ?? []) : ($page->blocks ?? [])" :images="$images" />
-                <p class="helper">Saving keeps this page as a draft. Manage SEO and publication separately below; public templates are still in development.</p>
-                <div><x-admin.button type="submit">Save page draft</x-admin.button></div>
+                <p class="helper">{{ $page->status === 'published' ? 'Saving updates the live page immediately and keeps it published. The published URL is locked.' : 'Saving keeps this page as a draft. Manage SEO and publication separately below.' }}</p>
+                <div><x-admin.button type="submit">{{ $page->status === 'published' ? 'Save published page' : 'Save page draft' }}</x-admin.button></div>
             </form>
         </x-admin.glass-card>
     @else

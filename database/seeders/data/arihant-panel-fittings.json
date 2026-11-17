@@ -1,0 +1,308 @@
+{
+  "title": "Arihant Panel Fittings",
+  "path": "/arihant-panel-fittings",
+  "source_titles": [
+    "Arihant Panel Fittings"
+  ],
+  "sort": 4,
+  "reference_url": "https://trivo.in/arihant-panel-fittings",
+  "seo": {
+    "seo_title": "Digital Marketing Portfolio | Arihant Panel Fittings Growth Case Study | Trivo",
+    "seo_description": "Explore Trivo's digital marketing portfolio for Arihant Panel Fittings and discover how our\nSEO, social media, and performance marketing strategies increased online visibility,\nqualified leads, and business growth.",
+    "canonical_url": "https://trivo.in/arihant-panel-fittings",
+    "robots": "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+    "og_title": null,
+    "og_description": null,
+    "twitter_title": null,
+    "twitter_description": null,
+    "schema_type": null,
+    "schema_json": null,
+    "noindex": 0,
+    "nofollow": 0,
+    "sitemap_include": 1,
+    "sitemap_priority": null
+  },
+  "layout": {
+    "version": 1,
+    "design": "industrial",
+    "display_date": "2026-05",
+    "thumbnail_path": "wp-content/uploads/2026/05/Arihant-Thumbnail.png",
+    "background": "#fff",
+    "gradient_start": "#034e87",
+    "gradient_end": "#006ace",
+    "heading_color": "#050505",
+    "body_color": "#8d8d95",
+    "container_width": 1240,
+    "sections": [
+      {
+        "type": "hero",
+        "title": "Arihant\nPanel Fittings",
+        "eyebrow": "TRIVO CLIENT PORTFOLIO",
+        "body": "<p>\nTransforming industrial branding with high-performance SEO,\nstrategic digital marketing, and modern brand positioning\ndesigned for long-term growth and visibility.\n</p>",
+        "image_path": "wp-content/uploads/2026/05/ChatGPT-Image-May-21-2026-04_59_09-PM.png",
+        "image_position": "right",
+        "button_label": "Visit Website",
+        "button_url": "https://www.arihant-india.com/",
+        "badge_value": "190%",
+        "badge_label": "Organic Growth",
+        "visible": true,
+        "padding_top": 100,
+        "padding_bottom": 100,
+        "cards": []
+      },
+      {
+        "type": "services",
+        "title": "What Trivo Delivered",
+        "eyebrow": "",
+        "body": "<p class=\"trivo-apf-desc\">\nComplete digital growth strategy focused on visibility,\nbranding, and lead generation.\n</p>",
+        "image_path": null,
+        "image_position": "right",
+        "button_label": "",
+        "button_url": "",
+        "badge_value": "",
+        "badge_label": "",
+        "visible": true,
+        "padding_top": 100,
+        "padding_bottom": 80,
+        "cards": [
+          {
+            "title": "SEO Optimization",
+            "label": "",
+            "url": "",
+            "image_path": null,
+            "icon": "🔍",
+            "body": "<p class=\"trivo-apf-desc\">\nAdvanced keyword targeting, technical SEO,\nand ranking optimization to boost search visibility.\n</p>"
+          },
+          {
+            "title": "Digital Marketing",
+            "label": "",
+            "url": "",
+            "image_path": null,
+            "icon": "📈",
+            "body": "<p class=\"trivo-apf-desc\">\nPerformance campaigns focused on traffic,\nengagement, and quality lead generation.\n</p>"
+          },
+          {
+            "title": "Branding",
+            "label": "",
+            "url": "",
+            "image_path": null,
+            "icon": "🎯",
+            "body": "<p class=\"trivo-apf-desc\">\nBuilding a modern and premium digital identity\naligned with industrial excellence.\n</p>"
+          }
+        ]
+      },
+      {
+        "type": "gallery",
+        "title": "Real Performance Results",
+        "eyebrow": "",
+        "body": "<p class=\"trivo-apf-desc\">\nShowcase your real SEO reports, analytics,\nkeyword rankings, and marketing screenshots here.\n</p>",
+        "image_path": null,
+        "image_position": "right",
+        "button_label": "",
+        "button_url": "",
+        "badge_value": "",
+        "badge_label": "",
+        "visible": true,
+        "padding_top": 100,
+        "padding_bottom": 80,
+        "cards": [
+          {
+            "title": "Linkedin",
+            "label": "",
+            "url": "",
+            "image_path": "wp-content/uploads/2026/05/Arihant-P-Linkedin.png",
+            "body": "<p>\nBoosting online visibility and driving measurable business growth through strategic digital solutions.\n</p>"
+          },
+          {
+            "title": "Analytics Dashboard",
+            "label": "",
+            "url": "",
+            "image_path": "wp-content/uploads/2026/05/Arihant-Analytics-Dashboard.png",
+            "body": "<p>\nTransforming data into actionable insights for smarter decisions and better business performance.\n</p>"
+          },
+          {
+            "title": "Graphic Design",
+            "label": "",
+            "url": "",
+            "image_path": "wp-content/uploads/2026/05/Arihant-Graphic-Design.png",
+            "body": "<p>\nCreating visually impactful designs that strengthen brand identity and audience engagement.\n</p>"
+          }
+        ]
+      },
+      {
+        "type": "results",
+        "title": "Growth Delivered By Trivo",
+        "eyebrow": "Performance Metrics",
+        "body": "<p class=\"trivo-apf-stats-desc\">\nStrategic SEO, branding, and digital marketing\nthat generated measurable business growth and visibility.\n</p>",
+        "image_path": null,
+        "image_position": "right",
+        "button_label": "",
+        "button_url": "",
+        "badge_value": "",
+        "badge_label": "",
+        "visible": true,
+        "padding_top": 100,
+        "padding_bottom": 80,
+        "cards": [
+          {
+            "title": "220%",
+            "label": "Organic Traffic Growth",
+            "url": "",
+            "image_path": null
+          },
+          {
+            "title": "150+",
+            "label": "Keywords Ranked",
+            "url": "",
+            "image_path": null
+          },
+          {
+            "title": "4X",
+            "label": "Lead Generation Growth",
+            "url": "",
+            "image_path": null
+          },
+          {
+            "title": "90%",
+            "label": "Brand Visibility Increase",
+            "url": "",
+            "image_path": null
+          }
+        ]
+      },
+      {
+        "type": "testimonial",
+        "title": "What They Said",
+        "eyebrow": "Client Feedback",
+        "body": "<p>\n“Trivo transformed our digital presence with powerful SEO\nstrategies and premium branding. Their expertise helped us\nincrease visibility, improve engagement, and generate\nquality business leads.”\n</p>",
+        "image_path": null,
+        "image_position": "right",
+        "button_label": "",
+        "button_url": "",
+        "badge_value": "",
+        "badge_label": "— Arihant Panel Fittings",
+        "visible": true,
+        "padding_top": 100,
+        "padding_bottom": 80,
+        "cards": []
+      },
+      {
+        "type": "related",
+        "title": "Our Recent Success Stories",
+        "eyebrow": "Our Clients",
+        "body": "",
+        "image_path": null,
+        "image_position": "right",
+        "button_label": "",
+        "button_url": "",
+        "badge_value": "",
+        "badge_label": "",
+        "visible": true,
+        "padding_top": 100,
+        "padding_bottom": 80,
+        "cards": [
+          {
+            "title": "Luhaif Perfumes",
+            "label": "May 2026",
+            "url": "/luhaif-perfumes",
+            "image_path": "wp-content/uploads/2026/05/Luhaif-Thumbnail.png"
+          },
+          {
+            "title": "Mumbai Darshan",
+            "label": "May 2026",
+            "url": "/mumbai-darshan",
+            "image_path": "wp-content/uploads/2026/05/Mumbai-Thumbnail.png"
+          },
+          {
+            "title": "Sell Sold",
+            "label": "May 2026",
+            "url": "/sell-sold",
+            "image_path": "wp-content/uploads/2026/05/Sell-Sold-Thumbnail.png"
+          },
+          {
+            "title": "Professional Frameworks",
+            "label": "May 2026",
+            "url": "/professional-frameworks",
+            "image_path": "wp-content/uploads/2026/05/Professional-Frameworks-Thumbnail.png"
+          },
+          {
+            "title": "Arihant Panel Fittings",
+            "label": "May 2026",
+            "url": "/arihant-panel-fittings",
+            "image_path": "wp-content/uploads/2026/05/Arihant-Thumbnail.png"
+          },
+          {
+            "title": "Al Bushra T & T",
+            "label": "March 2026",
+            "url": "/al-bushra-t-and-t",
+            "image_path": "wp-content/uploads/2026/03/Al-Bushra-Thumbnail.png"
+          },
+          {
+            "title": "Stock Sovet Conversion",
+            "label": "May 2023",
+            "url": "/stocksovet",
+            "image_path": "wp-content/uploads/2026/03/Stock-Sovet-Thumbnail.png"
+          },
+          {
+            "title": "Rashid Miftahi",
+            "label": "May 2023",
+            "url": "/rashidmiftahi",
+            "image_path": "wp-content/uploads/2026/03/Rashid-Miftahi-Thumbnail.png"
+          },
+          {
+            "title": "Areeba Tourism",
+            "label": "May 2023",
+            "url": "/areebatourism",
+            "image_path": "wp-content/uploads/2026/03/Areeba-Thumbnail.png"
+          },
+          {
+            "title": "Sanjari Recycling",
+            "label": "May 2023",
+            "url": "/sanjari-recycling",
+            "image_path": "wp-content/uploads/2026/03/Sanjari-Thumbnail.png"
+          },
+          {
+            "title": "Holiday Aapke Liye",
+            "label": "May 2023",
+            "url": "/holidayaapkliye",
+            "image_path": "wp-content/uploads/2026/05/Holiday-Aapke-Liye-Thumbnail.png"
+          },
+          {
+            "title": "Villa Planet",
+            "label": "May 2023",
+            "url": "/villaplanet",
+            "image_path": "wp-content/uploads/2026/05/Villa-Planet-Thumbnail.png"
+          },
+          {
+            "title": "Brady Morris",
+            "label": "May 2023",
+            "url": "/bradymorris",
+            "image_path": "wp-content/uploads/2026/05/Brady-Morris-Thumbnail.png"
+          },
+          {
+            "title": "Miftahi Shop",
+            "label": "June 2022",
+            "url": "/miftahi-shop",
+            "image_path": "wp-content/uploads/2026/05/Miftahi-Shop-Thumbnail.png"
+          }
+        ]
+      },
+      {
+        "type": "cta",
+        "title": "Ready To Scale Your Brand?",
+        "eyebrow": "",
+        "body": "<p>Partner with Trivo to create impactful digital experiences, powerful SEO strategies, and performance-driven growth.</p>",
+        "image_path": null,
+        "image_position": "right",
+        "button_label": "Start Your Project",
+        "button_url": "/contact",
+        "badge_value": "",
+        "badge_label": "",
+        "visible": true,
+        "padding_top": 80,
+        "padding_bottom": 50,
+        "cards": []
+      }
+    ]
+  }
+}

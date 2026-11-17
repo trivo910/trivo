@@ -48,7 +48,8 @@ class ContentDrafts
             throw ValidationException::withMessages(['path' => 'Use a unique content path without reserved routes, aliases, queries or unsafe characters.']);
         }
         $data['path'] ??= null;
-        if ($page && ($page->legacy_wp_id !== null || $page->publication_locked_at !== null) && $page->path !== $data['path']) {
+        if ($page && ($page->legacy_wp_id !== null || $page->publication_locked_at !== null
+            || (($page instanceof Page || $page instanceof PortfolioItem) && $page->status === 'published')) && $page->path !== $data['path']) {
             throw ValidationException::withMessages(['path' => 'Keep the original imported content path. URL changes require a reviewed redirect.']);
         }
         $blocks = [];

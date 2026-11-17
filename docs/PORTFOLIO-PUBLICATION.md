@@ -1,6 +1,6 @@
 # Portfolio publication and scheduling
 
-Portfolio entries now support publish-now, future UTC scheduling, rescheduling and cancellation through the shared publication workflow. These are backend state changes. Public case-study templates, canonical routing, SEO output and source import remain pending; publishing does not create a public route or deploy the website.
+Portfolio entries support publish-now, future UTC scheduling, rescheduling and cancellation through the shared publication workflow. Entries with a database-backed case-study design now render at their published URL; Luhaif Perfumes is the first imported page. See `PORTFOLIO-LUHAIF.md` for its import and editor. Public rendering for other portfolio entries remains pending. Publishing does not deploy the website.
 
 ## Permissions and readiness
 
@@ -8,7 +8,7 @@ Existing `portfolio.publish` permissions and PortfolioItemPolicy protect transit
 
 Readiness uses the portfolio schema context (`WebPage`/`CreativeWork`) and requires non-empty validated sections, SEO title/description, consistent canonical/robots/sitemap preferences and a conflict-free exact path. Content, featured and social images must be ready, unarchived rasters with alt text. Referenced image rows are locked together in sorted order and checked again when a schedule becomes due.
 
-Source body/details, case-study copy, metadata, featured image, display order and path are preserved by publication transitions. Cancellation returns the entry to draft editing and clears the scheduled timestamp/error, while retaining the permanent path lock. Formerly scheduled entries cannot be renamed or archived. Published/previously published content stays read-only in this workflow. SEO corrections remain a separate permission/action.
+Source body/details, case-study copy, metadata, featured image, display order and path are preserved by publication transitions. Cancellation returns the entry to draft editing and clears the scheduled timestamp/error, while retaining the permanent path lock. Formerly scheduled entries cannot be renamed or archived. Published entries remain editable with portfolio.update permission; saving retains their publication state, timestamp and URL lock. SEO corrections remain a separate permission/action.
 
 ## Due execution and history
 

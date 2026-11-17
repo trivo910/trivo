@@ -49,3 +49,7 @@ Reproduce with ignored `playwright-core` and `@axe-core/playwright` packages und
 5. Stop the owned preview server afterwards. The fixture and captured mail under `.audit/` are excluded from Git and must never be deployed.
 
 Do not run the browser fixture against production, use real accounts in this flow, or publish its credentials. Regenerate the fixture before repeating the test because authentication codes are deliberately single-use.
+# Portfolio profile add/edit verification
+
+`portfolio-profiles-crud.json` records passing browser checks for desktop light, mobile light and desktop dark. Run `php tools/setup_portfolio_browser_fixture.php`, start the isolated portfolio QA server as described in `../PORTFOLIO-LUHAIF.md`, then run `node tools/check_portfolio_profiles_ui.cjs`. Coverage includes creating/reopening/editing profiles, sections/cards/order, validation retention, stale-edit protection, SEO, publishing, live updates and listing visibility. No application profiles or enquiries are changed.
+

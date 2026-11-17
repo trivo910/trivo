@@ -304,3 +304,17 @@ document.querySelectorAll('.team-page__gallery').forEach((section) => {
     if (!(track instanceof HTMLUListElement)) return;
     setupHorizontalCarousel(section, track, [...track.children], 'team-page__gallery-controls', 'team-page-gallery', 'team photos');
 });
+
+// Case-study related projects use native scrolling, including without JavaScript.
+document.querySelectorAll('[data-case-carousel]').forEach(carousel => {
+    const track = carousel.querySelector('.case-cards');
+    carousel.querySelector('.case-carousel__previous').addEventListener('click', () => track.scrollBy({left: -track.clientWidth}));
+    carousel.querySelector('.case-carousel__next').addEventListener('click', () => track.scrollBy({left: track.clientWidth}));
+    const dots = [...carousel.querySelectorAll('[data-case-slide]')];
+    const step = () => (track.firstElementChild?.getBoundingClientRect().width ?? 0) + 30;
+    dots.forEach((dot, index) => dot.addEventListener('click', () => track.scrollTo({left: index * step()})));
+    track.addEventListener('scroll', () => {
+        const current = Math.round(track.scrollLeft / step());
+        dots.forEach((dot, index) => dot.setAttribute('aria-pressed', String(current === index)));
+    }, {passive: true});
+});

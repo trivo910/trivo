@@ -1,7 +1,8 @@
 <x-admin.layout :title="$portfolio->exists ? 'Portfolio details' : 'Create portfolio draft'">
-    <div class="page-intro"><h2>{{ $portfolio->exists ? $portfolio->title : 'New case-study draft' }}</h2><p class="helper">Preserve the original case-study path. Manage SEO and publication separately after saving; public templates are still in development.</p></div>
+    <div class="page-intro"><h2>{{ $portfolio->exists ? $portfolio->title : 'New case-study draft' }}</h2><p class="helper">Preserve the original case-study path. Manage the page content, design, SEO and publication here.</p></div>
     <div><x-admin.button :href="route('admin.portfolio.index')" variant="secondary">Back to portfolio</x-admin.button></div>
     @if($portfolio->exists) @can('updateSeo', $portfolio)<div><x-admin.button :href="route('admin.portfolio.seo', $portfolio)" variant="secondary">Edit portfolio SEO</x-admin.button></div>@endcan @endif
+    @if($portfolio->status === 'published' && isset($portfolio->details['case_study']))<div><x-admin.button :href="url($portfolio->path)" variant="secondary">View live page</x-admin.button></div>@endif
     @if(!$portfolio->exists || auth()->user()->can('update', $portfolio))
         <x-admin.glass-card strong><form method="POST" action="{{ $portfolio->exists ? route('admin.portfolio.update', $portfolio) : route('admin.portfolio.store') }}" class="form-stack">@csrf
             @if($portfolio->exists) @method('PUT')<input type="hidden" name="content_version" value="{{ old('content_version', $portfolio->content_version) }}">@endif
@@ -9,10 +10,14 @@
                 <x-admin.input name="title" label="Portfolio title" :value="old('title', $portfolio->title)" maxlength="255" required />
                 <x-admin.input name="path" label="Full portfolio path" :value="old('path', $portfolio->path)" maxlength="768" required help="Use the exact source path. Imported paths cannot be changed." />
                 <x-admin.input name="sort" label="Display order" type="number" :value="old('sort', $portfolio->sort ?? 0)" min="0" max="10000" required help="Lower numbers appear first; ties use creation order." />
-                <x-admin.select name="media_id" label="Featured portfolio image" :value="old('media_id', $portfolio->media_id ?? '')" :options="['' => 'No featured image'] + $images" help="Choose a ready image with alt text." />
+                @unless(isset($portfolio->details['case_study']))<x-admin.select name="media_id" label="Featured portfolio image" :value="old('media_id', $portfolio->media_id ?? '')" :options="['' => 'No featured image'] + $images" help="Choose a ready image with alt text." />@endunless
             </div>
+            @if(isset($portfolio->details['case_study']))
+                @include('admin.portfolio.layout-editor')
+            @else
             <x-admin.page-sections title="Case-study sections" :blocks="is_array(old('blocks', $portfolio->blocks ?? [])) ? old('blocks', $portfolio->blocks ?? []) : ($portfolio->blocks ?? [])" :images="$images" />
-            <div><x-admin.button type="submit">Save portfolio draft</x-admin.button></div>
+            @endif
+            <div><x-admin.button type="submit">{{ $portfolio->status === 'published' ? 'Save published portfolio' : 'Save portfolio draft' }}</x-admin.button></div>
         </form></x-admin.glass-card>
     @else
         <x-admin.glass-card strong><h2>Portfolio information</h2><p>{{ $portfolio->path }}</p><p class="helper">{{ $portfolio->trashed() ? 'Archived draft' : ucfirst($portfolio->status) }} · Version {{ $portfolio->content_version }} · Order {{ $portfolio->sort }}. This entry is read-only here.</p>

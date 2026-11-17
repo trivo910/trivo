@@ -1,0 +1,163 @@
+{
+  "title": "Stock Sovet Conversion",
+  "path": "/stocksovet",
+  "source_titles": [
+    "Stock Sovet Conversion"
+  ],
+  "sort": 6,
+  "reference_url": "https://trivo.in/stocksovet",
+  "seo": {
+    "seo_title": "Digital Marketing Portfolio | Stocksovet Financial Growth Case Study | Trivo",
+    "seo_description": "Explore Trivo's digital marketing portfolio for Stocksovet and\ndiscover how Trivo's SEO, social media, and performance marketing\nstrategies increased online visibility, engagement, and qualified\nleads.",
+    "canonical_url": "https://trivo.in/stocksovet",
+    "robots": "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+    "og_title": null,
+    "og_description": null,
+    "twitter_title": null,
+    "twitter_description": null,
+    "schema_type": null,
+    "schema_json": null,
+    "noindex": 0,
+    "nofollow": 0,
+    "sitemap_include": 1,
+    "sitemap_priority": null
+  },
+  "layout": {
+    "version": 1,
+    "design": "legacy",
+    "display_date": "2023-05",
+    "thumbnail_path": "wp-content/uploads/2026/03/Stock-Sovet-Thumbnail.png",
+    "background": "#ffffff",
+    "gradient_start": "#034e87",
+    "gradient_end": "#006ace",
+    "heading_color": "#050505",
+    "body_color": "#4a4a50",
+    "container_width": 1280,
+    "sections": [
+      {
+        "type": "intro",
+        "title": "Stock Sovet Conversion",
+        "eyebrow": "Empowering Investors with Data-Driven Insights",
+        "body": "<p style=\"text-align: justify;\">Stock Sovet is a <strong data-start=\"219\" data-end=\"260\">SEBI-registered research analyst firm</strong> dedicated to providing in-depth market analysis and investment insights. As their <strong data-start=\"343\" data-end=\"365\">technology partner</strong>, Trivo IT Solution Pvt. Ltd. developed a seamless, user-friendly platform that enables investors to access real-time financial data, expert recommendations, and market trends.</p>\t\t\t\t\t\t\t\t",
+        "image_path": null,
+        "image_position": "right",
+        "button_label": "",
+        "button_url": "",
+        "badge_value": "",
+        "badge_label": "",
+        "visible": true,
+        "padding_top": 80,
+        "padding_bottom": 60,
+        "cards": []
+      },
+      {
+        "type": "report",
+        "title": "Instagram Growth",
+        "eyebrow": "417 k follower",
+        "body": "<p style=\"text-align: justify;\">We help you <strong data-start=\"90\" data-end=\"109\">boost followers</strong> and <strong data-start=\"114\" data-end=\"137\">increase engagement</strong> through targeted strategies, enhancing your brand’s visibility and reach on Instagram. Stand out and connect with your audience like never before!</p>\t\t\t\t\t\t\t\t",
+        "image_path": "wp-content/uploads/2026/05/stock-Instagram-Growth.png",
+        "image_position": "left",
+        "button_label": "",
+        "button_url": "",
+        "badge_value": "",
+        "badge_label": "",
+        "visible": true,
+        "padding_top": 50,
+        "padding_bottom": 30,
+        "cards": [],
+        "heading_url": "https://www.instagram.com/stocksovet_/",
+        "hide_title": false,
+        "image_url": "https://www.instagram.com/stocksovet_/"
+      },
+      {
+        "type": "report",
+        "title": "Youtube Growth",
+        "eyebrow": "1.7 k subscribers",
+        "body": "<p style=\"text-align: justify;\">Maximize your YouTube channel’s potential by driving <strong data-start=\"562\" data-end=\"589\">more views, subscribers</strong>, and improving <strong data-start=\"605\" data-end=\"626\">video performance</strong>, ensuring your content reaches the right audience.</p>\t\t\t\t\t\t\t\t",
+        "image_path": "wp-content/uploads/2026/05/Youtube-Growth-1024x667.png",
+        "image_position": "left",
+        "button_label": "",
+        "button_url": "",
+        "badge_value": "",
+        "badge_label": "",
+        "visible": true,
+        "padding_top": 50,
+        "padding_bottom": 30,
+        "cards": [],
+        "heading_url": "https://www.youtube.com/@stocksovet",
+        "hide_title": false,
+        "image_url": "https://www.youtube.com/@stocksovet"
+      },
+      {
+        "type": "report",
+        "title": "Website Development",
+        "eyebrow": "",
+        "body": "<p style=\"text-align: justify;\">We developed a high-performance, user-friendly website that integrates real-time financial data and market analysis tools. This custom design enhances user engagement and ensures a seamless experience for investors accessing stock recommendations and insights.</p>\t\t\t\t\t\t\t\t",
+        "image_path": "wp-content/uploads/2026/05/Website-Development.png",
+        "image_position": "left",
+        "button_label": "",
+        "button_url": "",
+        "badge_value": "",
+        "badge_label": "",
+        "visible": true,
+        "padding_top": 50,
+        "padding_bottom": 30,
+        "cards": [],
+        "heading_url": "https://stocksovet.com/",
+        "hide_title": false,
+        "image_url": "https://stocksovet.com/"
+      },
+      {
+        "type": "text",
+        "title": "Services Used:",
+        "eyebrow": "",
+        "body": "<p>Social Growth, UI/UX Design, Website Design & Development</p>",
+        "image_path": null,
+        "image_position": "right",
+        "button_label": "",
+        "button_url": "",
+        "badge_value": "",
+        "badge_label": "",
+        "visible": true,
+        "padding_top": 80,
+        "padding_bottom": 60,
+        "cards": []
+      },
+      {
+        "type": "impact",
+        "title": "Business impact",
+        "eyebrow": "STRENGTH IN NUMBERS",
+        "body": "<p>Since teaming up with <strong data-start=\"76\" data-end=\"107\">Trivo IT Solution Pvt. Ltd.</strong>, Stock Sovet has seen a notable rise in organic search traffic, leading to better conversion rates and an increase in contact form submissions. By tapping into our expertise and strategic insights, Stock Sovet has been able to make smarter decisions with their marketing budget, achieving outstanding results.</p>\t\t\t\t\t\t\t\t",
+        "image_path": null,
+        "image_position": "right",
+        "button_label": "",
+        "button_url": "",
+        "badge_value": "",
+        "badge_label": "",
+        "visible": true,
+        "padding_top": 100,
+        "padding_bottom": 200,
+        "cards": [
+          {
+            "title": "178%",
+            "label": "Organic transactions increased",
+            "url": "",
+            "image_path": null
+          },
+          {
+            "title": "20%",
+            "label": "Organic conversion rate improved",
+            "url": "",
+            "image_path": null
+          },
+          {
+            "title": "130%",
+            "label": "Increase new users from organic traffic",
+            "url": "",
+            "image_path": null
+          }
+        ]
+      }
+    ]
+  }
+}

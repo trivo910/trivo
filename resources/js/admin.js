@@ -177,4 +177,14 @@ Alpine.data('pageSeoPreview', () => ({
     },
 }));
 
+Alpine.data('portfolioLayout', () => ({
+    layout: { sections: [] }, counter: 0, newType: 'report',
+    colors: [{key:'background',label:'Page background'},{key:'gradient_start',label:'Banner gradient start'},{key:'gradient_end',label:'Banner gradient end'},{key:'heading_color',label:'Heading colour'},{key:'body_color',label:'Body text colour'}],
+    init() { this.layout = JSON.parse(this.$el.dataset.layout); this.layout.design ??= 'modern'; this.layout.sections.forEach(s => { s._key = ++this.counter; }); },
+    serialize() { return JSON.stringify({...this.layout, sections: this.layout.sections.map(({_key, ...section}) => section)}); },
+    move(index, direction) { const next = index + direction; if (next < 0 || next >= this.layout.sections.length) return; const [s] = this.layout.sections.splice(index,1); this.layout.sections.splice(next,0,s); },
+    moveCard(section,index,direction) { const next=index+direction; if(next<0||next>=section.cards.length)return; const [card]=section.cards.splice(index,1);section.cards.splice(next,0,card); },
+    add() { this.layout.sections.push({_key: ++this.counter,type:this.newType,title:'New section',eyebrow:'',body:'',image_id:'',image_position:'right',button_label:'',button_url:'',badge_value:'',badge_label:'',visible:true,padding_top:80,padding_bottom:80,cards:[]}); }
+}));
+
 Alpine.start();

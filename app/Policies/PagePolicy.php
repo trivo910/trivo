@@ -30,12 +30,13 @@ class PagePolicy
     public function update(User $user, Page $page): bool
     {
         return $user->is_active && $user->can('pages.update') && ! $page->trashed()
-            && $page->status === 'draft' && $page->published_at === null;
+            && ($page->status === 'published' || ($page->status === 'draft' && $page->published_at === null));
     }
 
     public function delete(User $user, Page $page): bool
     {
-        return $this->update($user, $page) && $user->can('pages.delete') && $page->legacy_wp_id === null && $page->publication_locked_at === null;
+        return $this->update($user, $page) && $page->status === 'draft' && $page->published_at === null
+            && $user->can('pages.delete') && $page->legacy_wp_id === null && $page->publication_locked_at === null;
     }
 
     public function restore(User $user, Page $page): bool

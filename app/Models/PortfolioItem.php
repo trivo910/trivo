@@ -17,6 +17,9 @@ use Illuminate\Support\Carbon;
  * @property int|null $media_id
  * @property int $content_version
  * @property array<array-key, mixed>|null $blocks
+ * @property array<string, mixed>|null $details
+ * @property int|null $og_image_id
+ * @property int|null $twitter_image_id
  * @property Carbon|null $published_at
  * @property Carbon|null $publication_locked_at
  * @property string|null $publication_error

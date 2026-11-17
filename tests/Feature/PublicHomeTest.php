@@ -54,6 +54,7 @@ it('uses the about layout for published imported pages and preserves their SEO m
 });
 
 it('renders the portfolio layout with original project URLs and imported SEO metadata', function () {
+    $this->seed(\Database\Seeders\PortfolioProfilesSeeder::class);
     Page::query()->create([
         'title' => 'Portfolio',
         'path' => '/portfolio',
@@ -220,7 +221,7 @@ it('renders the career layout and preserves imported SEO metadata', function () 
     $html = $response->getContent();
 
     expect(substr_count($html, '<h1'))->toBe(1)
-        ->and(substr_count($html, '<details'))->toBe(3)
+        ->and(substr_count($html, '<details'))->toBe(5)
         ->and(substr_count($html, 'ChatGPT-Image-May-9-2026-at-'))->toBe(5);
 });
 
