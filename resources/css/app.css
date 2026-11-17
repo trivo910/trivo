@@ -56,6 +56,127 @@
 }
 
 @layer components {
+    .service-page--seo-company-mumbai { background: #fff; }
+    .service-page--seo-company-mumbai .paid-search-heading {
+        position: relative; overflow: hidden; padding: 28px 24px 0; background: #f4faff;
+    }
+    .service-page--seo-company-mumbai .paid-search-heading::before {
+        position: absolute; inset: -320px -15% -100px; z-index: 0; border-radius: 50%;
+        background: repeating-radial-gradient(circle at center, transparent 0 58px, #dcecff 59px 60px, transparent 61px 105px);
+        content: '';
+    }
+    .service-page--seo-company-mumbai .paid-search-heading h1 {
+        position: relative; z-index: 1; margin: 0; color: #6654ec;
+        font-size: clamp(34px, 4.2vw, 56px); font-weight: 700; letter-spacing: -1.6px;
+    }
+    .service-page--seo-company-mumbai .paid-search-heading h1::before {
+        display: block; width: fit-content; margin: 0 auto 12px; padding: 2px 24px;
+        border-radius: 16px; background: #dfe6ff; color: #6654ec; content: 'AI - Driven Growth Solution';
+        font-size: 13px; font-weight: 400; letter-spacing: 0;
+    }
+    .service-page--seo-company-mumbai .service-content {
+        display: grid; grid-template-columns: minmax(0, 1fr); width: 100%; gap: 0;
+    }
+    .service-page--seo-company-mumbai .service-content > .service-section { width: min(calc(100% - 64px), 1180px); margin-inline: auto; padding: 56px 0; }
+    .service-page--seo-company-mumbai .service-content h2,
+    .service-page--seo-company-mumbai .service-content h3 { font-size: clamp(24px, 2.5vw, 32px); font-weight: 650; letter-spacing: -.6px; }
+    .service-page--seo-company-mumbai .service-section--mumbai-hero {
+        position: relative; display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center;
+        width: 100% !important; max-width: none !important; margin: 0 !important; padding: 4px 24px 30px !important;
+        background: #f4faff; text-align: center;
+    }
+    .service-page--seo-company-mumbai .service-section--mumbai-hero .service-copy { width: min(100%, 1000px); }
+    .service-page--seo-company-mumbai .service-section--mumbai-hero .service-copy > h2 { margin: 0 auto 8px; font-size: clamp(25px, 3vw, 38px); line-height: 1.2; }
+    .service-page--seo-company-mumbai .service-section--mumbai-hero .service-copy > p { margin: 10px auto; color: #505050; }
+    .service-page--seo-company-mumbai .service-section--mumbai-hero .performance-marketing-form { display: flex; width: min(100%, 520px); gap: 8px; margin: 22px auto; }
+    .service-page--seo-company-mumbai .service-section--mumbai-hero .performance-marketing-form input,
+    .service-page--seo-company-mumbai .service-section--mumbai-hero .performance-marketing-form textarea,
+    .service-page--seo-company-mumbai .service-section--mumbai-hero .performance-marketing-form label { display: none; }
+    .service-page--seo-company-mumbai .service-section--mumbai-hero .performance-marketing-form input:first-of-type { display: block; flex: 1; min-width: 0; border: 1px solid #999; border-radius: 22px; padding: 12px 18px; background: #fff; }
+    .service-page--seo-company-mumbai .service-section--mumbai-hero .performance-marketing-form button { min-width: 140px; border: 0; border-radius: 20px; background: #000; color: #fff; font: inherit; font-size: 11px; font-weight: 700; }
+    .mumbai-proof { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); width: min(100%, 1000px); margin: 28px auto 0; border: 1px solid #fff; border-radius: 18px; text-align: left; }
+    .mumbai-proof article { display: grid; gap: 0 12px; grid-template-columns: auto 1fr; align-content: center; padding: 16px 18px; }
+    .mumbai-proof strong { font-size: 25px; line-height: 1.2; }
+    .mumbai-proof span { grid-column: 2; color: #8a9098; font-size: 13px; }
+    .mumbai-award-logos { display: flex; width: min(100%, 540px); min-height: 42px; align-items: center; justify-content: center; gap: 28px; margin: 20px auto 0; }
+    .mumbai-award-logos img { display: block; width: auto; max-width: 155px; height: 34px; object-fit: contain; }
+    .mumbai-case-studies { text-align: center; }
+    .mumbai-case-studies__eyebrow { margin: 0 0 8px; color: #006ace; font-size: 12px; font-weight: 700; }
+    .mumbai-case-studies h2 { margin-bottom: 4px; font-size: clamp(28px, 3.1vw, 40px) !important; }
+    .mumbai-case-studies > p:not(.mumbai-case-studies__eyebrow) { margin: 0 0 30px; color: #737983; font-size: 14px; }
+    .mumbai-case-studies__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; text-align: left; }
+    .mumbai-case-studies__card { overflow: hidden; border: 1px solid #e8e8eb; border-radius: 28px; color: #111; text-decoration: none; }
+    .mumbai-case-studies__card img { display: block; width: 100%; aspect-ratio: 1.65; object-fit: cover; }
+    .mumbai-case-studies__card > span { display: grid; gap: 2px; padding: 18px 22px; }
+    .mumbai-case-studies__card small { color: #9298a0; font-size: 12px; }
+    .mumbai-case-studies__button { display: inline-flex; margin-top: 24px; padding: 11px 23px; border-radius: 18px; background: #000; color: #fff; font-size: 12px; font-weight: 700; text-decoration: none; }
+    .service-page--seo-company-mumbai .service-section--mumbai-benefits { text-align: center; }
+    .service-page--seo-company-mumbai .service-section--mumbai-benefits .service-feature-cards { margin-top: 32px; }
+    .service-page--seo-company-mumbai .service-section--mumbai-benefits .service-feature-card { min-height: 210px; padding: 26px 22px; border-radius: 20px; box-shadow: 0 2px 3px #0002; }
+    .service-page--seo-company-mumbai .service-section--mumbai-benefits .service-feature-card h5 { font-size: 16px; }
+    .service-page--seo-company-mumbai .service-section--mumbai-location { width: 100% !important; max-width: none !important; padding: 48px max(32px, calc((100% - 1120px) / 2)) !important; background: #f7f5f5; }
+    .service-page--seo-company-mumbai .service-section--mumbai-location .service-copy { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .service-page--seo-company-mumbai .service-section--mumbai-location .service-copy > h2 { grid-column: 1 / -1; text-align: center; }
+    .mumbai-location-card, .mumbai-location-map { min-height: 250px; padding: 24px; border: 1px solid #eee; border-radius: 12px; background: #fff; box-shadow: 0 2px 5px #0001; }
+    .mumbai-location-card > p { margin: 0 0 20px; }
+    .mumbai-location-card a { min-height: 0; margin: 0; padding: 0; border-radius: 0; background: transparent; color: #111; font-size: 11px; text-decoration: underline; }
+    .mumbai-location-card h4 { margin: 4px 0 10px; font-size: 15px; }
+    .mumbai-location-card h6 { margin: 18px 0 3px; color: #858b94; font-size: 10px; font-weight: 400; }
+    .mumbai-location-map { padding: 0; }
+    .service-page--seo-company-mumbai .service-section--mumbai-services .service-copy > h2,
+    .service-page--seo-company-mumbai .service-section--mumbai-process .service-copy > h2,
+    .service-page--seo-company-mumbai .service-section--mumbai-packages .service-copy > h2,
+    .service-page--seo-company-mumbai .service-section--mumbai-faq .service-copy > h2 { text-align: center; }
+    .service-page--seo-company-mumbai .service-section--mumbai-services .service-feature-cards { gap: 16px; margin-top: 30px; }
+    .service-page--seo-company-mumbai .service-section--mumbai-services .service-feature-card { min-height: 200px; padding: 24px; border-top: 5px solid #0874d1; border-radius: 12px; box-shadow: 0 2px 6px #001b3422; }
+    .service-page--seo-company-mumbai .service-section--mumbai-services .service-feature-card::before { display: none; }
+    .service-page--seo-company-mumbai .service-section--mumbai-services .service-feature-card h5 { font-size: 17px; }
+    .service-page--seo-company-mumbai .service-section--mumbai-why { width: 100% !important; max-width: none !important; padding: 50px max(32px, calc((100% - 1120px) / 2)) !important; background: #f7f5f5; }
+    .service-page--seo-company-mumbai .service-section--mumbai-why .location-disclosure { padding-inline: 12px; border-radius: 6px; }
+    .service-page--seo-company-mumbai .service-section--mumbai-why .location-disclosure > summary { padding-block: 8px; font-size: 15px; }
+    .service-page--seo-company-mumbai .service-section--mumbai-why .service-media { min-height: 360px; padding: 20px; border: 1px solid #eee; border-radius: 12px; background: #fff; box-shadow: 0 2px 8px #0001; }
+    .service-page--seo-company-mumbai .service-section--mumbai-why .service-media img { visibility: hidden; }
+    .service-page--seo-company-mumbai .service-section--mumbai-process .service-copy > .mumbai-process-step { display: flex; width: min(100%, 700px); min-height: 54px; align-items: center; gap: 12px; margin: 0 auto 10px; padding: 8px 14px; border: 1px solid #999; border-radius: 10px; background: #fff; box-shadow: 0 4px 18px #0001; }
+    .service-page--seo-company-mumbai .mumbai-process-step > summary { flex: 1; color: #858b94; font-size: 14px; list-style: none; }
+    .service-page--seo-company-mumbai .mumbai-process-step > summary::-webkit-details-marker { display: none; }
+    .service-page--seo-company-mumbai .mumbai-process-step::before { display: grid; width: 32px; height: 32px; place-items: center; border-radius: 50%; background: #e5f1ff; color: #0874d1; content: '✓'; font-weight: 700; }
+    .service-page--seo-company-mumbai .service-section--mumbai-packages td:empty::before { display: inline-grid; width: 17px; height: 17px; place-items: center; border-radius: 50%; background: #20c567; color: #fff; content: '✓'; font-size: 12px; font-weight: 700; }
+    .service-page--seo-company-mumbai .service-section--mumbai-packages { overflow-x: auto; }
+    .service-page--seo-company-mumbai .service-section--mumbai-packages table { min-width: 720px; }
+    .service-page--seo-company-mumbai .service-section--mumbai-faq { width: 100% !important; max-width: none !important; padding: 42px max(32px, calc((100% - 900px) / 2)) !important; background: #fafafa; }
+    .service-page--seo-company-mumbai .service-section--mumbai-faq .location-disclosure > summary { padding-block: 12px; font-size: 15px; }
+    @media (max-width: 63.99rem) {
+        .service-page--seo-company-mumbai .service-content > .service-section { width: min(calc(100% - 44px), 1180px); }
+        .service-page--seo-company-mumbai .service-section--mumbai-location,
+        .service-page--seo-company-mumbai .service-section--mumbai-why,
+        .service-page--seo-company-mumbai .service-section--mumbai-faq { padding-inline: 24px !important; }
+        .service-page--seo-company-mumbai .service-section--mumbai-benefits .service-feature-cards,
+        .service-page--seo-company-mumbai .service-section--mumbai-services .service-feature-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 39.99rem) {
+        .service-page--seo-company-mumbai .paid-search-heading { padding: 22px 20px 0; }
+        .service-page--seo-company-mumbai .paid-search-heading h1 { font-size: 30px; }
+        .service-page--seo-company-mumbai .service-content > .service-section { width: calc(100% - 36px); padding-block: 38px; }
+        .service-page--seo-company-mumbai .service-section--mumbai-hero { width: 100% !important; padding: 0 18px 28px !important; }
+        .service-page--seo-company-mumbai .service-section--mumbai-hero .performance-marketing-form { flex-direction: column; }
+        .service-page--seo-company-mumbai .service-section--mumbai-hero .performance-marketing-form input:first-of-type,
+        .service-page--seo-company-mumbai .service-section--mumbai-hero .performance-marketing-form button { min-height: 46px; }
+        .mumbai-proof { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .mumbai-award-logos { gap: 14px; }
+        .mumbai-award-logos img { max-width: 100px; height: 28px; }
+        .mumbai-proof article { padding: 12px 9px; }
+        .mumbai-proof strong { font-size: 20px; }
+        .mumbai-proof span { font-size: 10px; }
+        .mumbai-case-studies__grid { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+        .service-page--seo-company-mumbai .service-section--mumbai-benefits .service-feature-cards,
+        .service-page--seo-company-mumbai .service-section--mumbai-services .service-feature-cards { grid-template-columns: minmax(0, 1fr); }
+        .service-page--seo-company-mumbai .service-section--mumbai-location .service-copy { grid-template-columns: minmax(0, 1fr); }
+        .service-page--seo-company-mumbai .service-section--mumbai-location .service-copy > h2 { grid-column: auto; }
+        .service-page--seo-company-mumbai .service-section--mumbai-location,
+        .service-page--seo-company-mumbai .service-section--mumbai-why,
+        .service-page--seo-company-mumbai .service-section--mumbai-faq { width: 100% !important; padding-inline: 18px !important; }
+    }
+
     [x-cloak] { display: none !important; }
 
     .site-header {
@@ -1431,6 +1552,581 @@
     }
 }
 @layer components {
+    .service-page--seo-company-surat {
+        background: linear-gradient(180deg, #f3f0ff 0, #fff 500px);
+    }
+
+    .service-page--seo-company-surat .paid-search-heading {
+        padding: 18px 24px 12px;
+        background: transparent;
+    }
+
+    .service-page--seo-company-surat .paid-search-heading h1 {
+        font-size: clamp(20px, 2.4vw, 28px);
+        letter-spacing: -.5px;
+    }
+
+    .service-page--seo-company-surat .service-content {
+        width: min(calc(100% - 48px), 1180px);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 48px;
+    }
+
+    .service-page--seo-company-surat .service-section--surat-hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(320px, .75fr);
+        align-items: center;
+        gap: 58px;
+        padding: 32px 0 64px;
+        text-align: left;
+    }
+
+    .service-page--seo-company-surat .service-section--surat-hero .service-copy > h2 {
+        margin-bottom: 18px;
+        font-size: clamp(30px, 3.2vw, 42px);
+        font-weight: 700;
+        line-height: 1.15;
+        letter-spacing: -1px;
+    }
+
+    .service-page--seo-company-surat .service-section--surat-hero .service-copy > p,
+    .service-page--seo-company-surat .service-section--surat-needs .service-copy > p {
+        color: #69727d;
+        font-size: 15px;
+        line-height: 1.65;
+    }
+
+    .service-page--seo-company-surat .service-section--surat-hero .service-copy > b {
+        display: inline-block;
+        margin: 8px 10px 0 0;
+        color: #006ace;
+        font-size: 14px;
+    }
+
+    .service-page--seo-company-surat .surat-seo-form-card {
+        width: 100%;
+        padding: 28px;
+        border: 1px solid #eeeef4;
+        border-radius: 22px;
+        background: #fff;
+        box-shadow: 8px 8px 0 #111, 0 16px 38px rgba(32, 54, 100, .12);
+    }
+
+    .service-page--seo-company-surat .surat-seo-form-card > h3 {
+        margin: 0 0 18px;
+        font-size: 19px;
+        font-weight: 700;
+        line-height: 1.35;
+    }
+
+    .service-page--seo-company-surat .surat-seo-form {
+        display: grid;
+        gap: 11px;
+    }
+
+    .service-page--seo-company-surat .surat-seo-form input,
+    .service-page--seo-company-surat .surat-seo-form textarea {
+        width: 100%;
+        min-height: 44px;
+        padding: 11px 13px;
+        border: 1px solid #e6e6ec;
+        border-radius: 9px;
+        background: #fff;
+        color: #111;
+        font: inherit;
+        font-size: 13px;
+    }
+
+    .service-page--seo-company-surat .surat-seo-form textarea {
+        min-height: 78px;
+        resize: vertical;
+    }
+
+    .service-page--seo-company-surat .surat-seo-form button {
+        display: inline-flex;
+        min-height: 46px;
+        align-items: center;
+        justify-content: center;
+        margin-top: 5px;
+        border: 0;
+        border-radius: 10px;
+        background: #000;
+        color: #fff;
+        font: inherit;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    .service-page--seo-company-surat .surat-seo-form button:focus-visible,
+    .service-page--seo-company-surat .surat-seo-form input:focus-visible,
+    .service-page--seo-company-surat .surat-seo-form textarea:focus-visible {
+        outline: 2px solid #006ace;
+        outline-offset: 3px;
+    }
+
+    .service-page--seo-company-surat .service-section--surat-needs {
+        align-items: center;
+        gap: 48px;
+        padding-block: 36px 62px;
+    }
+
+    .service-page--seo-company-surat .service-section--surat-needs .service-copy > h2,
+    .service-page--seo-company-surat .service-section--surat-choose .service-copy > h2,
+    .service-page--seo-company-surat .surat-seo-services > h2,
+    .service-page--seo-company-surat .surat-seo-audit-services .service-copy > h2,
+    .service-page--seo-company-surat .surat-seo-industries .service-copy > h2,
+    .service-page--seo-company-surat .service-section--surat-tools .service-copy > h2,
+    .service-page--seo-company-surat .service-section--surat-faq .service-copy > h2 {
+        font-size: clamp(24px, 3vw, 32px);
+        font-weight: 700;
+        letter-spacing: -.7px;
+    }
+
+    .service-page--seo-company-surat .service-section--surat-needs .service-media > img {
+        max-height: 320px;
+        border-radius: 0;
+    }
+
+    .service-page--seo-company-surat .surat-seo-reviews {
+        display: grid;
+        grid-template-columns: minmax(150px, .7fr) minmax(0, 2fr);
+        align-items: center;
+        gap: 18px;
+        padding-block: 20px 42px;
+    }
+
+    .service-page--seo-company-surat .surat-seo-reviews > h2 {
+        margin: 0;
+        font-size: 21px;
+        font-weight: 700;
+    }
+
+    .service-page--seo-company-surat .surat-seo-reviews__metrics {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .service-page--seo-company-surat .surat-seo-reviews__metric {
+        display: grid;
+        min-height: 82px;
+        align-content: center;
+        justify-items: center;
+        gap: 5px;
+        padding: 12px;
+        border: 1px solid #eeedf3;
+        border-radius: 12px;
+        background: #fff;
+    }
+
+    .service-page--seo-company-surat .surat-seo-reviews__metric strong {
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .service-page--seo-company-surat .surat-seo-reviews__metric span {
+        color: #69727d;
+        font-size: 11px;
+        text-align: center;
+    }
+
+    .service-page--seo-company-surat .service-section--surat-choose {
+        padding-block: 32px 60px;
+    }
+
+    .service-page--seo-company-surat .service-section--surat-choose .service-copy > h3 {
+        margin-bottom: 18px;
+        color: #006ace;
+        font-size: 16px;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .service-page--seo-company-surat .service-section--surat-choose .service-copy > h2 {
+        margin-bottom: 14px;
+        text-align: center;
+    }
+
+    .service-page--seo-company-surat .service-section--surat-choose .service-copy > h2:nth-of-type(2) {
+        margin-bottom: 24px;
+        font-size: 16px;
+        font-weight: 400;
+        letter-spacing: 0;
+        text-align: center;
+    }
+
+    .service-page--seo-company-surat .service-section--surat-choose .service-feature-cards {
+        gap: 16px;
+        margin-top: 0;
+    }
+
+    .service-page--seo-company-surat .service-section--surat-choose .service-feature-card {
+        min-height: 170px;
+        padding: 20px;
+        border-radius: 14px;
+        box-shadow: 0 7px 22px rgba(28, 48, 80, .07);
+    }
+
+    .service-page--seo-company-surat .service-section--surat-choose .service-feature-card::before {
+        width: 30px;
+        height: 30px;
+        margin-bottom: 12px;
+        background: #e9e5ff;
+        content: '\2197';
+        font-size: 19px;
+    }
+
+    .service-page--seo-company-surat .surat-seo-services {
+        padding-block: 40px 30px;
+    }
+
+    .service-page--seo-company-surat .surat-seo-services > h2 {
+        margin-bottom: 16px;
+        text-align: center;
+    }
+
+    .service-page--seo-company-surat .surat-seo-services__grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .service-page--seo-company-surat .surat-seo-service {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        align-items: center;
+        gap: 56px;
+        min-height: 260px;
+        padding: 24px 8px;
+    }
+
+    .service-page--seo-company-surat .surat-seo-service:nth-child(even) .surat-seo-service__copy {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    .service-page--seo-company-surat .surat-seo-service:nth-child(even) .surat-seo-service__media {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .service-page--seo-company-surat .surat-seo-service__copy > h3 {
+        margin: 0 0 12px;
+        font-size: 23px;
+        font-weight: 600;
+    }
+
+    .service-page--seo-company-surat .surat-seo-service__copy > p {
+        color: #69727d;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .service-page--seo-company-surat .surat-seo-service__media {
+        display: grid;
+        min-height: 210px;
+        place-items: center;
+    }
+
+    .service-page--seo-company-surat .surat-seo-service__media img {
+        display: block;
+        width: 100%;
+        max-width: 390px;
+        max-height: 250px;
+        object-fit: contain;
+    }
+
+    .service-page--seo-company-surat .surat-seo-support {
+        padding: 32px 34px;
+        border-radius: 20px;
+        background: #f3f0ff;
+    }
+
+    .service-page--seo-company-surat .surat-seo-support h2 {
+        margin-bottom: 14px;
+        font-size: 21px;
+        font-weight: 700;
+    }
+
+    .service-page--seo-company-surat .surat-seo-support ul {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px 28px;
+        margin: 0;
+        padding-left: 20px;
+    }
+
+    .service-page--seo-company-surat .surat-seo-audit-services {
+        padding-block: 48px 42px;
+    }
+
+    .service-page--seo-company-surat .surat-seo-audit-services .service-copy > h2,
+    .service-page--seo-company-surat .surat-seo-industries .service-copy > h2 {
+        margin-bottom: 22px;
+        text-align: center;
+    }
+
+    .service-page--seo-company-surat .surat-seo-audit-services__grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .service-page--seo-company-surat .surat-seo-audit-services__item {
+        padding: 17px 18px;
+        border: 1px solid #e8e7ed;
+        border-radius: 13px;
+        background: #fff;
+    }
+
+    .service-page--seo-company-surat .surat-seo-audit-services__item h3 {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    .service-page--seo-company-surat .surat-seo-industries {
+        padding: 34px 30px;
+        border-radius: 20px;
+        background: #f3f0ff;
+    }
+
+    .service-page--seo-company-surat .surat-seo-industries__grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .service-page--seo-company-surat .surat-seo-industries__grid p {
+        display: grid;
+        min-height: 70px;
+        margin: 0;
+        padding: 14px;
+        place-items: center;
+        border: 1px solid #e4e0f6;
+        border-radius: 12px;
+        background: #fff;
+        font-size: 13px;
+        text-align: center;
+    }
+
+    .service-page--seo-company-surat .service-section--surat-tools {
+        padding-block: 42px;
+    }
+
+    .service-page--seo-company-surat .service-section--surat-tools .service-copy > h2 {
+        margin-bottom: 22px;
+        text-align: center;
+    }
+
+    .service-page--seo-company-surat .service-section--surat-tools .location-logo-grid {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 12px;
+        margin: 0;
+    }
+
+    .service-page--seo-company-surat .service-section--surat-tools .location-logo-grid figure {
+        min-height: 84px;
+        padding: 12px;
+        border-radius: 12px;
+    }
+
+    .service-page--seo-company-surat .service-section--surat-tools .location-logo-grid img {
+        height: 55px;
+    }
+
+    .service-page--seo-company-surat .surat-seo-clients {
+        padding-block: 28px 42px;
+    }
+
+    .service-page--seo-company-surat .service-section--surat-growth,
+    .service-page--seo-company-surat .service-section--surat-cta {
+        padding: 30px;
+        border-radius: 20px;
+        background: #f3f0ff;
+        text-align: center;
+    }
+
+    .service-page--seo-company-surat .service-section--surat-growth .service-copy > h2,
+    .service-page--seo-company-surat .service-section--surat-cta .service-copy > h2 {
+        margin: 0;
+        font-size: clamp(23px, 3vw, 32px);
+        font-weight: 700;
+    }
+
+    .service-page--seo-company-surat .service-section--surat-faq {
+        padding-block: 42px;
+    }
+
+    .service-page--seo-company-surat .service-section--surat-faq .service-copy > h2 {
+        margin-bottom: 22px;
+    }
+
+    .service-page--seo-company-surat .service-section--surat-faq .location-disclosure {
+        margin-bottom: 0;
+        padding-inline: 0;
+        border: 0;
+        border-bottom: 1px solid #e7e5ee;
+        border-radius: 0;
+        background: transparent;
+    }
+
+    .service-page--seo-company-surat .service-section--surat-faq .location-disclosure > summary {
+        min-height: 52px;
+        padding-block: 15px;
+        font-size: 15px;
+    }
+
+    .service-page--seo-company-surat .service-section--surat-audit {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(320px, .8fr);
+        align-items: center;
+        gap: 50px;
+        padding-block: 40px 68px;
+        text-align: left;
+    }
+
+    .service-page--seo-company-surat .service-section--surat-audit .service-copy > h2 {
+        font-size: 27px;
+    }
+
+    @media (max-width: 63.99rem) {
+        .service-page--seo-company-surat .service-section--surat-hero,
+        .service-page--seo-company-surat .service-section--surat-audit {
+            gap: 30px;
+        }
+
+        .service-page--seo-company-surat .surat-seo-industries__grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .service-page--seo-company-surat .service-section--surat-tools .location-logo-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+    }
+
+    @media (max-width: 39.99rem) {
+        .service-page--seo-company-surat .paid-search-heading {
+            padding: 14px 20px 8px;
+        }
+
+        .service-page--seo-company-surat .paid-search-heading h1 {
+            font-size: 21px;
+        }
+
+        .service-page--seo-company-surat .service-content {
+            display: block;
+            width: calc(100% - 40px);
+        }
+
+        .service-page--seo-company-surat .service-section--surat-hero,
+        .service-page--seo-company-surat .service-section--surat-audit {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 26px;
+            padding-block: 32px 42px;
+        }
+
+        .service-page--seo-company-surat .service-section--surat-hero .service-copy > h2 {
+            font-size: 30px;
+        }
+
+        .service-page--seo-company-surat .surat-seo-form-card {
+            max-width: 440px;
+            margin: 0 6px 6px 0;
+            padding: 22px;
+        }
+
+        .service-page--seo-company-surat .service-section--surat-needs {
+            gap: 22px;
+            padding-block: 30px 42px;
+        }
+
+        .service-page--seo-company-surat .service-section--surat-choose {
+            padding-block: 28px 42px;
+        }
+
+        .service-page--seo-company-surat .surat-seo-reviews {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 12px;
+            padding-block: 18px 30px;
+        }
+
+        .service-page--seo-company-surat .service-section--surat-choose .service-feature-cards {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 12px;
+        }
+
+        .service-page--seo-company-surat .service-section--surat-choose .service-feature-card {
+            min-height: 0;
+        }
+
+        .service-page--seo-company-surat .surat-seo-services {
+            padding-block: 30px 20px;
+        }
+
+        .service-page--seo-company-surat .surat-seo-service {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 12px;
+            min-height: 0;
+            padding: 24px 0;
+        }
+
+        .service-page--seo-company-surat .surat-seo-service:nth-child(even) .surat-seo-service__copy,
+        .service-page--seo-company-surat .surat-seo-service:nth-child(even) .surat-seo-service__media {
+            grid-column: 1;
+            grid-row: auto;
+        }
+
+        .service-page--seo-company-surat .surat-seo-service__media {
+            min-height: 0;
+        }
+
+        .service-page--seo-company-surat .surat-seo-service__media img {
+            max-height: 220px;
+        }
+
+        .service-page--seo-company-surat .surat-seo-support,
+        .service-page--seo-company-surat .surat-seo-industries {
+            padding: 24px 18px;
+        }
+
+        .service-page--seo-company-surat .surat-seo-support ul {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 8px;
+        }
+
+        .service-page--seo-company-surat .surat-seo-audit-services {
+            padding-block: 34px;
+        }
+
+        .service-page--seo-company-surat .surat-seo-audit-services__grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .service-page--seo-company-surat .surat-seo-audit-services__item {
+            padding: 13px;
+        }
+
+        .service-page--seo-company-surat .surat-seo-audit-services__item h3 {
+            font-size: 13px;
+        }
+
+        .service-page--seo-company-surat .service-section--surat-tools .location-logo-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .service-page--seo-company-surat .service-section--surat-growth,
+        .service-page--seo-company-surat .service-section--surat-cta {
+            padding: 24px 18px;
+        }
+
+        .service-page--seo-company-surat .service-section--surat-faq {
+            padding-block: 34px;
+        }
+    }
+}
+@layer components {
     .contact-page { overflow: hidden; }
     .contact-page__banner {
         display: grid;
@@ -2117,7 +2813,7 @@
     .service-copy > ul { display: grid; gap: 20px; padding-left: 0; list-style: none; }
     .service-copy > ul li { position: relative; padding-left: 35px; }
     .service-copy > ul li::before { position: absolute; left: 0; top: 1px; display: grid; width: 24px; height: 24px; place-items: center; border-radius: 50%; background: #00538d; color: #fff; content: '\2713'; font-size: 17px; font-weight: 700; }
-    .service-copy a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; margin-top: 18px; padding: 12px 24px; border-radius: 15px; background: #000; color: #fff; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+    .service-copy a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; margin-top: 18px; margin-right: 10px; padding: 12px 24px; border-radius: 15px; background: #000; color: #fff; font-size: 12px; font-weight: 700; text-transform: uppercase; }
     .service-copy a:focus-visible { outline: 3px solid #00538d; outline-offset: 4px; }
     .service-feature-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 40px; text-align: left; }
     .service-feature-card { min-width: 0; padding: 30px; border: 1px solid #e6e6e6; border-radius: 20px; background: #fff; box-shadow: 0 4px 14px #0000000d; }

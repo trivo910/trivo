@@ -209,6 +209,10 @@ class ServicePageLayout
             $this->graphicDesignBanner($document, $groups);
             $this->graphicDesignStatsAndReviews($document, $output, $groups, $testimonials);
             $this->tabs($document, $groups, ['Motion Graphics', 'UI/UX Design', 'Marketing Design']);
+        } elseif ($path === '/seo-company-surat') {
+            $this->seoCompanySuratLayout($document, $output, $groups);
+        } elseif ($path === '/seo-company-mumbai') {
+            $this->seoCompanyMumbaiLayout($document, $output, $groups);
         }
         foreach ((new DOMXPath($document))->query('.//a[not(@href)]', $output) ?: [] as $link) {
             $text = strtolower(trim($link->textContent));
@@ -647,6 +651,742 @@ class ServicePageLayout
             } elseif ($details) {
                 $details->appendChild($child);
             }
+        }
+    }
+
+    private function seoCompanySuratLayout(DOMDocument $document, DOMElement $output, array $groups): void
+    {
+        $xpath = new DOMXPath($document);
+
+        foreach ($groups as $index => $group) {
+            $copy = $this->serviceCopy($xpath, $group);
+            if (! $copy) {
+                continue;
+            }
+
+            $headings = array_map(
+                fn (DOMElement $heading): string => strtolower(trim(preg_replace('/\s+/', ' ', $heading->textContent))),
+                $this->directHeadings($copy),
+            );
+            $label = $headings[0] ?? '';
+
+            if ($index === 0) {
+                $this->addClasses($group, ['service-section--surat-hero'], ['service-section--text']);
+                $group->appendChild($this->seoCompanySuratForm($document, 'surat-hero'));
+            }
+            if (str_starts_with($label, 'why your business in surat needs seo')) {
+                $this->addClasses($group, ['service-section--surat-needs']);
+            }
+            if (in_array('client reviews', $headings, true)
+                || array_filter($headings, fn (string $heading): bool => str_contains($heading, 'why choose trivo as your seo partner'))) {
+                $this->addClasses($group, ['service-section--surat-choose']);
+            }
+            if (str_starts_with($label, 'tools we use for seo success')) {
+                $this->addClasses($group, ['service-section--surat-tools']);
+            }
+            if (str_starts_with($label, 'get started with the best seo company in surat')) {
+                $this->addClasses($group, ['service-section--surat-cta']);
+            }
+            if (str_starts_with($label, 'request a free seo audit')) {
+                $this->addClasses($group, ['service-section--surat-audit']);
+                $group->appendChild($this->seoCompanySuratForm($document, 'surat-audit'));
+            }
+        }
+
+        $this->suratSeoReviewsSection($document, $output, $groups, $xpath);
+        $this->suratSeoServices($document, $output, $groups, $xpath);
+        $this->suratSeoAudienceSections($document, $output, $groups, $xpath);
+        $this->suratSeoGrowthSection($document, $output, $groups, $xpath);
+
+        foreach ($xpath->query('./section[contains(concat(" ", normalize-space(@class), " "), " paid-search-clients ")]', $output) ?: [] as $clients) {
+            $this->addClasses($clients, ['surat-seo-clients']);
+        }
+    }
+
+    private function seoCompanyMumbaiLayout(DOMDocument $document, DOMElement $output, array $groups): void
+    {
+        $xpath = new DOMXPath($document);
+        $hero = $groups[0] ?? null;
+        $heroCopy = $hero instanceof DOMElement ? $this->serviceCopy($xpath, $hero) : null;
+        $intro = $groups[1] ?? null;
+        $introCopy = $intro instanceof DOMElement ? $this->serviceCopy($xpath, $intro) : null;
+
+        if ($hero instanceof DOMElement && $heroCopy instanceof DOMElement) {
+            foreach (iterator_to_array($heroCopy->childNodes) as $child) {
+                if ($child instanceof DOMElement && $child->tagName === 'p'
+                    && str_contains(strtolower($child->textContent), 'ai - driven growth solution')) {
+                    $heroCopy->removeChild($child);
+                    break;
+                }
+            }
+            $this->addClasses($hero, ['service-section--mumbai-hero'], ['service-section--text']);
+        }
+
+        if ($heroCopy instanceof DOMElement && $intro instanceof DOMElement && $introCopy instanceof DOMElement) {
+            foreach (iterator_to_array($introCopy->childNodes) as $child) {
+                if (! $child instanceof DOMElement) {
+                    continue;
+                }
+                if ($child->tagName === 'h2' && str_contains(strtolower($child->textContent), 'seo company in mumbai')) {
+                    $introCopy->removeChild($child);
+                    continue;
+                }
+                if ($child->tagName === 'h3' && str_contains(strtolower($child->textContent), 'applying dependable seo techniques')) {
+                    $heading = $document->createElement('h2');
+                    while ($child->firstChild) {
+                        $heading->appendChild($child->firstChild);
+                    }
+                    $heroCopy->appendChild($heading);
+                    $introCopy->removeChild($child);
+                    continue;
+                }
+                if ($child->tagName === 'p' && str_contains(strtolower($child->textContent), 'implement successful, efficient seo')) {
+                    $heroCopy->appendChild($child);
+                    continue;
+                }
+                if ($child->tagName === 'div' && str_contains($child->getAttribute('class'), 'service-feature-cards')) {
+                    $introCopy->removeChild($child);
+                }
+            }
+
+            $form = $document->createElement('form');
+            $form->setAttribute('class', 'performance-marketing-form');
+            $form->setAttribute('action', url('/contact'));
+            $form->setAttribute('method', 'get');
+            $form->setAttribute('aria-label', 'Request a free SEO audit');
+            $website = $document->createElement('input');
+            $website->setAttribute('type', 'url');
+            $website->setAttribute('name', 'website');
+            $website->setAttribute('placeholder', 'www.website.com');
+            $website->setAttribute('aria-label', 'Website URL');
+            $form->appendChild($website);
+            $submit = $document->createElement('button', 'GET FREE AUDIT');
+            $submit->setAttribute('type', 'submit');
+            $form->appendChild($submit);
+            $heroCopy->appendChild($form);
+
+            $logos = $document->createElement('div');
+            $logos->setAttribute('class', 'mumbai-award-logos');
+            foreach ([$intro, $groups[2] ?? null] as $source) {
+                if (! $source instanceof DOMElement) {
+                    continue;
+                }
+                $media = $xpath->query('./div[contains(@class,"service-media")]', $source)->item(0);
+                if (! $media instanceof DOMElement) {
+                    continue;
+                }
+                foreach (iterator_to_array($media->getElementsByTagName('img')) as $image) {
+                    $image->setAttribute('loading', 'lazy');
+                    $logos->appendChild($image);
+                }
+                $source->removeChild($media);
+            }
+            if ($logos->hasChildNodes()) {
+                $heroCopy->appendChild($logos);
+            }
+
+            if ($intro->parentNode === $output) {
+                $output->removeChild($intro);
+            }
+        }
+
+        foreach ($groups as $index => $group) {
+            $copy = $this->serviceCopy($xpath, $group);
+            if (! $copy) {
+                continue;
+            }
+
+            $headings = array_map(
+                fn (DOMElement $heading): string => strtolower(trim(preg_replace('/\\s+/', ' ', $heading->textContent))),
+                $this->directHeadings($copy),
+            );
+            $label = $headings[0] ?? '';
+
+            if ($group === $hero) {
+                $copy->appendChild($this->mumbaiProofMetrics($document));
+            }
+            if (str_contains($label, 'seo services helping businesses grow in mumbai')) {
+                $this->addClasses($group, ['service-section--mumbai-benefits']);
+            } elseif (str_contains($label, 'seo services in mumbai')) {
+                $this->addClasses($group, ['service-section--mumbai-location']);
+            } elseif (str_contains($label, 'seo & digital growth services we offer')) {
+                $this->addClasses($group, ['service-section--mumbai-services']);
+            } elseif (str_contains($label, 'why choose our seo company in mumbai')) {
+                $this->addClasses($group, ['service-section--mumbai-why']);
+            } elseif (str_contains($label, 'our seo process to drive consistent growth')) {
+                $this->addClasses($group, ['service-section--mumbai-process']);
+            } elseif (str_contains($label, 'what our seo package includes')) {
+                $this->addClasses($group, ['service-section--mumbai-packages']);
+            } elseif (str_contains($label, 'faqs on seo services')) {
+                $this->addClasses($group, ['service-section--mumbai-faq']);
+            }
+
+            if (str_contains($label, 'why choose our seo company in mumbai')) {
+                $group->setAttribute('class', $group->getAttribute('class').' service-section--accordion');
+            }
+            if (str_contains($label, 'why choose our seo company in mumbai') || str_contains($label, 'faqs on seo services')) {
+                $this->locationDetails($document, $copy);
+                $details = $copy->getElementsByTagName('details');
+                if ($details->length > 0) {
+                    $details->item(0)?->setAttribute('open', '');
+                }
+            }
+        }
+
+        $this->mumbaiBenefitCards($document, $output, $groups, $xpath);
+        $this->mumbaiLocationCards($document, $output, $groups, $xpath);
+        $this->mumbaiProcessSteps($document, $groups, $xpath);
+
+        $success = $document->createElement('section');
+        $success->setAttribute('class', 'service-section mumbai-case-studies');
+        $eyebrow = $document->createElement('p', 'CLIENT SUCCESS');
+        $eyebrow->setAttribute('class', 'mumbai-case-studies__eyebrow');
+        $success->appendChild($eyebrow);
+        $success->appendChild($document->createElement('h2', 'Real Results, Real Businesses'));
+        $success->appendChild($document->createElement('p', 'Our clients don’t just grow — they dominate their categories online.'));
+        $cards = $document->createElement('div');
+        $cards->setAttribute('class', 'mumbai-case-studies__grid');
+        foreach ([
+            ['Luhaif Perfumes', '2026/05/Luhaif-Thumbnail.png', '/luhaif-perfumes'],
+            ['Mumbai Darshan', '2026/05/Mumbai-Thumbnail.png', '/mumbai-darshan'],
+            ['Sell Sold', '2026/05/Sell-Sold-Thumbnail.png', '/sell-sold'],
+        ] as [$title, $image, $url]) {
+            $card = $document->createElement('a');
+            $card->setAttribute('class', 'mumbai-case-studies__card');
+            $card->setAttribute('href', url($url));
+            $img = $document->createElement('img');
+            $img->setAttribute('src', asset('wp-content/uploads/'.$image));
+            $img->setAttribute('alt', $title.' case study');
+            $img->setAttribute('loading', 'lazy');
+            $card->appendChild($img);
+            $meta = $document->createElement('span');
+            $meta->appendChild($document->createElement('small', 'May 2026'));
+            $meta->appendChild($document->createElement('strong', $title));
+            $card->appendChild($meta);
+            $cards->appendChild($card);
+        }
+        $success->appendChild($cards);
+        $portfolio = $document->createElement('a', 'VIEW ALL  →');
+        $portfolio->setAttribute('class', 'mumbai-case-studies__button');
+        $portfolio->setAttribute('href', url('/portfolio'));
+        $success->appendChild($portfolio);
+
+        $clientSection = null;
+        foreach ($groups as $group) {
+            $copy = $this->serviceCopy($xpath, $group);
+            if ($copy && str_contains(strtolower($copy->textContent), 'real results, real businesses')) {
+                $clientSection = $group;
+                break;
+            }
+        }
+        if ($clientSection?->parentNode === $output) {
+            $output->removeChild($clientSection);
+        }
+
+        $benefits = null;
+        foreach ($groups as $group) {
+            if (str_contains($group->getAttribute('class'), 'service-section--mumbai-benefits')) {
+                $benefits = $group;
+                break;
+            }
+        }
+        if ($benefits?->parentNode === $output) {
+            $output->insertBefore($success, $benefits);
+        } else {
+            $output->appendChild($success);
+        }
+    }
+
+    private function mumbaiBenefitCards(DOMDocument $document, DOMElement $output, array $groups, DOMXPath $xpath): void
+    {
+        $first = null;
+        $cards = $document->createElement('div');
+        $cards->setAttribute('class', 'service-feature-cards');
+        $residual = [];
+        $active = null;
+        $started = false;
+
+        foreach ($groups as $group) {
+            $copy = $this->serviceCopy($xpath, $group);
+            if (! $copy) {
+                continue;
+            }
+            if (! $started && ! str_contains($group->getAttribute('class'), 'service-section--mumbai-benefits')) {
+                continue;
+            }
+            if (str_contains($group->getAttribute('class'), 'service-section--mumbai-services')) {
+                break;
+            }
+            $started = true;
+            $first ??= $group;
+
+            foreach (iterator_to_array($copy->childNodes) as $child) {
+                if (! $child instanceof DOMElement) {
+                    continue;
+                }
+                if ($child->tagName === 'h3' && $group === $first) {
+                    continue;
+                }
+                if ($child->tagName === 'h4') {
+                    $active = $document->createElement('article');
+                    $active->setAttribute('class', 'service-feature-card');
+                    $title = $document->createElement('h5');
+                    while ($child->firstChild) {
+                        $title->appendChild($child->firstChild);
+                    }
+                    $active->appendChild($title);
+                    $cards->appendChild($active);
+                } elseif ($child->tagName === 'p' && $active) {
+                    $active->appendChild($child);
+                } else {
+                    $residual[] = $child;
+                }
+            }
+            if ($group !== $first && $group->parentNode === $output) {
+                $output->removeChild($group);
+            }
+        }
+
+        if (! $first instanceof DOMElement) {
+            return;
+        }
+        $copy = $this->serviceCopy($xpath, $first);
+        if (! $copy) {
+            return;
+        }
+        $heading = $this->firstHeading($copy);
+        if ($heading) {
+            $copy->insertBefore($cards, $heading->nextSibling);
+        } else {
+            $copy->appendChild($cards);
+        }
+        foreach ($residual as $node) {
+            $copy->appendChild($node);
+        }
+    }
+
+    private function mumbaiLocationCards(DOMDocument $document, DOMElement $output, array $groups, DOMXPath $xpath): void
+    {
+        $location = null;
+        foreach ($groups as $group) {
+            if (str_contains($group->getAttribute('class'), 'service-section--mumbai-location')) {
+                $location = $group;
+                break;
+            }
+        }
+        if (! $location instanceof DOMElement) {
+            return;
+        }
+        $copy = $this->serviceCopy($xpath, $location);
+        if (! $copy) {
+            return;
+        }
+        $info = $document->createElement('div');
+        $info->setAttribute('class', 'mumbai-location-card');
+        $description = null;
+        foreach (iterator_to_array($copy->childNodes) as $child) {
+            if ($child instanceof DOMElement && $child->tagName === 'p') {
+                $description = $child;
+                break;
+            }
+        }
+        if ($description) {
+            $copy->removeChild($description);
+            $info->appendChild($description);
+        }
+
+        foreach ($groups as $group) {
+            if ($group === $location || $group->parentNode !== $output) {
+                continue;
+            }
+            $otherCopy = $this->serviceCopy($xpath, $group);
+            if (! $otherCopy || ! str_contains(strtolower($otherCopy->textContent), 'phone number')) {
+                continue;
+            }
+            foreach (iterator_to_array($otherCopy->childNodes) as $child) {
+                if ($child instanceof DOMElement) {
+                    $info->appendChild($child);
+                }
+            }
+            $output->removeChild($group);
+            break;
+        }
+        $map = $document->createElement('div');
+        $map->setAttribute('class', 'mumbai-location-map');
+        $map->setAttribute('aria-label', 'Map location for Trivo in Goregaon West, Mumbai');
+        $copy->appendChild($info);
+        $copy->appendChild($map);
+    }
+
+    private function mumbaiProcessSteps(DOMDocument $document, array $groups, DOMXPath $xpath): void
+    {
+        foreach ($groups as $group) {
+            if (! str_contains($group->getAttribute('class'), 'service-section--mumbai-process')) {
+                continue;
+            }
+            $copy = $this->serviceCopy($xpath, $group);
+            if (! $copy) {
+                continue;
+            }
+            $this->addClasses($group, [], ['service-section--accordion']);
+            foreach (iterator_to_array($copy->getElementsByTagName('details')) as $details) {
+                if (! $details instanceof DOMElement) {
+                    continue;
+                }
+                $step = $document->createElement('div');
+                $step->setAttribute('class', 'mumbai-process-step');
+                $summary = $details->getElementsByTagName('summary')->item(0);
+                if ($summary) {
+                    $step->appendChild($summary);
+                }
+                $details->parentNode?->replaceChild($step, $details);
+            }
+        }
+    }
+
+    private function mumbaiProofMetrics(DOMDocument $document): DOMElement
+    {
+        $proof = $document->createElement('div');
+        $proof->setAttribute('class', 'mumbai-proof');
+        foreach ([['1.2B+', 'Organic Sessions'], ['29M+', 'Leads Generated'], ['130+', 'Case Studies'], ['50+', 'Awards & Recognitions']] as [$value, $label]) {
+            $metric = $document->createElement('article');
+            $metric->appendChild($document->createElement('strong', $value));
+            $labelElement = $document->createElement('span');
+            $labelElement->appendChild($document->createTextNode($label));
+            $metric->appendChild($labelElement);
+            $proof->appendChild($metric);
+        }
+
+        return $proof;
+    }
+
+    private function seoCompanySuratForm(DOMDocument $document, string $prefix): DOMElement
+    {
+        $panel = $document->createElement('aside');
+        $panel->setAttribute('class', 'surat-seo-form-card');
+        $panel->setAttribute('aria-label', 'Request a free SEO audit');
+
+        $heading = $document->createElement('h3', 'Request a Free SEO Audit');
+        $panel->appendChild($heading);
+
+        $form = $this->performanceMarketingForm($document, $prefix);
+        $form->setAttribute('class', 'surat-seo-form');
+        $form->setAttribute('aria-label', 'Request a free SEO audit');
+        $button = $form->getElementsByTagName('button')->item(0);
+        if ($button) {
+            $button->textContent = 'Get My Free SEO Audit';
+        }
+        $panel->appendChild($form);
+
+        return $panel;
+    }
+
+    private function suratSeoReviewsSection(DOMDocument $document, DOMElement $output, array $groups, DOMXPath $xpath): void
+    {
+        foreach ($groups as $group) {
+            $copy = $this->serviceCopy($xpath, $group);
+            if (! $copy || $group->parentNode !== $output) {
+                continue;
+            }
+
+            $reviewHeading = null;
+            foreach ($this->directHeadings($copy) as $heading) {
+                if ($heading->tagName === 'h3' && strtolower(trim($heading->textContent)) === 'client reviews') {
+                    $reviewHeading = $heading;
+                    break;
+                }
+            }
+            if (! $reviewHeading) {
+                continue;
+            }
+
+            $reviews = $document->createElement('section');
+            $reviews->setAttribute('class', 'service-section surat-seo-reviews');
+            $heading = $document->createElement('h2', 'Client Reviews');
+            $reviews->appendChild($heading);
+
+            $metrics = $document->createElement('div');
+            $metrics->setAttribute('class', 'surat-seo-reviews__metrics');
+            foreach ([
+                ['4.7/5', 'Google Rating'],
+                ['Local SEO', 'Focused on Surat'],
+                ['Free', 'SEO Audit'],
+            ] as [$value, $label]) {
+                $metric = $document->createElement('article');
+                $metric->setAttribute('class', 'surat-seo-reviews__metric');
+                $metric->appendChild($document->createElement('strong', $value));
+                $metric->appendChild($document->createElement('span', $label));
+                $metrics->appendChild($metric);
+            }
+            $reviews->appendChild($metrics);
+            $copy->removeChild($reviewHeading);
+            $output->insertBefore($reviews, $group);
+
+            return;
+        }
+    }
+
+    private function suratSeoServices(DOMDocument $document, DOMElement $output, array $groups, DOMXPath $xpath): void
+    {
+        $start = null;
+        $end = null;
+
+        foreach ($groups as $index => $group) {
+            $copy = $this->serviceCopy($xpath, $group);
+            if (! $copy) {
+                continue;
+            }
+
+            $headings = $this->directHeadings($copy);
+            $labels = array_map(fn (DOMElement $heading): string => strtolower(trim($heading->textContent)), $headings);
+            if ($start === null && in_array('our seo services in surat', $labels, true)
+                && array_filter($headings, fn (DOMElement $heading): bool => $heading->tagName === 'h4' && preg_match('/^\s*\d+\s*\./', $heading->textContent) === 1)) {
+                $start = $index;
+            }
+            if ($start !== null && in_array('additional seo support services', $labels, true)) {
+                $end = $index;
+                break;
+            }
+        }
+
+        if ($start === null || $end === null) {
+            return;
+        }
+
+        $services = $document->createElement('section');
+        $services->setAttribute('class', 'service-section surat-seo-services');
+        $serviceTitle = null;
+        $grid = $document->createElement('div');
+        $grid->setAttribute('class', 'surat-seo-services__grid');
+        $cards = [];
+        $images = [];
+        $activeCard = null;
+        $support = $document->createElement('section');
+        $support->setAttribute('class', 'service-section surat-seo-support');
+        $supportCopy = $document->createElement('div');
+        $supportCopy->setAttribute('class', 'service-copy');
+        $supportStarted = false;
+        $removedGroups = [];
+
+        for ($index = $start; $index <= $end; $index++) {
+            $group = $groups[$index];
+            $copy = $this->serviceCopy($xpath, $group);
+            if (! $copy) {
+                continue;
+            }
+
+            foreach (iterator_to_array($copy->childNodes) as $child) {
+                if ($child instanceof DOMElement && $child->tagName === 'h2') {
+                    $label = strtolower(trim($child->textContent));
+                    if ($label === 'our seo services in surat' && ! $serviceTitle) {
+                        $serviceTitle = $child;
+                        continue;
+                    }
+                    if ($label === 'additional seo support services') {
+                        $supportStarted = true;
+                        $supportCopy->appendChild($child);
+                        $activeCard = null;
+                        continue;
+                    }
+                }
+
+                if ($supportStarted) {
+                    $supportCopy->appendChild($child);
+                    continue;
+                }
+
+                if ($child instanceof DOMElement && $child->tagName === 'h4'
+                    && preg_match('/^\s*\d+\s*\./', $child->textContent) === 1) {
+                    $activeCard = $document->createElement('article');
+                    $activeCard->setAttribute('class', 'surat-seo-service');
+                    $cardCopy = $document->createElement('div');
+                    $cardCopy->setAttribute('class', 'surat-seo-service__copy');
+                    $cardHeading = $document->createElement('h3');
+                    while ($child->firstChild) {
+                        $cardHeading->appendChild($child->firstChild);
+                    }
+                    $cardCopy->appendChild($cardHeading);
+                    $activeCard->appendChild($cardCopy);
+                    $cards[] = [$activeCard, $cardCopy, $cardHeading];
+                    $grid->appendChild($activeCard);
+                    continue;
+                }
+
+                if ($activeCard) {
+                    $activeCard->getElementsByTagName('div')->item(0)?->appendChild($child);
+                }
+            }
+
+            foreach ($xpath->query('./div[contains(concat(" ", normalize-space(@class), " "), " service-media ")]//img', $group) ?: [] as $image) {
+                if ($image instanceof DOMElement) {
+                    $image->setAttribute('loading', 'lazy');
+                    $images[] = $image;
+                }
+            }
+            $removedGroups[] = $group;
+        }
+
+        if ($serviceTitle) {
+            $services->appendChild($serviceTitle);
+        }
+        $services->appendChild($grid);
+
+        $descriptions = [
+            'Research the terms your customers in Surat are searching for and build a strategy around their intent.',
+            'Improve page titles, content, and internal links so your pages are useful to both visitors and search engines.',
+            'Keep your website fast, secure, mobile-friendly, and easy for search engines to crawl.',
+            'Improve your visibility in Surat searches with a complete Google Business Profile and consistent local listings.',
+            'Build authority with relevant, trustworthy links and ethical outreach.',
+            'Create useful blogs and landing pages that answer customer questions and support organic growth.',
+        ];
+
+        foreach ($cards as $index => [$card, $copy, $heading]) {
+            $image = $images[$index] ?? null;
+            if ($copy->getElementsByTagName('p')->length === 0 && isset($descriptions[$index])) {
+                $description = $document->createElement('p', $descriptions[$index]);
+                $copy->appendChild($description);
+            }
+            if (! $image instanceof DOMElement) {
+                continue;
+            }
+
+            if (trim($image->getAttribute('alt')) === '') {
+                $image->setAttribute('alt', 'SEO illustration for '.trim($heading->textContent));
+            }
+            $media = $document->createElement('div');
+            $media->setAttribute('class', 'surat-seo-service__media');
+            $media->appendChild($image);
+            $card->appendChild($media);
+        }
+
+        $support->appendChild($supportCopy);
+        $parent = $removedGroups[0]->parentNode ?? null;
+        if ($parent === $output) {
+            $output->insertBefore($services, $removedGroups[0]);
+            $output->insertBefore($support, $removedGroups[0]);
+            foreach ($removedGroups as $group) {
+                $output->removeChild($group);
+            }
+        }
+    }
+
+    private function suratSeoAudienceSections(DOMDocument $document, DOMElement $output, array $groups, DOMXPath $xpath): void
+    {
+        foreach ($groups as $group) {
+            $copy = $this->serviceCopy($xpath, $group);
+            if (! $copy) {
+                continue;
+            }
+
+            $headings = $this->directHeadings($copy);
+            $hasServiceItems = count(array_filter(
+                $headings,
+                fn (DOMElement $heading): bool => $heading->tagName === 'h6' && preg_match('/^\s*\d+\s*\./', $heading->textContent) === 1,
+            )) > 0;
+            $hasIndustries = count(array_filter(
+                $headings,
+                fn (DOMElement $heading): bool => $heading->tagName === 'h2' && strtolower(trim($heading->textContent)) === 'who we work with',
+            )) > 0;
+            if (! $hasServiceItems || ! $hasIndustries || $group->parentNode !== $output) {
+                continue;
+            }
+
+            $services = $document->createElement('section');
+            $services->setAttribute('class', 'service-section surat-seo-audit-services');
+            $serviceCopy = $document->createElement('div');
+            $serviceCopy->setAttribute('class', 'service-copy');
+            $serviceGrid = $document->createElement('div');
+            $serviceGrid->setAttribute('class', 'surat-seo-audit-services__grid');
+
+            $industries = $document->createElement('section');
+            $industries->setAttribute('class', 'service-section surat-seo-industries');
+            $industryCopy = $document->createElement('div');
+            $industryCopy->setAttribute('class', 'service-copy');
+            $industryGrid = $document->createElement('div');
+            $industryGrid->setAttribute('class', 'surat-seo-industries__grid');
+
+            $inIndustries = false;
+            foreach (iterator_to_array($copy->childNodes) as $child) {
+                if ($child instanceof DOMElement && $child->tagName === 'h2') {
+                    if (strtolower(trim($child->textContent)) === 'who we work with') {
+                        $inIndustries = true;
+                        $industryCopy->appendChild($child);
+                        continue;
+                    }
+                    if (! $inIndustries) {
+                        $serviceCopy->appendChild($child);
+                        continue;
+                    }
+                }
+
+                if ($inIndustries) {
+                    if ($child instanceof DOMElement && $child->tagName === 'p') {
+                        $industryGrid->appendChild($child);
+                    } else {
+                        $industryCopy->appendChild($child);
+                    }
+                    continue;
+                }
+
+                if ($child instanceof DOMElement && $child->tagName === 'h6') {
+                    $item = $document->createElement('article');
+                    $item->setAttribute('class', 'surat-seo-audit-services__item');
+                    $heading = $document->createElement('h3');
+                    while ($child->firstChild) {
+                        $heading->appendChild($child->firstChild);
+                    }
+                    $item->appendChild($heading);
+                    $serviceGrid->appendChild($item);
+                } else {
+                    $serviceCopy->appendChild($child);
+                }
+            }
+
+            $serviceCopy->appendChild($serviceGrid);
+            $industryCopy->appendChild($industryGrid);
+            $services->appendChild($serviceCopy);
+            $industries->appendChild($industryCopy);
+            $output->insertBefore($services, $group);
+            $output->insertBefore($industries, $group);
+            $output->removeChild($group);
+            break;
+        }
+    }
+
+    private function suratSeoGrowthSection(DOMDocument $document, DOMElement $output, array $groups, DOMXPath $xpath): void
+    {
+        foreach ($groups as $group) {
+            $copy = $this->serviceCopy($xpath, $group);
+            if (! $copy) {
+                continue;
+            }
+
+            $faqHeading = null;
+            foreach ($this->directHeadings($copy) as $heading) {
+                if (str_starts_with(strtolower(trim($heading->textContent)), 'frequently asked questions')) {
+                    $faqHeading = $heading;
+                    break;
+                }
+            }
+            if (! $faqHeading || $group->parentNode !== $output) {
+                continue;
+            }
+
+            $growth = $document->createElement('section');
+            $growth->setAttribute('class', 'service-section service-section--surat-growth');
+            $growthCopy = $document->createElement('div');
+            $growthCopy->setAttribute('class', 'service-copy');
+            foreach (iterator_to_array($copy->childNodes) as $child) {
+                if ($child === $faqHeading) {
+                    break;
+                }
+                $growthCopy->appendChild($child);
+            }
+
+            $growth->appendChild($growthCopy);
+            $this->addClasses($group, ['service-section--surat-faq'], ['service-section--text']);
+            $output->insertBefore($growth, $group);
+            break;
         }
     }
 
