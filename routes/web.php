@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Web\BlogController;
+use App\Http\Controllers\Web\EnquiryController;
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\ResolvePublicContentController;
 use Illuminate\Support\Facades\Route;
@@ -14,6 +15,7 @@ Route::get('/career', [HomeController::class, 'career'])->name('career');
 Route::get('/portfolio', [HomeController::class, 'portfolio'])->name('portfolio');
 Route::get('/portfolio/{slug}', [HomeController::class, 'portfolioItem'])->name('portfolio.item');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::post('/enquiries', [EnquiryController::class, 'store'])->middleware('throttle:leads')->name('enquiries.store');
 Route::get('/thank-you', [HomeController::class, 'thankYou'])->name('thank-you');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.post');

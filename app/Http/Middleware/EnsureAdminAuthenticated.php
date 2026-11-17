@@ -15,7 +15,7 @@ class EnsureAdminAuthenticated
     {
         $user = $request->user();
         $session = $request->session();
-        if (! $user instanceof User || ! $user->is_active || ! $user->two_factor_confirmed_at
+        if (! $user instanceof User || ! $user->is_active
             || ! $user->hasAnyRole(AdminAccess::ROLES)
             || $session->get('admin.verified_user_id') !== $user->id
             || $session->get('admin.auth_version') !== $user->auth_version

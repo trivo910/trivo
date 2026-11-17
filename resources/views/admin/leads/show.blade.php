@@ -7,6 +7,12 @@
         <dt>Source URL</dt><dd class="path-cell">{{ $lead->source_url ?: 'Not provided' }}</dd><dt>Received (UTC)</dt><dd>{{ $lead->created_at?->format('Y-m-d H:i:s') }}</dd>
         <dt>Status</dt><dd>{{ $statuses[$lead->status] ?? $lead->status }}</dd><dt>Last handled by</dt><dd>{{ $lead->handled_by ? 'Account #'.$lead->handled_by : 'Not yet handled' }}</dd>
     </dl><h3>Message</h3>@foreach(preg_split('/\r\n|\r|\n/', $lead->message ?? '') ?: [] as $line)<p>{{ $line }}</p>@endforeach</x-admin.glass-card>
+    <x-admin.table caption="Enquiry email delivery">
+        <x-slot:head><tr><th scope="col">Email</th><th scope="col">Status</th><th scope="col">Result</th></tr></x-slot:head>
+        @forelse($mailLogs as $log)
+            <tr><td>{{ $log->purpose === 'lead_thank_you' ? 'Visitor thank-you' : 'Admin notification' }}</td><td>{{ ucfirst($log->status) }}</td><td>{{ $log->error_message ?: ($log->sent_at ? 'SMTP accepted at '.$log->sent_at->format('Y-m-d H:i:s').' UTC' : 'Awaiting background processing') }}</td></tr>
+        @empty<tr><td colspan="3">No email delivery records for this enquiry.</td></tr>@endforelse
+    </x-admin.table>
     @can('update', $lead)
         <x-admin.glass-card strong><h2>Follow-up</h2><form method="POST" action="{{ route('admin.leads.update', $lead) }}" class="form-stack">@csrf @method('PUT')
             <input type="hidden" name="content_version" value="{{ old('content_version', $lead->content_version) }}">

@@ -36,8 +36,6 @@ class AppServiceProvider extends ServiceProvider
         ]);
         RateLimiter::for('leads', fn (Request $request) => Limit::perMinute(3)
             ->by(hash('sha256', (string) $request->ip())));
-        RateLimiter::for('admin-two-factor', fn (Request $request) => Limit::perMinute(5)
-            ->by(hash('sha256', (string) $request->session()->get('admin.pending.id').'|'.$request->ip())));
         Gate::define('view-styleguide', fn (User $user): bool => ! app()->isProduction() && $user->hasRole('Super Admin'));
         RateLimiter::for('admin-mail-test', fn (Request $request) => Limit::perMinute(2)->by((string) $request->user()?->getAuthIdentifier()));
     }

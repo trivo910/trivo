@@ -1,36 +1,5 @@
 import Alpine from 'alpinejs';
 
-const enrollmentQr = document.querySelector('[data-enrollment-qr]');
-
-if (enrollmentQr instanceof HTMLElement) {
-    const qrValue = enrollmentQr.dataset.enrollmentQr;
-    const image = enrollmentQr.querySelector('img');
-    const status = enrollmentQr.querySelector('[data-qr-status]');
-    const fallback = document.querySelector('[data-setup-key-fallback]');
-
-    if (qrValue && image instanceof HTMLImageElement && status instanceof HTMLElement) {
-        import('qrcode')
-            .then(({ default: QRCode }) => QRCode.toDataURL(qrValue, {
-                errorCorrectionLevel: 'M',
-                margin: 4,
-                width: 240,
-                color: { dark: '#000000', light: '#ffffff' },
-            }))
-            .then((dataUrl) => {
-                image.src = dataUrl;
-                image.hidden = false;
-                status.textContent = 'QR code ready. Scan it with your authenticator app.';
-            })
-            .catch((error) => {
-                console.error('Could not generate the local authenticator QR code.', error);
-                status.textContent = 'QR code could not be generated. Use the manual setup key below.';
-                if (fallback instanceof HTMLDetailsElement) fallback.open = true;
-            });
-    } else {
-        console.error('The authenticator QR code container is incomplete.');
-    }
-}
-
 Alpine.data('adminShell', () => ({
     sidebarOpen: false,
     compact: false,
