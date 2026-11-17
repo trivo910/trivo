@@ -18,7 +18,7 @@ class SaveSmtpSettings
                 ?? new Setting(['key' => 'mail.smtp', 'group' => 'mail']);
             $previous = $setting->getAttribute('value');
             $data = array_intersect_key($values, array_flip(['host', 'port', 'encryption', 'username',
-                'from_email', 'from_name', 'reply_to', 'queue_enabled']));
+                'from_email', 'from_name', 'reply_to', 'queue_enabled', 'notification_email']));
             $data['queue_enabled'] = (bool) $data['queue_enabled'];
             $data['port'] = (int) $data['port'];
             $data['password'] = ! empty($values['clear_password']) ? null

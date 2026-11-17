@@ -51,6 +51,15 @@ it('retains a saved password on blank submission and only clears it explicitly',
     expect(Setting::query()->where('key', 'mail.smtp')->first()->value['password'])->toBeNull();
 });
 
+it('saves and validates the enquiry notification recipient', function () {
+    $this->put(route('admin.mail.update'), [...smtpFixture(), 'notification_email' => 'enquiries@example.test'])
+        ->assertSessionHasNoErrors();
+    expect(app(\App\Services\Mail\SmtpSettings::class)->get()['notification_email'])->toBe('enquiries@example.test');
+    $this->get(route('admin.mail.index'))->assertOk()->assertSee('enquiries@example.test');
+    $this->put(route('admin.mail.update'), [...smtpFixture(), 'notification_email' => 'invalid'])
+        ->assertSessionHasErrors('notification_email');
+});
+
 it('queues a test containing only a log ID and an encrypted recipient', function () {
     Bus::fake();
     $this->put(route('admin.mail.update'), smtpFixture());

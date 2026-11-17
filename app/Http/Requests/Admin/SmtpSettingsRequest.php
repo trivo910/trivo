@@ -23,6 +23,7 @@ class SmtpSettingsRequest extends FormRequest
             'username' => ['nullable', 'string', 'max:254', 'not_regex:/[\r\n]/'],
             'password' => ['nullable', 'string', 'max:2048'], 'clear_password' => ['sometimes', 'boolean'],
             'from_email' => ['required', 'email:rfc', 'max:254'],
+            'notification_email' => ['nullable', 'email:rfc', 'max:254'],
             'from_name' => ['required', 'string', 'max:100', 'not_regex:/[\r\n]/'],
             'reply_to' => ['nullable', 'email:rfc', 'max:254'], 'queue_enabled' => ['required', 'boolean'],
         ];

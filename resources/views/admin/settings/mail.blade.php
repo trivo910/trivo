@@ -11,6 +11,7 @@
                 <div class="field"><label class="checkbox-label"><input type="checkbox" name="clear_password" value="1"> Remove the saved password</label><p class="helper">Use this only when the mail server does not require a password.</p></div>
                 <x-admin.input name="from_email" label="From email" type="email" :value="old('from_email', $settings['from_email'] ?? '')" required maxlength="254" />
                 <x-admin.input name="from_name" label="From name" :value="old('from_name', $settings['from_name'] ?? '')" required maxlength="100" />
+                <x-admin.input name="notification_email" label="Enquiry notification email" type="email" :value="old('notification_email', $settings['notification_email'] ?? '')" maxlength="254" help="Receives website enquiries. Leave blank to use the From email." />
                 <x-admin.input name="reply_to" label="Reply-to email (optional)" type="email" :value="old('reply_to', $settings['reply_to'] ?? '')" maxlength="254" />
                 <x-admin.select name="queue_enabled" label="Test email delivery" :value="old('queue_enabled', (int) ($settings['queue_enabled'] ?? true))" :options="[1 => 'Queue in the background', 0 => 'Send immediately']" help="Form notifications always use the background queue." />
             </div>

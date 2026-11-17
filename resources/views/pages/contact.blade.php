@@ -38,29 +38,31 @@
 
             <form
                 class="contact-page__form"
-                action="mailto:contact@trivo.in?subject=Contact%20enquiry"
+                action="{{ route('enquiries.store') }}"
                 method="post"
-                enctype="text/plain"
-                data-home-enquiry="contact"
             >
+                @csrf
+                <input type="hidden" name="form" value="contact">
+                @include('partials.enquiry-errors', ['formKey' => 'contact'])
+                @include('partials.enquiry-honeypot')
                 <svg class="contact-page__spark" viewBox="0 0 44 44" fill="none" aria-hidden="true">
                     <path d="M22 0c1.9 12.1 8 18.2 22 22-14 3.8-20.1 9.9-22 22C20.1 31.9 14 25.8 0 22 14 18.2 20.1 12.1 22 0Z" fill="currentColor"/>
                     <path d="M37 1v10M32 6h10" stroke="currentColor" stroke-width="2"/>
                 </svg>
                 <label class="sr-only" for="contact-name">Name</label>
-                <input id="contact-name" type="text" name="name" placeholder="Name" autocomplete="name" aria-label="Name" required>
+                <input id="contact-name" type="text" name="name" maxlength="150" value="{{ old('form') === 'contact' ? old('name') : '' }}" placeholder="Name" autocomplete="name" aria-label="Name" required>
 
                 <label class="sr-only" for="contact-email">Email</label>
-                <input id="contact-email" type="email" name="email" placeholder="Email" autocomplete="email" aria-label="Email" required>
+                <input id="contact-email" type="email" name="email" maxlength="254" value="{{ old('form') === 'contact' ? old('email') : '' }}" placeholder="Email" autocomplete="email" aria-label="Email" required>
 
                 <label class="sr-only" for="contact-company">Company name</label>
-                <input id="contact-company" type="text" name="company" placeholder="Company name" autocomplete="organization" aria-label="Company name">
+                <input id="contact-company" type="text" name="company" maxlength="255" value="{{ old('form') === 'contact' ? old('company') : '' }}" placeholder="Company name" autocomplete="organization" aria-label="Company name">
 
                 <label class="sr-only" for="contact-phone">Phone number</label>
-                <input id="contact-phone" type="tel" name="phone" placeholder="Phone number" autocomplete="tel" aria-label="Phone number" required>
+                <input id="contact-phone" type="tel" name="phone" maxlength="50" value="{{ old('form') === 'contact' ? old('phone') : '' }}" placeholder="Phone number" autocomplete="tel" aria-label="Phone number" required>
 
                 <label class="sr-only" for="contact-message">What can we help you with?</label>
-                <textarea id="contact-message" name="message" rows="4" placeholder="What can we help you with?" aria-label="What can we help you with?" required></textarea>
+                <textarea id="contact-message" name="message" maxlength="10000" rows="4" placeholder="What can we help you with?" aria-label="What can we help you with?" required>{{ old('form') === 'contact' ? old('message') : '' }}</textarea>
 
                 <button type="submit">Get in touch <span aria-hidden="true">→</span></button>
             </form>

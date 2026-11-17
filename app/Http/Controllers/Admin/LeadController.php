@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\LeadIndexRequest;
 use App\Http\Requests\Admin\LeadUpdateRequest;
 use App\Models\Lead;
+use App\Models\MailLog;
 use App\Services\Leads\LeadInbox;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Gate;
@@ -26,7 +27,8 @@ class LeadController extends Controller
     {
         Gate::authorize('view', $lead);
 
-        return view('admin.leads.show', ['lead' => $lead, 'statuses' => LeadInbox::STATUSES]);
+        return view('admin.leads.show', ['lead' => $lead, 'statuses' => LeadInbox::STATUSES,
+            'mailLogs' => MailLog::query()->where('lead_id', $lead->id)->latest()->limit(10)->get()]);
     }
 
     public function update(LeadUpdateRequest $request, Lead $lead, UpdateLead $action): RedirectResponse

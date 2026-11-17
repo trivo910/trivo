@@ -13,16 +13,20 @@
             @endif
         </ul>
     </div>
-    <form class="home-enquiry__form" data-home-enquiry>
+    <form class="home-enquiry__form" data-home-enquiry data-lead-form method="POST" action="{{ route('enquiries.store') }}">
+        @csrf
+        <input type="hidden" name="form" value="{{ $isAudit ? 'audit' : 'proposal' }}">
+        @include('partials.enquiry-errors', ['formKey' => $isAudit ? 'audit' : 'proposal'])
+        @include('partials.enquiry-honeypot')
         @unless($isAudit)<h3>Get In Touch</h3>@endunless
         <div class="home-enquiry__progress" aria-hidden="true"></div>
         <div class="home-enquiry__fields">
-            <input type="text" name="name" placeholder="Your name" aria-label="Your name" autocomplete="name" required>
-            <input type="email" name="email" placeholder="Email" aria-label="Email" autocomplete="email" required>
-            <input type="tel" name="phone" placeholder="Phone number" aria-label="Phone number" autocomplete="tel" required>
-            <input type="text" name="company" placeholder="Company name" aria-label="Company name" autocomplete="organization">
+            <input type="text" name="name" maxlength="150" value="{{ old('form') === ($isAudit ? 'audit' : 'proposal') ? old('name') : '' }}" placeholder="Your name" aria-label="Your name" autocomplete="name" required>
+            <input type="email" name="email" maxlength="254" value="{{ old('form') === ($isAudit ? 'audit' : 'proposal') ? old('email') : '' }}" placeholder="Email" aria-label="Email" autocomplete="email" required>
+            <input type="tel" name="phone" maxlength="50" value="{{ old('form') === ($isAudit ? 'audit' : 'proposal') ? old('phone') : '' }}" placeholder="Phone number" aria-label="Phone number" autocomplete="tel" required>
+            <input type="text" name="company" maxlength="255" value="{{ old('form') === ($isAudit ? 'audit' : 'proposal') ? old('company') : '' }}" placeholder="Company name" aria-label="Company name" autocomplete="organization">
         </div>
         <button type="submit">{{ $isAudit ? 'Request a free audit' : 'Send me a proposal' }} <span aria-hidden="true">→</span></button>
-        <p class="home-enquiry__hint">Opens your email app to send your enquiry.</p>
+        <p class="home-enquiry__hint">We will contact you about your enquiry.</p>
     </form>
 </section>

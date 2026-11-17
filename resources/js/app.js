@@ -149,7 +149,8 @@ document.querySelectorAll('[data-career-video]').forEach((container) => {
     });
 });
 
-document.querySelectorAll('[data-home-enquiry]').forEach((form) => {
+
+document.querySelectorAll('[data-home-enquiry]:not([data-lead-form])').forEach((form) => {
     form.addEventListener('submit', (event) => {
         event.preventDefault();
         if (!form.reportValidity()) return;
@@ -162,6 +163,7 @@ document.querySelectorAll('[data-home-enquiry]').forEach((form) => {
         openMailDraft('contact@trivo.in', subject, fields);
     });
 });
+
 
 document.querySelectorAll('[data-career-application]').forEach((form) => {
     form.addEventListener('submit', (event) => {

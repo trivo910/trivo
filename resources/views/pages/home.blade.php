@@ -245,20 +245,28 @@
                     <p class="mt-5 max-w-xl text-base leading-7 text-slate-300">Tell us where your pipeline is stalled and we’ll map the next best moves for sales, brand reach, and conversion efficiency.</p>
                 </div>
 
-                <form class="space-y-4 rounded-[28px] border border-white/10 bg-white/5 p-5 backdrop-blur-sm">
+                <form method="POST" action="{{ route('enquiries.store') }}" class="space-y-4 rounded-[28px] border border-white/10 bg-white/5 p-5 backdrop-blur-sm">
+                    @csrf
+                    <input type="hidden" name="form" value="proposal">
+                    @include('partials.enquiry-errors', ['formKey' => 'proposal'])
+                    @include('partials.enquiry-honeypot')
                     <div>
                         <label for="name" class="mb-2 block text-sm font-medium text-slate-200">Name</label>
-                        <input id="name" type="text" class="w-full rounded-2xl border border-slate-700 bg-slate-950/40 px-4 py-3 text-white placeholder:text-slate-400 focus:border-primary focus:outline-none" placeholder="Your name">
+                        <input id="name" name="name" maxlength="150" required value="{{ old('name') }}" type="text" class="w-full rounded-2xl border border-slate-700 bg-slate-950/40 px-4 py-3 text-white placeholder:text-slate-400 focus:border-primary focus:outline-none" placeholder="Your name">
                     </div>
                     <div>
                         <label for="email" class="mb-2 block text-sm font-medium text-slate-200">Email</label>
-                        <input id="email" type="email" class="w-full rounded-2xl border border-slate-700 bg-slate-950/40 px-4 py-3 text-white placeholder:text-slate-400 focus:border-primary focus:outline-none" placeholder="hello@brand.com">
+                        <input id="email" name="email" maxlength="254" required value="{{ old('email') }}" type="email" class="w-full rounded-2xl border border-slate-700 bg-slate-950/40 px-4 py-3 text-white placeholder:text-slate-400 focus:border-primary focus:outline-none" placeholder="hello@brand.com">
+                    </div>
+                    <div>
+                        <label for="phone" class="mb-2 block text-sm font-medium text-slate-200">Phone</label>
+                        <input id="phone" name="phone" type="tel" maxlength="50" required value="{{ old('phone') }}" class="w-full rounded-2xl border border-slate-700 bg-slate-950/40 px-4 py-3 text-white" autocomplete="tel">
                     </div>
                     <div>
                         <label for="message" class="mb-2 block text-sm font-medium text-slate-200">What do you need?</label>
-                        <textarea id="message" rows="4" class="w-full rounded-2xl border border-slate-700 bg-slate-950/40 px-4 py-3 text-white placeholder:text-slate-400 focus:border-primary focus:outline-none" placeholder="Tell us a bit about your goals"></textarea>
+                        <textarea id="message" name="message" maxlength="10000" rows="4" class="w-full rounded-2xl border border-slate-700 bg-slate-950/40 px-4 py-3 text-white placeholder:text-slate-400 focus:border-primary focus:outline-none" placeholder="Tell us a bit about your goals">{{ old('message') }}</textarea>
                     </div>
-                    <button type="button" class="inline-flex w-full items-center justify-center rounded-full bg-primary px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#004b8a]">Send enquiry</button>
+                    <button type="submit" class="inline-flex w-full items-center justify-center rounded-full bg-primary px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#004b8a]">Send enquiry</button>
                 </form>
             </div>
         </div>
