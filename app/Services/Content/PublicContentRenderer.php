@@ -20,6 +20,10 @@ class PublicContentRenderer
 {
     public function render(Page|Post $content): View
     {
+        if ($content instanceof Page && $content->path === '/marketing-agency-in-bahrain') {
+            return view('pages.marketing-agency-in-bahrain', ['record' => $content]);
+        }
+
         if ($content instanceof Page && $content->path === '/marketing-solutions') {
             return view('pages.marketing-solutions', ['record' => $content]);
         }
@@ -55,6 +59,40 @@ class PublicContentRenderer
         $body = $content instanceof Page ? $this->pageBody($content) : $content->body;
         $bodyHtml = app(ContentHtml::class)->clean($body);
         $hasHeadingOne = app(ContentHtml::class)->hasHeadingOne($bodyHtml);
+
+        if ($content instanceof Page && $content->path === '/seo-company-mumbai') {
+            $layout = app(ServicePageLayout::class)->render($bodyHtml, $content->path);
+            $document = new DOMDocument('1.0', 'UTF-8');
+            $previous = libxml_use_internal_errors(true);
+            try {
+                $document->loadHTML('<?xml encoding="UTF-8"><html><body>'.$layout.'</body></html>');
+            } finally {
+                libxml_clear_errors();
+                libxml_use_internal_errors($previous);
+            }
+            $xpath = new DOMXPath($document);
+            $cards = function (string $section, string $selector) use ($xpath): array {
+                $items = [];
+                foreach ($xpath->query('//*[contains(@class,"'.$section.'")]'.$selector) as $node) {
+                    $heading = $xpath->query('./h5|./summary', $node)->item(0);
+                    $paragraphs = [];
+                    foreach ($xpath->query('./p', $node) as $paragraph) {
+                        $paragraphs[] = trim($paragraph->textContent);
+                    }
+                    $items[] = ['title' => trim($heading?->textContent ?? ''), 'copy' => implode(' ', $paragraphs)];
+                }
+                return $items;
+            };
+
+            return view('pages.seo-company-mumbai', [
+                'record' => $content,
+                'benefits' => $cards('service-section--mumbai-benefit-item', '//article[contains(@class,"service-feature-card")]'),
+                'services' => $cards('service-section--mumbai-services', '//article[contains(@class,"service-feature-card")]'),
+                'reasons' => $cards('service-section--mumbai-why', '//details'),
+                'faqs' => $cards('service-section--mumbai-faq', '//details'),
+                'awardImages' => array_map(fn ($image) => $image->getAttribute('src'), iterator_to_array($xpath->query('//*[contains(@class,"mumbai-award-logos")]/img'))),
+            ]);
+        }
 
         if ($content instanceof Post) {
             $blogPostLayout = app(BlogPostLayout::class);

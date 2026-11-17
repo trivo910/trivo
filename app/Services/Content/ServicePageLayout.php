@@ -213,6 +213,8 @@ class ServicePageLayout
             $this->seoCompanySuratLayout($document, $output, $groups);
         } elseif ($path === '/seo-company-mumbai') {
             $this->seoCompanyMumbaiLayout($document, $output, $groups);
+        } elseif ($path === '/digital-marketing-agency-in-mumbai') {
+            $this->digitalMarketingMumbaiLayout($document, $output, $groups);
         }
         foreach ((new DOMXPath($document))->query('.//a[not(@href)]', $output) ?: [] as $link) {
             $text = strtolower(trim($link->textContent));
@@ -231,6 +233,151 @@ class ServicePageLayout
         }
 
         return $document->saveHTML($output);
+    }
+
+    private function digitalMarketingMumbaiLayout(DOMDocument $document, DOMElement $output, array $groups): void
+    {
+        $xpath = new DOMXPath($document);
+        $services = [];
+        $serviceIntro = null;
+        $process = null;
+        $processActive = false;
+        $metrics = [];
+        $clients = $xpath->query('./section[contains(@class,"paid-search-clients")]', $output)->item(0);
+        foreach ($groups as $index => $group) {
+            $copy = $this->serviceCopy($xpath, $group);
+            if (! $copy) {
+                continue;
+            }
+            $heading = $this->firstHeading($copy);
+            $label = strtolower(trim($heading?->textContent ?? ''));
+            if ($index === 0) {
+                $this->addClasses($group, ['dm-hero']);
+            }
+            if (str_starts_with($label, 'elevate your business')) {
+                $this->addClasses($group, ['dm-about']);
+            }
+            if (in_array($label, ['10+', '400+', '10m+'], true)) {
+                $metrics[] = $group;
+            }
+            if ($label === 'modern tools & techniques') {
+                $serviceIntro = $group;
+                $this->addClasses($group, ['dm-services-intro']);
+                foreach (iterator_to_array($copy->getElementsByTagName('h6')) as $smallHeading) {
+                    $copy->removeChild($smallHeading);
+                }
+            }
+            if (in_array($label, ['pay-per-click advertising (ppc)', 'social media marketing (smm)', 'search engine optimization (seo)'], true)) {
+                $services[] = $group;
+                $this->addClasses($group, ['dm-service-card']);
+                $link = $copy->getElementsByTagName('a')->item(0);
+                $link?->setAttribute('href', url(match (count($services)) {
+                    1 => '/paid-search-marketing', 2 => '/social-media-marketing', default => '/search-engine-optimization',
+                }));
+            }
+            if (str_starts_with($label, 'tools & platforms')) {
+                $this->addClasses($group, ['dm-tools']);
+            } elseif (str_starts_with($label, 'key benefits')) {
+                $this->addClasses($group, ['dm-benefits']);
+            } elseif (str_starts_with($label, 'industries we support')) {
+                $this->addClasses($group, ['dm-industries']);
+            } elseif ($label === 'our digital marketing process') {
+                $process = $group;
+                $processActive = true;
+                $this->addClasses($group, ['dm-process']);
+            } elseif ($processActive && str_starts_with($label, 'why businesses choose')) {
+                $processActive = false;
+            } elseif ($processActive && $process) {
+                $target = $this->serviceCopy($xpath, $process);
+                foreach (iterator_to_array($copy->childNodes) as $child) {
+                    $target->appendChild($child);
+                }
+                $group->parentNode?->removeChild($group);
+            }
+            if (str_starts_with($label, 'why businesses choose')) {
+                $this->addClasses($group, [$copy->getElementsByTagName('h6')->length ? 'dm-reasons' : 'dm-capabilities']);
+            }
+            if (str_starts_with($label, 'our digital marketing capabilities')) {
+                $this->addClasses($group, ['dm-capabilities-list']);
+            }
+            if (str_starts_with($label, 'frequently asked')) {
+                $this->addClasses($group, ['dm-faq']);
+                $copy->getElementsByTagName('details')->item(0)?->setAttribute('open', '');
+            }
+            if (str_starts_with($label, 'professional digital marketing audit')) {
+                $this->addClasses($group, ['dm-audit']);
+                $fragment = new DOMDocument();
+                @$fragment->loadHTML('<?xml encoding="UTF-8"><html><body>'.view('partials.digital-mumbai-audit')->render().'</body></html>');
+                foreach (iterator_to_array($fragment->getElementsByTagName('body')->item(0)->childNodes) as $child) {
+                    $copy->appendChild($document->importNode($child, true));
+                }
+            }
+            if (! $heading && str_contains(strtolower($copy->textContent), 'trusted by clients')) {
+                $this->addClasses($group, ['dm-google-rating']);
+                if ($clients instanceof DOMElement && $clients->nextSibling !== $group) {
+                    $clients->parentNode?->insertBefore($group, $clients->nextSibling);
+                }
+            }
+        }
+        if ($serviceIntro) {
+            $stats = $document->createElement('section');
+            $stats->setAttribute('class', 'dm-stats');
+            foreach ([['10+', 'Client-Focused Approach'], ['400+', 'Experienced Digital Specialists'], ['10M+', 'Transparent Communication'], ['', 'Modern Tools & Techniques'], ['', 'Timely Execution'], ['', 'Reliable Support']] as [$number, $text]) {
+                $card = $document->createElement('div');
+                $icon = $document->createElement('span', '✓');
+                $icon->setAttribute('aria-hidden', 'true');
+                $card->appendChild($icon);
+                $card->appendChild($document->createElement('strong', $number));
+                $paragraph = $document->createElement('p');
+                $paragraph->appendChild($document->createTextNode($text));
+                $card->appendChild($paragraph);
+                $stats->appendChild($card);
+            }
+            $output->insertBefore($stats, $serviceIntro);
+            foreach ($metrics as $metric) {
+                $metric->parentNode?->removeChild($metric);
+            }
+            // Each imported service illustration occurs before its corresponding heading.
+            $figures = [];
+            foreach ([$serviceIntro, ...$services] as $source) {
+                $copy = $this->serviceCopy($xpath, $source);
+                foreach (iterator_to_array($xpath->query('./figure', $copy)) as $figure) {
+                    $figures[] = $figure;
+                    $copy->removeChild($figure);
+                }
+            }
+            foreach ($services as $index => $service) {
+                $copy = $this->serviceCopy($xpath, $service);
+                if (isset($figures[$index])) {
+                    $copy->insertBefore($figures[$index], $copy->firstChild);
+                }
+            }
+        }
+        if ($clients instanceof DOMElement) {
+            $this->addClasses($clients, ['dm-clients']);
+            foreach (iterator_to_array($clients->getElementsByTagName('img')) as $image) {
+                if (str_ends_with($image->getAttribute('src'), '/download.png')) {
+                    $image->parentNode?->parentNode?->removeChild($image->parentNode);
+                }
+            }
+        }
+        foreach ($xpath->query('.//h3', $output) as $heading) {
+            $text = trim($heading->textContent);
+            $highlight = str_contains($text, 'Digital Marketing') ? 'Digital Marketing' : (str_contains($text, 'Asked Questions') ? 'Asked Questions' : null);
+            if (! $highlight) {
+                continue;
+            }
+            [$before, $after] = explode($highlight, $text, 2);
+            while ($heading->firstChild) {
+                $heading->removeChild($heading->firstChild);
+            }
+            $heading->appendChild($document->createTextNode($before));
+            $span = $document->createElement('span');
+            $span->setAttribute('class', 'dm-heading-accent');
+            $span->appendChild($document->createTextNode($highlight));
+            $heading->appendChild($span);
+            $heading->appendChild($document->createTextNode($after));
+        }
     }
 
     private function graphicDesignHero(DOMDocument $document, DOMElement $output, array $groups): void
@@ -891,7 +1038,14 @@ class ServicePageLayout
             }
         }
         if ($benefits?->parentNode === $output) {
-            $output->insertBefore($success, $benefits);
+            $benefitHeading = null;
+            foreach ($output->childNodes as $child) {
+                if ($child instanceof DOMElement && str_contains($child->getAttribute('class'), 'mumbai-benefits-heading')) {
+                    $benefitHeading = $child;
+                    break;
+                }
+            }
+            $output->insertBefore($success, $benefitHeading ?? $benefits);
         } else {
             $output->appendChild($success);
         }
@@ -900,68 +1054,89 @@ class ServicePageLayout
     private function mumbaiBenefitCards(DOMDocument $document, DOMElement $output, array $groups, DOMXPath $xpath): void
     {
         $first = null;
-        $cards = $document->createElement('div');
-        $cards->setAttribute('class', 'service-feature-cards');
-        $residual = [];
-        $active = null;
-        $started = false;
-
+        $last = null;
+        $auditLink = null;
         foreach ($groups as $group) {
+            if (str_contains($group->getAttribute('class'), 'service-section--mumbai-benefits')) {
+                $first = $group;
+                break;
+            }
+        }
+        if (! $first) {
+            return;
+        }
+        $firstCopy = $this->serviceCopy($xpath, $first);
+        $title = $this->firstHeading($firstCopy);
+        if ($title) {
+            $replacement = $document->createElement('h2');
+            while ($title->firstChild) {
+                $replacement->appendChild($title->firstChild);
+            }
+            $title->parentNode?->replaceChild($replacement, $title);
+            $title = $replacement;
+        }
+        $headingSection = $document->createElement('section');
+        $headingSection->setAttribute('class', 'mumbai-benefits-heading');
+        if ($title) {
+            $headingSection->appendChild($title);
+        }
+        $output->insertBefore($headingSection, $first);
+
+        $withinBenefits = false;
+        $benefitIndex = 0;
+        foreach ($groups as $group) {
+            if ($group === $first) {
+                $withinBenefits = true;
+            }
+            if (! $withinBenefits || str_contains($group->getAttribute('class'), 'service-section--mumbai-services')) {
+                if (str_contains($group->getAttribute('class'), 'service-section--mumbai-services')) {
+                    break;
+                }
+                continue;
+            }
             $copy = $this->serviceCopy($xpath, $group);
             if (! $copy) {
                 continue;
             }
-            if (! $started && ! str_contains($group->getAttribute('class'), 'service-section--mumbai-benefits')) {
-                continue;
-            }
-            if (str_contains($group->getAttribute('class'), 'service-section--mumbai-services')) {
-                break;
-            }
-            $started = true;
-            $first ??= $group;
-
+            $last = $group;
+            $card = $document->createElement('article');
+            $card->setAttribute('class', 'service-feature-card');
+            $active = false;
             foreach (iterator_to_array($copy->childNodes) as $child) {
                 if (! $child instanceof DOMElement) {
                     continue;
                 }
-                if ($child->tagName === 'h3' && $group === $first) {
+                if ($child === $title) {
                     continue;
                 }
-                if ($child->tagName === 'h4') {
-                    $active = $document->createElement('article');
-                    $active->setAttribute('class', 'service-feature-card');
+                if ($child->tagName === 'a' && str_contains(strtolower($child->textContent), 'free audit')) {
+                    $auditLink = $child;
+                    $copy->removeChild($child);
+                } elseif ($child->tagName === 'h4') {
                     $title = $document->createElement('h5');
                     while ($child->firstChild) {
                         $title->appendChild($child->firstChild);
                     }
-                    $active->appendChild($title);
-                    $cards->appendChild($active);
+                    $card->appendChild($title);
+                    $child->parentNode?->removeChild($child);
+                    $active = true;
+                } elseif ($child->tagName === 'p' && strcasecmp(trim($child->textContent), 'Get Location') === 0) {
+                    $child->setAttribute('class', 'mumbai-location-eyebrow');
                 } elseif ($child->tagName === 'p' && $active) {
-                    $active->appendChild($child);
-                } else {
-                    $residual[] = $child;
+                    $card->appendChild($child);
                 }
             }
-            if ($group !== $first && $group->parentNode === $output) {
-                $output->removeChild($group);
+            if ($card->hasChildNodes()) {
+                $copy->appendChild($card);
+                $benefitIndex++;
+                $this->addClasses($group, ['service-section--mumbai-benefit-item', 'service-section--mumbai-benefit-item-'.$benefitIndex], ['service-section--text']);
             }
         }
-
-        if (! $first instanceof DOMElement) {
-            return;
-        }
-        $copy = $this->serviceCopy($xpath, $first);
-        if (! $copy) {
-            return;
-        }
-        $heading = $this->firstHeading($copy);
-        if ($heading) {
-            $copy->insertBefore($cards, $heading->nextSibling);
-        } else {
-            $copy->appendChild($cards);
-        }
-        foreach ($residual as $node) {
-            $copy->appendChild($node);
+        if ($auditLink instanceof DOMElement && $last instanceof DOMElement && $last->parentNode === $output) {
+            $cta = $document->createElement('div');
+            $cta->setAttribute('class', 'mumbai-benefits-cta');
+            $cta->appendChild($auditLink);
+            $output->insertBefore($cta, $last->nextSibling);
         }
     }
 
@@ -980,6 +1155,25 @@ class ServicePageLayout
         $copy = $this->serviceCopy($xpath, $location);
         if (! $copy) {
             return;
+        }
+        foreach ($this->directHeadings($copy) as $heading) {
+            if ($heading->tagName === 'h3' && str_contains(strtolower($heading->textContent), 'seo services in mumbai')) {
+                $replacement = $document->createElement('h2');
+                while ($heading->firstChild) {
+                    $replacement->appendChild($heading->firstChild);
+                }
+                $heading->parentNode?->replaceChild($replacement, $heading);
+            }
+        }
+        foreach ($groups as $group) {
+            $groupCopy = $this->serviceCopy($xpath, $group);
+            if (! $groupCopy) {
+                continue;
+            }
+            foreach (iterator_to_array($xpath->query('./p[contains(@class,"mumbai-location-eyebrow")]', $groupCopy)) as $eyebrow) {
+                $groupCopy->removeChild($eyebrow);
+                $copy->insertBefore($eyebrow, $copy->firstChild);
+            }
         }
         $info = $document->createElement('div');
         $info->setAttribute('class', 'mumbai-location-card');

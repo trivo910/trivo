@@ -287,6 +287,12 @@ document.querySelectorAll('.paid-search-clients').forEach((section) => {
     setupHorizontalCarousel(section, track, figures, 'paid-search-client-controls', 'paid-search-client-track');
 });
 
+document.querySelectorAll('.service-page--digital-marketing-agency-in-mumbai .dm-tools').forEach((section) => {
+    const track = section.querySelector('.location-logo-grid');
+    if (!track) return;
+    setupHorizontalCarousel(section, track, [...track.children], 'paid-search-client-controls', 'digital-marketing-tools');
+});
+
 document.querySelectorAll('.about-page__clients').forEach((section) => {
     const track = section.querySelector(':scope > .about-page__client-track');
     if (!(track instanceof HTMLUListElement)) return;
