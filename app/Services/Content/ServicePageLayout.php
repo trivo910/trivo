@@ -215,6 +215,8 @@ class ServicePageLayout
             $this->seoCompanyMumbaiLayout($document, $output, $groups);
         } elseif ($path === '/digital-marketing-agency-in-mumbai') {
             $this->digitalMarketingMumbaiLayout($document, $output, $groups);
+        } elseif ($path === '/social-media-marketing-agency-in-mumbai') {
+            $this->socialMediaMumbaiLayout($document, $output, $groups);
         }
         foreach ((new DOMXPath($document))->query('.//a[not(@href)]', $output) ?: [] as $link) {
             $text = strtolower(trim($link->textContent));
@@ -233,6 +235,142 @@ class ServicePageLayout
         }
 
         return $document->saveHTML($output);
+    }
+
+    private function socialMediaMumbaiLayout(DOMDocument $document, DOMElement $output, array $groups): void
+    {
+        $xpath = new DOMXPath($document);
+        $metrics = [];
+        $benefits = null;
+        $clients = $xpath->query('./section[contains(@class,"paid-search-clients")]', $output)->item(0);
+        foreach ($groups as $index => $group) {
+            $copy = $this->serviceCopy($xpath, $group);
+            if (! $copy) {
+                continue;
+            }
+            $heading = $this->firstHeading($copy);
+            $label = strtolower(trim($heading?->textContent ?? ''));
+            if ($index === 0) {
+                $this->addClasses($group, ['sm-hero']);
+                foreach ($copy->getElementsByTagName('a') as $link) {
+                    $link->setAttribute('href', '#social-media-audit');
+                }
+            }
+            if (! $heading && str_contains(strtolower($copy->textContent), 'trusted by clients')) {
+                $this->addClasses($group, ['sm-rating']);
+            }
+            if ($label === 'about') {
+                $this->addClasses($group, ['sm-about']);
+                $paragraphs = $copy->getElementsByTagName('p');
+                $last = $paragraphs->item($paragraphs->length - 1);
+                if ($last instanceof DOMElement && str_starts_with(trim($last->textContent), 'Chatting first')) {
+                    $note = $document->createElement('section');
+                    $note->setAttribute('class', 'sm-about-note');
+                    $note->appendChild($last);
+                    $output->insertBefore($note, $group->nextSibling);
+                }
+            }
+            if (in_array($label, ['10+', '400+', '10m+'], true)) {
+                $metrics[] = $group;
+            }
+            if (str_starts_with($label, 'key benefits of social media')) {
+                $benefits = $group;
+                $this->addClasses($group, ['sm-benefits-intro']);
+            }
+            if ($heading?->tagName === 'h4') {
+                $this->addClasses($group, ['sm-prose']);
+            }
+            if ($label === 'our social media marketing process') {
+                $this->addClasses($group, ['sm-process-intro']);
+            }
+            if ($label === 'tools we use') {
+                $this->addClasses($group, ['sm-tools']);
+            }
+            if (str_starts_with($label, 'industries we support')) {
+                $this->addClasses($group, ['sm-industries']);
+            }
+            if (str_starts_with($label, "why we're a good fit")) {
+                $this->addClasses($group, ['sm-why']);
+                $fit = $document->createElement('div');
+                $fit->setAttribute('class', 'sm-fit-grid');
+                foreach (iterator_to_array($copy->getElementsByTagName('h6')) as $item) {
+                    $fit->appendChild($item);
+                }
+                $copy->insertBefore($fit, $heading->nextSibling);
+                $why = $copy->getElementsByTagName('h2')->item(0);
+                $why?->setAttribute('class', 'sm-why-heading');
+            }
+            if (str_starts_with($label, 'frequently asked')) {
+                $this->addClasses($group, ['sm-faq']);
+                $copy->getElementsByTagName('details')->item(0)?->setAttribute('open', '');
+            }
+            if ($label === 'social media (free audit)') {
+                $this->addClasses($group, ['sm-audit']);
+                $group->setAttribute('id', 'social-media-audit');
+                $fragment = new DOMDocument();
+                @$fragment->loadHTML('<?xml encoding="UTF-8"><html><body>'.view('partials.digital-mumbai-audit', ['auditPrefix' => 'sm'])->render().'</body></html>');
+                foreach (iterator_to_array($fragment->getElementsByTagName('body')->item(0)->childNodes) as $child) {
+                    $copy->appendChild($document->importNode($child, true));
+                }
+            }
+        }
+        if ($benefits) {
+            $stats = $document->createElement('section');
+            $stats->setAttribute('class', 'sm-stats');
+            foreach ([['10+', 'Years of Industry Experience'], ['400+', 'Projects Delivered Across Multiple Domains'], ['10M+', 'Strong Client Satisfaction Record'], ['', 'Google Certified Practitioner'], ['', 'Meta Certified Practitioner'], ['', '100% Online Brand Visibility']] as [$number, $label]) {
+                $card = $document->createElement('div');
+                $icon = $document->createElement('span', '✓');
+                $icon->setAttribute('aria-hidden', 'true');
+                $card->appendChild($icon);
+                $card->appendChild($document->createElement('strong', $number));
+                $description = $document->createElement('p');
+                $description->appendChild($document->createTextNode($label));
+                $card->appendChild($description);
+                $stats->appendChild($card);
+            }
+            $output->insertBefore($stats, $benefits);
+            foreach ($metrics as $metric) {
+                $metric->parentNode?->removeChild($metric);
+            }
+        }
+        if ($clients instanceof DOMElement) {
+            $this->addClasses($clients, ['sm-clients']);
+            foreach (iterator_to_array($clients->getElementsByTagName('img')) as $image) {
+                if (str_ends_with($image->getAttribute('src'), '/download.png')) {
+                    $figure = $image->parentNode;
+                    if ($figure instanceof DOMElement && $figure->tagName === 'figure') {
+                        $figure->parentNode?->removeChild($figure);
+                    } else {
+                        $image->parentNode?->removeChild($image);
+                    }
+                }
+            }
+        }
+        foreach ($xpath->query('.//h2|.//h3', $output) as $heading) {
+            $text = trim($heading->textContent);
+            $accent = match (true) {
+                str_starts_with($text, 'Key Benefits') => 'Social Media',
+                $text === 'Marketing' => 'Marketing',
+                str_contains($text, 'Marketing Process') => 'Process',
+                $text === 'Tools We Use' => 'Tools',
+                str_contains($text, 'Why choose The Trivo') => 'The Trivo',
+                str_contains($text, 'Asked Questions') => 'Questions',
+                default => null,
+            };
+            if (! $accent) {
+                continue;
+            }
+            [$before, $after] = explode($accent, $text, 2);
+            while ($heading->firstChild) {
+                $heading->removeChild($heading->firstChild);
+            }
+            $heading->appendChild($document->createTextNode($before));
+            $span = $document->createElement('span');
+            $span->setAttribute('class', 'sm-accent');
+            $span->appendChild($document->createTextNode($accent));
+            $heading->appendChild($span);
+            $heading->appendChild($document->createTextNode($after));
+        }
     }
 
     private function digitalMarketingMumbaiLayout(DOMDocument $document, DOMElement $output, array $groups): void
@@ -1614,6 +1752,14 @@ class ServicePageLayout
             }
             if (str_starts_with($label, 'what is performance marketing')) {
                 $this->addClasses($group, ['service-section--performance-definition']);
+                foreach (iterator_to_array($copy->getElementsByTagName('p')) as $paragraph) {
+                    if (str_starts_with(trim($paragraph->textContent), 'At Trivo, we blend')) {
+                        $note = $document->createElement('section');
+                        $note->setAttribute('class', 'performance-definition-note');
+                        $note->appendChild($paragraph);
+                        $output->insertBefore($note, $group->nextSibling);
+                    }
+                }
             }
             if (array_filter($labels, fn (string $heading): bool => str_starts_with($heading, 'why trivo is the right performance marketing partner'))) {
                 $this->addClasses($group, ['service-section--performance-partner'], ['service-section--text']);
@@ -1632,6 +1778,14 @@ class ServicePageLayout
             }
             if (str_starts_with($label, 'get in touch')) {
                 $this->addClasses($group, ['service-section--performance-contact'], ['service-section--text']);
+                $fragment = new DOMDocument('1.0', 'UTF-8');
+                @$fragment->loadHTML('<?xml encoding="UTF-8"><html><body>'.view('partials.nagpur-contact-details')->render().'</body></html>');
+                while ($copy->firstChild) {
+                    $copy->removeChild($copy->firstChild);
+                }
+                foreach (iterator_to_array($fragment->getElementsByTagName('body')->item(0)->childNodes) as $child) {
+                    $copy->appendChild($document->importNode($child, true));
+                }
                 $group->appendChild($this->performanceMarketingForm($document, 'performance-contact'));
             }
 
@@ -1652,9 +1806,9 @@ class ServicePageLayout
                 $metrics = $document->createElement('div');
                 $metrics->setAttribute('class', 'performance-marketing-proof__metrics');
                 foreach ([
-                    ['0+', 'Client reviews'],
-                    ['0+', 'Client'],
-                    ['0', 'Clutch rating'],
+                    ['798+', 'Client Reviews'],
+                    ['86+', 'Client'],
+                    ['4.9', 'Clutch Rating'],
                 ] as [$value, $label]) {
                     $metric = $document->createElement('article');
                     $metric->setAttribute('class', 'performance-marketing-proof__metric');
@@ -1908,6 +2062,19 @@ class ServicePageLayout
 
     private function performanceMarketingForm(DOMDocument $document, string $prefix): DOMElement
     {
+        if (in_array($prefix, ['performance-hero', 'performance-contact'], true)) {
+            $fragment = new DOMDocument('1.0', 'UTF-8');
+            $previous = libxml_use_internal_errors(true);
+            try {
+                $fragment->loadHTML('<?xml encoding="UTF-8"><html><body>'.view('partials.performance-enquiry', compact('prefix'))->render().'</body></html>');
+            } finally {
+                libxml_clear_errors();
+                libxml_use_internal_errors($previous);
+            }
+
+            return $document->importNode($fragment->getElementsByTagName('form')->item(0), true);
+        }
+
         $form = $document->createElement('form');
         $form->setAttribute('class', 'performance-marketing-form');
         $form->setAttribute('data-home-enquiry', '');

@@ -287,7 +287,7 @@ document.querySelectorAll('.paid-search-clients').forEach((section) => {
     setupHorizontalCarousel(section, track, figures, 'paid-search-client-controls', 'paid-search-client-track');
 });
 
-document.querySelectorAll('.service-page--digital-marketing-agency-in-mumbai .dm-tools').forEach((section) => {
+document.querySelectorAll('.service-page--digital-marketing-agency-in-mumbai .dm-tools, .service-page--social-media-marketing-agency-in-mumbai .sm-tools').forEach((section) => {
     const track = section.querySelector('.location-logo-grid');
     if (!track) return;
     setupHorizontalCarousel(section, track, [...track.children], 'paid-search-client-controls', 'digital-marketing-tools');

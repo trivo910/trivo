@@ -1,5 +1,5 @@
 @php($isAudit = $variant === 'audit')
-@php($isMumbai = !$isAudit && request()->is('seo-company-mumbai', 'marketing-agency-in-bahrain', 'digital-marketing-agency-in-mumbai'))
+@php($isMumbai = !$isAudit && request()->is('seo-company-mumbai', 'marketing-agency-in-bahrain', 'digital-marketing-agency-in-mumbai', 'social-media-marketing-agency-in-mumbai', 'performance-marketing-agency-nagpur'))
 <section class="home-enquiry home-enquiry--{{ $variant }}" @if($isAudit) id="home-audit" @endif aria-label="{{ $isAudit ? 'Free marketing audit' : 'Get in touch' }}">
     <div class="home-enquiry__copy">
         @unless($isAudit)<p>In love with what we do?</p>@endunless
