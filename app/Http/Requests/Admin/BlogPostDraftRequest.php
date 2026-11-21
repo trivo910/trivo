@@ -28,7 +28,8 @@ class BlogPostDraftRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
-        $this->merge(['is_cornerstone' => $this->boolean('is_cornerstone'), 'show_toc' => $this->boolean('show_toc')]);
+        $this->merge(['is_cornerstone' => $this->boolean('is_cornerstone'), 'show_toc' => $this->boolean('show_toc'),
+            'tag_ids' => $this->input('tag_ids', []), 'secondary_keywords' => $this->input('secondary_keywords', [])]);
         if (! $this->has('secondary_keywords_text')) {
             return;
         }

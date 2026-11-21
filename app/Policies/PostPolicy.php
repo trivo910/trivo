@@ -14,7 +14,7 @@ class PostPolicy
 
     public function view(User $user, Post $post): bool
     {
-        return $this->viewAny($user);
+        return $this->viewAny($user) && ($post->content_kind ?? 'article') === 'article';
     }
 
     public function create(User $user): bool
@@ -24,29 +24,31 @@ class PostPolicy
 
     public function updateSeo(User $user, Post $post): bool
     {
-        return $user->is_active && $user->can('posts.seo') && ! $post->trashed();
+        return $user->is_active && $user->can('posts.seo') && ! $post->trashed() && ($post->content_kind ?? 'article') === 'article';
     }
 
     public function update(User $user, Post $post): bool
     {
         return $user->is_active && $user->can('posts.update') && ! $post->trashed()
-            && $post->status === 'draft' && $post->published_at === null;
+            && ($post->content_kind ?? 'article') === 'article' && in_array($post->status, ['draft', 'published'], true);
     }
 
     public function delete(User $user, Post $post): bool
     {
-        return $this->update($user, $post) && $user->can('posts.delete') && $post->legacy_wp_id === null && $post->publication_locked_at === null;
+        return $user->is_active && $user->can('posts.delete') && ! $post->trashed()
+            && ($post->content_kind ?? 'article') === 'article';
     }
 
     public function restore(User $user, Post $post): bool
     {
-        return $user->is_active && $user->can('posts.delete') && $post->trashed() && $post->legacy_wp_id === null
-            && $post->status === 'draft' && $post->published_at === null && $post->publication_locked_at === null;
+        return $user->is_active && $user->can('posts.delete') && $post->trashed()
+            && ($post->content_kind ?? 'article') === 'article';
     }
 
     public function publish(User $user, Post $post): bool
     {
-        return $user->is_active && $user->can('posts.publish') && ! $post->trashed() && in_array($post->status, ['draft', 'scheduled'], true);
+        return $user->is_active && $user->can('posts.publish') && ! $post->trashed()
+            && ($post->content_kind ?? 'article') === 'article' && in_array($post->status, ['draft', 'scheduled'], true);
     }
 
     public function cancelPublication(User $user, Post $post): bool

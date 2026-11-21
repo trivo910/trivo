@@ -6288,3 +6288,5 @@ body:has(.service-page--performance-marketing-agency-nagpur) .home-enquiry__hint
 .service-page--performance-marketing-agency-nagpur .nagpur-address { margin-top:18px; padding-top:0; }
 @media(max-width:650px) { .service-page--performance-marketing-agency-nagpur .nagpur-contact-map { height:340px; } }
 }
+
+.blog-post__meta{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 24px;margin-top:24px;font-size:14px;color:#69727d}.blog-post__toc,.blog-post__tags{width:min(calc(100% - 40px),1000px);margin:32px auto}.blog-post__toc{padding:24px 30px;border:1px solid #ddd;border-radius:20px;background:#f7f7fa}.blog-post__toc h2{font-size:20px;font-weight:700;margin-bottom:12px}.blog-post__toc ol{list-style:decimal;padding-left:24px}.blog-post__toc a{text-decoration:underline;line-height:1.9}.blog-post__body [id]{scroll-margin-top:110px}.blog-post__body figure{margin:30px 0}.blog-post__body figure img{max-width:100%;height:auto}.blog-post__body figcaption{text-align:center;font-size:14px;color:#69727d;margin-top:10px}.blog-post__tags{display:flex;flex-wrap:wrap;gap:8px}.blog-post__tags span{padding:8px 14px;border-radius:20px;background:#eef3fa;font-size:13px}

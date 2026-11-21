@@ -30,7 +30,10 @@ class SaveBlogPost
                 }
                 $validated = app(BlogPosts::class)->validate($post, $values);
                 $post->fill($validated['post']);
-                $post->status = 'draft';
+                $post->forceFill(['body_format' => 'html']);
+                if (! $post->exists) {
+                    $post->status = 'draft';
+                }
                 $post->reading_time = app(PostReadingTime::class)->minutes($post->body);
                 $analysis = app(PostSeoAnalysis::class)->analyze($post);
                 $post->seo_score = $analysis['seo_score'];

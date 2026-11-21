@@ -23,6 +23,9 @@ class ArchiveBlogPost
                     throw ValidationException::withMessages(['content_version' => 'This post changed. Reload before continuing.']);
                 }
                 $post->increment('content_version');
+                if ($restore) {
+                    $post->forceFill(['status' => 'draft', 'published_at' => null, 'publication_error' => null]);
+                }
                 $restore ? $post->restore() : $post->delete();
                 $event = $restore ? 'blog_post_draft_restored' : 'blog_post_draft_archived';
                 activity('content')->causedBy(auth()->user())->performedOn($post)->event($event)->log($event);

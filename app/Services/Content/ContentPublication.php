@@ -16,15 +16,13 @@ class ContentPublication
     public function check(Page|Service|PortfolioItem|Post $page): void
     {
         if ($page instanceof Post) {
+            if (($page->content_kind ?? 'article') !== 'article') {
+                throw ValidationException::withMessages(['publication' => 'Manage this source through its portfolio profile.']);
+            }
             if (trim($page->body) === '' || trim((string) $page->seo_title) === '' || trim((string) $page->seo_description) === '') {
                 throw ValidationException::withMessages(['publication' => 'Add post content, an SEO title and a meta description before publishing.']);
             }
-            if ($page->featured_media_id) {
-                $image = Media::query()->whereKey($page->featured_media_id)->lockForUpdate()->first();
-                if (! $image || $image->processing_status !== 'ready' || blank($image->alt)) {
-                    throw ValidationException::withMessages(['publication' => 'Choose a ready featured image with alt text before publishing.']);
-                }
-            }
+            app(BlogBody::class)->lockImages($page, $page->body, $page->featured_media_id);
 
             return;
         }

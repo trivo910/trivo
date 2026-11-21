@@ -6,6 +6,9 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 uses(RefreshDatabase::class);
 
 it('renders the core public and legal pages', function () {
+    Post::query()->create(['title' => 'How to turn intent into pipeline with SEO-led content',
+        'slug' => 'turn-intent-into-pipeline-seo-led-content', 'path' => '/blog/turn-intent-into-pipeline-seo-led-content',
+        'body' => '<p>Database article content.</p>', 'status' => 'published', 'published_at' => now()]);
     $this->get('/blog')
         ->assertOk()
         ->assertSee('<h1>Blog</h1>', false)

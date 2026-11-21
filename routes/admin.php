@@ -43,6 +43,7 @@ Route::middleware(['web', AdminIpAllow::class])->prefix($path)->name('admin.')->
         Route::get('pages', [PageController::class, 'index'])->name('pages.index');
         Route::get('posts', [BlogPostController::class, 'index'])->name('posts.index');
         Route::get('posts/create', [BlogPostController::class, 'create'])->name('posts.create');
+        Route::get('posts/media-options', [BlogPostController::class, 'mediaOptions'])->name('posts.media-options');
         Route::post('posts', [BlogPostController::class, 'store'])->name('posts.store');
         Route::get('posts/{post}/edit', [BlogPostController::class, 'edit'])->whereNumber('post')->name('posts.edit');
         Route::put('posts/{post}', [BlogPostController::class, 'update'])->whereNumber('post')->name('posts.update');

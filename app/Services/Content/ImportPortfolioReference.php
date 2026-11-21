@@ -50,7 +50,7 @@ class ImportPortfolioReference
                 // Keep the original source body and ID, but transfer this single public URL to Portfolio.
                 Revision::query()->create(['revisionable_type' => Post::class, 'revisionable_id' => $source->id,
                     'snapshot' => ['kind' => 'portfolio_source_transfer', 'source' => $sourceSnapshot]]);
-                $source->forceFill(['path' => $retainedPath, 'status' => 'draft', 'sitemap_include' => false,
+                $source->forceFill(['path' => $retainedPath, 'status' => 'draft', 'content_kind' => 'portfolio_source', 'sitemap_include' => false,
                     'content_version' => $source->content_version + 1])->save();
             }
             $blocks = app(PortfolioLayout::class)->blocks($layout);

@@ -1,4 +1,7 @@
 import Alpine from 'alpinejs';
+import registerBlogEditor from './admin-blog-editor';
+
+registerBlogEditor(Alpine);
 
 Alpine.data('adminShell', () => ({
     sidebarOpen: false,

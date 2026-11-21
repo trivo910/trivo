@@ -96,15 +96,20 @@ class PublicContentRenderer
 
         if ($content instanceof Post) {
             $blogPostLayout = app(BlogPostLayout::class);
-            $articleHeading = $blogPostLayout->heading($bodyHtml, $content->title);
+            $articleHeading = ($content->content_kind ?? 'article') === 'article' ? $content->title : $blogPostLayout->heading($bodyHtml, $content->title);
             $featuredMedia = $content->featured_media_id
                 ? Media::query()->find($content->featured_media_id)
                 : null;
+            if ($featuredMedia && $featuredMedia->processing_status !== 'ready') {
+                $featuredMedia = null;
+            }
             $preparedBody = $blogPostLayout->prepare(
                 $bodyHtml,
                 $articleHeading,
-                ! $featuredMedia || $featuredMedia->processing_status !== 'ready'
+                ($content->body_format ?? 'legacy') === 'legacy' && (! $featuredMedia || $featuredMedia->processing_status !== 'ready')
             );
+
+            $withContents = app(BlogBody::class)->tableOfContents($preparedBody['html'], (bool) $content->show_toc);
 
             return view('pages.blog-post', [
                 'article' => [
@@ -116,8 +121,10 @@ class PublicContentRenderer
                     'seo_description' => $content->seo_description ?: ($content->excerpt ?: Str::limit(strip_tags($bodyHtml), 180)),
                     'canonical_url' => $content->canonical_url,
                     'robots' => $content->robots,
+                    'author' => $content->author?->name, 'category' => $content->category?->name,
+                    'tags' => $content->tags()->pluck('name')->all(), 'reading_time' => $content->reading_time,
                 ],
-                'bodyHtml' => $preparedBody['html'],
+                'bodyHtml' => $withContents['html'], 'toc' => $withContents['toc'],
                 'featuredMedia' => $featuredMedia,
                 'featuredImage' => $preparedBody['featuredImage'],
             ]);
@@ -461,8 +468,8 @@ class PublicContentRenderer
 
         $xpath = new DOMXPath($document);
         foreach ($xpath->query('.//section[contains(@class, "home-section--blog")]', $sections) ?: [] as $blog) {
-            $posts = Post::query()->where('status', 'published')->whereNotNull('published_at')
-                ->where('published_at', '<=', now())->orderByDesc('published_at')->limit(2)->get();
+            $posts = Post::query()->articles()->where('status', 'published')->where('published_at', '<=', now())
+                ->orderByDesc('published_at')->limit(2)->get();
             $media = Media::query()->whereIn('id', $posts->pluck('featured_media_id'))->get()->keyBy('id');
             $this->appendHomeFragment($document, $blog, view('partials.home-blog-cards', compact('posts', 'media'))->render());
         }

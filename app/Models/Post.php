@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Models\Concerns\HasSeo;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
@@ -13,12 +15,36 @@ use Illuminate\Support\Carbon;
  * @property string|null $seo_title
  * @property string|null $seo_description
  * @property string|null $canonical_url
+ * @property string $content_kind
+ * @property string $body_format
+ * @property Author|null $author
+ * @property Category|null $category
  * @property Carbon|null $published_at
  */
 class Post extends Model
 {
     use HasSeo;
     use SoftDeletes;
+
+    /** @param Builder<Post> $query
+     * @return Builder<Post>
+     */
+    public function scopeArticles(Builder $query): Builder
+    {
+        return $query->where('content_kind', 'article');
+    }
+
+    /** @return BelongsTo<Author, $this> */
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(Author::class);
+    }
+
+    /** @return BelongsTo<Category, $this> */
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
 
     /** @var list<string> */
     protected $fillable = [

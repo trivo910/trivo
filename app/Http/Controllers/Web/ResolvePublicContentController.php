@@ -22,7 +22,7 @@ class ResolvePublicContentController extends Controller
             return app(PortfolioPublicController::class)->show($portfolio);
         }
         $content = Page::query()->where('status', 'published')->where('path', $path)->first()
-            ?? Post::query()->where('status', 'published')->where('path', $path)->first();
+            ?? Post::query()->where('status', 'published')->where('published_at', '<=', now())->whereIn('path', [$path, $path.'/'])->first();
 
         abort_if(! $content, 404);
 

@@ -17,6 +17,8 @@ use App\Models\Media;
 use App\Models\Post;
 use App\Models\Revision;
 use App\Models\Tag;
+use App\Services\Media\MediaAssets;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
@@ -25,8 +27,11 @@ class BlogPostController extends Controller
 {
     public function index(BlogPostIndexRequest $request): View
     {
-        $state = $request->input('state', 'draft');
-        $query = $state === 'archived' ? Post::onlyTrashed() : Post::query()->where('status', $state);
+        $state = $request->input('state', 'all');
+        $query = $state === 'archived' ? Post::onlyTrashed()->articles() : Post::query()->articles();
+        if (in_array($state, ['draft', 'scheduled', 'published'], true)) {
+            $query->where('status', $state);
+        }
         if ($request->filled('q')) {
             $query->where(fn ($query) => $query->where('title', 'like', '%'.$request->string('q').'%')->orWhere('path', 'like', '%'.$request->string('q').'%'));
         }
@@ -57,9 +62,29 @@ class BlogPostController extends Controller
     private function form(Post $post): View
     {
         $names = fn (string $model) => $model::query()->orderBy('name')->get(['id', 'name'])->mapWithKeys(fn ($row) => [$row->id => '#'.$row->id.' '.$row->name])->all();
+        $library = $this->libraryImages();
 
         return view('admin.posts.edit', ['post' => $post, 'revisions' => $post->exists ? Revision::query()->where('revisionable_type', Post::class)->where('revisionable_id', $post->id)->where('snapshot->kind', 'post_draft')->latest('id')->paginate(10) : null, 'publicationHistory' => $post->exists ? Revision::query()->where('revisionable_type', Post::class)->where('revisionable_id', $post->id)->where('snapshot->kind', 'publication')->latest('id')->limit(5)->get() : collect(), 'authors' => ['' => 'No author'] + $names(Author::class), 'categories' => ['' => 'No category'] + $names(Category::class),
-            'tags' => $names(Tag::class), 'images' => ['' => 'No featured image'] + Media::query()->where('processing_status', 'ready')->whereNotNull('alt')->orderBy('id')->get(['id', 'title', 'original_name'])->mapWithKeys(fn (Media $image) => [$image->id => '#'.$image->id.' '.($image->title ?: $image->original_name)])->all()]);
+            'tags' => $names(Tag::class), 'inlineImages' => $library,
+            'images' => ['' => 'No featured image'] + array_column($library, 'label', 'id')]);
+    }
+
+    public function mediaOptions(): JsonResponse
+    {
+        Gate::authorize('viewAny', Post::class);
+        Gate::authorize('viewAny', Media::class);
+
+        return response()->json(['images' => $this->libraryImages()]);
+    }
+
+    /** @return list<array{id: int, label: string, url: string, alt: string, caption: string, width: int, height: int}> */
+    private function libraryImages(): array
+    {
+        return Media::query()->where('processing_status', 'ready')->whereNotNull('alt')->where('alt', '!=', '')
+            ->whereIn('mime', ['image/jpeg', 'image/png', 'image/webp', 'image/avif'])->orderByDesc('id')->get()
+            ->map(fn (Media $image) => ['id' => $image->id, 'label' => '#'.$image->id.' '.($image->title ?: $image->original_name),
+                'url' => app(MediaAssets::class)->originalUrl($image), 'alt' => $image->alt,
+                'caption' => $image->caption ?? '', 'width' => $image->width ?? 0, 'height' => $image->height ?? 0])->all();
     }
 
     public function store(BlogPostDraftRequest $request, SaveBlogPost $action): RedirectResponse
@@ -71,23 +96,23 @@ class BlogPostController extends Controller
 
     public function update(BlogPostDraftRequest $request, int $post, SaveBlogPost $action): RedirectResponse
     {
-        $action->handle(Post::query()->findOrFail($post), $request->validated());
+        $saved = $action->handle(Post::query()->findOrFail($post), $request->validated());
 
-        return redirect()->route('admin.posts.edit', $post)->with('status', 'Post draft saved.');
+        return redirect()->route('admin.posts.edit', $post)->with('status', $saved->status === 'published' ? 'Published post updated.' : 'Post draft saved.');
     }
 
     public function archive(BlogPostMutationRequest $request, int $post, ArchiveBlogPost $action): RedirectResponse
     {
         $action->handle(Post::query()->findOrFail($post), $request->integer('content_version'));
 
-        return redirect()->route('admin.posts.index')->with('status', 'Post draft archived.');
+        return redirect()->route('admin.posts.index')->with('status', 'Post moved to Trash.');
     }
 
     public function restore(BlogPostMutationRequest $request, int $post, ArchiveBlogPost $action): RedirectResponse
     {
         $action->handle(Post::query()->withTrashed()->findOrFail($post), $request->integer('content_version'), true);
 
-        return redirect()->route('admin.posts.edit', $post)->with('status', 'Post draft restored.');
+        return redirect()->route('admin.posts.edit', $post)->with('status', 'Post restored as a draft. Review and publish when ready.');
     }
 
     public function revision(BlogPostMutationRequest $request, int $post, Revision $revision, RestoreBlogPostRevision $action): RedirectResponse

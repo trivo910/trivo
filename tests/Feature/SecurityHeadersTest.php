@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
+uses(RefreshDatabase::class);
 
 it('sets security and staging indexing headers', function () {
     $this->get('/up')
@@ -32,11 +35,11 @@ it('does not expose legacy WordPress entrypoints', function (string $path) {
     $this->get($path)->assertNotFound()->assertHeader('X-Robots-Tag', 'noindex, nofollow');
 })->with(['/wp-admin', '/wp-login.php', '/xmlrpc.php']);
 
-it('does not serve a placeholder as the migrated homepage', function () {
-    $this->get('/')->assertStatus(503)->assertHeader('X-Robots-Tag', 'noindex, nofollow');
+it('serves the public homepage with staging indexing protection', function () {
+    $this->get('/')->assertOk()->assertHeader('X-Robots-Tag', 'noindex, nofollow')->assertSee('Digital marketing that drives revenue.');
 });
 
 it('does not expose the framework private-file serving or upload routes', function () {
     $this->get('/storage/private.txt')->assertNotFound();
-    $this->put('/storage/private.txt')->assertNotFound();
+    $this->put('/storage/private.txt')->assertStatus(405);
 });

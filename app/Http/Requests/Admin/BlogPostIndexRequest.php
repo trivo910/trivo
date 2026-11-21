@@ -15,6 +15,6 @@ class BlogPostIndexRequest extends FormRequest
     /** @return array<string, mixed> */
     public function rules(): array
     {
-        return ['q' => ['nullable', 'string', 'max:120'], 'state' => ['nullable', 'in:draft,scheduled,published,archived'], 'score' => ['nullable', 'in:any,needs_attention,good']];
+        return ['q' => ['nullable', 'string', 'max:120'], 'state' => ['nullable', 'in:all,draft,scheduled,published,archived'], 'score' => ['nullable', 'in:any,needs_attention,good']];
     }
 }

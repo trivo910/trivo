@@ -7,7 +7,6 @@ use App\Models\Category;
 use App\Models\Media;
 use App\Models\Post;
 use App\Models\Tag;
-use App\Support\ContentHtml;
 use Closure;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
@@ -25,9 +24,6 @@ class BlogPosts
             }
         };
         $bodyRules = ['required', 'string', 'max:100000'];
-        if ($post->legacy_wp_id === null) {
-            $bodyRules[] = $plain;
-        }
         $data = Validator::make($values, [
             'title' => ['required', 'string', 'max:255', $plain], 'slug' => ['required', 'string', 'max:255', 'regex:/^(?:[\p{L}\p{N}_-]|%[0-9a-fA-F]{2})+$/uD'],
             'path' => ['required', 'string', 'max:768'], 'excerpt' => ['nullable', 'string', 'max:1000', $plain],
@@ -50,10 +46,8 @@ class BlogPosts
         $data['is_cornerstone'] = (bool) $data['is_cornerstone'];
         $data['show_toc'] = (bool) $data['show_toc'];
         $data['secondary_keywords'] = array_values(array_unique(array_filter(array_map(fn ($keyword) => is_string($keyword) ? trim($keyword) : '', $data['secondary_keywords']), fn (string $keyword) => $keyword !== '')));
-        $data['body'] = $post->legacy_wp_id !== null
-            ? app(ContentHtml::class)->clean($data['body'])
-            : trim($data['body']);
-        if ($data['body'] === '') {
+        $data['body'] = app(BlogBody::class)->clean($data['body']);
+        if (trim(html_entity_decode(strip_tags($data['body']))) === '') {
             throw ValidationException::withMessages(['body' => 'Enter the post body.']);
         }
         foreach (['author_id' => Author::class, 'category_id' => Category::class] as $key => $model) {
@@ -70,6 +64,7 @@ class BlogPosts
         if ($data['featured_media_id'] !== null && ! Media::query()->whereKey($data['featured_media_id'])->where('processing_status', 'ready')->whereNotNull('alt')->exists()) {
             throw ValidationException::withMessages(['featured_media_id' => 'Choose a ready image with alt text.']);
         }
+        app(BlogBody::class)->lockImages($post, $data['body'], $data['featured_media_id']);
         unset($data['tag_ids']);
 
         return ['post' => $data, 'tag_ids' => $tagIds];

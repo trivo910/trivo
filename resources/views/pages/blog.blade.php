@@ -52,10 +52,12 @@
                         </div>
                     </article>
                 @endforeach
+                @if(count($posts) === 0)<p>No articles have been published yet. Please check back soon.</p>@endif
             </div>
             @if (count($posts) > 6)
                 <button class="blog-page__load-more" type="button" data-blog-load-more aria-controls="blog-articles">Load More</button>
             @endif
+            <div class="pagination">{{ $posts->links() }}</div>
         </section>
 
         <section class="about-page__clients blog-page__clients" aria-labelledby="blog-clients-title">
