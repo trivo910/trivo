@@ -4,6 +4,7 @@ namespace App\Services\Media;
 
 use App\Models\Media;
 use App\Models\Setting;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\DB;
 
 class MediaUsage
@@ -46,7 +47,15 @@ class MediaUsage
             }
         }
         foreach (Setting::query()->where('group', '!=', 'mail')->lazy(50) as $setting) {
-            if ($this->contains($setting->value, $media)) {
+            try {
+                $value = $setting->value;
+            } catch (DecryptException) {
+                // Usage is unknown: keep archival blocked without crashing the upload redirect.
+                $result['settings:'.$setting->id] = ['type' => 'unreadable_settings', 'id' => $setting->id];
+
+                continue;
+            }
+            if ($this->contains($value, $media)) {
                 $result['settings:'.$setting->id] = ['type' => 'settings', 'id' => $setting->id];
             }
         }

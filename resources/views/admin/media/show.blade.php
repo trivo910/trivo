@@ -21,6 +21,7 @@
         </x-admin.glass-card>
     </div>
     <x-admin.glass-card strong><h2>Image usage</h2>
+        @if(collect($references)->contains('type', 'unreadable_settings'))<p class="helper" role="status">Some saved settings could not be read, so image usage cannot be fully checked. Archiving is blocked until those settings are restored or re-saved.</p>@endif
         @if($references)<ul class="plain-list">@foreach($references as $reference)<li>{{ ucfirst(str_replace('_', ' ', $reference['type'])) }} #{{ $reference['id'] }}</li>@endforeach</ul>
         @else<p class="helper">No references found in the current content or revisions.</p>@endif
         @if($media->isLegacy())<p class="helper">Legacy image files and their published URLs are protected from archiving.</p>@endif

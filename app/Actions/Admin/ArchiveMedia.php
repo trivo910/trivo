@@ -16,7 +16,11 @@ class ArchiveMedia
         DB::transaction(function () use ($media) {
             $media = Media::query()->lockForUpdate()->findOrFail($media->id);
             Gate::authorize('delete', $media);
-            if (app(MediaUsage::class)->references($media) !== []) {
+            $references = app(MediaUsage::class)->references($media);
+            if (collect($references)->contains('type', 'unreadable_settings')) {
+                throw ValidationException::withMessages(['media' => 'Image usage cannot be fully checked. Restore or re-save the unreadable settings before archiving.']);
+            }
+            if ($references !== []) {
                 throw ValidationException::withMessages(['media' => 'This image is in use. Remove its references before archiving.']);
             }
             $media->delete();

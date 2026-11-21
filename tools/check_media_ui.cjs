@@ -54,7 +54,7 @@ const results = [];
                 await page.getByLabel('Folder (optional)', { exact: true }).fill('QA Images');
                 await page.getByRole('button', { name: 'Upload image', exact: true }).click();
                 await page.waitForURL(new RegExp(`/${credentials.admin_path}/media/[0-9]+$`));
-                execFileSync(path.join(root, '.audit/php83/php.exe'), ['artisan', 'queue:work', 'database', '--stop-when-empty', '--max-jobs=1', '--tries=1', '--timeout=60'], {
+                execFileSync(path.join(root, '.audit/php83/php.exe'), ['artisan', 'queue:work', 'database', '--queue=media', '--stop-when-empty', '--max-jobs=1', '--tries=1', '--timeout=60'], {
                     cwd: root, timeout: 90000, windowsHide: true, stdio: 'pipe',
                     env: { ...process.env, DB_CONNECTION: 'sqlite', DB_DATABASE: path.join(fixture, 'ui.sqlite'), CACHE_STORE: 'array',
                         MEDIA_PUBLIC_ROOT: path.join(fixture, 'media-public'), MEDIA_PRIVATE_ROOT: path.join(fixture, 'media-private') },

@@ -24,6 +24,7 @@ For a new local SQLite setup, use `DB_CONNECTION=sqlite` and `DB_DATABASE=databa
 The current machine is already prepared. Run:
 
 ```powershell
+node tools/start_media_worker.cjs
 & .\.audit\php83\php.exe artisan serve
 ```
 
@@ -61,7 +62,7 @@ Hostinger: keep the application outside `public_html`; copy only the contents of
 
 Set `APP_ENV=production`, `APP_DEBUG=false`, a unique `APP_KEY`, `APP_URL=https://trivo.in`, secure cookies and the production DB. Keep queue `database`, cache `file` and daily logs. Build assets with `npm ci` and `npm run build`; install production PHP dependencies using `composer install --no-dev --optimize-autoloader`. Run reviewed migrations and Laravel config/route/view/event cache commands with the correct PHP executable. Enforce CSP only after reviewing report-only behavior with the actual pages and third parties.
 
-Use a one-minute cron invoking `php /absolute/app/path/artisan schedule:run`. A bounded database queue worker is now scheduled every minute, with an overlap lock, a 50-second runtime limit between jobs and a 30-second per-job timeout. Validate actual cron execution before relying on queued delivery. SMTP settings, test delivery and redirect management are documented in `docs/SMTP-AND-REDIRECTS.md`.
+Use a one-minute cron invoking `php /absolute/app/path/artisan schedule:run`. A bounded database queue worker is now scheduled every minute, with an overlap lock, a 50-second runtime limit between jobs and a 60-second per-job timeout. Validate actual cron execution before relying on queued delivery. SMTP settings, test delivery and redirect management are documented in `docs/SMTP-AND-REDIRECTS.md`.
 
 Before cut-over, lower DNS TTL, retain the WordPress backup, run the completed URL verifier and content diff, then switch only after UAT. Roll back by restoring the previous app/public release and its matching database backup; keep APP_KEY and encrypted media/settings backups together. Do not run destructive migrations against a live DB to simulate rollback. Keep the WordPress backup for at least 30 days and monitor Search Console, sitemaps and 404s after release.
 

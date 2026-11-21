@@ -37,7 +37,7 @@ it('stages a validated upload privately and queues only its record ID', function
     expect($media->path)->toMatch('/^media\/[a-f0-9-]{36}\/original\.png$/')->and($media->processing_status)->toBe('queued');
     Storage::disk('public')->assertMissing($media->path);
     Storage::disk('local')->assertExists(app(MediaPaths::class)->staging($media).'/upload.bin');
-    Bus::assertDispatched(ProcessMedia::class, fn (ProcessMedia $job) => $job->mediaId === $media->id && $job->connection === 'database');
+    Bus::assertDispatched(ProcessMedia::class, fn (ProcessMedia $job) => $job->mediaId === $media->id && $job->connection === 'database' && $job->queue === 'media');
 });
 
 it('reencodes strips metadata generates bounded WebP AVIF variants and renders srcsets', function () {
@@ -123,6 +123,29 @@ it('updates only metadata and escapes it in the editor', function () {
     $media->refresh();
     expect($media->path)->toBe($path)->and($media->processing_status)->toBe('queued')->and($media->disk)->toBe('public');
     $this->get(route('admin.media.show', $media))->assertOk()->assertDontSee('<script>alert(1)</script>', false)->assertSee('&lt;script&gt;', false);
+});
+
+it('opens the uploaded image when saved settings cannot be decrypted and keeps archival blocked', function () {
+    $setting = Setting::query()->create(['key' => 'site.logo', 'group' => 'site', 'value' => []]);
+    $oldEncrypter = new \Illuminate\Encryption\Encrypter(random_bytes(32), 'AES-256-CBC');
+    $ciphertext = $oldEncrypter->encryptString(json_encode(['logo_media_id' => 1], JSON_THROW_ON_ERROR));
+    \Illuminate\Support\Facades\DB::table('settings')->where('id', $setting->id)->update(['value' => $ciphertext]);
+
+    $response = $this->post(route('admin.media.store'), ['image' => UploadedFile::fake()->image('upload.png', 32, 24), 'alt' => 'Uploaded image']);
+    $media = Media::query()->sole();
+    $response->assertRedirect(route('admin.media.show', $media));
+    $this->get(route('admin.media.show', $media))->assertOk()->assertSee('Some saved settings could not be read')
+        ->assertSee('Image details')->assertDontSee($ciphertext, false);
+    expect(app(MediaUsage::class)->references($media))->toContain(['type' => 'unreadable_settings', 'id' => $setting->id]);
+    $this->delete(route('admin.media.archive', $media))->assertSessionHasErrors('media');
+    expect($media->fresh()->trashed())->toBeFalse();
+    expect(\Illuminate\Support\Facades\DB::table('settings')->where('id', $setting->id)->value('value'))->toBe($ciphertext);
+
+    $setting->value = ['logo_media_id' => $media->id];
+    $setting->save();
+    $this->get(route('admin.media.show', $media))->assertOk()->assertDontSee('Some saved settings could not be read');
+    expect(app(MediaUsage::class)->references($media))->toContain(['type' => 'settings', 'id' => $setting->id]);
+    $this->delete(route('admin.media.archive', $media))->assertSessionHasErrors('media');
 });
 
 it('tracks content revision and setting references and only archives unused images', function () {

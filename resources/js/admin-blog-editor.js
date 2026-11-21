@@ -34,6 +34,9 @@ export default function registerBlogEditor(Alpine) {
             return range;
         },
         sync() {
+            if (this.selectedImage && !this.$refs.visual.contains(this.selectedImage)) {
+                this.selectedImage = null;
+            }
             const copy = this.$refs.visual.cloneNode(true);
             copy.querySelectorAll('[data-blog-selected]').forEach(image => image.removeAttribute('data-blog-selected'));
             this.body = copy.innerHTML;
@@ -123,7 +126,11 @@ export default function registerBlogEditor(Alpine) {
                 this.imageId = found ? String(found.id) : '';
             } else this.remember();
         },
-        insertImage() {
+        insertImage(asNew = false) {
+            if (asNew || (this.selectedImage && !this.$refs.visual.contains(this.selectedImage))) {
+                this.$refs.visual.querySelectorAll('[data-blog-selected]').forEach(image => image.removeAttribute('data-blog-selected'));
+                this.selectedImage = null;
+            }
             const item = this.images.find(image => String(image.id) === String(this.imageId));
             if ((!item && !this.selectedImage) || this.sourceMode) return;
             const image = this.selectedImage || document.createElement('img');

@@ -25,7 +25,7 @@ class ImageProcessor
         $public = Storage::disk($media->disk);
         $privateDirectory = $this->paths->staging($media);
         try {
-            if (! extension_loaded('exif') || ! (gd_info()['AVIF Support'] ?? false) || ! (gd_info()['WebP Support'] ?? false)) {
+            if (! extension_loaded('gd') || ! extension_loaded('exif') || ! (gd_info()['AVIF Support'] ?? false) || ! (gd_info()['WebP Support'] ?? false)) {
                 $media->update(['processing_status' => 'failed', 'error_code' => 'unsupported_encoder']);
 
                 return;

@@ -15,7 +15,10 @@ class ProcessMedia implements ShouldQueue
 
     public int $timeout = 60;
 
-    public function __construct(public int $mediaId) {}
+    public function __construct(public int $mediaId)
+    {
+        $this->onQueue('media');
+    }
 
     public function handle(ImageProcessor $processor): void
     {

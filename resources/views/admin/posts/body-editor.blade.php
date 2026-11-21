@@ -32,6 +32,7 @@
         </div>
         <div class="blog-editor__toolbar">
             <button type="button" class="admin-button button-secondary" @click="insertImage()" :disabled="(!imageId && !selectedImage) || sourceMode" x-text="selectedImage ? 'Update selected image' : 'Insert image'"></button>
+            <button type="button" class="admin-button button-secondary" x-show="selectedImage" x-cloak @click="insertImage(true)" :disabled="!imageId || sourceMode">Insert another image</button>
             <button type="button" class="admin-button button-secondary" @click="moveImage(-1)" :disabled="!selectedImage || sourceMode">Move image earlier</button>
             <button type="button" class="admin-button button-secondary" @click="moveImage(1)" :disabled="!selectedImage || sourceMode">Move image later</button>
             <button type="button" class="admin-button button-secondary" @click="removeImage()" :disabled="!selectedImage || sourceMode">Remove selected image</button>

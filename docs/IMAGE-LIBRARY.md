@@ -28,7 +28,7 @@ Public assets are stored on the public disk. Run `php artisan storage:link`, or 
 
 PHP 8.3 needs GD with WebP and AVIF support, EXIF, fileinfo and mbstring. Composer declares the core image extensions; the worker checks format support. Configure `upload_max_filesize=8M` and `post_max_size=12M` or higher, with adequate worker memory. The portable development runtime is configured for these limits; system XAMPP remains unchanged.
 
-The existing minute-based database queue scheduler processes conversions without Redis/Supervisor. Image jobs have a 60-second timeout and one attempt; queue retry-after must remain longer than the timeout. Failed entries provide a protected retry action.
+Image conversions use the dedicated `media` queue; the minute-based scheduler listens to `media,default` with a 60-second job timeout. Standalone workers must include `--queue=media` (or `--queue=media,default` if they also handle other jobs). Image jobs have a 60-second timeout and one attempt; queue retry-after must remain longer than the timeout. Failed entries provide a protected retry action.
 
 ## Verification
 
@@ -37,3 +37,8 @@ Synthetic tests cover unsafe uploads, byte/pixel limits, private staging, WebP/A
 Browser QA uses a separate synthetic database and storage roots. Upload, detail and library pages pass nine axe A/AA audits across desktop light/dark and a true 390px mobile viewport. The browser test performs a real upload and invokes the queue worker on a generated test image. No actual website image was converted during development validation.
 
 Still pending: legacy import, public templates/content integration, supported production database/hosting checks and full release performance/accessibility acceptance.
+
+
+## Local Windows image worker
+
+Start `node tools/start_media_worker.cjs` alongside the development web server. It starts a hidden, image-only database worker, enables GD for that process when the default PHP CLI has GD disabled, and records its PID and logs under `.audit/media-worker/`. Running the command again reuses the same live worker. Restart it after rebooting Windows or deploying worker code changes. It does not change machine PHP configuration or process email jobs. Production still requires the configured scheduler or supervised worker.
