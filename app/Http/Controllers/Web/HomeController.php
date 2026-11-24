@@ -11,9 +11,9 @@ use Illuminate\View\View;
 
 class HomeController extends Controller
 {
-    public function index(PublicContentRenderer $renderer): View
+    public function index(): View
     {
-        return $this->page('/', 'pages.home', $renderer);
+        return view('pages.home');
     }
 
     public function about(PublicContentRenderer $renderer): View

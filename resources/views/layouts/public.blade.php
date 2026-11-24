@@ -138,11 +138,14 @@
                         <b>4.7 Rating</b>
                     </div>
                     <div class="site-footer__partners" aria-label="Our partners">
-                        <img src="{{ asset('wp-content/uploads/2023/05/google-cloud.svg') }}" alt="Google Cloud Partner" loading="lazy">
-                        <img src="{{ asset('wp-content/uploads/2023/05/meta-partner.svg') }}" alt="Meta Business Partner" loading="lazy">
-                        <img src="{{ asset('wp-content/uploads/2023/05/google-partner.svg') }}" alt="Google Partner" loading="lazy">
-                        <img src="{{ asset('wp-content/uploads/2023/05/shopify.svg') }}" alt="Shopify Partner" loading="lazy">
-                        <img src="{{ asset('wp-content/uploads/2023/05/Untitled-design-3.png') }}" alt="Razorpay Partner" loading="lazy">
+                        <img src="{{ asset('wp-content/uploads/2023/05/semrush-partner-transparent.webp') }}" alt="Semrush Partner" width="142" height="40" loading="lazy">
+                        <img src="{{ asset('wp-content/uploads/2023/05/hostinger-partner-transparent.webp') }}" alt="Hostinger Partner" width="142" height="40" loading="lazy">
+                        <img src="{{ asset('wp-content/uploads/2023/05/google-my-business-partner-transparent.webp') }}" alt="Google My Business Partner" width="142" height="40" loading="lazy">
+                        <img src="{{ asset('wp-content/uploads/2023/05/shopify-partner-transparent.webp') }}" alt="Shopify Partner" width="142" height="40" loading="lazy">
+                        <img src="{{ asset('wp-content/uploads/2023/05/meta-business-partner-transparent.webp') }}" alt="Meta Business Partner" width="142" height="40" loading="lazy">
+                        <img src="{{ asset('wp-content/uploads/2023/05/cashfree-payments-logo-transparent.webp') }}" alt="Cashfree Payments Partner" width="142" height="40" loading="lazy">
+                        <img src="{{ asset('wp-content/uploads/2023/05/google-cloud-partner-transparent.webp') }}" alt="Google Cloud Partner" width="142" height="40" loading="lazy">
+                        <img src="{{ asset('wp-content/uploads/2023/05/razorpay-logo-transparent.webp') }}" alt="Razorpay Partner" width="142" height="40" loading="lazy">
                     </div>
                 </section>
 

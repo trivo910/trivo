@@ -1,274 +1,323 @@
 @extends('layouts.public')
 
 @section('title', 'Digital Marketing Services Company India | Trivo')
-@section('description', 'Trivo is a leading digital marketing services company in India offering SEO, PPC, social media and performance marketing tailored for scalable growth.')
+@section('description', 'Trivo is a leading digital marketing services company in India offering SEO, PPC, social media, and performance marketing tailored for scalable growth.')
 
 @section('content')
-    <section class="relative overflow-hidden bg-white">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(0,106,206,0.14),transparent_30%),radial-gradient(circle_at_right,rgba(255,190,17,0.16),transparent_28%)]"></div>
-        <div class="relative mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.2fr_0.8fr] lg:px-8 lg:py-24">
-            <div>
-                <span class="inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary">Growth partner for ambitious brands</span>
-                <h1 class="mt-6 max-w-xl text-5xl font-black tracking-[-0.07em] text-slate-900 sm:text-6xl lg:text-[66px]">Digital marketing that drives revenue.</h1>
-                <p class="mt-6 max-w-xl text-lg text-slate-600">We build performance marketing systems that turn search, social, and content into measurable pipeline and consistent sales.</p>
-
-                <div class="mt-8 flex flex-wrap items-center gap-4">
-                    <a href="#contact" class="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-primary/20 transition hover:bg-[#004b8a]">Get a free consultation</a>
-                    <a href="#work" class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-6 py-3.5 text-sm font-semibold text-slate-800 transition hover:border-primary hover:text-primary">See case studies</a>
+    <div class="imported-home">
+        <div class="imported-home__content">
+            <section class="home-hero">
+                <div class="home-hero__orbit" aria-hidden="true">
+                    <span class="home-hero__orbit-ring home-hero__orbit-ring--one">
+                        <span class="home-hero__orbit-sphere home-hero__orbit-sphere--large"></span>
+                    </span>
+                    <span class="home-hero__orbit-ring home-hero__orbit-ring--two">
+                        <span class="home-hero__orbit-sphere home-hero__orbit-sphere--medium"></span>
+                    </span>
+                    <span class="home-hero__orbit-ring home-hero__orbit-ring--three">
+                        <span class="home-hero__orbit-sphere home-hero__orbit-sphere--small"></span>
+                    </span>
+                    <span class="home-hero__orbit-glow"></span>
                 </div>
-
-                <div class="mt-10 flex flex-wrap items-center gap-8 text-sm text-slate-500">
-                    <div>
-                        <div class="text-2xl font-black tracking-[-0.06em] text-slate-900">4.8/5</div>
-                        <div>Client rating</div>
+                <div class="home-hero__inner">
+                    <div class="home-hero__copy">
+                        <p class="home-hero__eyebrow"><span class="home-hero__eyebrow-icon" aria-hidden="true">✦</span> AI-DRIVEN GROWTH SOLUTIONS</p>
+                        <h1><span class="home-hero__dark-title"><span class="home-hero__word home-hero__word--first">Digital</span> <span class="home-hero__word home-hero__word--second">marketing</span></span><br><span class="home-hero__light-title">that drives<br>revenue.</span></h1>
+                        <p>It's time for your brand to shine as we put the spotlight on it. We help attract the attention and generate the revenue your business deserves in the digital world.</p>
+                        <div class="home-hero__actions" aria-label="Explore Trivo services">
+                            <a class="home-hero__cta home-hero__cta--primary" href="#home-audit" aria-label="Get a free growth audit">
+                                <span>Get a free growth audit</span>
+                                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                    <path d="M5 12h13M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </a>
+                            <a class="home-hero__cta home-hero__cta--secondary" href="{{ route('portfolio') }}" aria-label="View our work">
+                                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                    <path d="M8 5.8c0-.8.9-1.3 1.6-.9l9.1 5.2c.7.4.7 1.4 0 1.8l-9.1 5.2c-.7.4-1.6-.1-1.6-.9V5.8Z" fill="currentColor"></path>
+                                </svg>
+                                <span>View our work</span>
+                            </a>
+                        </div>
+                        <ul class="home-hero__proof" aria-label="How we help your business grow">
+                            <li><span aria-hidden="true">✓</span>Data-Driven Strategy</li>
+                            <li><span aria-hidden="true">✓</span>Performance Marketing</li>
+                            <li><span aria-hidden="true">✓</span>Measurable Growth</li>
+                        </ul>
                     </div>
-                    <div>
-                        <div class="text-2xl font-black tracking-[-0.06em] text-slate-900">120+</div>
-                        <div>Brands scaled</div>
-                    </div>
-                    <div>
-                        <div class="text-2xl font-black tracking-[-0.06em] text-slate-900">300%</div>
-                        <div>Avg. ROI uplift</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="relative">
-                <div class="absolute -left-10 top-10 h-40 w-40 rounded-full bg-primary/15 blur-3xl"></div>
-                <div class="absolute -right-6 bottom-8 h-40 w-40 rounded-full bg-secondary/30 blur-3xl"></div>
-
-                <div class="relative rounded-[32px] border border-slate-200 bg-white p-5 shadow-[0_30px_80px_rgba(15,23,42,0.08)] sm:p-7">
-                    <div class="rounded-[28px] bg-[#f7f7fa] p-6">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Campaign overview</p>
-                                <h2 class="mt-2 text-3xl font-black tracking-[-0.06em] text-slate-900">Growth engine</h2>
+                    <div class="home-hero__visual" role="group" aria-label="Marketing campaign performance preview">
+                        <article class="home-hero-card home-hero-card--budget" aria-label="Campaign budget: 42,600 rupees spent from a 55,000 rupee budget">
+                            <div class="home-budget-insight" aria-label="Conversion rate increased 38.4 percent">
+                                <span class="home-budget-insight__icon" aria-hidden="true">
+                                    <svg viewBox="0 0 48 48" focusable="false">
+                                        <path d="M8 33 19 22l8 8L40 15M29 15h11v11" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </span>
+                                <span class="home-budget-insight__copy"><span>Conversion rate</span><strong>+38.4%</strong></span>
                             </div>
-                            <div class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">+72.4%</div>
+                            <div class="home-hero-card__budget-total">₹<span data-count-start="55000" data-count-target="42600" data-count-format="grouped">42,600</span></div>
+                            <p class="home-hero-card__budget-caption">Budget <strong>55,000</strong></p>
+                            <svg class="home-budget-chart" viewBox="0 0 300 180" role="img" aria-label="Live campaign budget trend">
+                                <path class="home-budget-chart__baseline" d="M12 154H288"></path>
+                                <path class="home-budget-chart__trend" id="home-budget-trend" d="M14 112 C28 110 28 145 44 143 S62 92 79 100 S94 151 112 140 S130 74 147 88 S164 153 181 145 S197 55 214 58 S233 105 251 99 S273 93 286 70"></path>
+                                <circle class="home-budget-chart__dot" r="5">
+                                    <animateMotion begin="indefinite" dur="5s" repeatCount="indefinite" rotate="auto">
+                                        <mpath href="#home-budget-trend"></mpath>
+                                    </animateMotion>
+                                </circle>
+                            </svg>
+                            <div class="home-hero-card__legend"><span><i></i>Feb 2025</span><span><i></i>Jan 2025</span></div>
+                        </article>
+
+                        <article class="home-hero-card home-hero-card--campaign" aria-label="Facebook Marketing Campaign: 690 clicks, goal 1,000">
+                            <h2>Facebook Marketing<br>Campaign</h2>
+                            <div class="home-campaign-ring">
+                                <svg viewBox="0 0 160 160" role="img" aria-label="Campaign progress toward 1,000 clicks">
+                                    <circle class="home-campaign-ring__track" cx="80" cy="80" r="61"></circle>
+                                    <circle class="home-campaign-ring__progress" cx="80" cy="80" r="61"></circle>
+                                </svg>
+                                <div class="home-campaign-ring__value"><strong data-count-start="0" data-count-target="690" data-count-mode="fast-then-slow">690</strong><span>Goal: 1000</span></div>
+                            </div>
+                            <div class="home-hero-card__legend"><span><i></i>Clicks: <strong data-count-start="0" data-count-target="690" data-count-mode="fast-then-slow">690</strong></span><span><i></i>Goal: <strong>1000</strong></span></div>
+                        </article>
+
+                        <article class="home-hero-card home-hero-card--leads" aria-label="Generated traffic and leads, average annual growth rate 61 percent">
+                            <h2>Generated Traffic<br>&amp; Leads</h2>
+                            <svg class="home-leads-chart" viewBox="0 0 240 148" role="img" aria-label="Animated traffic and leads bar chart">
+                                <path class="home-leads-chart__baseline" d="M8 132H232"></path>
+                                <g class="home-leads-chart__bars">
+                                    <rect x="22" y="62" width="12" height="70" rx="6"></rect><rect x="48" y="38" width="12" height="94" rx="6"></rect><rect x="74" y="70" width="12" height="62" rx="6"></rect><rect x="100" y="54" width="12" height="78" rx="6"></rect><rect x="126" y="76" width="12" height="56" rx="6"></rect><rect x="152" y="46" width="12" height="86" rx="6"></rect><rect x="178" y="24" width="12" height="108" rx="6"></rect><rect x="204" y="36" width="12" height="96" rx="6"></rect>
+                                </g>
+                            </svg>
+                            <div class="home-leads-stat"><strong><span data-count-start="0" data-count-target="61">61</span>%</strong><span>Average annual growth rate</span></div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="home-partners" aria-label="Our partners">
+                <p>A partner, not a vendor</p>
+                <div class="home-partners__marquee" aria-label="Partner logos">
+                    <div class="home-partners__track">
+                        <div class="home-partners__group">
+                            <img src="{{ asset('wp-content/uploads/2023/05/semrush-partner-transparent.webp') }}" alt="Semrush Partner" width="142" height="40">
+                            <img src="{{ asset('wp-content/uploads/2023/05/hostinger-partner-transparent.webp') }}" alt="Hostinger Partner" width="142" height="40">
+                            <img src="{{ asset('wp-content/uploads/2023/05/google-my-business-partner-transparent.webp') }}" alt="Google My Business Partner" width="142" height="40">
+                            <img src="{{ asset('wp-content/uploads/2023/05/shopify-partner-transparent.webp') }}" alt="Shopify Partner" width="142" height="40">
+                            <img src="{{ asset('wp-content/uploads/2023/05/meta-business-partner-transparent.webp') }}" alt="Meta Business Partner" width="142" height="40">
+                            <img src="{{ asset('wp-content/uploads/2023/05/cashfree-payments-logo-transparent.webp') }}" alt="Cashfree Payments Partner" width="142" height="40">
+                            <img src="{{ asset('wp-content/uploads/2023/05/google-cloud-partner-transparent.webp') }}" alt="Google Cloud Partner" width="142" height="40">
+                            <img src="{{ asset('wp-content/uploads/2023/05/razorpay-logo-transparent.webp') }}" alt="Razorpay Partner" width="142" height="40">
+                        </div>
+                        <div class="home-partners__group" aria-hidden="true">
+                            <img src="{{ asset('wp-content/uploads/2023/05/semrush-partner-transparent.webp') }}" alt="" width="142" height="40">
+                            <img src="{{ asset('wp-content/uploads/2023/05/hostinger-partner-transparent.webp') }}" alt="" width="142" height="40">
+                            <img src="{{ asset('wp-content/uploads/2023/05/google-my-business-partner-transparent.webp') }}" alt="" width="142" height="40">
+                            <img src="{{ asset('wp-content/uploads/2023/05/shopify-partner-transparent.webp') }}" alt="" width="142" height="40">
+                            <img src="{{ asset('wp-content/uploads/2023/05/meta-business-partner-transparent.webp') }}" alt="" width="142" height="40">
+                            <img src="{{ asset('wp-content/uploads/2023/05/cashfree-payments-logo-transparent.webp') }}" alt="" width="142" height="40">
+                            <img src="{{ asset('wp-content/uploads/2023/05/google-cloud-partner-transparent.webp') }}" alt="" width="142" height="40">
+                            <img src="{{ asset('wp-content/uploads/2023/05/razorpay-logo-transparent.webp') }}" alt="" width="142" height="40">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="home-sections">
+                <section class="home-section home-section--services">
+                    <h2>What we do</h2>
+                    <div class="home-section__group">
+                        <h3>Smarter Solutions, Better Markets</h3>
+                        <p>Trivo offers expert IT solutions and digital marketing services, helping travel agents enhance their online presence, engage more customers, and drive business growth.</p>
+                        <a href="{{ url('/marketing-solutions') }}">View all solutions</a>
+                    </div>
+
+                    @php
+                        $services = [
+                            [
+                                'title' => 'Search engine optimization',
+                                'copy' => 'Increase your organic traffic by ranking high on search engines and AI discovery tools like ChatGPT.',
+                                'benefits' => ['Keyword and competitor research', 'SKAGS (single keyword ad groups)', 'Negative keyword pruning', 'Ad copy optimization', 'Backlink generation'],
+                                'stat' => '93%',
+                                'stat_copy' => 'Of customers reported that their online experience begins with search.',
+                                'url' => '/search-engine-optimization',
+                            ],
+                            [
+                                'title' => 'Paid search marketing',
+                                'copy' => 'Performance marketing helps businesses focus their investment on measurable outcomes like website visits, sign-ups, and sales.',
+                                'benefits' => ['Flexible campaigns tailored to your goals', 'Real-time tracking and optimization', 'Transparent, data-backed results', 'Cost-effective for growing businesses', 'Boosts brand visibility and lead generation'],
+                                'stat' => '68%',
+                                'stat_copy' => 'Performance ads drive better leads by targeting users ready to convert.',
+                                'url' => '/paid-search-marketing',
+                            ],
+                            [
+                                'title' => 'Conversion rate optimization',
+                                'copy' => 'Unlock your website’s full potential and boost your revenue with conversion rate optimization.',
+                                'benefits' => ['Improve contact form completions', 'Increase online orders', 'Decrease abandoned shopping cart rates', 'Accelerate website-generated revenue', 'Maximize site design and conversion rates'],
+                                'stat' => '71%',
+                                'stat_copy' => 'Of customers reported that contact form submissions increased.',
+                                'url' => '/rate-optimization',
+                            ],
+                            [
+                                'title' => 'Social media marketing',
+                                'copy' => 'Finding the balance between staying current and relying on proven strategies is essential in the ever-changing landscape of marketing.',
+                                'benefits' => ['Social media design', 'Social media management', 'Custom ad strategy', 'Unique ad campaigns and ads', 'Advanced demographic targeting'],
+                                'stat' => '86%',
+                                'stat_copy' => 'Of customers reported an increase in conversion rates through social media marketing.',
+                                'url' => '/social-media-marketing',
+                            ],
+                            [
+                                'title' => 'Performance marketing',
+                                'copy' => 'Invest smartly in digital efforts by focusing on trackable outcomes that matter, like website visits, sign-ups, or sales.',
+                                'benefits' => ['Flexible campaigns tailored to your goals', 'Real-time tracking and optimization', 'Transparent, data-backed results', 'Cost-effective for growing businesses', 'Boosts brand visibility and lead generation'],
+                                'stat' => '68%',
+                                'stat_copy' => 'Performance ads drive better leads by targeting users ready to convert.',
+                                'url' => '/performance-marketing-agency-nagpur',
+                            ],
+                        ];
+                    @endphp
+
+                    <div class="home-service-tabs">
+                        <div class="home-service-tabs__list" role="tablist" aria-label="Marketing services">
+                            @foreach ($services as $index => $service)
+                                <button
+                                    class="home-service-tabs__tab"
+                                    type="button"
+                                    role="tab"
+                                    id="home-service-tab-{{ $index }}"
+                                    aria-controls="home-service-panel-{{ $index }}"
+                                    aria-selected="{{ $index === 0 ? 'true' : 'false' }}"
+                                    tabindex="{{ $index === 0 ? '0' : '-1' }}"
+                                ><span class="home-service-tabs__tab-label">{{ $service['title'] }}</span></button>
+                            @endforeach
                         </div>
 
-                        <div class="mt-8 space-y-5">
-                            <div class="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-100">
-                                <div class="flex items-baseline justify-between text-sm text-slate-500">
-                                    <span>Qualified leads</span>
-                                    <span class="font-semibold text-slate-900">8.4K</span>
+                        @foreach ($services as $index => $service)
+                            <section
+                                class="home-service-tabs__panel"
+                                id="home-service-panel-{{ $index }}"
+                                role="tabpanel"
+                                aria-labelledby="home-service-tab-{{ $index }}"
+                                @if ($index > 0) hidden @endif
+                            >
+                                <div class="home-service-tabs__copy">
+                                    <p>{{ $service['copy'] }}</p>
+                                    <ul>
+                                        @foreach ($service['benefits'] as $benefit)
+                                            <li>{{ $benefit }}</li>
+                                        @endforeach
+                                    </ul>
+                                    <a href="{{ url($service['url']) }}">Learn more</a>
                                 </div>
-                                <div class="mt-3 h-2.5 overflow-hidden rounded-full bg-slate-100">
-                                    <div class="h-full w-[82%] rounded-full bg-primary"></div>
+                                <div class="home-service-tabs__statistics">
+                                    <section>
+                                        <h3>{{ $service['stat'] }}</h3>
+                                        <p>{{ $service['stat_copy'] }}</p>
+                                    </section>
                                 </div>
-                            </div>
+                            </section>
+                        @endforeach
+                    </div>
+                </section>
 
-                            <div class="grid gap-4 sm:grid-cols-2">
-                                <div class="rounded-2xl bg-primary p-4 text-white shadow-lg shadow-primary/20">
-                                    <div class="text-xs uppercase tracking-[0.2em] text-primary-foreground/80">ROAS</div>
-                                    <div class="mt-4 text-3xl font-black tracking-[-0.08em]">4.2x</div>
-                                </div>
-                                <div class="rounded-2xl bg-[#e9e5ff] p-4 text-slate-900">
-                                    <div class="text-xs uppercase tracking-[0.2em] text-slate-500">CPL</div>
-                                    <div class="mt-4 text-3xl font-black tracking-[-0.08em]">₹486</div>
-                                </div>
-                            </div>
+                <section class="trivo-about" aria-labelledby="home-about-title">
+                    <h2 id="home-about-title" class="trivo-about__label">About Trivo</h2>
+                    <div class="trivo-about__intro">
+                        <h3 class="trivo-about__title">Customer Data,<br>Thoughtfully Built</h3>
+                        <div class="trivo-about__copy">
+                            <p>Trivo IT Solution is a tech-enabled travel marketing solutions provider, specializing in creating custom strategies for travel agencies, tour operators, and hospitality businesses based on their unique needs and goals. Our result-driven approach has helped travel businesses generate over &#8377;3.5 lakh in sales and attract over 1.8 million potential leads, boosting their bookings, visibility, and revenue growth.</p>
+                            <a href="{{ route('about') }}">More about our unique approach</a>
+                        </div>
+                    </div>
+                    <ul class="trivo-about__milestones">
+                        <li>Our customers have raised over $35mn in funding</li>
+                        <li>In over 10 years, we’ve never lost a customer</li>
+                        <li>We work with the world’s fastest-growing startups</li>
+                        <li>Distributed team of over 20 marketers, podcasters, and copywriters</li>
+                    </ul>
+                </section>
 
-                            <div class="rounded-2xl border border-slate-200 bg-white p-4">
-                                <div class="flex items-center justify-between text-sm text-slate-500">
-                                    <span>Channel mix</span>
-                                    <span class="font-semibold text-slate-900">Best performance</span>
-                                </div>
-                                <div class="mt-4 flex items-center gap-3">
-                                    <div class="flex-1">
-                                        <div class="mb-2 h-2.5 rounded-full bg-slate-100">
-                                            <div class="h-full w-[64%] rounded-full bg-primary"></div>
-                                        </div>
-                                        <div class="mb-2 h-2.5 rounded-full bg-slate-100">
-                                            <div class="h-full w-[52%] rounded-full bg-[#ffbe11]"></div>
-                                        </div>
-                                        <div class="h-2.5 rounded-full bg-slate-100">
-                                            <div class="h-full w-[77%] rounded-full bg-[#e9e5ff]"></div>
-                                        </div>
-                                    </div>
-                                </div>
+                <section class="home-showcase">
+                    <div class="home-section__group home-section__group--customer-overline">
+                        <h6>Our customers are some of the world’s...</h6>
+                    </div>
+                    <div class="home-section__group home-section__group--fastest">
+                        <h3>Fastest growing companies</h3>
+                        <a href="{{ route('portfolio') }}">View all</a>
+                    </div>
+                    @include('partials.home-enquiry', ['variant' => 'audit'])
+                </section>
+
+                <section class="home-section home-section--results">
+                    <h2>Driving Digital Success With Proven Results</h2>
+                    <div class="home-section__group home-section__group--results-intro">
+                        <h6>We deliver reliable technology solutions that help businesses grow, scale, and succeed in the digital world.</h6>
+                        <div class="home-results__stats">
+                            <div class="home-results__stat"><strong>1,000+</strong><span>Projects Successfully Delivered</span></div>
+                            <div class="home-results__stat"><strong>300+</strong><span>Happy Clients Worldwide</span></div>
+                            <div class="home-results__stat"><strong>15+</strong><span>Years of Industry Experience</span></div>
+                            <div class="home-results__stat"><strong>100+</strong><span>Technologies &amp; Tools Expertise</span></div>
+                        </div>
+                    </div>
+                    <div class="home-section__group home-section__group--results-testimonials">
+                        <h3>Driving digital revenue for our 1000+ satisfied customers</h3>
+                        <div class="home-results__proof">
+                            <div class="home-results__metric">
+                                <strong>21%</strong>
+                                <span>Average Traffic Increase for Clients</span>
+                            </div>
+                            <div class="home-results__testimonials">
+                                <blockquote class="home-results__testimonial">
+                                    <p>Working with Trivo IT Solution transformed our business! Their tailored strategy boosted our online presence, SEO, and social media engagement. We saw a significant rise in website traffic and lead generation within months. Highly professional and detail-oriented team!</p>
+                                    <footer><cite>Parwez Alam</cite></footer>
+                                </blockquote>
+                                <blockquote class="home-results__testimonial">
+                                    <p>We are happy with Trivo IT Solution. They are doing a great job for us far beyond our expectations. We contracted them with a goal to become an online supplier for travel agencies and they fulfilled it very nicely.</p>
+                                    <footer><cite>Muhammad Imran</cite><span>CEO &amp; Founder</span></footer>
+                                </blockquote>
+                                <blockquote class="home-results__testimonial">
+                                    <p>I am very grateful to the Trivo IT Solution team and mostly to Mr. Kashif Khan. He helped us select the proper product as per our needs. Proud to say my portal was developed and designed by Trivo IT Solution.</p>
+                                    <footer><cite>Ronak Patel</cite><span>Director, United Air Travel &amp; Tours London UK</span></footer>
+                                </blockquote>
+                                <blockquote class="home-results__testimonial">
+                                    <p>I had a fantastic experience with Trivo. Their team was professional, creative, and responsive, tailoring a marketing strategy that boosted our engagement and sales. They provided clear communication and valuable insights throughout the process. Highly recommend them for any business looking to enhance their marketing efforts!</p>
+                                    <footer><cite>Mustak Panwar</cite></footer>
+                                </blockquote>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                    <img class="home-results__visual" src="{{ asset('wp-content/uploads/2025/03/Untitled-design.png') }}" alt="" width="480" height="520" loading="lazy">
+                </section>
 
-    <section class="trivo-about" aria-labelledby="home-about-title">
-        <h2 id="home-about-title" class="trivo-about__label">About Trivo</h2>
-        <div class="trivo-about__intro">
-            <h3 class="trivo-about__title">Customer Data,<br>Thoughtfully Built</h3>
-            <div class="trivo-about__copy">
-                <p>Trivo IT Solution is a tech-enabled travel marketing solutions provider, specializing in creating custom strategies for travel agencies, tour operators, and hospitality businesses based on their unique needs and goals. Our result-driven approach has helped travel businesses generate over &#8377;3.5 lakh in sales and attract over 1.8 million potential leads, boosting their bookings, visibility, and revenue growth.</p>
-                <a href="{{ route('about') }}">More about our unique approach</a>
-            </div>
-        </div>
-        <ul class="trivo-about__milestones">
-            <li>Our customers have raised over $35mn in Funding</li>
-            <li>In over 10 years, we&#8217;ve never lost a customer</li>
-            <li>We works with the world&#8217;s fastest growing startups</li>
-            <li>Distributed team of over 20 of the worlds best marketers, podcasters and copywriters</li>
-        </ul>
-    </section>
-
-    <section class="bg-[#f7f7fa] py-12">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <p class="text-center text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Trusted by high-growth teams and ambitious brands</p>
-            <div class="mt-8 grid gap-4 text-center text-sm font-semibold text-slate-400 sm:grid-cols-2 lg:grid-cols-5">
-                <div class="rounded-full border border-slate-200 bg-white px-4 py-3">Google</div>
-                <div class="rounded-full border border-slate-200 bg-white px-4 py-3">Meta</div>
-                <div class="rounded-full border border-slate-200 bg-white px-4 py-3">Shopify</div>
-                <div class="rounded-full border border-slate-200 bg-white px-4 py-3">Razorpay</div>
-                <div class="rounded-full border border-slate-200 bg-white px-4 py-3">HubSpot</div>
-            </div>
-        </div>
-    </section>
-
-    <section id="services" class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <div class="max-w-3xl">
-            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-primary">What we do</p>
-            <h2 class="mt-4 text-4xl font-black tracking-[-0.06em] text-slate-900 sm:text-5xl">Performance marketing built for sustainable growth.</h2>
-        </div>
-
-        <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            @php
-                $services = [
-                    ['title' => 'SEO', 'copy' => 'Rank higher, capture intent, and turn search traffic into consistent demand.', 'accent' => 'bg-primary text-white'],
-                    ['title' => 'PPC & Paid Search', 'copy' => 'Scale leads with channel-specific testing and conversion-focused ad creative.', 'accent' => 'bg-[#e9e5ff] text-slate-900'],
-                    ['title' => 'Social Media', 'copy' => 'Build brand trust and performance through creative storytelling and audiences.', 'accent' => 'bg-[#fff3cd] text-slate-900'],
-                    ['title' => 'Web & CRO', 'copy' => 'Design landing pages and funnels that improve commercial conversion at every step.', 'accent' => 'bg-slate-900 text-white'],
-                ];
-            @endphp
-
-            @foreach ($services as $service)
-                <article class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-[0_14px_45px_rgba(15,23,42,0.04)] transition hover:-translate-y-1 hover:shadow-[0_18px_55px_rgba(15,23,42,0.08)]">
-                    <div class="{{ $service['accent'] }} inline-flex rounded-full px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.18em]">{{ $service['title'] }}</div>
-                    <p class="mt-6 text-base leading-7 text-slate-600">{{ $service['copy'] }}</p>
-                    <a href="#contact" class="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-slate-900">Book a strategy call <span aria-hidden="true">→</span></a>
-                </article>
-            @endforeach
-        </div>
-    </section>
-
-    <section id="process" class="bg-[#f7f7fa] py-20">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="max-w-3xl">
-                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-primary">Our process</p>
-                <h2 class="mt-4 text-4xl font-black tracking-[-0.06em] text-slate-900 sm:text-5xl">A clear strategy from discovery to conversion.</h2>
-            </div>
-
-            <div class="mt-12 grid gap-6 lg:grid-cols-3">
-                @php
-                    $steps = [
-                        ['title' => '01. Diagnose', 'copy' => 'We audit traffic, funnel health, and conversion leaks to find the real growth blockers.'],
-                        ['title' => '02. Prioritise', 'copy' => 'We align your goals with the highest-impact channels and content opportunities.'],
-                        ['title' => '03. Scale', 'copy' => 'We deploy, optimise, and automate the strategy that keeps performance compounding.'],
-                    ];
-                @endphp
-
-                @foreach ($steps as $index => $step)
-                    <div class="rounded-[28px] border border-slate-200 bg-white p-6">
-                        <div class="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#e9e5ff] text-lg font-black text-primary">{{ $index + 1 }}</div>
-                        <h3 class="text-2xl font-bold tracking-[-0.06em] text-slate-900">{{ $step['title'] }}</h3>
-                        <p class="mt-4 text-base leading-7 text-slate-600">{{ $step['copy'] }}</p>
+                <section class="home-section home-section--team">
+                    <h2>The team behind</h2>
+                    <div class="home-section__group home-section__group--team">
+                        <h3>Powering Your Growth with the Expertise of Our Visionary Team</h3>
+                        <p>At Trivo, we focus on fostering long-term relationships with our clients. Leveraging our extensive industry knowledge, we provide essential insights to enhance your brand, drive business success, and reduce risks, paving the way for continuous growth.</p>
+                        <a href="{{ url('/meet-the-team') }}">Meet the team</a>
+                        <img src="{{ asset('wp-content/uploads/2025/03/Untitled-313-x-375-px.png') }}" alt="The Trivo team" width="313" height="375" loading="lazy">
                     </div>
-                @endforeach
+                </section>
+
+                <section class="home-section home-section--blog">
+                    <h2>Blog</h2>
+                    <div class="home-section__group">
+                        <h3>Digital marketing &amp; industry insights</h3>
+                        <a href="{{ route('blog') }}">View more</a>
+                    </div>
+                    <div class="home-blog-cards">
+                        <a class="home-blog-card" href="{{ url('/how-a-digital-marketing-company-in-mumbai-can-transform-your-business') }}">
+                            <img src="{{ asset('wp-content/uploads/2026/10/Digital-Marketing-Growth-Launch.png') }}" alt="Digital marketing growth strategy" loading="lazy">
+                            <h3>How a digital marketing company in Mumbai can transform your business</h3>
+                        </a>
+                        <a class="home-blog-card" href="{{ url('/discover-the-role-of-an-seo-company-in-surat-for-the-travel-industry') }}">
+                            <img src="{{ asset('wp-content/uploads/2026/09/ChatGPT-Image-Sep-29-2026-07_30_44-PM-1.png') }}" alt="SEO for travel businesses" loading="lazy">
+                            <h3>Discover the role of an SEO company in Surat for the travel industry</h3>
+                        </a>
+                    </div>
+                </section>
+
+                @include('partials.home-clients', ['headingId' => 'home-clients-title'])
             </div>
         </div>
-    </section>
-
-    <section id="work" class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div class="max-w-3xl">
-                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-primary">Selected work</p>
-                <h2 class="mt-4 text-4xl font-black tracking-[-0.06em] text-slate-900 sm:text-5xl">We turn strategy into measurable demand.</h2>
-            </div>
-            <a href="#contact" class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-800 transition hover:border-primary hover:text-primary">Talk to us</a>
-        </div>
-
-        <div class="mt-12 grid gap-6 lg:grid-cols-3">
-            @php
-                $work = [
-                    ['title' => 'Travel brand growth sprint', 'copy' => 'Improved qualified inquiries by 214% through SEO-led landing page optimisation and paid search.', 'tag' => 'SEO + PPC'],
-                    ['title' => 'B2B pipeline acceleration', 'copy' => 'Expanded high-intent demand generation across Google Search and LinkedIn remarketing.', 'tag' => 'Performance marketing'],
-                    ['title' => 'E-commerce revenue lift', 'copy' => 'Built conversion-focused product journeys and remarketing funnels to improve ROAS.', 'tag' => 'CRO + Social'],
-                ];
-            @endphp
-
-            @foreach ($work as $item)
-                <article class="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-[0_14px_45px_rgba(15,23,42,0.04)]">
-                    <div class="h-48 bg-[linear-gradient(135deg,#006ace_0%,#5bb0ff_35%,#ffbe11_100%)]"></div>
-                    <div class="p-6">
-                        <span class="inline-flex rounded-full bg-[#e9e5ff] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-primary">{{ $item['tag'] }}</span>
-                        <h3 class="mt-4 text-2xl font-bold tracking-[-0.06em] text-slate-900">{{ $item['title'] }}</h3>
-                        <p class="mt-4 text-base leading-7 text-slate-600">{{ $item['copy'] }}</p>
-                    </div>
-                </article>
-            @endforeach
-        </div>
-    </section>
-
-    <section id="insights" class="bg-[#f7f7fa] py-20">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="max-w-3xl">
-                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-primary">Insights</p>
-                <h2 class="mt-4 text-4xl font-black tracking-[-0.06em] text-slate-900 sm:text-5xl">Practical ideas to sharpen your digital growth strategy.</h2>
-            </div>
-
-            <div class="mt-12 grid gap-6 lg:grid-cols-3">
-                @php
-                    $posts = [
-                        ['title' => 'How to turn intent into pipeline with SEO-led content', 'meta' => 'SEO strategy'],
-                        ['title' => 'The paid media dashboard every growth team should track', 'meta' => 'Marketing ops'],
-                        ['title' => 'What good conversion design actually looks like', 'meta' => 'CRO'],
-                    ];
-                @endphp
-
-                @foreach ($posts as $post)
-                    <article class="rounded-[28px] border border-slate-200 bg-white p-6">
-                        <span class="text-[10px] font-semibold uppercase tracking-[0.18em] text-primary">{{ $post['meta'] }}</span>
-                        <h3 class="mt-4 text-2xl font-bold tracking-[-0.06em] text-slate-900">{{ $post['title'] }}</h3>
-                        <a href="#contact" class="mt-6 inline-flex text-sm font-semibold text-slate-900">Read more <span class="ml-2" aria-hidden="true">→</span></a>
-                    </article>
-                @endforeach
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <div class="overflow-hidden rounded-[32px] bg-slate-900 p-8 text-white shadow-[0_30px_80px_rgba(15,23,42,0.12)] sm:p-12 lg:p-16">
-            <div class="grid gap-10 lg:grid-cols-[1fr_0.9fr]">
-                <div>
-                    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-secondary">Let’s grow</p>
-                    <h2 class="mt-4 max-w-xl text-4xl font-black tracking-[-0.06em] text-white sm:text-5xl">Need a smarter digital growth plan?</h2>
-                    <p class="mt-5 max-w-xl text-base leading-7 text-slate-300">Tell us where your pipeline is stalled and we’ll map the next best moves for sales, brand reach, and conversion efficiency.</p>
-                </div>
-
-                <form method="POST" action="{{ route('enquiries.store') }}" class="space-y-4 rounded-[28px] border border-white/10 bg-white/5 p-5 backdrop-blur-sm">
-                    @csrf
-                    <input type="hidden" name="form" value="proposal">
-                    @include('partials.enquiry-errors', ['formKey' => 'proposal'])
-                    @include('partials.enquiry-honeypot')
-                    <div>
-                        <label for="name" class="mb-2 block text-sm font-medium text-slate-200">Name</label>
-                        <input id="name" name="name" maxlength="150" required value="{{ old('name') }}" type="text" class="w-full rounded-2xl border border-slate-700 bg-slate-950/40 px-4 py-3 text-white placeholder:text-slate-400 focus:border-primary focus:outline-none" placeholder="Your name">
-                    </div>
-                    <div>
-                        <label for="email" class="mb-2 block text-sm font-medium text-slate-200">Email</label>
-                        <input id="email" name="email" maxlength="254" required value="{{ old('email') }}" type="email" class="w-full rounded-2xl border border-slate-700 bg-slate-950/40 px-4 py-3 text-white placeholder:text-slate-400 focus:border-primary focus:outline-none" placeholder="hello@brand.com">
-                    </div>
-                    <div>
-                        <label for="phone" class="mb-2 block text-sm font-medium text-slate-200">Phone</label>
-                        <input id="phone" name="phone" type="tel" maxlength="50" required value="{{ old('phone') }}" class="w-full rounded-2xl border border-slate-700 bg-slate-950/40 px-4 py-3 text-white" autocomplete="tel">
-                    </div>
-                    <div>
-                        <label for="message" class="mb-2 block text-sm font-medium text-slate-200">What do you need?</label>
-                        <textarea id="message" name="message" maxlength="10000" rows="4" class="w-full rounded-2xl border border-slate-700 bg-slate-950/40 px-4 py-3 text-white placeholder:text-slate-400 focus:border-primary focus:outline-none" placeholder="Tell us a bit about your goals">{{ old('message') }}</textarea>
-                    </div>
-                    <button type="submit" class="inline-flex w-full items-center justify-center rounded-full bg-primary px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#004b8a]">Send enquiry</button>
-                </form>
-            </div>
-        </div>
-    </section>
+    </div>
 @endsection

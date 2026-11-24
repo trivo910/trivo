@@ -15,23 +15,6 @@
             ['year' => '2021', 'title' => 'Clutch Top Marketing Agency', 'provider' => 'Clutch', 'image' => 'wp-content/uploads/2023/06/56cf51c7d935aba26a8f553867bf878b.png', 'alt' => 'Clutch Top Marketing Agency 2021'],
             ['year' => '2020', 'title' => 'UpCity Top Ad Agency', 'provider' => 'UpCity', 'image' => 'wp-content/uploads/2023/06/new-badge20211005-28345-8m8kvp.png', 'alt' => 'UpCity Top Ad Agency Marketplace'],
         ];
-
-        $clients = [
-            ['name' => 'Sanjari', 'image' => 'Sanjari-2.png'],
-            ['name' => 'Polla Tech', 'image' => 'Polla-Tech.png'],
-            ['name' => 'Al Bushra', 'image' => 'Al-Bushra.png'],
-            ['name' => 'Mumbai Darshan', 'image' => 'Mumbai-Darshan.png'],
-            ['name' => 'Brady Morris', 'image' => 'Brady-Morris.png'],
-            ['name' => 'Stock Sovet', 'image' => 'Stock-Sovet.png'],
-            ['name' => 'Stop Over', 'image' => 'Stop-Over.png'],
-            ['name' => 'Quba Dates', 'image' => 'Quba-Dates.png'],
-            ['name' => 'Medikash', 'image' => 'Medikash.png'],
-            ['name' => 'MYVN', 'image' => 'MYVN.png'],
-            ['name' => 'Al-Arafat', 'image' => 'Al-Arafat.png'],
-            ['name' => 'Al-Rida', 'image' => 'Al-Rida.png'],
-            ['name' => 'Gulshan Tours', 'image' => 'Gulshan-Tours.png'],
-            ['name' => 'Global Duniya', 'image' => 'Global-Duniya.png'],
-        ];
     @endphp
 
     <article class="awards-page">
@@ -79,13 +62,6 @@
             <img class="awards-page__rocket" src="{{ asset('wp-content/uploads/2023/05/GettyImages-1367732506-159x300.png') }}" alt="" width="90" height="170" loading="lazy">
         </section>
 
-        <section class="about-page__clients awards-page__clients" aria-labelledby="awards-clients-title">
-            <h2 id="awards-clients-title">Clients We work with</h2>
-            <ul class="about-page__client-track" aria-label="Client logos">
-                @foreach ($clients as $client)
-                    <li><img src="{{ asset('wp-content/uploads/2026/03/'.$client['image']) }}" alt="{{ $client['name'] }}" loading="lazy" width="300" height="135"></li>
-                @endforeach
-            </ul>
-        </section>
+        @include('partials.home-clients', ['headingId' => 'awards-clients-title'])
     </article>
 @endsection

@@ -204,23 +204,179 @@ document.querySelectorAll('[data-blog-load-more]').forEach((button) => {
 document.querySelectorAll('.home-results__testimonials').forEach((container) => {
     const cards = [...container.querySelectorAll('.home-results__testimonial')];
     if (cards.length < 2) return;
-    let selected = 0;
+    const proof = container.closest('.home-results__proof');
+    if (!proof) return;
+
     const controls = document.createElement('div');
-    controls.className = 'home-testimonial-controls';
-    function show(index) {
-        selected = (index + cards.length) % cards.length;
-        cards.forEach((card, i) => { card.hidden = i !== selected; card.classList.toggle('is-active', i === selected); });
-    }
+    controls.className = 'home-results__nav';
     [-1, 1].forEach((direction) => {
         const button = document.createElement('button');
         button.type = 'button';
-        button.textContent = direction < 0 ? '\u2190' : '\u2192';
         button.setAttribute('aria-label', direction < 0 ? 'Previous testimonial' : 'Next testimonial');
-        button.addEventListener('click', () => show(selected + direction));
+        button.innerHTML = direction < 0
+            ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>'
+            : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+        button.addEventListener('click', () => {
+            const firstCard = cards[0];
+            if (!(firstCard instanceof HTMLElement)) return;
+            const gap = Number.parseFloat(getComputedStyle(container).columnGap) || 0;
+            const step = firstCard.getBoundingClientRect().width + gap;
+            const atStart = container.scrollLeft <= 4;
+            const atEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - 4;
+
+            if (direction > 0 && atEnd) {
+                container.scrollTo({ left: 0, behavior: 'smooth' });
+            } else if (direction < 0 && atStart) {
+                container.scrollTo({ left: container.scrollWidth, behavior: 'smooth' });
+            } else {
+                container.scrollBy({ left: direction * step, behavior: 'smooth' });
+            }
+        });
         controls.appendChild(button);
     });
-    container.appendChild(controls);
-    show(0);
+    proof.appendChild(controls);
+});
+
+const heroAudit = document.querySelector('.home-hero__audit');
+const heroEmail = heroAudit?.querySelector('input');
+if (heroAudit instanceof HTMLElement && heroEmail instanceof HTMLInputElement) {
+    heroEmail.addEventListener('input', () => {
+        heroAudit.style.setProperty('--progress', heroEmail.value.trim() ? '100%' : '35%');
+    });
+}
+
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const homeHero = document.querySelector('.home-hero');
+const homeHeroOrbit = homeHero?.querySelector('.home-hero__orbit');
+const homeBudgetInsight = homeHero?.querySelector('.home-budget-insight');
+
+if (homeHero instanceof HTMLElement && homeHeroOrbit instanceof HTMLElement && homeBudgetInsight instanceof HTMLElement) {
+    const alignHeroOrbitWithInsight = () => {
+        const heroBounds = homeHero.getBoundingClientRect();
+        const insightBounds = homeBudgetInsight.getBoundingClientRect();
+        if (heroBounds.width === 0 || heroBounds.height === 0) return;
+
+        const centerX = insightBounds.left + insightBounds.width / 2 - heroBounds.left;
+        const centerY = insightBounds.top + insightBounds.height / 2 - heroBounds.top;
+        homeHero.style.setProperty('--home-orbit-center-x', `${centerX / heroBounds.width * 100}%`);
+        homeHero.style.setProperty('--home-orbit-center-y', `${centerY / heroBounds.height * 100}%`);
+
+        const viewportWidth = window.innerWidth;
+        let targetWidths;
+        let targetHeights;
+        if (viewportWidth <= 560) {
+            targetWidths = [Math.min(heroBounds.width * .9258, 370), Math.min(heroBounds.width * .701, 284.3), Math.min(heroBounds.width * .4761, 191.8)];
+            targetHeights = [Math.min(heroBounds.width * .7, 280), Math.min(heroBounds.width * .53, 215), Math.min(heroBounds.width * .36, 145)];
+        } else if (viewportWidth <= 1100) {
+            targetWidths = [Math.min(heroBounds.width * .6348, 423), Math.min(heroBounds.width * .4893, 323), Math.min(heroBounds.width * .34385, 231.4)];
+            targetHeights = [Math.min(heroBounds.width * .48, 320), Math.min(heroBounds.width * .37, 245), Math.min(heroBounds.width * .26, 175)];
+        } else {
+            targetWidths = [heroBounds.width * .64, heroBounds.width * .54, heroBounds.width * .35];
+            targetHeights = [Math.min(heroBounds.width * .391, 368), Math.min(heroBounds.width * .3105, 287.5), Math.min(heroBounds.width * .23, 212.75)];
+        }
+
+        const availableWidth = Math.max(0, 2 * (Math.min(centerX, heroBounds.width - centerX) - 12));
+        const availableHeight = Math.max(0, 2 * (Math.min(centerY, heroBounds.height - centerY) - 12));
+        ['one', 'two', 'three'].forEach((name, index) => {
+            homeHero.style.setProperty(`--home-orbit-ring-${name}-size`, `${Math.min(targetWidths[index], availableWidth)}px`);
+            homeHero.style.setProperty(`--home-orbit-ring-${name}-height`, `${Math.min(targetHeights[index], availableHeight)}px`);
+        });
+    };
+
+    const sphereTracks = [
+        { ring: homeHeroOrbit.querySelector('.home-hero__orbit-ring--one'), sphere: homeHeroOrbit.querySelector('.home-hero__orbit-sphere--large'), duration: 34000, startAngle: -Math.PI / 2, direction: 1 },
+        { ring: homeHeroOrbit.querySelector('.home-hero__orbit-ring--two'), sphere: homeHeroOrbit.querySelector('.home-hero__orbit-sphere--medium'), duration: 27000, startAngle: Math.PI / 2, direction: -1 },
+        { ring: homeHeroOrbit.querySelector('.home-hero__orbit-ring--three'), sphere: homeHeroOrbit.querySelector('.home-hero__orbit-sphere--small'), duration: 21000, startAngle: Math.PI, direction: 1 },
+    ].filter((track) => track.ring instanceof HTMLElement && track.sphere instanceof HTMLElement);
+
+    const placeOrbitSpheres = (time) => {
+        sphereTracks.forEach(({ ring, sphere, duration, startAngle, direction }) => {
+            const angle = startAngle + time / duration * Math.PI * 2 * direction;
+            const radiusX = ring.clientWidth / 2;
+            const radiusY = ring.clientHeight / 2;
+            sphere.style.left = `${ring.clientWidth / 2 + radiusX * Math.cos(angle)}px`;
+            sphere.style.top = `${ring.clientHeight / 2 + radiusY * Math.sin(angle)}px`;
+            sphere.style.right = 'auto';
+            sphere.style.bottom = 'auto';
+            sphere.style.transform = 'translate(-50%, -50%)';
+        });
+    };
+
+    alignHeroOrbitWithInsight();
+    placeOrbitSpheres(0);
+    if (!reduceMotion) {
+        const animateOrbitSpheres = (time) => {
+            placeOrbitSpheres(time);
+            requestAnimationFrame(animateOrbitSpheres);
+        };
+        requestAnimationFrame(animateOrbitSpheres);
+    }
+    window.addEventListener('resize', alignHeroOrbitWithInsight, { passive: true });
+    if ('ResizeObserver' in window) {
+        const heroOrbitObserver = new ResizeObserver(alignHeroOrbitWithInsight);
+        heroOrbitObserver.observe(homeHero);
+        heroOrbitObserver.observe(homeBudgetInsight);
+    }
+    document.fonts?.ready.then(alignHeroOrbitWithInsight);
+}
+
+const budgetDotMotion = document.querySelector('.home-budget-chart__dot animateMotion');
+if (!reduceMotion && budgetDotMotion && typeof budgetDotMotion.beginElement === 'function') {
+    budgetDotMotion.beginElement();
+}
+
+document.querySelectorAll('[data-count-target]').forEach((counter) => {
+    if (!(counter instanceof HTMLElement)) return;
+    const target = Number.parseInt(counter.dataset.countTarget ?? '', 10);
+    if (!Number.isFinite(target)) return;
+    const initial = Number.parseInt(counter.dataset.countStart ?? '0', 10);
+    const startValue = Number.isFinite(initial) ? initial : 0;
+    const format = (value) => counter.dataset.countFormat === 'grouped'
+        ? new Intl.NumberFormat('en-IN').format(value)
+        : String(value);
+    if (reduceMotion) {
+        counter.textContent = format(target);
+        return;
+    }
+
+    const mode = counter.dataset.countMode;
+    const duration = mode === 'fast-then-slow' ? 1850 : (startValue > target ? 2100 : 1650);
+    const start = performance.now();
+    counter.textContent = format(startValue);
+    const updateCounter = (now) => {
+        const elapsed = now - start;
+        let value;
+
+        if (mode === 'fast-then-slow') {
+            const fastPhase = Math.min(1, elapsed / 550);
+            const fastValue = 550 * (1 - Math.pow(1 - fastPhase, 3));
+            const slowPhase = Math.min(1, Math.max(0, (elapsed - 550) / 1300));
+            value = elapsed < 550
+                ? fastValue
+                : 550 + (target - 550) * (1 - Math.pow(1 - slowPhase, 3));
+        } else {
+            const progress = Math.min(1, elapsed / duration);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            value = startValue + (target - startValue) * eased;
+        }
+
+        counter.textContent = format(Math.round(value));
+        if (elapsed < duration) requestAnimationFrame(updateCounter);
+    };
+    requestAnimationFrame(updateCounter);
+});
+
+document.querySelectorAll('[data-home-enquiry]').forEach((form) => {
+    const inputs = [...form.querySelectorAll('.home-enquiry__fields input')];
+    if (inputs.length === 0) return;
+
+    const updateProgress = () => {
+        const filled = inputs.filter((input) => input.value.trim() !== '').length;
+        form.style.setProperty('--progress', `${35 + 65 * filled / inputs.length}%`);
+    };
+
+    inputs.forEach((input) => input.addEventListener('input', updateProgress));
+    updateProgress();
 });
 
 let horizontalCarouselId = 0;

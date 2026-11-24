@@ -110,6 +110,7 @@ class PublicContentRenderer
             );
 
             $withContents = app(BlogBody::class)->tableOfContents($preparedBody['html'], (bool) $content->show_toc);
+            $withContents['html'] = app(ClientLogoMarquee::class)->transform($withContents['html']);
 
             return view('pages.blog-post', [
                 'article' => [
@@ -131,9 +132,11 @@ class PublicContentRenderer
         }
 
         if ($content instanceof Page && $content->path === '/') {
+            $homeHtml = $this->homeLayout($bodyHtml);
+
             return view('pages.imported-home', [
                 'record' => $content,
-                'bodyHtml' => $this->homeLayout($bodyHtml),
+                'bodyHtml' => app(ClientLogoMarquee::class)->transform($homeHtml),
                 'hasHeadingOne' => $hasHeadingOne,
             ]);
         }
@@ -149,7 +152,7 @@ class PublicContentRenderer
 
         return view('pages.imported-content', [
             'record' => $content,
-            'bodyHtml' => $bodyHtml,
+            'bodyHtml' => app(ClientLogoMarquee::class)->transform($bodyHtml),
             'hasHeadingOne' => $hasHeadingOne,
         ]);
     }

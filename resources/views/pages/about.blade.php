@@ -92,23 +92,6 @@
             </figure>
         </section>
 
-        <section class="about-page__clients" aria-labelledby="about-clients-title">
-            <h2 id="about-clients-title">Clients We work with</h2>
-            <ul class="about-page__client-track" aria-label="Client logos">
-                <li><img src="{{ asset('wp-content/uploads/2026/03/Sanjari-2.png') }}" alt="Sanjari Recycling &amp; Travels" loading="lazy" width="300" height="135"></li>
-                <li><img src="{{ asset('wp-content/uploads/2026/03/Polla-Tech.png') }}" alt="Polla Tech" loading="lazy" width="300" height="135"></li>
-                <li><img src="{{ asset('wp-content/uploads/2026/03/Al-Bushra.png') }}" alt="Al Bushra &amp; Travels" loading="lazy" width="300" height="135"></li>
-                <li><img src="{{ asset('wp-content/uploads/2026/03/Mumbai-Darshan.png') }}" alt="Mumbai Darshan" loading="lazy" width="300" height="135"></li>
-                <li><img src="{{ asset('wp-content/uploads/2026/03/Brady-Morris.png') }}" alt="Brady Morris" loading="lazy" width="300" height="135"></li>
-                <li><img src="{{ asset('wp-content/uploads/2026/03/Stock-Sovet.png') }}" alt="Stock Sovet" loading="lazy" width="300" height="135"></li>
-                <li><img src="{{ asset('wp-content/uploads/2026/03/Stop-Over.png') }}" alt="Stop Over" loading="lazy" width="300" height="135"></li>
-                <li><img src="{{ asset('wp-content/uploads/2026/03/Quba-Dates.png') }}" alt="Quba Dates" loading="lazy" width="300" height="135"></li>
-                <li><img src="{{ asset('wp-content/uploads/2026/03/Medikash.png') }}" alt="Medikash" loading="lazy" width="300" height="135"></li>
-                <li><img src="{{ asset('wp-content/uploads/2026/03/MYVN.png') }}" alt="MYVN" loading="lazy" width="300" height="135"></li>
-                <li><img src="{{ asset('wp-content/uploads/2026/03/Al-Arafat.png') }}" alt="Al Arafat" loading="lazy" width="300" height="135"></li>
-                <li><img src="{{ asset('wp-content/uploads/2026/03/Al-Rida.png') }}" alt="Al Rida" loading="lazy" width="300" height="135"></li>
-                <li><img src="{{ asset('wp-content/uploads/2026/03/Gulshan-Tours.png') }}" alt="Gulshan Tours" loading="lazy" width="300" height="135"></li>
-            </ul>
-        </section>
+        @include('partials.home-clients', ['headingId' => 'about-clients-title'])
     </article>
 @endsection

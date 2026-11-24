@@ -27,7 +27,9 @@ class ServicePageLayout
     public function render(string $html, string $path, array $testimonials = []): string
     {
         if ($path === '/paid-search-marketing') {
-            return app(PaidSearchPageLayout::class)->render($html);
+            $layout = app(PaidSearchPageLayout::class)->render($html);
+
+            return app(ClientLogoMarquee::class)->transform($layout);
         }
 
         $document = new DOMDocument('1.0', 'UTF-8');
@@ -234,7 +236,7 @@ class ServicePageLayout
             }
         }
 
-        return $document->saveHTML($output);
+        return app(ClientLogoMarquee::class)->transform($document->saveHTML($output));
     }
 
     private function socialMediaMumbaiLayout(DOMDocument $document, DOMElement $output, array $groups): void

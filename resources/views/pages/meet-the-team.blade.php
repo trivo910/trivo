@@ -6,25 +6,6 @@
 @section('robots', isset($record) ? ($record->robots ?: config('seo.default_robots')) : config('seo.default_robots'))
 
 @section('content')
-    @php
-        $clients = [
-            ['name' => 'Sanjari', 'image' => 'Sanjari-2.png'],
-            ['name' => 'Polla Tech', 'image' => 'Polla-Tech.png'],
-            ['name' => 'Al Bushra', 'image' => 'Al-Bushra.png'],
-            ['name' => 'Mumbai Darshan', 'image' => 'Mumbai-Darshan.png'],
-            ['name' => 'Brady Morris', 'image' => 'Brady-Morris.png'],
-            ['name' => 'Stock Sovet', 'image' => 'Stock-Sovet.png'],
-            ['name' => 'Stop Over', 'image' => 'Stop-Over.png'],
-            ['name' => 'Quba Dates', 'image' => 'Quba-Dates.png'],
-            ['name' => 'Medikash', 'image' => 'Medikash.png'],
-            ['name' => 'MYVN', 'image' => 'MYVN.png'],
-            ['name' => 'Al-Arafat', 'image' => 'Al-Arafat.png'],
-            ['name' => 'Al-Rida', 'image' => 'Al-Rida.png'],
-            ['name' => 'Gulshan Tours', 'image' => 'Gulshan-Tours.png'],
-            ['name' => 'Global Duniya', 'image' => 'Global-Duniya.png'],
-        ];
-    @endphp
-
     <article class="team-page">
         <header class="team-page__banner">
             <h1>Meet the Team</h1>
@@ -86,13 +67,6 @@
             <a href="{{ route('contact') }}">Join our team <span aria-hidden="true">→</span></a>
         </section>
 
-        <section class="team-page__clients about-page__clients" aria-labelledby="team-clients-title">
-            <h2 id="team-clients-title">Clients We work with</h2>
-            <ul class="about-page__client-track" aria-label="Client logos">
-                @foreach ($clients as $client)
-                    <li><img src="{{ asset('wp-content/uploads/2026/03/'.$client['image']) }}" alt="{{ $client['name'] }}" loading="lazy" width="300" height="135"></li>
-                @endforeach
-            </ul>
-        </section>
+        @include('partials.home-clients', ['headingId' => 'team-clients-title'])
     </article>
 @endsection

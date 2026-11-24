@@ -45,7 +45,7 @@ return [
             'prefix' => '',
             'strict' => true,
             'options' => extension_loaded('pdo_mysql') ? [
-                PDO::MYSQL_ATTR_INIT_COMMAND => 'SET SESSION TRANSACTION READ ONLY',
+                Pdo\Mysql::ATTR_INIT_COMMAND => 'SET SESSION TRANSACTION READ ONLY',
             ] : [],
         ],
 
