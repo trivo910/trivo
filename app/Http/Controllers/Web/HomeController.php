@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\Media;
 use App\Models\Page;
 use App\Models\Post;
 use App\Models\PortfolioItem;
@@ -13,7 +14,19 @@ class HomeController extends Controller
 {
     public function index(): View
     {
-        return view('pages.home');
+        $homeBlogPosts = Post::query()->articles()
+            ->where('status', 'published')
+            ->where('published_at', '<=', now())
+            ->orderByDesc('published_at')
+            ->orderByDesc('id')
+            ->get();
+
+        $homeBlogMedia = Media::query()
+            ->whereIn('id', $homeBlogPosts->pluck('featured_media_id')->filter())
+            ->get()
+            ->keyBy('id');
+
+        return view('pages.home', compact('homeBlogPosts', 'homeBlogMedia'));
     }
 
     public function about(PublicContentRenderer $renderer): View

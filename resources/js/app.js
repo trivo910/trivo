@@ -70,6 +70,102 @@ document.querySelectorAll('.home-case-study-carousel').forEach((carousel) => {
     if (carousel instanceof HTMLElement) updateCaseStudyCarousel(carousel);
 });
 
+function updateHomeBlogCarousel(carousel) {
+    const track = carousel.querySelector('.home-blog-cards');
+    const previous = carousel.querySelector('[data-home-blog-prev]');
+    const next = carousel.querySelector('[data-home-blog-next]');
+    if (!(track instanceof HTMLElement)
+        || !(previous instanceof HTMLButtonElement)
+        || !(next instanceof HTMLButtonElement)) return;
+
+    const maxScroll = Math.max(0, track.scrollWidth - track.clientWidth);
+    previous.disabled = track.scrollLeft <= 1;
+    next.disabled = track.scrollLeft >= maxScroll - 1;
+}
+
+document.querySelectorAll('[data-home-blog-carousel]').forEach((carousel) => {
+    if (!(carousel instanceof HTMLElement)) return;
+
+    const track = carousel.querySelector('.home-blog-cards');
+    if (!(track instanceof HTMLElement)) return;
+
+    updateHomeBlogCarousel(carousel);
+    track.addEventListener('scroll', () => updateHomeBlogCarousel(carousel), { passive: true });
+
+    let autoplayTimer = 0;
+    const stopAutoplay = () => {
+        if (autoplayTimer !== 0) window.clearInterval(autoplayTimer);
+        autoplayTimer = 0;
+    };
+    const startAutoplay = () => {
+        if (autoplayTimer !== 0
+            || carousel.matches(':hover')
+            || carousel.contains(document.activeElement)
+            || document.hidden
+            || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        autoplayTimer = window.setInterval(() => {
+            if (document.hidden) return;
+
+            const firstCard = track.querySelector('.home-blog-card');
+            if (!(firstCard instanceof HTMLElement)) return;
+
+            const styles = getComputedStyle(track);
+            const gap = Number.parseFloat(styles.columnGap) || 0;
+            const cardStep = firstCard.getBoundingClientRect().width + gap;
+            const visibleCards = Math.max(1, Math.round((track.clientWidth + gap) / cardStep));
+            const maxScroll = Math.max(0, track.scrollWidth - track.clientWidth);
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            if (track.scrollLeft >= maxScroll - 2) {
+                track.scrollTo({ left: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+            } else {
+                track.scrollBy({ left: cardStep * visibleCards, behavior: reduceMotion ? 'auto' : 'smooth' });
+            }
+        }, 5000);
+    };
+
+    carousel.addEventListener('mouseenter', stopAutoplay);
+    carousel.addEventListener('mouseleave', startAutoplay);
+    carousel.addEventListener('focusin', stopAutoplay);
+    carousel.addEventListener('focusout', (event) => {
+        if (!(event.relatedTarget instanceof Node) || !carousel.contains(event.relatedTarget)) startAutoplay();
+    });
+    carousel.addEventListener('pointerdown', stopAutoplay);
+    carousel.addEventListener('pointerup', startAutoplay);
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) stopAutoplay();
+        else startAutoplay();
+    });
+    startAutoplay();
+});
+
+document.addEventListener('click', (event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+
+    const button = target.closest('[data-home-blog-prev], [data-home-blog-next]');
+    if (!(button instanceof HTMLButtonElement)) return;
+
+    const carousel = button.closest('[data-home-blog-carousel]');
+    const track = carousel?.querySelector('.home-blog-cards');
+    const firstCard = track?.querySelector('.home-blog-card');
+    if (!(carousel instanceof HTMLElement) || !(track instanceof HTMLElement) || !(firstCard instanceof HTMLElement)) return;
+
+    const styles = getComputedStyle(track);
+    const gap = Number.parseFloat(styles.columnGap) || 0;
+    const cardStep = firstCard.getBoundingClientRect().width + gap;
+    const visibleCards = Math.max(1, Math.round((track.clientWidth + gap) / cardStep));
+    const direction = button.hasAttribute('data-home-blog-next') ? 1 : -1;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    track.scrollBy({ left: direction * cardStep * visibleCards, behavior: reduceMotion ? 'auto' : 'smooth' });
+});
+
+window.addEventListener('resize', () => {
+    document.querySelectorAll('[data-home-blog-carousel]').forEach((carousel) => {
+        if (carousel instanceof HTMLElement) updateHomeBlogCarousel(carousel);
+    });
+});
+
 document.addEventListener('click', (event) => {
     const target = event.target;
     if (!(target instanceof Element)) return;

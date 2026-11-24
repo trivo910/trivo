@@ -126,19 +126,18 @@
                 <section class="home-section home-section--services">
                     <h2>What we do</h2>
                     <div class="home-section__group">
-                        <h3>Smarter Solutions, Better Markets</h3>
-                        <p>Trivo offers expert IT solutions and digital marketing services, helping travel agents enhance their online presence, engage more customers, and drive business growth.</p>
-                        <a href="{{ url('/marketing-solutions') }}">View all solutions</a>
+                        <h3>Smarter Solutions,<br>Better Markets</h3>
+                        <p>Trivo IT Solution is a tech-enabled travel marketing solutions provider, specializing in creating custom strategies for travel agencies, tour operators, and hospitality businesses.</p>
                     </div>
 
                     @php
                         $services = [
                             [
                                 'title' => 'Search engine optimization',
-                                'copy' => 'Increase your organic traffic by ranking high on search engines and AI discovery tools like ChatGPT.',
-                                'benefits' => ['Keyword and competitor research', 'SKAGS (single keyword ad groups)', 'Negative keyword pruning', 'Ad copy optimization', 'Backlink generation'],
+                                'copy' => 'Increase your organic traffic by ranking higher on search engines with a discovery process like CHANCE™.',
+                                'benefits' => ['Keyword research and content strategy', 'On-page & technical SEO optimization', 'High-quality link building', 'Performance tracking and reporting', 'Continuous improvement'],
                                 'stat' => '93%',
-                                'stat_copy' => 'Of customers reported that their online experience begins with search.',
+                                'stat_copy' => 'Of customers achieved a higher search visibility within 6 months.',
                                 'url' => '/search-engine-optimization',
                             ],
                             [
@@ -222,17 +221,29 @@
                 <section class="trivo-about" aria-labelledby="home-about-title">
                     <h2 id="home-about-title" class="trivo-about__label">About Trivo</h2>
                     <div class="trivo-about__intro">
-                        <h3 class="trivo-about__title">Customer Data,<br>Thoughtfully Built</h3>
+                        <h3 class="trivo-about__title">Customer Data,<br><span>Thoughtfully Built</span></h3>
                         <div class="trivo-about__copy">
                             <p>Trivo IT Solution is a tech-enabled travel marketing solutions provider, specializing in creating custom strategies for travel agencies, tour operators, and hospitality businesses based on their unique needs and goals. Our result-driven approach has helped travel businesses generate over &#8377;3.5 lakh in sales and attract over 1.8 million potential leads, boosting their bookings, visibility, and revenue growth.</p>
-                            <a href="{{ route('about') }}">More about our unique approach</a>
+                            <a href="{{ route('about') }}">More about our unique approach <span aria-hidden="true">→</span></a>
                         </div>
                     </div>
                     <ul class="trivo-about__milestones">
-                        <li>Our customers have raised over $35mn in funding</li>
-                        <li>In over 10 years, we’ve never lost a customer</li>
-                        <li>We work with the world’s fastest-growing startups</li>
-                        <li>Distributed team of over 20 marketers, podcasters, and copywriters</li>
+                        <li>
+                            <span class="trivo-about__milestone-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M14.5 5.5c1.8-1.8 4.5-2 6-2 .1 1.5-.2 4.2-2 6l-6.8 6.8-4-4 6.8-6.8Z"/><path d="m7.7 12.3-3.4.4-2 3.5 5 .5m4.4.1-.4 3.4-3.5 2-.5-5m6.7-8.8h.1M5.5 18.5l-2 2"/></svg></span>
+                            <span class="trivo-about__milestone-copy">Our customers have raised over $35mn in funding</span>
+                        </li>
+                        <li>
+                            <span class="trivo-about__milestone-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M8 4h8v5a4 4 0 0 1-8 0V4Z"/><path d="M8 6H5v2a4 4 0 0 0 4 4m7-6h3v2a4 4 0 0 1-4 4m-3 1v4m-4 3h8m-7-3h6l2 3H7l2-3Z"/></svg></span>
+                            <span class="trivo-about__milestone-copy">In over 10 years, we’ve never lost a customer</span>
+                        </li>
+                        <li>
+                            <span class="trivo-about__milestone-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5M3 16l9 5 9-5"/></svg></span>
+                            <span class="trivo-about__milestone-copy">We work with the world’s fastest-growing startups</span>
+                        </li>
+                        <li>
+                            <span class="trivo-about__milestone-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M16 20v-1.5a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4V20m7-9a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm7-7.7a4 4 0 0 1 0 7.4m1 4.1a4 4 0 0 1 3 3.9V20"/></svg></span>
+                            <span class="trivo-about__milestone-copy">Distributed team of over 20 marketers, podcasters, and copywriters</span>
+                        </li>
                     </ul>
                 </section>
 
@@ -304,15 +315,40 @@
                         <h3>Digital marketing &amp; industry insights</h3>
                         <a href="{{ route('blog') }}">View more</a>
                     </div>
-                    <div class="home-blog-cards">
-                        <a class="home-blog-card" href="{{ url('/how-a-digital-marketing-company-in-mumbai-can-transform-your-business') }}">
-                            <img src="{{ asset('wp-content/uploads/2026/10/Digital-Marketing-Growth-Launch.png') }}" alt="Digital marketing growth strategy" loading="lazy">
-                            <h3>How a digital marketing company in Mumbai can transform your business</h3>
-                        </a>
-                        <a class="home-blog-card" href="{{ url('/discover-the-role-of-an-seo-company-in-surat-for-the-travel-industry') }}">
-                            <img src="{{ asset('wp-content/uploads/2026/09/ChatGPT-Image-Sep-29-2026-07_30_44-PM-1.png') }}" alt="SEO for travel businesses" loading="lazy">
-                            <h3>Discover the role of an SEO company in Surat for the travel industry</h3>
-                        </a>
+                    <div class="home-blog-carousel" data-home-blog-carousel>
+                        <div class="home-blog-cards" id="home-blog-track" tabindex="0" aria-label="Latest blog posts">
+                            @forelse($homeBlogPosts as $post)
+                                @php($image = $homeBlogMedia->get($post->featured_media_id))
+                                <a class="home-blog-card" href="{{ url($post->path) }}" aria-label="Read more: {{ $post->title }}">
+                                    @if($image && ($image->processing_status === 'ready' || $image->isLegacy()))
+                                        <img src="{{ $image->isLegacy() ? asset(ltrim($image->path, '/')) : Storage::disk($image->disk)->url($image->path) }}" alt="{{ $image->alt ?: $post->title }}" loading="lazy">
+                                    @elseif(preg_match('~<img[^>]+src=[\x22\x27](/wp-content/uploads/[^\x22\x27]+)~i', $post->body ?? '', $match))
+                                        <img src="{{ asset(ltrim($match[1], '/')) }}" alt="{{ $post->title }}" loading="lazy">
+                                    @endif
+                                    <h3>{{ $post->title }}</h3>
+                                    <span class="home-blog-card__read-more" aria-hidden="true">→</span>
+                                </a>
+                            @empty
+                                <a class="home-blog-card" href="{{ url('/how-a-digital-marketing-company-in-mumbai-can-transform-your-business') }}" aria-label="Read more: How a digital marketing company in Mumbai can transform your business">
+                                    <img src="{{ asset('wp-content/uploads/2026/10/Digital-Marketing-Growth-Launch.png') }}" alt="Digital marketing growth strategy" loading="lazy">
+                                    <h3>How a digital marketing company in Mumbai can transform your business</h3>
+                                    <span class="home-blog-card__read-more" aria-hidden="true">→</span>
+                                </a>
+                                <a class="home-blog-card" href="{{ url('/discover-the-role-of-an-seo-company-in-surat-for-the-travel-industry') }}" aria-label="Read more: Discover the role of an SEO company in Surat for the travel industry">
+                                    <img src="{{ asset('wp-content/uploads/2026/09/ChatGPT-Image-Sep-29-2026-07_30_44-PM-1.png') }}" alt="SEO for travel businesses" loading="lazy">
+                                    <h3>Discover the role of an SEO company in Surat for the travel industry</h3>
+                                    <span class="home-blog-card__read-more" aria-hidden="true">→</span>
+                                </a>
+                            @endforelse
+                        </div>
+                        <div class="home-blog-carousel__controls" aria-label="Blog slider controls">
+                            <button type="button" data-home-blog-prev aria-label="Previous blog posts" aria-controls="home-blog-track" disabled>
+                                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 12H5m7 7-7-7 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                            </button>
+                            <button type="button" data-home-blog-next aria-label="Next blog posts" aria-controls="home-blog-track">
+                                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14m-7-7 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                            </button>
+                        </div>
                     </div>
                 </section>
 
