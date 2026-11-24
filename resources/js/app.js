@@ -443,6 +443,24 @@ document.querySelectorAll('.paid-search-clients').forEach((section) => {
     setupHorizontalCarousel(section, track, figures, 'paid-search-client-controls', 'paid-search-client-track');
 });
 
+// Reveal the paid search service content as it enters view. Keep the client
+// marquee out of this animation so its existing motion stays untouched.
+document.querySelectorAll('.service-page--paid-search-marketing').forEach((page) => {
+    const sections = [...page.querySelectorAll('.paid-search-content > .paid-search-intro, .paid-search-content > .paid-search-row, .paid-search-content > .paid-search-results')];
+    if (!sections.length || !('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    page.classList.add('js-reveal-ready');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    sections.forEach((section) => observer.observe(section));
+});
+
 document.querySelectorAll('.service-page--digital-marketing-agency-in-mumbai .dm-tools, .service-page--social-media-marketing-agency-in-mumbai .sm-tools').forEach((section) => {
     const track = section.querySelector('.location-logo-grid');
     if (!track) return;

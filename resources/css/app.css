@@ -2719,6 +2719,185 @@
 }
 
 @layer components {
+    /* Paid search landing page refresh. The client marquee below keeps its shared design. */
+    .service-page--paid-search-marketing.paid-search-page {
+        overflow: hidden;
+        background: #fbfcff;
+        color: #10213b;
+    }
+
+    .service-page--paid-search-marketing .paid-search-heading {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(360px, .88fr);
+        align-items: center;
+        gap: clamp(36px, 7vw, 110px);
+        width: min(calc(100% - 64px), 1240px);
+        min-height: 530px;
+        margin: 0 auto;
+        padding: 68px 0 104px;
+        text-align: left;
+        isolation: isolate;
+    }
+
+    .service-page--paid-search-marketing .paid-search-heading::before {
+        position: absolute;
+        z-index: -1;
+        top: -260px;
+        right: -260px;
+        width: 780px;
+        height: 780px;
+        border: 1px solid rgba(50, 104, 212, .08);
+        border-radius: 50%;
+        box-shadow: 0 0 0 58px rgba(50, 104, 212, .025), 0 0 0 118px rgba(50, 104, 212, .02);
+        content: '';
+    }
+
+    .paid-search-hero__copy { position: relative; z-index: 1; max-width: 630px; animation: paid-search-rise .7s both; }
+    .paid-search-hero__eyebrow { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 24px; color: #315fb8; font-size: 11px; font-weight: 700; letter-spacing: .16em; }
+    .paid-search-hero__eyebrow > span { width: 8px; height: 8px; border-radius: 50%; background: #45c39a; box-shadow: 0 0 0 5px rgba(69, 195, 154, .14); }
+    .service-page--paid-search-marketing .paid-search-heading h1 { max-width: 680px; margin: 0; color: #10213b; font-size: clamp(44px, 5.4vw, 72px); font-weight: 650; line-height: 1.04; letter-spacing: -.065em; }
+    .paid-search-hero__copy > p { max-width: 510px; margin: 22px 0 27px; color: #64718a; font-size: 18px; line-height: 1.65; }
+    .paid-search-hero__cta { display: inline-flex; align-items: center; gap: 22px; min-height: 54px; padding: 0 22px; border-radius: 7px; background: #275fc7; color: #fff; font-size: 14px; font-weight: 650; text-decoration: none; box-shadow: 0 12px 24px rgba(39, 95, 199, .18); transition: transform .22s ease, background .22s ease, box-shadow .22s ease; }
+    .paid-search-hero__cta span { font-size: 18px; transition: transform .22s ease; }
+    .paid-search-hero__cta:hover { transform: translateY(-3px); background: #174da9; box-shadow: 0 16px 30px rgba(39, 95, 199, .25); }
+    .paid-search-hero__cta:hover span { transform: translate(2px, -2px); }
+    .paid-search-hero__visual { position: relative; display: grid; min-height: 340px; place-items: center; animation: paid-search-rise .8s .1s both; }
+    .paid-search-hero__orbit { position: absolute; aspect-ratio: 1; border: 1px solid rgba(63, 112, 205, .11); border-radius: 50%; }
+    .paid-search-hero__orbit--one { width: 390px; }
+    .paid-search-hero__orbit--two { width: 315px; border-style: dashed; animation: paid-search-orbit 42s linear infinite; }
+    .paid-search-hero__ad-card { position: relative; z-index: 1; width: min(100%, 420px); padding: 21px; border: 1px solid rgba(208, 218, 235, .9); border-radius: 14px; background: rgba(255,255,255,.96); box-shadow: 0 24px 70px rgba(34, 63, 112, .13); transform: rotate(-2deg); transition: transform .35s ease, box-shadow .35s ease; }
+    .paid-search-hero__visual:hover .paid-search-hero__ad-card { transform: rotate(0) translateY(-5px); box-shadow: 0 30px 78px rgba(34, 63, 112, .18); }
+    .paid-search-hero__ad-top { display: flex; align-items: center; gap: 9px; color: #738099; font-size: 11px; font-weight: 600; }
+    .paid-search-hero__google-mark { display: grid; width: 27px; height: 27px; place-items: center; border: 1px solid #edf0f5; border-radius: 8px; color: #4285f4; font-size: 17px; font-weight: 700; }
+    .paid-search-hero__live { display: inline-flex; align-items: center; gap: 5px; margin-left: auto; color: #41a984; font-size: 9px; letter-spacing: .08em; }
+    .paid-search-hero__live i { width: 6px; height: 6px; border-radius: 50%; background: #41c293; }
+    .paid-search-hero__search { display: flex; align-items: center; gap: 10px; margin: 17px 0 19px; padding: 12px 14px; border: 1px solid #e5eaf1; border-radius: 6px; color: #697790; font-size: 11px; }
+    .paid-search-hero__search > span { color: #285fbd; font-size: 21px; }
+    .paid-search-hero__search b { margin-left: auto; color: #71809a; font-size: 17px; }
+    .paid-search-hero__sponsored { margin-bottom: 7px; color: #8b95a7; font-size: 9px; letter-spacing: .05em; }
+    .paid-search-hero__ad-card > strong { display: block; color: #2861c2; font-size: 17px; font-weight: 600; }
+    .paid-search-hero__ad-card > p { margin: 6px 0 17px; color: #758198; font-size: 11px; line-height: 1.5; }
+    .paid-search-hero__ad-foot { display: flex; justify-content: space-between; padding-top: 13px; border-top: 1px solid #edf0f5; color: #67758d; font-size: 10px; }
+    .paid-search-hero__ad-foot span:last-child b { margin-left: 5px; color: #36af83; }
+    .paid-search-hero__spark { position: absolute; z-index: 2; display: grid; width: 48px; height: 48px; place-items: center; border: 1px solid #e5ebf5; border-radius: 13px; background: #fff; color: #3571d5; box-shadow: 0 12px 30px rgba(34, 63, 112, .1); }
+    .paid-search-hero__spark--one { top: 23px; right: 12px; font-size: 24px; transform: rotate(8deg); }
+    .paid-search-hero__spark--two { bottom: 23px; left: 0; color: #e2a534; font-size: 21px; transform: rotate(-9deg); }
+    .paid-search-hero__ticker { position: absolute; right: 50%; bottom: 0; left: 50%; width: 100vw; min-height: 51px; overflow: hidden; border-top: 1px solid #e9edf4; border-bottom: 1px solid #e9edf4; background: rgba(255,255,255,.66); transform: translateX(-50%); }
+    .paid-search-hero__ticker-track { display: flex; width: max-content; min-height: 49px; align-items: center; gap: clamp(18px, 4vw, 58px); padding-inline: 28px; animation: paid-search-ticker 34s linear infinite; color: #8290a5; font-size: 9px; font-weight: 700; letter-spacing: .17em; white-space: nowrap; }
+    .paid-search-hero__ticker i { color: #3c76d3; font-size: 13px; font-style: normal; }
+
+    .service-page--paid-search-marketing .paid-search-content { width: min(calc(100% - 48px), 1400px); }
+    .service-page--paid-search-marketing .paid-search-intro { gap: clamp(40px, 7vw, 100px); padding: 70px 0 75px; }
+    .service-page--paid-search-marketing .paid-search-intro h4,
+    .service-page--paid-search-marketing .paid-search-row h4,
+    .service-page--paid-search-marketing .paid-search-results > h4 { color: #142642; font-size: clamp(27px, 3.2vw, 39px); font-weight: 620; line-height: 1.18; letter-spacing: -.045em; }
+    .service-page--paid-search-marketing .paid-search-intro .paid-search-copy p { color: #68768b; text-align: left; }
+    .service-page--paid-search-marketing .paid-search-intro > ul { min-height: auto; padding: 9px 0 9px 42px; border-left: 1px solid #e2e8f1; }
+    .service-page--paid-search-marketing .paid-search-intro > ul li { color: #43526a; font-size: 14px; line-height: 1.6; }
+    .service-page--paid-search-marketing .paid-search-intro > ul li::before { top: 2px; width: 22px; height: 22px; background: #e7f5f0; color: #17966d; font-size: 13px; }
+    .service-page--paid-search-marketing .paid-search-row { min-height: 0; gap: clamp(35px, 7vw, 90px); padding: 78px 0; border-top: 1px solid #e9edf3; }
+    .service-page--paid-search-marketing .paid-search-row > img { max-width: 500px; max-height: 370px; justify-self: center; border-radius: 16px; transition: transform .4s ease, filter .4s ease; }
+    .service-page--paid-search-marketing .paid-search-row:hover > img { transform: translateY(-5px); filter: drop-shadow(0 18px 22px rgba(29, 57, 100, .12)); }
+    .service-page--paid-search-marketing .paid-search-row .paid-search-copy { max-width: 540px; }
+    .service-page--paid-search-marketing .paid-search-row .paid-search-copy p,
+    .service-page--paid-search-marketing .paid-search-row .paid-search-copy li { color: #68768b; line-height: 1.75; }
+    .service-page--paid-search-marketing .paid-search-results { padding: 90px 0 80px; border-top-color: #e9edf3; }
+    .service-page--paid-search-marketing .paid-search-results > h6 { color: #3670ce; font-size: 10px; letter-spacing: .16em; }
+    .service-page--paid-search-marketing .paid-search-results > h4 { max-width: 620px; margin-bottom: 44px; }
+    .service-page--paid-search-marketing .paid-search-result-cards { gap: 16px; }
+    .service-page--paid-search-marketing .paid-search-result-card { min-height: 230px; padding: 27px; border-color: #e4eaf3; border-radius: 12px; background: #fff; transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
+    .service-page--paid-search-marketing .paid-search-result-card:hover { transform: translateY(-6px); border-color: #cad9f1; box-shadow: 0 18px 40px rgba(34, 63, 112, .08); }
+    .service-page--paid-search-marketing .paid-search-result-card::before { top: auto; right: 24px; bottom: 22px; width: 39px; height: 39px; background: #edf3fc; color: #3269c5; font-size: 21px; }
+    .service-page--paid-search-marketing .paid-search-result-card h5 { color: #1b2f4c; font-size: 17px; }
+    .service-page--paid-search-marketing .paid-search-result-card p { max-width: 290px; color: #748197; font-size: 14px; line-height: 1.65; }
+
+    /* Give the main service story a card based editorial layout. */
+    .service-page--paid-search-marketing .paid-search-content > .paid-search-intro,
+    .service-page--paid-search-marketing .paid-search-content > .paid-search-row {
+        position: relative;
+        margin: 24px 0;
+        padding: clamp(28px, 4.5vw, 58px);
+        overflow: hidden;
+        border: 1px solid #e7ecf4;
+        border-radius: 20px;
+        background: #fff;
+        box-shadow: 0 16px 42px rgba(27, 53, 93, .045);
+    }
+
+    .service-page--paid-search-marketing .paid-search-content > .paid-search-intro { margin-top: 40px; }
+    .service-page--paid-search-marketing .paid-search-content > .paid-search-row { border-top: 1px solid #e7ecf4; }
+    .service-page--paid-search-marketing .paid-search-intro h4,
+    .service-page--paid-search-marketing .paid-search-row h4 { max-width: 600px; font-size: clamp(29px, 3.2vw, 42px); }
+    .service-page--paid-search-marketing .paid-search-intro > img,
+    .service-page--paid-search-marketing .paid-search-row > img { width: 100%; min-height: 250px; padding: 20px; border: 1px solid #edf1f7; border-radius: 14px; background: linear-gradient(145deg, #f4f8ff, #f9fbff); object-fit: contain; }
+    .service-page--paid-search-marketing .paid-search-intro .paid-search-copy { grid-column: 1; grid-row: 1; }
+    .service-page--paid-search-marketing .paid-search-intro > ul { grid-column: 2; grid-row: 1; gap: 12px; padding: 0; border: 0; }
+    .service-page--paid-search-marketing .paid-search-intro > ul li { padding: 12px 14px 12px 43px; border: 1px solid #eaf0f7; border-radius: 10px; background: #f9fbfe; }
+    .service-page--paid-search-marketing .paid-search-intro > ul li::before { top: 13px; left: 13px; }
+
+    .service-page--paid-search-marketing .paid-search-row--practices { background: linear-gradient(125deg, #fff 0%, #fff 66%, #f4f7ff 100%); }
+    .service-page--paid-search-marketing .paid-search-row--practices .paid-search-copy { padding: 6px 0; }
+    .service-page--paid-search-marketing .paid-search-row--practices .paid-search-copy p { position: relative; margin: 0; padding: 13px 0 13px 30px; border-bottom: 1px solid #edf0f5; color: #52637d; }
+    .service-page--paid-search-marketing .paid-search-row--practices .paid-search-copy p::before { position: absolute; top: 14px; left: 0; color: #3975d3; content: '\2197'; font-size: 15px; font-weight: 700; }
+    .service-page--paid-search-marketing .paid-search-row--platforms .paid-search-copy ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 22px; padding: 0; list-style: none; }
+    .service-page--paid-search-marketing .paid-search-row--platforms .paid-search-copy li { padding: 12px 13px; border: 1px solid #e8edf5; border-radius: 9px; background: #f8faff; color: #4f607a; font-size: 13px; line-height: 1.45; transition: transform .2s ease, border-color .2s ease, background .2s ease; }
+    .service-page--paid-search-marketing .paid-search-row--platforms .paid-search-copy li:hover { transform: translateY(-2px); border-color: #bfd1f1; background: #fff; }
+    .service-page--paid-search-marketing .paid-search-row--strategy { background: linear-gradient(135deg, #f6f8ff, #fff 70%); }
+    .service-page--paid-search-marketing .paid-search-row--strategy .paid-search-copy ol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 20px; padding: 0; counter-reset: strategy-step; list-style: none; }
+    .service-page--paid-search-marketing .paid-search-row--strategy .paid-search-copy li { position: relative; min-height: 62px; padding: 13px 12px 12px 42px; border: 1px solid #e4eaf5; border-radius: 9px; background: rgba(255,255,255,.88); color: #52627a; font-size: 13px; line-height: 1.45; counter-increment: strategy-step; }
+    .service-page--paid-search-marketing .paid-search-row--strategy .paid-search-copy li::before { position: absolute; top: 12px; left: 11px; display: grid; width: 22px; height: 22px; place-items: center; border-radius: 7px; background: #eaf1ff; color: #346dcb; content: counter(strategy-step, decimal-leading-zero); font-size: 9px; font-weight: 700; }
+    .service-page--paid-search-marketing .paid-search-row--investment .paid-search-copy ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 22px; padding: 0; list-style: none; }
+    .service-page--paid-search-marketing .paid-search-row--investment .paid-search-copy li { padding: 13px 14px; border-radius: 9px; background: #f2f7ff; color: #4e6079; font-size: 13px; line-height: 1.45; }
+    .service-page--paid-search-marketing .paid-search-row--investment .paid-search-copy li::before { margin-right: 8px; color: #3975d3; content: '\2726'; font-size: 11px; }
+
+    .service-page--paid-search-marketing.js-reveal-ready .paid-search-content > :is(.paid-search-intro, .paid-search-row, .paid-search-results) { opacity: 0; transform: translateY(22px); transition: opacity .65s ease, transform .65s cubic-bezier(.2,.7,.2,1); }
+    .service-page--paid-search-marketing.js-reveal-ready .paid-search-content > :is(.paid-search-intro, .paid-search-row, .paid-search-results).is-visible { opacity: 1; transform: translateY(0); }
+    @keyframes paid-search-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes paid-search-orbit { to { transform: rotate(360deg); } }
+
+    @media (max-width: 760px) {
+        .service-page--paid-search-marketing .paid-search-heading { grid-template-columns: 1fr; gap: 28px; width: min(calc(100% - 40px), 600px); min-height: 0; padding: 54px 0 90px; }
+        .service-page--paid-search-marketing .paid-search-heading h1 { max-width: 560px; font-size: clamp(42px, 11vw, 62px); }
+        .paid-search-hero__copy > p { font-size: 16px; }
+        .paid-search-hero__visual { min-height: 290px; }
+        .paid-search-hero__orbit--one { width: 330px; }
+        .paid-search-hero__orbit--two { width: 265px; }
+        .paid-search-hero__ad-card { width: min(100% - 24px, 390px); }
+        .paid-search-hero__spark--one { right: 0; }
+        .paid-search-hero__spark--two { left: 0; }
+        .paid-search-hero__ticker-track { gap: 18px; padding-inline: 20px; animation-duration: 25s; }
+        .service-page--paid-search-marketing .paid-search-content { width: min(calc(100% - 40px), 600px); }
+        .service-page--paid-search-marketing .paid-search-intro { grid-template-columns: 1fr; gap: 25px; padding: 45px 0 50px; }
+        .service-page--paid-search-marketing .paid-search-intro > ul { padding: 22px 0 0; border-top: 1px solid #e2e8f1; border-left: 0; }
+        .service-page--paid-search-marketing .paid-search-content > .paid-search-intro,
+        .service-page--paid-search-marketing .paid-search-content > .paid-search-row { gap: 22px; margin: 15px 0; padding: 24px 20px; border-radius: 15px; }
+        .service-page--paid-search-marketing .paid-search-content > .paid-search-intro { margin-top: 25px; }
+        .service-page--paid-search-marketing .paid-search-intro .paid-search-copy { grid-row: 1; }
+        .service-page--paid-search-marketing .paid-search-intro > ul { grid-column: 1; grid-row: 2; padding-top: 0; border: 0; }
+        .service-page--paid-search-marketing .paid-search-intro > img { grid-row: 3; }
+        .service-page--paid-search-marketing .paid-search-row--platforms .paid-search-copy ul,
+        .service-page--paid-search-marketing .paid-search-row--strategy .paid-search-copy ol,
+        .service-page--paid-search-marketing .paid-search-row--investment .paid-search-copy ul { grid-template-columns: 1fr; }
+        .service-page--paid-search-marketing .paid-search-row,
+        .service-page--paid-search-marketing .paid-search-row:nth-of-type(3) { grid-template-columns: 1fr; gap: 24px; padding: 48px 0; }
+        .service-page--paid-search-marketing .paid-search-row--reverse > img { grid-column: 1; grid-row: 1; }
+        .service-page--paid-search-marketing .paid-search-row--reverse > .paid-search-copy { grid-column: 1; grid-row: 2; }
+        .service-page--paid-search-marketing .paid-search-results { padding: 60px 0 70px; }
+        .service-page--paid-search-marketing .paid-search-result-cards { grid-template-columns: 1fr; gap: 12px; }
+        .service-page--paid-search-marketing .paid-search-result-card { min-height: 0; padding: 22px; }
+        .service-page--paid-search-marketing .paid-search-result-card::before { position: absolute; top: 18px; right: 18px; bottom: auto; }
+        .service-page--paid-search-marketing .paid-search-result-card h5 { margin-right: 45px; }
+        .service-page--paid-search-marketing .paid-search-result-card p { margin-bottom: 18px; }
+    }
+    @keyframes paid-search-ticker { to { transform: translateX(-50%); } }
+    @media (prefers-reduced-motion: reduce) {
+        .service-page--paid-search-marketing *, .service-page--paid-search-marketing *::before, .service-page--paid-search-marketing *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+        .service-page--paid-search-marketing.js-reveal-ready .paid-search-content > :is(.paid-search-intro, .paid-search-row, .paid-search-results) { opacity: 1; transform: none; }
+    }
+}
+
+@layer components {
     .marketing-solutions-page {
         width: min(calc(100% - 48px), 1220px);
         margin-inline: auto;
@@ -2837,7 +3016,7 @@
     .service-copy > ul li::before { position: absolute; left: 0; top: 1px; display: grid; width: 24px; height: 24px; place-items: center; border-radius: 50%; background: #00538d; color: #fff; content: '\2713'; font-size: 17px; font-weight: 700; }
     .service-copy a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; margin-top: 18px; margin-right: 10px; padding: 12px 24px; border-radius: 15px; background: #000; color: #fff; font-size: 12px; font-weight: 700; text-transform: uppercase; }
     .service-copy a:focus-visible { outline: 3px solid #00538d; outline-offset: 4px; }
-    .service-feature-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 40px; text-align: left; }
+    .service-feature-cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin-top: 40px; text-align: left; }
     .service-feature-card { min-width: 0; padding: 30px; border: 1px solid #e6e6e6; border-radius: 20px; background: #fff; box-shadow: 0 4px 14px #0000000d; }
     .service-feature-card::before { display: block; width: 42px; height: 42px; margin-bottom: 20px; border-radius: 50%; background: #f7f7fa; color: #00538d; content: '\2197'; font-size: 28px; font-weight: 700; text-align: center; }
     .service-feature-card h5 { margin: 0 0 14px; font-size: 20px; font-weight: 600; line-height: 1.3; }
@@ -4126,7 +4305,7 @@
     .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(6) .service-feature-card {
         border-color: #e5e1fa;
         border-radius: 24px;
-        box-shadow: 0 12px 28px #514bd010;
+        box-shadow: 0 12px 18px #514bd010;
     }
 
     .service-page--search-engine-optimization .service-content > .service-section:nth-of-type(7) {
@@ -9470,7 +9649,8 @@ body:has(.imported-home) .home-clients__row:hover .home-clients__track {
     width: 100%;
     max-width: none;
     margin: 0;
-    padding: 96px max(24px, calc((100% - 1280px) / 2));
+    /* padding: 0px max(24px, calc((100% - 1280px) / 2)); */
+    padding-bottom: 96px;
     overflow: hidden;
     background: #fff;
 }
