@@ -60,7 +60,20 @@ class PaidSearchPageLayout
             if ($mode === 'rows') {
                 if ($tag === 'h4') {
                     $section = $document->createElement('section');
-                    $section->setAttribute('class', count($rows) === 0 ? 'paid-search-intro' : 'paid-search-row');
+                    $heading = strtolower(trim(preg_replace('/\s+/', ' ', $node->textContent)));
+                    $variant = match (true) {
+                        str_contains($heading, 'benefits of paid search') => 'benefits',
+                        str_contains($heading, 'best practices') => 'practices',
+                        str_contains($heading, 'paid advertising platforms') => 'platforms',
+                        str_contains($heading, 'proven paid search strategy') => 'strategy',
+                        str_contains($heading, 'why invest in paid search') => 'investment',
+                        default => null,
+                    };
+                    $sectionClass = count($rows) === 0 ? 'paid-search-intro' : 'paid-search-row';
+                    if ($variant) {
+                        $sectionClass .= ' paid-search-row--'.$variant;
+                    }
+                    $section->setAttribute('class', $sectionClass);
                     $rows[] = $section;
                     $output->appendChild($section);
                 }
@@ -83,7 +96,7 @@ class PaidSearchPageLayout
             if (count($images) > 1 && isset($rows[$index + 1])) {
                 $next = $rows[$index + 1];
                 $next->insertBefore(end($images), $next->firstChild);
-                $next->setAttribute('class', 'paid-search-row paid-search-row--reverse');
+                $next->setAttribute('class', trim($next->getAttribute('class').' paid-search-row--reverse'));
             }
             $copy = $document->createElement('div');
             $copy->setAttribute('class', 'paid-search-copy');

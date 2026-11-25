@@ -63,6 +63,11 @@ function updateCaseStudyCarousel(carousel) {
 
     carousel.dataset.slideIndex = String(activeIndex);
     track.style.transform = `translate3d(-${activeIndex * step}px, 0, 0)`;
+    carousel.querySelectorAll('.home-case-study-carousel__arrow').forEach((arrow) => {
+        if (!(arrow instanceof HTMLButtonElement)) return;
+        const direction = Number.parseInt(arrow.dataset.carouselDirection ?? '0', 10) || 0;
+        arrow.disabled = direction < 0 ? activeIndex === 0 : activeIndex === maxIndex;
+    });
     carousel.classList.add('is-enhanced');
 }
 
@@ -169,6 +174,20 @@ window.addEventListener('resize', () => {
 document.addEventListener('click', (event) => {
     const target = event.target;
     if (!(target instanceof Element)) return;
+
+    const arrow = target.closest('.home-case-study-carousel__arrow');
+    if (arrow instanceof HTMLButtonElement) {
+        const carousel = arrow.closest('.home-case-study-carousel');
+        if (!(carousel instanceof HTMLElement)) return;
+        const currentIndex = Number.parseInt(carousel.dataset.slideIndex ?? '0', 10) || 0;
+        const direction = Number.parseInt(arrow.dataset.carouselDirection ?? '0', 10) || 0;
+        const slideCount = carousel.querySelector('.home-case-studies')?.children.length ?? 0;
+        const visibleSlides = carousel.clientWidth >= 1024 ? 3 : carousel.clientWidth >= 640 ? 2 : 1;
+        const maxIndex = Math.max(0, slideCount - visibleSlides);
+        carousel.dataset.slideIndex = String(Math.min(maxIndex, Math.max(0, currentIndex + direction)));
+        updateCaseStudyCarousel(carousel);
+        return;
+    }
 
     const button = target.closest('.home-case-study-pagination__button');
     if (!(button instanceof HTMLButtonElement)) return;
@@ -537,6 +556,24 @@ document.querySelectorAll('.paid-search-clients').forEach((section) => {
     figures.forEach((figure) => track.appendChild(figure));
     section.appendChild(track);
     setupHorizontalCarousel(section, track, figures, 'paid-search-client-controls', 'paid-search-client-track');
+});
+
+// Reveal the paid search service content as it enters view. Keep the client
+// marquee out of this animation so its existing motion stays untouched.
+document.querySelectorAll('.service-page--paid-search-marketing').forEach((page) => {
+    const sections = [...page.querySelectorAll('.paid-search-content > .paid-search-intro, .paid-search-content > .paid-search-row, .paid-search-content > .paid-search-results')];
+    if (!sections.length || !('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    page.classList.add('js-reveal-ready');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    sections.forEach((section) => observer.observe(section));
 });
 
 document.querySelectorAll('.service-page--digital-marketing-agency-in-mumbai .dm-tools, .service-page--social-media-marketing-agency-in-mumbai .sm-tools').forEach((section) => {

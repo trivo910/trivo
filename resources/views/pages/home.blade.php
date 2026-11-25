@@ -249,14 +249,36 @@
 
                 <section class="home-showcase">
                     <div class="home-section__group home-section__group--customer-overline">
-                        <h6>Our customers are some of the world’s...</h6>
+                        <h6>Our Customers Are Some Of The World’s...</h6>
                     </div>
                     <div class="home-section__group home-section__group--fastest">
                         <h3>Fastest growing companies</h3>
+                        @if(count($caseStudies) > 0)
+                            <div class="home-case-study-carousel" role="region" aria-label="Featured client case studies">
+                                <button class="home-case-study-carousel__arrow home-case-study-carousel__arrow--previous" type="button" aria-label="Previous case studies" data-carousel-direction="-1">‹</button>
+                                <div class="home-case-studies-viewport">
+                                    <div class="home-case-studies" id="home-case-studies-track" role="list">
+                                        @foreach($caseStudies as $caseStudy)
+                                            <article class="home-case-study" role="listitem">
+                                                <a class="home-case-study__link" href="{{ url($caseStudy['path']) }}">
+                                                    <img src="{{ $caseStudy['image'] }}" alt="{{ $caseStudy['title'] }}" loading="lazy" decoding="async">
+                                                </a>
+                                                <p class="home-case-study__date">{{ $caseStudy['date'] }}</p>
+                                                <h4><a href="{{ url($caseStudy['path']) }}">{{ $caseStudy['title'] }}</a></h4>
+                                            </article>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <button class="home-case-study-carousel__arrow home-case-study-carousel__arrow--next" type="button" aria-label="Next case studies" data-carousel-direction="1">›</button>
+                                <div class="home-case-study-pagination" role="group" aria-label="Choose a case study slide">
+                                    <button class="home-case-study-pagination__button" type="button" aria-label="Go to case study slide 1" aria-controls="home-case-studies-track" data-slide-index="0" aria-current="true"></button>
+                                </div>
+                            </div>
+                        @endif
                         <a href="{{ route('portfolio') }}">View all</a>
                     </div>
-                    @include('partials.home-enquiry', ['variant' => 'audit'])
                 </section>
+                @include('partials.home-enquiry', ['variant' => 'audit'])
 
                 <section class="home-section home-section--results">
                     <h2>Driving Digital Success With Proven Results</h2>

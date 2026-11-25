@@ -14,19 +14,7 @@ class HomeController extends Controller
 {
     public function index(): View
     {
-        $homeBlogPosts = Post::query()->articles()
-            ->where('status', 'published')
-            ->where('published_at', '<=', now())
-            ->orderByDesc('published_at')
-            ->orderByDesc('id')
-            ->get();
-
-        $homeBlogMedia = Media::query()
-            ->whereIn('id', $homeBlogPosts->pluck('featured_media_id')->filter())
-            ->get()
-            ->keyBy('id');
-
-        return view('pages.home', compact('homeBlogPosts', 'homeBlogMedia'));
+        return view('pages.home');
     }
 
     public function about(PublicContentRenderer $renderer): View
