@@ -63,6 +63,11 @@ function updateCaseStudyCarousel(carousel) {
 
     carousel.dataset.slideIndex = String(activeIndex);
     track.style.transform = `translate3d(-${activeIndex * step}px, 0, 0)`;
+    carousel.querySelectorAll('.home-case-study-carousel__arrow').forEach((arrow) => {
+        if (!(arrow instanceof HTMLButtonElement)) return;
+        const direction = Number.parseInt(arrow.dataset.carouselDirection ?? '0', 10) || 0;
+        arrow.disabled = direction < 0 ? activeIndex === 0 : activeIndex === maxIndex;
+    });
     carousel.classList.add('is-enhanced');
 }
 
@@ -73,6 +78,20 @@ document.querySelectorAll('.home-case-study-carousel').forEach((carousel) => {
 document.addEventListener('click', (event) => {
     const target = event.target;
     if (!(target instanceof Element)) return;
+
+    const arrow = target.closest('.home-case-study-carousel__arrow');
+    if (arrow instanceof HTMLButtonElement) {
+        const carousel = arrow.closest('.home-case-study-carousel');
+        if (!(carousel instanceof HTMLElement)) return;
+        const currentIndex = Number.parseInt(carousel.dataset.slideIndex ?? '0', 10) || 0;
+        const direction = Number.parseInt(arrow.dataset.carouselDirection ?? '0', 10) || 0;
+        const slideCount = carousel.querySelector('.home-case-studies')?.children.length ?? 0;
+        const visibleSlides = carousel.clientWidth >= 1024 ? 3 : carousel.clientWidth >= 640 ? 2 : 1;
+        const maxIndex = Math.max(0, slideCount - visibleSlides);
+        carousel.dataset.slideIndex = String(Math.min(maxIndex, Math.max(0, currentIndex + direction)));
+        updateCaseStudyCarousel(carousel);
+        return;
+    }
 
     const button = target.closest('.home-case-study-pagination__button');
     if (!(button instanceof HTMLButtonElement)) return;

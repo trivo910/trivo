@@ -13,7 +13,9 @@ class HomeController extends Controller
 {
     public function index(): View
     {
-        return view('pages.home');
+        return view('pages.home', [
+            'caseStudies' => app(\App\Services\Content\PortfolioCards::class)->published(),
+        ]);
     }
 
     public function about(PublicContentRenderer $renderer): View

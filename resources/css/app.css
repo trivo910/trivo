@@ -8258,6 +8258,13 @@ body:has(.imported-home) .home-enquiry--contact .home-enquiry__copy li::before {
     color: #fff;
 }
 
+body:has(.imported-home) .home-showcase .home-section__group--fastest > a::after {
+    margin-left: 9px;
+    content: '→';
+    font-size: 16px;
+    line-height: 1;
+}
+
 body:has(.imported-home) .home-enquiry--contact .home-enquiry__form {
     gap: 0;
     padding: 36px;
@@ -9750,8 +9757,180 @@ body:has(.imported-home) .home-hero__proof {
     margin-top: 32px !important;
 }
 
+body:has(.imported-home) .home-showcase {
+    margin: 136px 0 0;
+    padding: 16px 24px 40px;
+    border-radius: 0;
+    background: #f7f7fa;
+}
+
+body:has(.imported-home) .home-showcase .home-section__group--customer-overline {
+    margin: 0 0 14px;
+    text-align: center;
+}
+
+body:has(.imported-home) .home-showcase .home-section__group--customer-overline h6 {
+    color: #111;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+body:has(.imported-home) .home-showcase > .home-section__group--fastest {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+}
+
+body:has(.imported-home) .home-showcase .home-section__group--fastest > h3 {
+    margin: 0;
+    color: #080808;
+    font-size: clamp(30px, 3.2vw, 38px);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -1.2px;
+    text-align: center;
+}
+
+body:has(.imported-home) .home-showcase .home-section__group--fastest > a {
+    order: 2;
+    align-self: center;
+    min-height: 42px;
+    margin-top: 26px;
+    padding: 12px 26px;
+    border-radius: 16px;
+    background: #050505;
+    color: #fff;
+}
+
+body:has(.imported-home) .home-case-study-carousel {
+    position: relative;
+    width: min(100%, 1100px);
+    margin: 30px auto 0;
+    overflow: visible;
+}
+
+body:has(.imported-home) .home-case-study-carousel.is-enhanced {
+    overflow: visible;
+}
+
+body:has(.imported-home) .home-case-studies-viewport {
+    width: 100%;
+    overflow: hidden;
+}
+
+body:has(.imported-home) .home-case-studies {
+    width: max-content;
+    overflow: visible;
+    gap: 26px;
+}
+
+body:has(.imported-home) .home-case-study-carousel__arrow {
+    position: absolute;
+    z-index: 2;
+    top: 35%;
+    display: grid;
+    width: 34px;
+    height: 42px;
+    padding: 0;
+    place-items: center;
+    border: 0;
+    background: transparent;
+    color: #080808;
+    font-family: Arial, sans-serif;
+    font-size: 44px;
+    font-weight: 400;
+    line-height: 1;
+    cursor: pointer;
+}
+
+body:has(.imported-home) .home-case-study-carousel__arrow--previous {
+    left: -40px;
+}
+
+body:has(.imported-home) .home-case-study-carousel__arrow--next {
+    right: -40px;
+}
+
+body:has(.imported-home) .home-case-study-carousel__arrow:disabled {
+    color: #aaa;
+    cursor: default;
+}
+
+body:has(.imported-home) .home-case-study {
+    padding-bottom: 28px;
+    border-radius: 44px;
+    background: #f7f7fa;
+}
+
+body:has(.imported-home) .home-case-study__link img {
+    aspect-ratio: 1.4;
+    object-fit: cover;
+}
+
+body:has(.imported-home) .home-case-study__date,
+body:has(.imported-home) .home-case-study h4 {
+    padding-inline: 31px;
+}
+
+body:has(.imported-home) .home-case-study__date {
+    margin-top: 25px;
+    margin-bottom: 7px;
+    color: #888;
+    font-size: 14px;
+}
+
+body:has(.imported-home) .home-case-study h4 {
+    font-size: 19px;
+    font-weight: 600;
+}
+
+body:has(.imported-home) .home-case-study-pagination {
+    margin-top: 12px;
+}
+
+body:has(.imported-home) .home-case-study-pagination__button {
+    flex-basis: 8px;
+    width: 8px;
+    height: 8px;
+}
+
+body:has(.imported-home) .home-enquiry--audit {
+    margin: 50px max(24px, calc((100% - 1200px) / 2)) 50px;
+}
+
 @media (max-width: 760px) {
     body:has(.imported-home) .home-hero__proof {
         margin-top: 24px !important;
+    }
+
+    body:has(.imported-home) .home-showcase {
+        margin-top: 72px;
+        padding: 24px 28px 36px;
+    }
+
+    body:has(.imported-home) .home-case-study-carousel {
+        width: 100%;
+        margin-top: 24px;
+    }
+
+    body:has(.imported-home) .home-case-studies {
+        gap: 18px;
+    }
+
+    body:has(.imported-home) .home-case-study-carousel__arrow--previous {
+        left: -24px;
+    }
+
+    body:has(.imported-home) .home-case-study-carousel__arrow--next {
+        right: -24px;
+    }
+
+    body:has(.imported-home) .home-case-study {
+        border-radius: 30px;
+    }
+
+    body:has(.imported-home) .home-enquiry--audit {
+        margin: 0 20px 60px;
     }
 }

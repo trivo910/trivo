@@ -560,6 +560,12 @@ class PublicContentRenderer
         $carousel->setAttribute('class', 'home-case-study-carousel');
         $carousel->setAttribute('role', 'region');
         $carousel->setAttribute('aria-label', 'Featured client case studies');
+        $previous = $document->createElement('button', '‹');
+        $previous->setAttribute('class', 'home-case-study-carousel__arrow home-case-study-carousel__arrow--previous');
+        $previous->setAttribute('type', 'button');
+        $previous->setAttribute('aria-label', 'Previous case studies');
+        $previous->setAttribute('data-carousel-direction', '-1');
+        $carousel->appendChild($previous);
         $track = $document->createElement('div');
         $track->setAttribute('class', 'home-case-studies');
         $track->setAttribute('id', 'home-case-studies-track');
@@ -602,7 +608,16 @@ class PublicContentRenderer
             return null;
         }
 
-        $carousel->appendChild($track);
+        $viewport = $document->createElement('div');
+        $viewport->setAttribute('class', 'home-case-studies-viewport');
+        $viewport->appendChild($track);
+        $carousel->appendChild($viewport);
+        $next = $document->createElement('button', '›');
+        $next->setAttribute('class', 'home-case-study-carousel__arrow home-case-study-carousel__arrow--next');
+        $next->setAttribute('type', 'button');
+        $next->setAttribute('aria-label', 'Next case studies');
+        $next->setAttribute('data-carousel-direction', '1');
+        $carousel->appendChild($next);
         $pagination = $document->createElement('div');
         $pagination->setAttribute('class', 'home-case-study-pagination');
         $pagination->setAttribute('role', 'group');
