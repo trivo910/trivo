@@ -14,7 +14,22 @@ class HomeController extends Controller
 {
     public function index(): View
     {
-        return view('pages.home');
+        $homeBlogPosts = Post::query()->articles()
+            ->where('status', 'published')
+            ->where('published_at', '<=', now())
+            ->orderByDesc('published_at')
+            ->orderByDesc('id')
+            ->limit(3)
+            ->get();
+
+        return view('pages.home', [
+            'caseStudies' => app(\App\Services\Content\PortfolioCards::class)->published(),
+            'homeBlogPosts' => $homeBlogPosts,
+            'homeBlogMedia' => Media::query()
+                ->whereIn('id', $homeBlogPosts->pluck('featured_media_id')->filter())
+                ->get()
+                ->keyBy('id'),
+        ]);
     }
 
     public function about(PublicContentRenderer $renderer): View
