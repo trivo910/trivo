@@ -2343,7 +2343,7 @@
         top: 11px;
         right: 0;
         left: 0;
-        border-top: 3px dashed #e3e3e3;
+       
         content: '';
     }
     .trivo-about__milestones > li {
@@ -7810,6 +7810,11 @@ body:has(.imported-home) .trivo-about {
     display: grid;
     gap: 36px;
     padding: 136px var(--home-padding) 0;
+    font-family: var(--font-sans);
+}
+
+body:has(.imported-home) .trivo-about :is(.trivo-about__label, .trivo-about__title, .trivo-about__copy, .trivo-about__milestones) {
+    font-family: inherit;
 }
 
 body:has(.imported-home) .trivo-about__label {
@@ -7839,13 +7844,21 @@ body:has(.imported-home) .trivo-about__copy {
     gap: 32px;
 }
 
-body:has(.imported-home) .trivo-about__copy > p {
-    color: var(--home-muted);
-    font-size: 18px;
-    line-height: 1.8;
-    text-align: justify;
-    hyphens: auto;
+body:has(.imported-home) :is(.home-section--services > .home-section__group > p, .trivo-about__copy > p) {
+    color: #444c60;
+    text-align: left;
+    hyphens: none;
+  
+    
+
+    letter-spacing: .050;
+    position: relative;
+
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.5;
 }
+
 
 body:has(.imported-home) .trivo-about__milestones {
     display: grid;
@@ -7884,7 +7897,6 @@ body:has(.imported-home) .trivo-about__milestones > li::after {
     top: 9px;
     right: -40px;
     left: 36px;
-    border-top: 3px dashed #d8d8e3;
     content: "";
 }
 
@@ -10208,6 +10220,11 @@ body:has(.imported-home) .home-section--blog::before {
     width: clamp(340px, 42vw, 620px);
     border-color: rgb(54 132 225 / 12%);
     box-shadow: 0 0 0 38px rgb(54 132 225 / 3.5%), 0 0 0 78px rgb(54 132 225 / 2.5%);
+}
+
+/* The Blog section does not use the shared decorative orbital circle. */
+body:has(.imported-home) .home-section--blog::before {
+    display: none;
 }
 
 body:has(.imported-home) .home-section--blog > :is(h2, .home-section__group, .home-blog-carousel) {

@@ -134,7 +134,7 @@
                         $services = [
                             [
                                 'title' => 'Search engine optimization',
-                                'copy' => 'Increase your organic traffic by ranking higher on search engines with a discovery process like CHANCE™.',
+                                'copy' => 'Increase your organic traffic by ranking high on search engines and AI discovery tools like ChatGPT.',
                                 'benefits' => ['Keyword research and content strategy', 'On-page & technical SEO optimization', 'High-quality link building', 'Performance tracking and reporting', 'Continuous improvement'],
                                 'stat' => '93%',
                                 'stat_copy' => 'Of customers achieved a higher search visibility within 6 months.',
