@@ -7,6 +7,7 @@
 .case-copy h1{font-size:clamp(38px,4.2vw,60px);font-weight:800;line-height:1.08;margin-bottom:12px}
 .case-copy h2{font-size:clamp(26px,2.5vw,36px);line-height:1.13;margin-bottom:20px}
 .case-body{font-size:16px;font-weight:300;line-height:2}.case-body p{margin:0 0 10px}.case-body p:last-child{margin-bottom:0}.case-body strong{font-weight:650}.case-body a{text-decoration:underline}
+.case-section--report-wide{background:linear-gradient(180deg,#f7f8fc 0%,#fff 100%)}.case-section--report-wide .case-heading{max-width:1040px;text-align:left}.case-section--report-wide .case-heading h2{font-size:clamp(30px,3.5vw,42px);line-height:1.14;margin-bottom:28px}.case-section--report-wide .case-heading .case-body{text-align:left;font-size:16px;line-height:1.8}.case-section--report-wide .case-body h3{font-size:24px;letter-spacing:-.5px;margin:30px 0 10px}.case-section--report-wide .case-body ul{padding-left:24px;margin-block:12px 22px}.case-section--report-wide .case-body figure{margin:30px 0}.case-section--report-wide .case-body img{display:block;width:100%;height:auto;border:1px solid #dfe3e8;border-radius:12px;box-shadow:0 12px 32px #15152112}
 .case-section--report .case-body{text-align:justify}
 .case-visual{position:relative;min-width:0}.case-visual img{width:100%;height:auto;display:block;border-radius:28px;box-shadow:0 18px 42px #15152112}
 .case-section--hero,.case-section--results,.case-section--cta{background:linear-gradient(155deg,var(--case-start),var(--case-end));color:#96bfdf}
