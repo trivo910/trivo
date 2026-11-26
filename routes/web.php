@@ -22,5 +22,6 @@ Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.post');
 Route::get('/privacy-policy', [HomeController::class, 'privacyPolicy'])->name('privacy-policy');
 Route::get('/terms-conditions', [HomeController::class, 'termsConditions'])->name('terms-conditions');
 Route::get('/return-refund-policy', [HomeController::class, 'refundPolicy'])->name('return-refund-policy');
+Route::view('/search-engine-optimization-preview', 'pages.search-engine-optimization')->name('search-engine-optimization.preview');
 
 Route::fallback(ResolvePublicContentController::class);

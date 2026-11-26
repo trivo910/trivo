@@ -280,15 +280,31 @@
                 </section>
                 @include('partials.home-enquiry', ['variant' => 'audit'])
 
-                <section class="home-section home-section--results">
-                    <h2>Driving Digital Success With Proven Results</h2>
+                <section class="home-section home-section--results home-results--premium" aria-labelledby="home-results-title">
+                    <h2 id="home-results-title">Driving Digital Success With <span>Proven Results</span></h2>
                     <div class="home-section__group home-section__group--results-intro">
                         <h6>We deliver reliable technology solutions that help businesses grow, scale, and succeed in the digital world.</h6>
                         <div class="home-results__stats">
-                            <div class="home-results__stat"><strong>1,000+</strong><span>Projects Successfully Delivered</span></div>
-                            <div class="home-results__stat"><strong>300+</strong><span>Happy Clients Worldwide</span></div>
-                            <div class="home-results__stat"><strong>15+</strong><span>Years of Industry Experience</span></div>
-                            <div class="home-results__stat"><strong>100+</strong><span>Technologies &amp; Tools Expertise</span></div>
+                            <article class="home-results__stat" style="--result-accent: #006ace; --result-tint: #e1efff; --result-shadow: rgb(0 106 206 / 24%); --result-delay: 0ms;">
+                                <span class="home-results__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 8 4.5-8 4.5-8-4.5L12 2Z"/><path d="m4 11 8 4.5 8-4.5"/><path d="m4 15.5 8 4.5 8-4.5"/></svg></span>
+                                <strong><span data-results-counter data-results-target="1000" data-results-suffix="+">1,000+</span></strong>
+                                <span>Projects Successfully Delivered</span>
+                            </article>
+                            <article class="home-results__stat" style="--result-accent: #8738e8; --result-tint: #f0e5ff; --result-shadow: rgb(135 56 232 / 24%); --result-delay: 100ms;">
+                                <span class="home-results__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+                                <strong><span data-results-counter data-results-target="300" data-results-suffix="+">300+</span></strong>
+                                <span>Happy Clients Worldwide</span>
+                            </article>
+                            <article class="home-results__stat" style="--result-accent: #d99a00; --result-tint: #fff3cf; --result-shadow: rgb(217 154 0 / 24%); --result-delay: 200ms;">
+                                <span class="home-results__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M8 2v5M16 2v5M3 9.5h18M8 14h.01M12 14h.01M16 14h.01M8 17.5h.01M12 17.5h.01"/></svg></span>
+                                <strong><span data-results-counter data-results-target="15" data-results-suffix="+">15+</span></strong>
+                                <span>Years of Industry Experience</span>
+                            </article>
+                            <article class="home-results__stat" style="--result-accent: #28a767; --result-tint: #dff5e9; --result-shadow: rgb(40 167 103 / 24%); --result-delay: 300ms;">
+                                <span class="home-results__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2.5 5 2.9v5.8L12 14l-5-2.8V5.4l5-2.9Z"/><path d="m7 5.4 5 2.8 5-2.8M12 8.2V14"/><path d="m7 12 5 2.8 5-2.8v5.7l-5 2.8-5-2.8V12Z"/><path d="m7 17.7 5 2.8 5-2.8"/></svg></span>
+                                <strong><span data-results-counter data-results-target="100" data-results-suffix="+">100+</span></strong>
+                                <span>Technologies &amp; Tools Expertise</span>
+                            </article>
                         </div>
                     </div>
                     <div class="home-section__group home-section__group--results-testimonials">
