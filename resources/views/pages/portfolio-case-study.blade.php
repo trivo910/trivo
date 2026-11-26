@@ -16,7 +16,7 @@
     @if(isset($images[$portfolio->twitter_image_id ?: ($layout['thumbnail_media_id'] ?? 0)]))<meta name="twitter:image" content="{{ $images[$portfolio->twitter_image_id ?: $layout['thumbnail_media_id']]['url'] }}">@endif
 @endsection
 @section('content')
-<article class="case-study case-design--{{ $layout['design'] ?? 'modern' }}" style="--case-bg: {{ $layout['background'] }}; --case-start: {{ $layout['gradient_start'] }}; --case-end: {{ $layout['gradient_end'] }}; --case-heading: {{ $layout['heading_color'] }}; --case-text: {{ $layout['body_color'] }}; --case-width: {{ $layout['container_width'] }}px">
+<article class="case-study case-design--{{ $layout['design'] ?? 'modern' }} {{ $portfolio->path === '/sanjari-computers' ? 'case-design--sanjari' : '' }}" style="--case-bg: {{ $layout['background'] }}; --case-start: {{ $layout['gradient_start'] }}; --case-end: {{ $layout['gradient_end'] }}; --case-heading: {{ $layout['heading_color'] }}; --case-text: {{ $layout['body_color'] }}; --case-width: {{ $layout['container_width'] }}px">
     @foreach($layout['sections'] as $section)
         @continue(!($section['visible'] ?? true))
         @php($image = $images[$section['image_id'] ?? 0] ?? null)
