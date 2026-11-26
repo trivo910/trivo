@@ -18,6 +18,30 @@ class ImportPortfolioReference
         return Cache::lock('content-path-writes', 60)->block(5, fn () => DB::transaction(function () use ($data): PortfolioItem {
             $existing = PortfolioItem::withTrashed()->where('path', $data['path'])->first();
             if ($existing) {
+                // This case study is authored from the supplied visual reference; refresh its
+                // seeded layout and media on each profile import while leaving other portfolios editable.
+                if ($data['path'] === '/sanjari-computers' && ! $existing->trashed()) {
+                    $layout = $data['layout'];
+                    $layout['thumbnail_media_id'] = $this->image($layout['thumbnail_path'], $data['title'].' portfolio thumbnail');
+                    unset($layout['thumbnail_path']);
+                    foreach ($layout['sections'] as &$section) {
+                        $section['image_id'] = empty($section['image_path']) ? null : $this->image($section['image_path'], $section['title']);
+                        unset($section['image_path']);
+                        foreach ($section['cards'] as &$card) {
+                            $card['image_id'] = empty($card['image_path']) ? null : $this->image($card['image_path'], $card['title'].' portfolio project');
+                            unset($card['image_path']);
+                        }
+                        unset($card);
+                    }
+                    unset($section);
+                    $layout = app(PortfolioLayout::class)->validate($layout);
+                    $blocks = app(PortfolioLayout::class)->blocks($layout);
+                    app(ContentDrafts::class)->lockImages($blocks);
+                    $existing->forceFill(['media_id' => $layout['thumbnail_media_id'], 'blocks' => $blocks,
+                        'details' => [...$existing->details, 'case_study' => $layout],
+                        'content_version' => $existing->content_version + 1])->save();
+                    return $existing;
+                }
                 return $existing;
             }
             if (Page::withTrashed()->where('path', $data['path'])->exists()) {
