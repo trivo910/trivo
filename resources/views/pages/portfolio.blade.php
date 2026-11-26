@@ -8,6 +8,25 @@
 @section('content')
     @php
         $projects = app(\App\Services\Content\PortfolioCards::class)->published();
+
+        if ($projects === []) {
+            $projects = [
+                ['title' => 'Luhaif Perfumes', 'date' => 'May 2026', 'datetime' => '2026-05', 'path' => '/luhaif-perfumes', 'image' => 'wp-content/uploads/2026/05/Luhaif-Thumbnail.png'],
+                ['title' => 'Mumbai Darshan', 'date' => 'May 2026', 'datetime' => '2026-05', 'path' => '/mumbai-darshan', 'image' => 'wp-content/uploads/2026/05/Mumbai-Thumbnail.png'],
+                ['title' => 'Sell Sold', 'date' => 'May 2026', 'datetime' => '2026-05', 'path' => '/sell-sold', 'image' => 'wp-content/uploads/2026/05/Sell-Sold-Thumbnail.png'],
+                ['title' => 'Professional Frameworks', 'date' => 'May 2026', 'datetime' => '2026-05', 'path' => '/professional-frameworks', 'image' => 'wp-content/uploads/2026/05/Professional-Frameworks-Thumbnail.png'],
+                ['title' => 'Arihant Panel Fittings', 'date' => 'May 2026', 'datetime' => '2026-05', 'path' => '/arihant-panel-fittings', 'image' => 'wp-content/uploads/2026/05/Arihant-Thumbnail.png'],
+                ['title' => 'Al Bushra T & T', 'date' => 'March 2026', 'datetime' => '2026-03', 'path' => '/al-bushra-t-and-t', 'image' => 'wp-content/uploads/2026/03/Al-Bushra-Thumbnail.png'],
+                ['title' => 'Stock Sovet Conversion', 'date' => 'May 2023', 'datetime' => '2023-05', 'path' => '/stocksovet', 'image' => 'wp-content/uploads/2026/03/Stock-Sovet-Thumbnail.png'],
+                ['title' => 'Rashid Miftahi', 'date' => 'May 2023', 'datetime' => '2023-05', 'path' => '/rashidmiftahi', 'image' => 'wp-content/uploads/2026/03/Rashid-Miftahi-Thumbnail.png'],
+                ['title' => 'Areeba Tourism', 'date' => 'May 2023', 'datetime' => '2023-05', 'path' => '/areebatourism', 'image' => 'wp-content/uploads/2026/03/Areeba-Thumbnail.png'],
+                ['title' => 'Sanjari Recycling', 'date' => 'May 2023', 'datetime' => '2023-05', 'path' => '/sanjari-recycling', 'image' => 'wp-content/uploads/2026/03/Sanjari-Thumbnail.png'],
+                ['title' => 'Holiday Aapke Liye', 'date' => 'May 2023', 'datetime' => '2023-05', 'path' => '/holidayaapkliye', 'image' => 'wp-content/uploads/2026/05/Holiday-Aapke-Liye-Thumbnail.png'],
+                ['title' => 'Villa Planet', 'date' => 'May 2023', 'datetime' => '2023-05', 'path' => '/villaplanet', 'image' => 'wp-content/uploads/2026/05/Villa-Planet-Thumbnail.png'],
+                ['title' => 'Brady Morris', 'date' => 'May 2023', 'datetime' => '2023-05', 'path' => '/bradymorris', 'image' => 'wp-content/uploads/2026/05/Brady-Morris-Thumbnail.png'],
+                ['title' => 'Miftahi Shop', 'date' => 'June 2022', 'datetime' => '2022-06', 'path' => '/miftahi-shop', 'image' => 'wp-content/uploads/2026/05/Miftahi-Shop-Thumbnail.png'],
+            ];
+        }
     @endphp
 
     <article class="portfolio-page">

@@ -481,6 +481,51 @@ document.querySelectorAll('[data-count-target]').forEach((counter) => {
     requestAnimationFrame(updateCounter);
 });
 
+const premiumResults = document.querySelector('.home-results--premium');
+if (premiumResults instanceof HTMLElement) {
+    const counters = [...premiumResults.querySelectorAll('[data-results-counter]')]
+        .filter((counter) => counter instanceof HTMLElement);
+    const setFinalResults = () => {
+        counters.forEach((counter) => {
+            const target = Number.parseInt(counter.dataset.resultsTarget ?? '', 10);
+            if (!Number.isFinite(target)) return;
+            counter.textContent = `${new Intl.NumberFormat('en-IN').format(target)}${counter.dataset.resultsSuffix ?? ''}`;
+        });
+    };
+    const animateResults = () => {
+        counters.forEach((counter) => {
+            const target = Number.parseInt(counter.dataset.resultsTarget ?? '', 10);
+            if (!Number.isFinite(target)) return;
+
+            const suffix = counter.dataset.resultsSuffix ?? '';
+            const start = performance.now();
+            const duration = 1450;
+            const update = (now) => {
+                const progress = Math.min(1, (now - start) / duration);
+                const value = Math.round(target * (1 - Math.pow(1 - progress, 3)));
+                counter.textContent = `${new Intl.NumberFormat('en-IN').format(value)}${suffix}`;
+                if (progress < 1) requestAnimationFrame(update);
+            };
+            counter.textContent = `0${suffix}`;
+            requestAnimationFrame(update);
+        });
+    };
+
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+        premiumResults.classList.add('is-visible');
+        setFinalResults();
+    } else {
+        premiumResults.classList.add('is-ready');
+        const observer = new IntersectionObserver((entries) => {
+            if (!entries.some((entry) => entry.isIntersecting)) return;
+            premiumResults.classList.add('is-visible');
+            animateResults();
+            observer.disconnect();
+        }, { threshold: 0.22 });
+        observer.observe(premiumResults);
+    }
+}
+
 document.querySelectorAll('[data-home-enquiry]').forEach((form) => {
     const inputs = [...form.querySelectorAll('.home-enquiry__fields input')];
     if (inputs.length === 0) return;
