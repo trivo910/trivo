@@ -59,7 +59,7 @@ class PortfolioLayout
             'case_study.sections.*' => ['array:type,title,hide_title,eyebrow,body,image_id,image_url,image_position,heading_url,button_label,button_url,badge_value,badge_label,visible,padding_top,padding_bottom,cards'],
             'case_study.sections.*.hide_title' => ['sometimes', 'boolean'],
             'case_study.sections.*.image_url' => $url,
-            'case_study.sections.*.type' => ['required', Rule::in(['hero', 'report', 'results', 'related', 'cta', 'intro', 'text', 'services', 'gallery', 'impact', 'testimonial', 'columns'])],
+            'case_study.sections.*.type' => ['required', Rule::in(['hero', 'report', 'report-wide', 'results', 'related', 'cta', 'intro', 'text', 'services', 'gallery', 'impact', 'testimonial', 'columns'])],
             'case_study.sections.*.heading_url' => $url,
             'case_study.sections.*.title' => ['required', 'string', 'max:255', 'not_regex:/[<>]/'],
             'case_study.sections.*.eyebrow' => ['nullable', 'string', 'max:150'],
