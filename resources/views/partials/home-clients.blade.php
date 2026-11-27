@@ -1,5 +1,6 @@
 @php
     $headingId = $headingId ?? 'home-clients-title';
+    $showTrustedPartnershipsBadge = $showTrustedPartnershipsBadge ?? false;
     $clients = [
         ['Sanjari-2.png', 'Sanjari'],
         ['Polla-Tech.png', 'Polla Tech'],
@@ -21,6 +22,9 @@
 
 <section class="home-section home-section--clients" aria-labelledby="{{ $headingId }}">
     <div class="home-section__group">
+        @if ($showTrustedPartnershipsBadge)
+            <p class="home-clients__trusted-badge">Trusted Partnerships</p>
+        @endif
         <h3 id="{{ $headingId }}">Clients we work with</h3>
         @foreach ($clientRows as $rowIndex => $clientRow)
             <div class="home-clients__row home-clients__row--{{ $rowIndex + 1 }}" aria-label="Client logos row {{ $rowIndex + 1 }}">

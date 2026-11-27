@@ -390,7 +390,7 @@
                     </div>
                 </section>
 
-                @include('partials.home-clients', ['headingId' => 'home-clients-title'])
+                @include('partials.home-clients', ['headingId' => 'home-clients-title', 'showTrustedPartnershipsBadge' => true])
             </div>
         </div>
     </div>
