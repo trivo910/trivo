@@ -50,6 +50,11 @@
     "title": "Sanjari Recycling"
   },
   {
+    "file": "sanjari-computers.json",
+    "path": "/sanjari-computers",
+    "title": "Sanjari Computers"
+  },
+  {
     "file": "holidayaapkliye.json",
     "path": "/holidayaapkliye",
     "title": "Holiday Aapke Liye"

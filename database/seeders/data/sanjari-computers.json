@@ -1,0 +1,44 @@
+{
+  "title": "Sanjari Computers",
+  "path": "/sanjari-computers",
+  "source_titles": ["Sanjari Computers"],
+  "sort": 15,
+  "reference_url": "https://trivo.in/sanjari-computers",
+  "seo": {
+    "seo_title": "Sanjari Computers | Trivo Portfolio Case Study",
+    "seo_description": "Building a stronger online presence for an e-waste recycling and IT asset disposal company.",
+    "canonical_url": "https://trivo.in/sanjari-computers",
+    "robots": "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large",
+    "og_title": null,
+    "og_description": null,
+    "twitter_title": null,
+    "twitter_description": null,
+    "schema_type": null,
+    "schema_json": null,
+    "noindex": 0,
+    "nofollow": 0,
+    "sitemap_include": 1,
+    "sitemap_priority": null
+  },
+  "layout": {
+    "version": 1,
+    "design": "industrial",
+    "display_date": "2026-11",
+    "thumbnail_path": "wp-content/uploads/2026/11/11-1/Screenshot 2026-11-26 170513.png",
+    "background": "#ffffff",
+    "gradient_start": "#073e78",
+    "gradient_end": "#0872ca",
+    "heading_color": "#050505",
+    "body_color": "#4a4a50",
+    "container_width": 1280,
+    "sections": [
+      {"type":"hero","title":"Sanjari Computers","eyebrow":"TRIVO PORTFOLIO Â· CASE STUDY","body":"<p>Building a stronger online presence for an e-waste recycling and IT asset disposal company.</p>","image_path":"wp-content/uploads/2026/11/11-1/Screenshot 2026-11-26 170513.png","image_position":"right","button_label":"","button_url":"","badge_value":"","badge_label":"","visible":true,"padding_top":72,"padding_bottom":72,"cards":[]},
+      {"type":"columns","title":"About Sanjari Computers","eyebrow":"THE CLIENT","body":"<p>Sanjari Computers focuses on e-waste recycling, IT asset disposal, computer scrap buying, and secure data destruction. The company provides solutions for businesses looking to dispose of old IT equipment and electronic waste responsibly.</p>","image_path":null,"image_position":"right","button_label":"","button_url":"","badge_value":"","badge_label":"","visible":true,"padding_top":80,"padding_bottom":80,"cards":[{"title":"E-waste recycling","label":"","body":"","icon":"â™»","url":"","image_id":null},{"title":"IT asset disposal","label":"","body":"","icon":"","url":"","image_id":null},{"title":"Computer scrap buying","label":"","body":"","icon":"","url":"","image_id":null},{"title":"Secure data destruction","label":"","body":"","icon":"","url":"","image_id":null}]},
+      {"type":"gallery","title":"Tracking Organic Search Performance","eyebrow":"SEO","body":"<p>Google Search Console and website analytics data were used to monitor organic search performance, impressions, clicks and search visibility.</p><p>These reports help evaluate SEO progress and identify opportunities for further website optimization.</p>","image_path":null,"image_position":"right","button_label":"","button_url":"","badge_value":"","badge_label":"","visible":true,"padding_top":80,"padding_bottom":80,"cards":[{"title":"Performance","label":"","body":"","icon":"","url":"","image_path":"wp-content/uploads/2026/11/11-1/Screenshot 2026-11-26 174205.png"},{"title":"Search performance","label":"","body":"","icon":"","url":"","image_path":"wp-content/uploads/2026/11/11-1/Screenshot 2026-11-26 174259.png"},{"title":"Active users by country","label":"","body":"","icon":"","url":"","image_path":"wp-content/uploads/2026/11/11-1/Screenshot 2026-11-26 174334.png"},{"title":"Organic keywords trend","label":"","body":"","icon":"","url":"","image_path":"wp-content/uploads/2026/11/11-1/Screenshot 2026-11-26 174205.png"}]},
+      {"type":"results","title":"SEO Results & Growth","eyebrow":"RESULTS","body":"<p>The SEO work focused on building a stronger organic presence through website content, targeted landing pages, blog optimization and on-page SEO improvements.</p>","image_path":null,"image_position":"right","button_label":"","button_url":"","badge_value":"","badge_label":"","visible":true,"padding_top":80,"padding_bottom":80,"cards":[{"title":"Website content","label":"","body":"","icon":"","url":"","image_id":null},{"title":"Landing pages","label":"","body":"","icon":"","url":"","image_id":null},{"title":"Blog optimization","label":"","body":"","icon":"","url":"","image_id":null},{"title":"On-page SEO","label":"","body":"","icon":"","url":"","image_id":null}]},
+      {"type":"report","title":"Google Ads Campaign Management","eyebrow":"PAID SEARCH","body":"<p>Google Ads campaigns were focused on reaching potential customers actively searching for e-waste recycling, computer scrap buying and IT disposal services. Campaign strategy included keyword targeting, ad copy creation, campaign optimization and performance monitoring to improve relevant traffic and generate business enquiries.</p>","image_path":"wp-content/uploads/2026/11/11-1/Screenshot 2026-11-26 174444.png","image_position":"right","button_label":"","button_url":"","badge_value":"","badge_label":"","visible":true,"padding_top":80,"padding_bottom":80,"cards":[]},
+      {"type":"report","title":"Social Media Marketing – LinkedIn","eyebrow":"SOCIAL MEDIA","body":"<h3>LinkedIn</h3><p>LinkedIn marketing built professional brand awareness, showcased e-waste management services, shared industry insights, and strengthened the company's presence among businesses — highlighting sustainability initiatives and building credibility with a relevant professional audience.</p>","image_path":"wp-content/uploads/2026/11/11-1/Screenshot 2026-11-26 174523.png","image_position":"right","button_label":"","button_url":"","badge_value":"","badge_label":"","visible":true,"padding_top":80,"padding_bottom":80,"cards":[]},
+      {"type":"gallery","title":"Website Traffic & Traffic Acquisition","eyebrow":"ANALYTICS","body":"<p>Website traffic and acquisition data was monitored to understand how users discovered Sanjari Computers online, which channels brought visitors and how traffic sources contributed to overall digital performance.</p><p>The analysis focused on organic search, paid traffic, direct visits and other traffic sources to evaluate marketing performance and identify opportunities for further growth.</p>","image_path":null,"image_position":"right","button_label":"","button_url":"","badge_value":"","badge_label":"","visible":true,"padding_top":80,"padding_bottom":80,"cards":[{"title":"Website traffic","label":"","body":"","icon":"","url":"","image_path":"wp-content/uploads/2026/11/11-1/Screenshot 2026-11-26 174259.png"},{"title":"Traffic acquisition","label":"","body":"","icon":"","url":"","image_path":"wp-content/uploads/2026/11/11-1/Screenshot 2026-11-26 174553.png"}]}
+    ]
+  }
+}
